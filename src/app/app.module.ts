@@ -4,12 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { FormularioComponent } from './formulario/formulario.component';
+import { FormularioComponent } from './app.formulario/app.formulario.component';
+import { MenuSuperiorComponent } from './menu-superior/menu-superior.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FormularioComponent
+    FormularioComponent,
+    MenuSuperiorComponent
   ],
   imports: [
     BrowserModule,
@@ -17,6 +19,6 @@ import { FormularioComponent } from './formulario/formulario.component';
     HttpModule
   ],
   providers: [],
-  bootstrap: [FormularioComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

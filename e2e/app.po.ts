@@ -5,7 +5,7 @@ export class MeuTccPage {
     return browser.get('/');
   }
 
-  getParagraphText() {
-    return element(by.css('formulario h3')).getText();
+  getInputState() {
+    return element(by.id('valor-imovel')).isEnabled();
   }
 }

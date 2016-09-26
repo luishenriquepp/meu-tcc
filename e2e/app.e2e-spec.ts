@@ -7,8 +7,8 @@ describe('meu-tcc App', function() {
     page = new MeuTccPage();
   });
 
-  it('should display message saying app works', () => {
+  it('valor imovel must be enabled', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('');
+    expect(page.getInputState()).toEqual(true);
   });
 });

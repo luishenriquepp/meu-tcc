@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'formulario',
-  templateUrl: './formulario.component.html'
+  templateUrl: './app.formulario.component.html'
 })
 export class FormularioComponent implements OnInit {
 
