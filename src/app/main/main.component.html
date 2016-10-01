@@ -1,0 +1,15 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <app-menu-superior></app-menu-superior>
+  </div>
+</nav>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-2">
+      <app-formulario (onCalcular)="onCalcular($event)"></app-formulario>
+    </div>
+    <div class="col-lg-10">
+      <app-tabela-vpl [financiamento]="financiamento"></app-tabela-vpl>
+    </div>
+  </div>
+</div>
