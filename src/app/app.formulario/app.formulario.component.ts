@@ -1,29 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 
 import { Usuario } from '../models/usuario';
-import { Financiamento } from '../models/financiamento'
 
 @Component({
-  selector: 'formulario',
+  selector: 'app-formulario',
   templateUrl: './app.formulario.component.html'
 })
 export class FormularioComponent implements OnInit {
-  
-  public usuario: Usuario = new Usuario();
-  public finan: Financiamento;
-  
-  constructor() { }
 
-  private title: string = "Home";
-  private aluguel: string = "Aluguel";
-  private financiamento: string = "Financiamento";
-  private consorcio: string = "Consórcio";
+  @Output() onCalcular = new EventEmitter<Usuario>();
+  usuario: Usuario;
 
-  calcular(): void {
-    this.finan = new Financiamento(this.usuario);
-    this.finan.fdc();
-  }
+  constructor() {}
 
   ngOnInit() {
+    this.usuario = new Usuario();
+    this.usuario.disponivel = 25000;
+    this.usuario.prestacoes = 10;
+    this.usuario.valorImovel = 200000;
+  }
+  
+  calcular(): void {
+    this.onCalcular.emit(this.usuario);
   }
 }
