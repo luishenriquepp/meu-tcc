@@ -1,28 +1,24 @@
-<table class="table table-bordered">
+<table class="table table-bordered table-striped table-condensed">
   <thead>
     <tr>
-      <th>Prestação</th>
-      <th>SaldoDevedor1</th>
-      <th>CorreçãoTR</th>
-      <th>SaldoDevedor2</th>
+      <th>N</th>
+      <th>Saldo Devedor</th>
+      <th>Correção TR</th>
       <th>Amortização</th>
       <th>Juros</th>
       <th>Seguros</th>
       <th>Parcela</th>
-      <th>VPParcela</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let p of financiamento.prestacoes; let i=index">
       <td>{{i}}</td>
-      <td>{{p.saldoDevedor1 | currency:'USD':true }}</td>
-      <td>{{p.correcaoTR | currency:'USD':true}}</td>
-      <td>{{p.saldoDevedor2 | currency:'USD':true}}</td>
-      <td>{{p.amortizacao | currency:'USD':true}}</td>
-      <td>{{p.juros | currency:'USD':true}}</td>
-      <td>{{p.seguros | currency:'USD':true}}</td>
-      <td>{{p.parcela | currency:'USD':true}}</td>
-      <td>{{p.parcelaVP | currency:'USD':true}}</td>
+      <td>{{p.saldoDevedor1 | number:'1.2-2' }}</td> 
+      <td>{{p.correcaoTR | number:'1.2-2' }}</td>
+      <td>{{p.amortizacao | number:'1.2-2' }}</td>
+      <td>{{p.juros | number:'1.2-2' }}</td>
+      <td>{{p.seguros | number:'1.2-2' }}</td>
+      <td>{{p.parcela | number:'1.2-2' }}</td>
     </tr>
   </tbody>
 </table>
