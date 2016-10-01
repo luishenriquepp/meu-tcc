@@ -1,0 +1,28 @@
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Prestação</th>
+      <th>SaldoDevedor1</th>
+      <th>CorreçãoTR</th>
+      <th>SaldoDevedor2</th>
+      <th>Amortização</th>
+      <th>Juros</th>
+      <th>Seguros</th>
+      <th>Parcela</th>
+      <th>VPParcela</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let p of financiamento.prestacoes; let i=index">
+      <td>{{i}}</td>
+      <td>{{p.saldoDevedor1 | currency }}</td>
+      <td>{{p.correcaoTR | currency}}</td>
+      <td>{{p.saldoDevedor2 | currency}}</td>
+      <td>{{p.amortizacao | currency}}</td>
+      <td>{{p.juros | currency}}</td>
+      <td>{{p.seguros | currency}}</td>
+      <td>{{p.parcela | currency}}</td>
+      <td>{{p.parcelaVP | currency}}</td>
+    </tr>
+  </tbody>
+</table>
