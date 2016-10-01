@@ -1,6 +1,6 @@
 export class Usuario {
     valorImovel: number;
     disponivel: number;
-    prestacoes: number;
+    prestacoes: number = 0
     usaFGTS: boolean; 
 }
