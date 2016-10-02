@@ -9,6 +9,12 @@
         <th>Juros</th>
         <th>Seguros</th>
         <th>Parcela</th>
+        <th>VP Parcela</th>
+        <!--<th>Valor Imóvel</th>
+        <th>Patrimônio</th>
+        <th>Var. Patrimônio</th>
+        <th>VP Variação</th>-->
+        
       </tr>
     </thead>
     <tbody>
@@ -20,6 +26,11 @@
         <td>{{p.juros | number:'1.2-2' }}</td>
         <td>{{p.seguros | number:'1.2-2' }}</td>
         <td>{{p.parcela | number:'1.2-2' }}</td>
+        <td>{{p.parcelaVP | number:'1.2-2' }}</td>
+        <!--<td>{{p.valorImovel | number:'1.2-2' }}</td>
+        <td>{{p.patrimonio | number:'1.2-2' }}</td>
+        <td>{{p.varPatrimonio | number:'1.2-2' }}</td>
+        <td>{{p.vpVariacao | number:'1.2-2' }}</td>-->
       </tr>
     </tbody>
   </table>

@@ -6,6 +6,11 @@ export class Financiamento {
     usuario: Usuario;
     prestacoes: FinanciamentoFdc[] = new Array();
 
+    primeiraParcela: number = 0;
+    ultimaParcela: number = 0;
+    parcelaTotal: number = 0;
+    parcelaVPTotal: number = 0;
+
     constructor(usuario: Usuario) {
         this.usuario = usuario;
     }
@@ -26,16 +31,10 @@ export class Financiamento {
             var copy = new FinanciamentoFdc();            
             copy.setProperties(this.vfdc);
             this.prestacoes.push(copy);
+            this.parcelaTotal += this.prestacoes[i].parcela;
+            this.parcelaVPTotal += this.prestacoes[i].parcelaVP;
         }
+        this.primeiraParcela = this.prestacoes[1].parcela;
+        this.ultimaParcela = this.prestacoes[this.prestacoes.length-1].parcela;
     }
-
-    equals(obj: Financiamento): boolean {
-        if(obj.usuario.disponivel == this.usuario.disponivel 
-        && obj.usuario.prestacoes == this.usuario.prestacoes
-        && obj.usuario.valorImovel == this.usuario.valorImovel) {
-            return true;
-        }        
-    }
-
-
 }

@@ -1,53 +1,54 @@
-<div class="panel panel-default">
-  <div class="panel-heading">Financiamento com prazo de 100 meses</div>
-  <div class="panel-body">
-    <table class="table table-condensed">
-        <tbody>
-            <tr>
-                <td>Primeira Parcela</td>
-                <td>3.000,69</td>
-            </tr>
-            <tr>
-                <td>Comprometimento</td>
-                <td>59%</td>
-            </tr>
-            <tr>
-                <td>Última Parcela</td>
-                <td>2.135,54</td>
-            </tr>
-        </tbody>    
-    </table>
-    <table class="table table-condensed">
-        <thead>
-            <tr>
-                <th class="col-md-4"></th>
-                <th class="col-md-4">Valor Presente</th>
-                <th class="col-md-4">Valor Nominal</th>
-            </tr>
-            </thead>
+<div *ngIf="exibirTabela">
+    <div class="panel panel-default">
+    <div class="panel-heading">Financiamento com prazo de {{financiamento.usuario.prestacoes }} meses</div>
+    <div class="panel-body">
+        <table class="table table-condensed">
             <tbody>
-            <tr class="success">
-                <td>Patrimônio</td>
-                <td class="text-right">237.728,76</td>
-                <td class="text-right">367.956,00</td>
-            </tr>
-            <tr class="warning">
-                <td>Entrada</td>
-                <td class="text-right">25.000,00</td>
-                <td class="text-right">25.000,00</td>
-            </tr>
-            <tr class="warning">
-                <td>Total de Parcelas</td>
-                <td class="text-right">186.820,70</td>
-                <td class="text-right">280.353,27</td>
-            </tr>
-            <tr>
-                <td class="text-center"><strong>Valor Líquido</strong></td>
-                <td class="text-right"><strong>25.908,06</strong></td>
-                <td class="text-right"><strong>62.602,73</strong></td>
-            </tr>
-        </tbody>    
-    </table>
-  </div>
+                <tr>
+                    <td>Primeira Parcela</td>
+                    <td>{{financiamento.primeiraParcela | number:'1.2-2'}}</td>
+                </tr>
+                <tr>
+                    <td>Comprometimento</td>
+                    <td>59%</td>
+                </tr>
+                <tr>
+                    <td>Última Parcela</td>
+                    <td>{{financiamento.ultimaParcela | number:'1.2-2'}}</td>
+                </tr>
+            </tbody>    
+        </table>
+        <table class="table table-condensed">
+            <thead>
+                <tr>
+                    <th class="col-md-4"></th>
+                    <th class="col-md-4">Valor Presente</th>
+                    <th class="col-md-4">Valor Nominal</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="success">
+                    <td>Patrimônio</td>
+                    <td class="text-right">237.728,76</td>
+                    <td class="text-right">367.956,00</td>
+                </tr>
+                <tr class="warning">
+                    <td>Entrada</td>
+                    <td class="text-right">25.000,00</td>
+                    <td class="text-right">25.000,00</td>
+                </tr>
+                <tr class="warning">
+                    <td>Total de Parcelas</td>
+                    <td class="text-right">{{financiamento.parcelaTotal | number:'1.2-2'}}</td>
+                    <td class="text-right">{{financiamento.parcelaVPTotal | number:'1.2-2'}}</td>
+                </tr>
+                <tr>
+                    <td class="text-center"><strong>Valor Líquido</strong></td>
+                    <td class="text-right"><strong>25.908,06</strong></td>
+                    <td class="text-right"><strong>62.602,73</strong></td>
+                </tr>
+            </tbody>    
+        </table>
+    </div>
+    </div>
 </div>
-

@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+
+import { Usuario } from '../models/usuario';
+import { Financiamento } from'../models/financiamento';
 
 @Component({
   selector: 'app-resultado',
@@ -7,9 +10,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ResultadoComponent implements OnInit {
 
-  constructor() { }
+  @Input() exibirTabela: boolean;
+  @Input() financiamento: Financiamento;
 
   ngOnInit() {
+    this.financiamento = new Financiamento(new Usuario());
   }
 
 }

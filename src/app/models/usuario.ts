@@ -3,4 +3,6 @@ export class Usuario {
     disponivel: number;
     prestacoes: number = 0
     usaFGTS: boolean; 
+    nascimento: Date;
+    renda: number;
 }
