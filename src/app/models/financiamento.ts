@@ -28,4 +28,14 @@ export class Financiamento {
             this.prestacoes.push(copy);
         }
     }
+
+    equals(obj: Financiamento): boolean {
+        if(obj.usuario.disponivel == this.usuario.disponivel 
+        && obj.usuario.prestacoes == this.usuario.prestacoes
+        && obj.usuario.valorImovel == this.usuario.valorImovel) {
+            return true;
+        }        
+    }
+
+
 }

@@ -8,7 +8,7 @@ import { Financiamento } from'../models/financiamento';
   templateUrl: './tabela-vpl.component.html',
   styleUrls: ['./tabela-vpl.component.css']
 })
-export class TabelaVplComponent implements OnInit { 
+export class TabelaVplComponent implements OnInit{ 
 
   @Input() exibirTabela: boolean;  
   @Input() financiamento: Financiamento;
