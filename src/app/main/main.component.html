@@ -9,8 +9,10 @@
       <app-formulario (onCalcular)="onCalcular($event)"></app-formulario>
     </div>
     <div class="col-lg-4">
-      <!--<app-tabela-vpl [financiamento]="financiamento" [exibirTabela]="exibir"></app-tabela-vpl>-->
       <app-resultado></app-resultado>
+    </div>
+    <div class="col-lg-6">
+      <app-tabela-vpl [financiamento]="financiamento" [exibirTabela]="exibir"></app-tabela-vpl>      
     </div>
   </div>
 </div>

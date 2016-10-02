@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { FormularioComponent } from './app.formulario/app.formulario.component';
+import { FormularioComponent } from './formulario/formulario.component';
 import { MenuSuperiorComponent } from './menu-superior/menu-superior.component';
 import { MainComponent } from './main/main.component';
 import { TabelaVplComponent } from './tabela-vpl/tabela-vpl.component';

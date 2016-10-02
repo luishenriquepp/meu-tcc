@@ -4,7 +4,7 @@ import { Usuario } from '../models/usuario';
 
 @Component({
   selector: 'app-formulario',
-  templateUrl: './app.formulario.component.html'
+  templateUrl: './formulario.component.html'
 })
 export class FormularioComponent implements OnInit {
 
