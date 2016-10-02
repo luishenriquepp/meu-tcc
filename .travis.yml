@@ -29,7 +29,7 @@ before_install:
 
 script:
   - ng test --watch false
-  - ng serve
+  # - ng serve
   # - ng e2e
 
 after_success:
