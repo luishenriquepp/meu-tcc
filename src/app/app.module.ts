@@ -9,6 +9,8 @@ import { MenuSuperiorComponent } from './menu-superior/menu-superior.component';
 import { MainComponent } from './main/main.component';
 import { TabelaVplComponent } from './tabela-vpl/tabela-vpl.component';
 import { ResultadoComponent } from './resultado/resultado.component';
+import { GoogleChartComponent } from './google-chart/google-chart.component';
+import { GraficoFinanciamentoComponent } from './grafico-financiamento/grafico-financiamento.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { ResultadoComponent } from './resultado/resultado.component';
     MenuSuperiorComponent,
     MainComponent,
     TabelaVplComponent,
-    ResultadoComponent
+    ResultadoComponent,
+    GoogleChartComponent,
+    GraficoFinanciamentoComponent
   ],
   imports: [
     BrowserModule,

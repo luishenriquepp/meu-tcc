@@ -18,6 +18,7 @@ export class FormularioComponent implements OnInit {
     this.usuario.disponivel = 25000;
     this.usuario.prestacoes = 10;
     this.usuario.valorImovel = 200000;
+    this.usuario.renda = 4500;;
   }
   
   calcular(): void {

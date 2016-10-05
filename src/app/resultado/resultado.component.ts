@@ -13,8 +13,9 @@ export class ResultadoComponent implements OnInit {
   @Input() exibirTabela: boolean;
   @Input() financiamento: Financiamento;
 
-  ngOnInit() {
-    this.financiamento = new Financiamento(new Usuario());
-  }
+  comprometimento: number;
 
+  ngOnInit() {
+    this.comprometimento = 0;
+  }
 }

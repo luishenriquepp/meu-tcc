@@ -10,7 +10,7 @@
                 </tr>
                 <tr>
                     <td>Comprometimento</td>
-                    <td>59%</td>
+                    <td>{{ financiamento.comprometimento | percent }}</td>
                 </tr>
                 <tr>
                     <td>Última Parcela</td>
@@ -29,13 +29,13 @@
                 <tbody>
                 <tr class="success">
                     <td>Patrimônio</td>
-                    <td class="text-right">237.728,76</td>
-                    <td class="text-right">367.956,00</td>
+                    <td class="text-right">{{ financiamento.patrimonioVPTotal | number:'1.2-2' }}</td>
+                    <td class="text-right">{{ financiamento.patrimonioTotal | number:'1.2-2' }}</td>
                 </tr>
                 <tr class="warning">
                     <td>Entrada</td>
-                    <td class="text-right">25.000,00</td>
-                    <td class="text-right">25.000,00</td>
+                    <td class="text-right">{{ financiamento.usuario.disponivel | number:'1.2-2' }}</td>
+                    <td class="text-right">{{ financiamento.usuario.disponivel | number:'1.2-2' }}</td>
                 </tr>
                 <tr class="warning">
                     <td>Total de Parcelas</td>
@@ -44,8 +44,8 @@
                 </tr>
                 <tr>
                     <td class="text-center"><strong>Valor Líquido</strong></td>
-                    <td class="text-right"><strong>25.908,06</strong></td>
-                    <td class="text-right"><strong>62.602,73</strong></td>
+                    <td class="text-right"><strong>{{ financiamento.vlPresente | number:'1.2-2' }}</strong></td>
+                    <td class="text-right"><strong>{{ financiamento.vlNominal | number:'1.2-2' }}</strong></td>
                 </tr>
             </tbody>    
         </table>

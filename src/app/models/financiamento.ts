@@ -10,6 +10,12 @@ export class Financiamento {
     ultimaParcela: number = 0;
     parcelaTotal: number = 0;
     parcelaVPTotal: number = 0;
+    comprometimento: number = 0;
+    patrimonioTotal: number = 0;
+    patrimonioVPTotal: number = 0;
+
+    vlPresente: number = 0;
+    vlNominal: number = 0;
 
     constructor(usuario: Usuario) {
         this.usuario = usuario;
@@ -19,7 +25,7 @@ export class Financiamento {
     
     fdc(): void {
         this.vfdc.setUsuario(this.usuario);
-        for(var i=0; i<this.usuario.prestacoes;i++) {                    
+        for(var i=0; i<=this.usuario.prestacoes;i++) {                    
             if(i == 0) {
                 var copy = new FinanciamentoFdc();            
                 copy.setProperties(this.vfdc);
@@ -33,8 +39,13 @@ export class Financiamento {
             this.prestacoes.push(copy);
             this.parcelaTotal += this.prestacoes[i].parcela;
             this.parcelaVPTotal += this.prestacoes[i].parcelaVP;
+            this.patrimonioVPTotal += this.prestacoes[i].varPatrimonio;
         }
         this.primeiraParcela = this.prestacoes[1].parcela;
         this.ultimaParcela = this.prestacoes[this.prestacoes.length-1].parcela;
+        this.comprometimento = this.primeiraParcela/this.usuario.renda;
+        this.patrimonioTotal += this.prestacoes[this.prestacoes.length-1].patrimonio;
+        this.vlPresente = this.patrimonioVPTotal-this.usuario.disponivel-this.parcelaVPTotal;
+        this.vlNominal = this.patrimonioTotal-this.usuario.disponivel-this.parcelaTotal;
     }
 }

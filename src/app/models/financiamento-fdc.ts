@@ -47,10 +47,10 @@ export class FinanciamentoFdc {
     }
 
     atualizar(parcela: number): void {
+        this.amortizar(parcela);
         this.saldoDevedor1 = this.saldoDevedor2 - this.amortizacao;
         this.calculaCorrecaoTR();
         this.saldoDevedor2 = this.saldoDevedor1 + this.correcaoTR;        
-        this.amortizar(parcela);
         this.calcularJuros();
         this.calculaSeguro();
         this.calcularParcela();
