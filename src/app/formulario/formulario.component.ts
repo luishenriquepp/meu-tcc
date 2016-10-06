@@ -24,4 +24,23 @@ export class FormularioComponent implements OnInit {
   calcular(): void {
     this.onCalcular.emit(this.usuario);
   }
+
+  validaForm(): boolean {
+    if(this.usuario.valorImovel < 10000) {
+      return false;
+    }
+
+    if(this.usuario.disponivel < this.usuario.valorImovel*0.1 || this.usuario.disponivel > this.usuario.valorImovel*0.9) {
+      return false;
+    }
+    
+    if(this.usuario.prestacoes < 12 || this.usuario.prestacoes > 480) {
+      return false;
+    }
+
+    if(this.usuario.renda < 0) {
+      return false;
+    }
+    return true;
+  } 
 }
