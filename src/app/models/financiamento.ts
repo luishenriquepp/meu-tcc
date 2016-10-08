@@ -37,14 +37,19 @@ export class Financiamento {
             var copy = new FinanciamentoFdc();            
             copy.setProperties(this.vfdc);
             this.prestacoes.push(copy);
+            
             this.parcelaTotal += this.prestacoes[i].parcela;
             this.parcelaVPTotal += this.prestacoes[i].parcelaVP;
-            this.patrimonioVPTotal += this.prestacoes[i].varPatrimonio;
+            this.patrimonioVPTotal += this.prestacoes[i].vpVariacao;
         }
+        alert(this.patrimonioVPTotal);
         this.primeiraParcela = this.prestacoes[1].parcela;
-        this.ultimaParcela = this.prestacoes[this.prestacoes.length-1].parcela;
         this.comprometimento = this.primeiraParcela/this.usuario.renda;
-        this.patrimonioTotal += this.prestacoes[this.prestacoes.length-1].patrimonio;
+        this.ultimaParcela = this.prestacoes[this.prestacoes.length-1].parcela;
+                
+        this.patrimonioVPTotal += this.usuario.disponivel;
+        this.patrimonioTotal = this.prestacoes[this.prestacoes.length-1].valorImovel;
+        
         this.vlPresente = this.patrimonioVPTotal-this.usuario.disponivel-this.parcelaVPTotal;
         this.vlNominal = this.patrimonioTotal-this.usuario.disponivel-this.parcelaTotal;
     }

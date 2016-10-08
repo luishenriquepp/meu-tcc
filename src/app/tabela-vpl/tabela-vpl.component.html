@@ -3,23 +3,33 @@
     <thead>
       <tr>
         <th>N</th>
-        <th>Parcela</th>   
         <th>Saldo Devedor</th>
         <th>Correção TR</th>
         <th>Amortização</th>
         <th>Juros</th>
-        <th>Seguros</th>     
+        <th>Seguros</th>
+        <th>Parcela</th>
+        <th>ParcelaVP</th>
+        <th>Valor Imovel</th>
+        <th>Patrimônio</th>
+        <th>varPatrimônio</th>
+        <th>vpVariacao</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let p of financiamento.prestacoes; let i=index">
         <td>{{i}}</td>
-        <td>{{p.parcela | number:'1.2-2' }}</td>
         <td>{{p.saldoDevedor1 | number:'1.2-2' }}</td> 
         <td>{{p.correcaoTR | number:'1.2-2' }}</td>
         <td>{{p.amortizacao | number:'1.2-2' }}</td>
         <td>{{p.juros | number:'1.2-2' }}</td>
         <td>{{p.seguros | number:'1.2-2' }}</td>
+        <td>{{p.parcela | number:'1.2-2' }}</td>
+        <td>{{p.parcelaVP | number:'1.2-2' }}</td>
+        <td>{{p.valorImovel | number:'1.2-2' }}</td>
+        <td>{{p.patrimonio | number:'1.2-2' }}</td>
+        <td>{{p.varPatrimonio | number:'1.2-2' }}</td>
+        <td>{{p.vpVariacao | number:'1.2-2' }}</td>
       </tr>
     </tbody>
   </table>
