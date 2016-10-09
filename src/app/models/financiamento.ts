@@ -27,18 +27,18 @@ export class Financiamento {
     }
 
     
-    fdc(): void {
+    FluxoDeCaixa(): void {
         this.vfdc.setUsuario(this.usuario);
-        for(var i=0; i<=this.usuario.prestacoes;i++) {                    
+        for(var i=0; i<=this.usuario.prestacoes;i++) {
             if(i == 0) {
-                var copy = new FinanciamentoFdc(this.config);            
+                var copy = new FinanciamentoFdc(this.config);
                 copy.setProperties(this.vfdc);
                 this.prestacoes.push(copy);
                 continue;
             }
             
             this.vfdc.atualizar(i);
-            var copy = new FinanciamentoFdc(this.config);            
+            var copy = new FinanciamentoFdc(this.config);
             copy.setProperties(this.vfdc);
             this.prestacoes.push(copy);
             

@@ -1,13 +1,18 @@
+import { Usuario } from './usuario';
 import { ISeguro } from './iseguro';
 
 export class FinanciamentoSeguro {
 
+    usuario: Usuario;
     private _MIP: number;
     private _DFI: number;
     private _ISeguro: ISeguro;
 
-    constructor(seguro: ISeguro) {
+    constructor(seguro: ISeguro, usuario: Usuario) {
         this._ISeguro = seguro;
+        this.usuario = usuario;
+        this.DFI = this._ISeguro.GetDFI();
+        this.MIP = this._ISeguro.GetMIP(new Date(this.usuario.nascimento));
     }
         
     set DFI(dfi: number) {
@@ -15,7 +20,7 @@ export class FinanciamentoSeguro {
     }
 
     get DFI(): number {
-        return this._ISeguro.GetDFI();
+        return this._DFI;
     } 
 
     set MIP(mip: number) {
@@ -23,6 +28,6 @@ export class FinanciamentoSeguro {
     }
 
     get MIP(): number {
-        return this._ISeguro.GetMIP(new Date(1988, 4));
+        return this._MIP;
     } 
 }

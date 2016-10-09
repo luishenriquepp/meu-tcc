@@ -24,8 +24,8 @@ export class MainComponent implements OnInit {
   onCalcular(user: Usuario) {
     this.usuario = user;
     this.financiamento = new Financiamento(this.usuario, this.config);
-    this.config.Seguro = new FinanciamentoSeguro(new SeguradoraSa());
-    this.financiamento.fdc();
+    this.config.Seguro = new FinanciamentoSeguro(new SeguradoraSa(), this.usuario);
+    this.financiamento.FluxoDeCaixa();
     this.exibir = this.financiamento.prestacoes.length > 0;
   }
     
