@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 
 import { Usuario } from '../models/usuario';
 import { Financiamento } from'../models/financiamento';
+import { FinanciamentoConfig } from'../models/financiamento-config';
+import { FinanciamentoSeguro } from'../models/financiamento-seguro';
+import { SeguradoraSa } from'../models/seguradora-sa';
 
 @Component({
   selector: 'app-main',
@@ -11,6 +14,7 @@ export class MainComponent implements OnInit {
 
   usuario: Usuario;
   financiamento: Financiamento;
+  config: FinanciamentoConfig = new FinanciamentoConfig();
   exibir: boolean;
 
   constructor() {
@@ -19,7 +23,8 @@ export class MainComponent implements OnInit {
 
   onCalcular(user: Usuario) {
     this.usuario = user;
-    this.financiamento = new Financiamento(this.usuario);
+    this.financiamento = new Financiamento(this.usuario, this.config);
+    this.config.Seguro = new FinanciamentoSeguro(new SeguradoraSa());
     this.financiamento.fdc();
     this.exibir = this.financiamento.prestacoes.length > 0;
   }

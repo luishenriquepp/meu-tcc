@@ -14,6 +14,6 @@ export class TabelaVplComponent implements OnInit{
   @Input() financiamento: Financiamento;
 
   ngOnInit() {
-    this.financiamento = new Financiamento(new Usuario());
+    // this.financiamento = new Financiamento(new Usuario(), this.financiamento.config);
   }
 }

@@ -3,7 +3,12 @@ import { Usuario } from './usuario';
 
 export class FinanciamentoFdc {
         
-    config: FinanciamentoConfig = new FinanciamentoConfig();
+    
+    constructor(config: FinanciamentoConfig) {
+        this.config = config;
+    }
+    
+    private config: FinanciamentoConfig;
     private usuario: Usuario;
 
     private ano: number = 0.0759;
@@ -54,14 +59,14 @@ export class FinanciamentoFdc {
         this.calcularJuros();
         this.calculaSeguro();
         this.calcularParcela();
-        this.parcelaVP = (this.parcela/Math.pow(1+this.config.rentabilidade,parcela));
+        this.parcelaVP = (this.parcela/Math.pow(1+this.config.Rentabilidade,parcela));
 
         // TODO
         this.valorImovel = this.valorImovel*(1+this.mes);
         var patri = this.patrimonio;
         this.patrimonio = this.valorImovel - this.saldoDevedor1;
         this.varPatrimonio = this.patrimonio - patri;
-        this.vpVariacao = (this.varPatrimonio/Math.pow(1+this.config.rentabilidade,parcela));
+        this.vpVariacao = (this.varPatrimonio/Math.pow(1+this.config.Rentabilidade,parcela));
     }
 
     amortizar(n: number): void {
@@ -69,18 +74,18 @@ export class FinanciamentoFdc {
     }
 
     calcularJuros(): void {
-        this.juros = (this.config.juros_mensais * this.saldoDevedor2)
+        this.juros = (this.config.JurosMensais * this.saldoDevedor2)
     }
 
     calcularParcela(): void {
-        this.parcela = this.amortizacao + this.juros + this.seguros + this.config.taxaAdm;
+        this.parcela = this.amortizacao + this.juros + this.seguros + this.config.TaxaAdministrativa;
     }
 
     calculaSeguro(): void {
-        this.seguros = (this.config.seguro_dfi * this.usuario.valorImovel) + (this.config.seguro_mip * this.saldoDevedor1);
+        this.seguros = (this.config.Seguro.DFI * this.usuario.valorImovel) + (this.config.Seguro.MIP * this.saldoDevedor1);
     }
 
     calculaCorrecaoTR(): void {
-        this.correcaoTR = (this.saldoDevedor1 * this.config.tr_mensal);
+        this.correcaoTR = (this.saldoDevedor1 * this.config.TRMensal);
     }
 }
