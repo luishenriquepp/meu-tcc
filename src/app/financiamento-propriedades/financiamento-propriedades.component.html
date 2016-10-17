@@ -1,0 +1,40 @@
+<div *ngIf="exibirConfig">
+  <div class="form-group">  
+    <label>Taxa Admnistrativa:</label>
+      <input [(ngModel)]="config.TaxaAdministrativa" type="number" class="form-control">
+  </div>
+  <div class="form-group">
+    <label>Juros Mensais</label>
+      <input [(ngModel)]="config.JurosMensais" type="number" class="form-control">
+  </div>
+  <div class="form-group">
+    <label>TR Mensal</label>
+    <input [(ngModel)]="config.TRMensal" type="number" class="form-control">
+  </div>
+  <div class="form-group">
+    <label>Rentabilidade</label>
+      <input [(ngModel)]="config.Rentabilidade" type="number" class="form-control">
+  </div>
+  <div class="form-group">
+    <label>Seguros</label>
+    <select class="form-control" (change)="selecionaSeguro($event)">
+      <option value="sa" selected>Sul América</option>
+      <option value="hdi">HDI</option>
+    </select>
+  </div>
+  <div class="form-group">
+      <label><input [(ngModel)]="teste.Entrada" type="checkbox" value="true"> Abater da entrada</label>
+  </div>
+  <div class="form-group">
+    <label>FGTS acumulado</label>
+      <input [(ngModel)]="usuario.FGTS" type="number" class="form-control" id="fgts" min="0" step="1000">
+  </div>
+  <div class="form-group">
+    <label>Novos Créditos de FGTS</label>
+      <select [(ngModel)]="teste.Posterior" class="form-control">
+        <option>Abater das próximas parcela</option>
+        <option>Abater do saldo devedor</option>
+        <option>Não usar mais</option>
+      </select>
+  </div>
+</div>

@@ -31,5 +31,7 @@
   <label><input [(ngModel)]="usuario.usaFGTS" type="checkbox" value="true"> Possui FGTS</label>
 </div>
 <div class="form-group">
-  <button type="button" [disabled]="!validaForm()" (click)="calcular()" class="btn btn-primary">Calcular</button>
+  <button type="button" (click)="calcular()" class="btn btn-primary">Calcular</button>
 </div>
+
+<!--[disabled]="!validaForm()"-->

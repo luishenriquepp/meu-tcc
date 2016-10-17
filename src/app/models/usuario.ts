@@ -1,8 +1,9 @@
-export class Usuario {
+export class Usuario {        
     valorImovel: number;
     disponivel: number;
-    prestacoes: number = 0
-    usaFGTS: boolean; 
+    prestacoes: number = 12;
+    usaFGTS: boolean = true;
     nascimento: Date;
     renda: number;
+    FGTS: number = 25000;    
 }

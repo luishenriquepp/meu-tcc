@@ -11,6 +11,8 @@ import { TabelaVplComponent } from './tabela-vpl/tabela-vpl.component';
 import { ResultadoComponent } from './resultado/resultado.component';
 import { GoogleChartComponent } from './google-chart/google-chart.component';
 import { GraficoFinanciamentoComponent } from './grafico-financiamento/grafico-financiamento.component';
+import { FinanciamentoPropriedadesComponent } from './financiamento-propriedades/financiamento-propriedades.component';
+
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { GraficoFinanciamentoComponent } from './grafico-financiamento/grafico-f
     TabelaVplComponent,
     ResultadoComponent,
     GoogleChartComponent,
-    GraficoFinanciamentoComponent
+    GraficoFinanciamentoComponent,
+    FinanciamentoPropriedadesComponent
   ],
   imports: [
     BrowserModule,

@@ -19,9 +19,9 @@ export class FormularioComponent implements OnInit {
   ngOnInit() {
     this.usuario = new Usuario();
     this.usuario.disponivel = 25000;
-    this.usuario.prestacoes = 12;
     this.usuario.valorImovel = 200000;
-    this.usuario.renda = 4500;    
+    this.usuario.renda = 4500;
+    // this.nascimento = '1988/04/21';    
   }
   
   calcular(): void {

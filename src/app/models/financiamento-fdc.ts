@@ -14,6 +14,8 @@ export class FinanciamentoFdc {
     private ano: number = 0.0759;
     private mes: number = Math.pow((1+this.ano),1/12)-1; 
     
+    n: number;
+    
     saldoDevedor1: number = 0;
     saldoDevedor2: number = 0;
     correcaoTR: number = 0;
@@ -22,6 +24,7 @@ export class FinanciamentoFdc {
     seguros: number = 0;
     parcela: number = 0;
     parcelaVP: number = 0;
+    fgts: number = 0;
 
     valorImovel: number = 0;
     patrimonio: number = 0;
@@ -41,6 +44,7 @@ export class FinanciamentoFdc {
         this.patrimonio = fdc.patrimonio;
         this.varPatrimonio = fdc.varPatrimonio;
         this.vpVariacao = fdc.vpVariacao;
+        this.usuario = fdc.usuario;
     }
     
     setUsuario(usuario: Usuario): void {
@@ -51,8 +55,12 @@ export class FinanciamentoFdc {
         this.patrimonio = this.usuario.disponivel;
     }
 
-    atualizar(parcela: number): void {
-        this.saldoDevedor1 = this.saldoDevedor2 - this.amortizacao;
+    atualizar(parcela: number, fdc: FinanciamentoFdc): void {
+        if(parcela == 1) {
+            // alert(this.saldoDevedor1 +' '+this.saldoDevedor2 +' '+this.amortizacao);
+            // alert(this.amortizacao);
+        }
+        this.calcularSaldoDevedor(fdc);
         this.calculaCorrecaoTR();
         this.saldoDevedor2 = this.saldoDevedor1 + this.correcaoTR;
         this.amortizar(parcela);        
@@ -69,6 +77,10 @@ export class FinanciamentoFdc {
         this.vpVariacao = (this.varPatrimonio/Math.pow(1+this.config.Rentabilidade,parcela));
     }
 
+    calcularSaldoDevedor(fdc: FinanciamentoFdc) {
+        this.saldoDevedor1 = fdc.saldoDevedor2 - fdc.amortizacao;
+    }
+    
     amortizar(n: number): void {
         this.amortizacao = (this.saldoDevedor2)/(this.usuario.prestacoes-(n-1));
     }

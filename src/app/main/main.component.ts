@@ -1,34 +1,39 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { Usuario } from '../models/usuario';
 import { Financiamento } from'../models/financiamento';
 import { FinanciamentoConfig } from'../models/financiamento-config';
-import { FinanciamentoSeguro } from'../models/financiamento-seguro';
-import { SeguradoraSa } from'../models/seguradora-sa';
+import { FinanciamentoFgtsConfig } from '../models/financiamento-fgts-config';
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html'
 })
-export class MainComponent implements OnInit {
+export class MainComponent {
 
   usuario: Usuario;
   financiamento: Financiamento;
-  config: FinanciamentoConfig = new FinanciamentoConfig();
+  fgtsConfig: FinanciamentoFgtsConfig;
+  financiamentoConfig: FinanciamentoConfig;
+
   exibir: boolean;
+  exibir2: boolean;
 
   constructor() {
-    this.exibir = false;  
+    this.usuario = new Usuario();
+    this.fgtsConfig = new FinanciamentoFgtsConfig();
+    this.financiamentoConfig = new FinanciamentoConfig(this.fgtsConfig);
+    this.exibir = false;
   }
 
   onCalcular(user: Usuario) {
     this.usuario = user;
-    this.financiamento = new Financiamento(this.usuario, this.config);
-    this.config.Seguro = new FinanciamentoSeguro(new SeguradoraSa(), this.usuario);
+    this.financiamento = new Financiamento(this.usuario, this.financiamentoConfig);
+    this.financiamentoConfig.Seguro.Usuario = this.usuario;
+    this.financiamentoConfig.Seguro.Calcular();
+    alert('Taxa de seguro usada foi: '+this.financiamentoConfig.Seguro.MIP);
     this.financiamento.FluxoDeCaixa();
-    this.exibir = this.financiamento.prestacoes.length > 0;
-  }
-    
-  ngOnInit() {
+    this.financiamento.FluxoDeFGTS();
+    this.exibir = true;
   }
 }
