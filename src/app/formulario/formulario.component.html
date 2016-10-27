@@ -1,37 +1,47 @@
-<div class="form-group">  
-  <label>Valor do imóvel:</label>
-  <div class="input-group">
-    <span class="input-group-addon">R$</span>
-    <input [(ngModel)]="usuario.valorImovel" type="number" class="form-control" id="valor-imovel" min="0" step="25000" autofocus>
+<div class="panel panel-default">
+  <div class="panel-heading">Financiamento</div>
+  <div class="panel-body">
+    <div class="form-group">  
+      <label>Valor do imóvel:</label>
+      <div class="input-group">
+        <span class="input-group-addon">R$</span>
+        <input [(ngModel)]="usuario.valorImovel" type="number" class="form-control" id="valor-imovel" min="0" step="25000" autofocus>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Disponibilidade</label>
+      <div class="input-group">
+        <span class="input-group-addon">R$</span>
+        <input [(ngModel)]="usuario.disponivel" type="number" class="form-control" id="disponibilidade" min="0" step="5000">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Prestações</label>
+      <input [(ngModel)]="usuario.prestacoes" type="number" class="form-control" id="prestacoes" min="0" max="480">
+    </div>
+    <div class="form-group">
+      <label>Renda Mensal</label>
+      <div class="input-group">
+        <span class="input-group-addon">R$</span>
+        <input [(ngModel)]="usuario.renda" type="number" class="form-control" id="renda" min="0" step="100">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Data de Nascimento</label>
+      <input [(ngModel)]="nascimento" type="date" class="form-control" id="nascimento">
+    </div>
+    <div class="form-group">
+      <label><input [(ngModel)]="usuario.usaFGTS" type="checkbox" value="true"> Possui FGTS</label>
+    </div>
+    <div class="form-group" [hidden]="!usuario.usaFGTS">
+      <label>FGTS acumulado</label>
+      <input [(ngModel)]="usuario.FGTS" type="number" class="form-control" id="fgts" min="0" step="1000">
+    </div>
+    <div class="form-group">
+      <button type="button" (click)="calcular()" class="btn btn-primary">Calcular</button>
+    </div>
+
+    <!--[disabled]="!validaForm()"-->
   </div>
-</div>
-<div class="form-group">
-  <label>Disponibilidade</label>
-  <div class="input-group">
-    <span class="input-group-addon">R$</span>
-    <input [(ngModel)]="usuario.disponivel" type="number" class="form-control" id="disponibilidade" min="0" step="5000">
-  </div>
-</div>
-<div class="form-group">
-  <label>Prestações</label>
-  <input [(ngModel)]="usuario.prestacoes" type="number" class="form-control" id="prestacoes" min="0" max="480">
-</div>
-<div class="form-group">
-  <label>Renda Mensal</label>
-  <div class="input-group">
-    <span class="input-group-addon">R$</span>
-    <input [(ngModel)]="usuario.renda" type="number" class="form-control" id="renda" min="0" step="100">
-  </div>
-</div>
-<div class="form-group">
-  <label>Data de Nascimento</label>
-  <input [(ngModel)]="nascimento" type="date" class="form-control" id="nascimento">
-</div>
-<div class="form-group">
-  <label><input [(ngModel)]="usuario.usaFGTS" type="checkbox" value="true"> Possui FGTS</label>
-</div>
-<div class="form-group">
-  <button type="button" (click)="calcular()" class="btn btn-primary">Calcular</button>
 </div>
 
-<!--[disabled]="!validaForm()"-->

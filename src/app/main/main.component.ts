@@ -4,6 +4,9 @@ import { Usuario } from '../models/usuario';
 import { Financiamento } from'../models/financiamento';
 import { FinanciamentoConfig } from'../models/financiamento-config';
 import { FinanciamentoFgtsConfig } from '../models/financiamento-fgts-config';
+import { FinanciamentoSemFgts } from '../models/financiamento-sem-fgts';
+import { FinanciamentoComFgtsNasParcelas } from '../models/financiamento-com-fgts-nas-parcelas';
+import { FinanciamentoComFgtsNoSaldoDevedor } from '../models/financiamento-com-fgts-no-saldo-devedor';
 
 @Component({
   selector: 'app-main',
@@ -17,7 +20,6 @@ export class MainComponent {
   financiamentoConfig: FinanciamentoConfig;
 
   exibir: boolean;
-  exibir2: boolean;
 
   constructor() {
     this.usuario = new Usuario();
@@ -27,13 +29,13 @@ export class MainComponent {
   }
 
   onCalcular(user: Usuario) {
+    this.exibir = false;
     this.usuario = user;
-    this.financiamento = new Financiamento(this.usuario, this.financiamentoConfig);
+    this.financiamento = new FinanciamentoComFgtsNasParcelas(this.usuario, this.financiamentoConfig);
     this.financiamentoConfig.Seguro.Usuario = this.usuario;
     this.financiamentoConfig.Seguro.Calcular();
-    alert('Taxa de seguro usada foi: '+this.financiamentoConfig.Seguro.MIP);
+    // alert('Taxa de seguro usada foi: '+this.financiamentoConfig.Seguro.MIP);
     this.financiamento.FluxoDeCaixa();
-    this.financiamento.FluxoDeFGTS();
     this.exibir = true;
   }
 }

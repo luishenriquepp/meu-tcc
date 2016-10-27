@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuSuperiorComponent implements OnInit {
 
-  private title: string = 'Home';
+  private title: string = 'Simulações para Financiamento de Imóveis';
   private aluguel: string = 'Aluguel';
   private financiamento: string = 'Financiamento';
   private consorcio: string = 'Consórcio';

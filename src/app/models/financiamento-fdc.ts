@@ -13,9 +13,7 @@ export class FinanciamentoFdc {
 
     private ano: number = 0.0759;
     private mes: number = Math.pow((1+this.ano),1/12)-1; 
-    
-    n: number;
-    
+        
     saldoDevedor1: number = 0;
     saldoDevedor2: number = 0;
     correcaoTR: number = 0;
@@ -56,10 +54,6 @@ export class FinanciamentoFdc {
     }
 
     atualizar(parcela: number, fdc: FinanciamentoFdc): void {
-        if(parcela == 1) {
-            // alert(this.saldoDevedor1 +' '+this.saldoDevedor2 +' '+this.amortizacao);
-            // alert(this.amortizacao);
-        }
         this.calcularSaldoDevedor(fdc);
         this.calculaCorrecaoTR();
         this.saldoDevedor2 = this.saldoDevedor1 + this.correcaoTR;
