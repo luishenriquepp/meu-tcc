@@ -11,7 +11,7 @@ export class FinanciamentoComFgtsNasParcelas extends Financiamento {
 
         if(this.Configuracao.FGTSConfig.Entrada) {
             this.Fdc.saldoDevedor1 -= fgtsAcumulado;
-            this.Fdc.saldoDevedor2 -= fgtsAcumulado;
+            // this.Fdc.Atualizar()
             this.Fdc.fgts = fgtsAcumulado;
             this.Fdc.patrimonio += fgtsAcumulado;
             fgtsAcumulado = 0;
@@ -21,7 +21,7 @@ export class FinanciamentoComFgtsNasParcelas extends Financiamento {
         for(var i=1; i<=this.Usuario.prestacoes;i++) {
             var nFdc = new FinanciamentoFdc(this.Configuracao);
             nFdc.setProperties(this.Prestacoes[i-1]);
-            nFdc.atualizar(i,this.Prestacoes[i-1]);
+            nFdc.Atualizar(i,this.Prestacoes[i-1]);
             this.Prestacoes.push(nFdc);
             
             parcelaAcumulado += this.Prestacoes[i].parcela;
@@ -56,6 +56,8 @@ export class FinanciamentoComFgtsNasParcelas extends Financiamento {
             if(usando) {
                 this.Prestacoes[i].fgts = this.Prestacoes[i].parcela*taxa;
                 this.Prestacoes[i].parcela *= (1-taxa);
+                this.Prestacoes[i].attParcelaValorPresente(i);
+                this.Prestacoes[i].attVariacaoValorPresente(i);
             }
             fgtsAcumulado += fgtsAcumulado*0.008;
             fgtsAcumulado += this.Usuario.renda * 0.08;

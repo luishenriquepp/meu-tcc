@@ -1,8 +1,10 @@
 <div class="navbar-header">
-  <a class="navbar-brand" href="#">{{title}}</a>
+  <a class="navbar-brand" [routerLink]="['/home']">{{title}}</a>
 </div>
 <ul class="nav navbar-nav">
-  <li><a href="#">{{aluguel}}</a></li>
-  <li><a href="#">{{financiamento}}</a></li>
-  <li><a href="#">{{consorcio}}</a></li>
+  <li><a [routerLink]="['/financiamento']">{{financiamento}}</a></li>
+  <li><a [routerLink]="['/aluguel']">{{aluguel}}</a></li>
+  <li><a [routerLink]="['/consorcio']">{{consorcio}}</a></li>
 </ul>
+
+

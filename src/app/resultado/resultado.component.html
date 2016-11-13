@@ -10,7 +10,7 @@
                 </tr>
                 <tr>
                     <td>Comprometimento</td>
-                    <td>{{ financiamento.Resultado.Comprometimento }}</td>
+                    <td>{{ financiamento.Resultado.Comprometimento | percent }}</td>
                 </tr>
                 <tr>
                     <td>Última Parcela</td>
@@ -22,8 +22,8 @@
             <thead>
                 <tr>
                     <th class="col-md-4"></th>
-                    <th class="col-md-4">Valor Presente</th>
-                    <th class="col-md-4">Valor Nominal</th>
+                    <th class="col-md-4 text-right">Valor Presente</th>
+                    <th class="col-md-4 text-right" >Valor Nominal</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -43,7 +43,7 @@
                     <td class="text-right">{{financiamento.Resultado.ParcelaTotal | number:'1.2-2'}}</td>
                 </tr>
                 <tr>
-                    <td class="text-center"><strong>Valor Líquido</strong></td>
+                    <td><strong>Valor Líquido</strong></td>
                     <td class="text-right"><strong>{{ financiamento.Resultado.ValorLiquidoPresente | number:'1.2-2' }}</strong></td>
                     <td class="text-right"><strong>{{ financiamento.Resultado.ValorLiquidoNominal | number:'1.2-2' }}</strong></td>
                 </tr>

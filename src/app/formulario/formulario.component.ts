@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output, Input, OnInit } from '@angular/core';
 
 import { Usuario } from '../models/usuario';
 import { Dates } from '../utils/dates';
@@ -9,6 +9,7 @@ import { Dates } from '../utils/dates';
 })
 export class FormularioComponent implements OnInit {
 
+  @Input() title;
   @Output() onCalcular = new EventEmitter<Usuario>();
   usuario: Usuario;
   dateUtils: Dates;
@@ -20,8 +21,7 @@ export class FormularioComponent implements OnInit {
     this.usuario = new Usuario();
     this.usuario.disponivel = 25000;
     this.usuario.valorImovel = 200000;
-    this.usuario.renda = 4500;
-    // this.nascimento = '1988/04/21';    
+    this.usuario.renda = 4500;    
   }
   
   calcular(): void {

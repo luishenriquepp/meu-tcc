@@ -18,6 +18,7 @@ export abstract class Financiamento {
         this._vfdc.setUsuario(this.Usuario);
         this._resultado = new FinanciamentoResultado();
         this._resultado.Usuario = this._usuario;
+        this._resultado.Parcela = this._prestacoes;
     }    
     
     FluxoDeCaixa(): void { }
@@ -38,27 +39,27 @@ export abstract class Financiamento {
         this._usuario = usuario;
     }
     
-    protected get Prestacoes(): FinanciamentoFdc[] {
+    public get Prestacoes(): FinanciamentoFdc[] {
         return this._prestacoes;
     } 
 
-    protected set Prestacoes(prestacoes: FinanciamentoFdc[]) {
+    public set Prestacoes(prestacoes: FinanciamentoFdc[]) {
         this._prestacoes = prestacoes;
     }
 
-    protected get Configuracao(): FinanciamentoConfig {
+    public get Configuracao(): FinanciamentoConfig {
         return this._config;
     } 
 
-    protected set Configuracao(config: FinanciamentoConfig) {
+    public set Configuracao(config: FinanciamentoConfig) {
         this._config = config;
     }
 
-    protected get Resultado(): FinanciamentoResultado {
+    public get Resultado(): FinanciamentoResultado {
         return this._resultado;
     } 
 
-    protected set Resultado(resultado: FinanciamentoResultado) {
+    public set Resultado(resultado: FinanciamentoResultado) {
         this._resultado = resultado;
     }
 }

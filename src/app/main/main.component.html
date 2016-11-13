@@ -4,18 +4,5 @@
   </div>
 </nav>
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-lg-2">
-      <app-formulario (onCalcular)="onCalcular($event)"></app-formulario>
-    </div>
-    <div class="col-lg-2">
-      <!--<app-resultado [financiamento]="financiamento" [exibirTabela]="exibir"></app-resultado>-->
-      <app-financiamento-propriedades [exibirConfig]="exibir" [usuario]="usuario" [config]="financiamentoConfig" [teste]="fgtsConfig">        
-      </app-financiamento-propriedades>
-    </div>
-    <div class="col-lg-8">
-      <app-tabela-vpl [financiamento]="financiamento" [exibirTabela]="exibir"></app-tabela-vpl>
-      <!--<app-grafico-financiamento [exibirTabela]="exibir"></app-grafico-financiamento>-->
-    </div>
-  </div>
+  <router-outlet></router-outlet>
 </div>

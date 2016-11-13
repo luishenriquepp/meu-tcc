@@ -1,9 +1,7 @@
 import { FinanciamentoConfig } from './financiamento-config';
 import { Usuario } from './usuario';
 
-export class FinanciamentoFdc {
-        
-    
+export class FinanciamentoFdc {    
     constructor(config: FinanciamentoConfig) {
         this.config = config;
     }
@@ -53,45 +51,67 @@ export class FinanciamentoFdc {
         this.patrimonio = this.usuario.disponivel;
     }
 
-    atualizar(parcela: number, fdc: FinanciamentoFdc): void {
-        this.calcularSaldoDevedor(fdc);
-        this.calculaCorrecaoTR();
-        this.saldoDevedor2 = this.saldoDevedor1 + this.correcaoTR;
-        this.amortizar(parcela);        
-        this.calcularJuros();
-        this.calculaSeguro();
-        this.calcularParcela();
-        this.parcelaVP = (this.parcela/Math.pow(1+this.config.Rentabilidade,parcela));
-
-        // TODO
-        this.valorImovel = this.valorImovel*(1+this.mes);
+    Atualizar(n: number, fdc: FinanciamentoFdc): void {
+        this.attSaldoDevedor(fdc);
+        this.attCorrecaoTR();
+        this.attSaldoDevedor2();
+        this.attAmortizacao(n);        
+        this.attJuros();
+        this.attSeguro();
+        this.attParcela();
+        this.attParcelaValorPresente(n);
+        this.attValorImovel();        
         var patri = this.patrimonio;
-        this.patrimonio = this.valorImovel - this.saldoDevedor1;
-        this.varPatrimonio = this.patrimonio - patri;
-        this.vpVariacao = (this.varPatrimonio/Math.pow(1+this.config.Rentabilidade,parcela));
+        this.attPatrimonio();
+        this.attVariacaoPatrimonio(patri);
+        this.attVariacaoValorPresente(n);
     }
 
-    calcularSaldoDevedor(fdc: FinanciamentoFdc) {
+    attSaldoDevedor(fdc: FinanciamentoFdc) {
         this.saldoDevedor1 = fdc.saldoDevedor2 - fdc.amortizacao;
     }
+
+    attCorrecaoTR(): void {
+        this.correcaoTR = (this.saldoDevedor1 * this.config.TRMensal);
+    }
+
+    attSaldoDevedor2(): void {
+        this.saldoDevedor2 = this.saldoDevedor1 + this.correcaoTR;
+    }
     
-    amortizar(n: number): void {
+    attAmortizacao(n: number): void {
         this.amortizacao = (this.saldoDevedor2)/(this.usuario.prestacoes-(n-1));
     }
 
-    calcularJuros(): void {
+    attJuros(): void {
         this.juros = (this.config.JurosMensais * this.saldoDevedor2)
     }
 
-    calcularParcela(): void {
-        this.parcela = this.amortizacao + this.juros + this.seguros + this.config.TaxaAdministrativa;
-    }
-
-    calculaSeguro(): void {
+    attSeguro(): void {
         this.seguros = (this.config.Seguro.DFI * this.usuario.valorImovel) + (this.config.Seguro.MIP * this.saldoDevedor1);
     }
+    
+    attParcela(): void {
+        this.parcela = this.amortizacao + this.juros + this.seguros + this.config.TaxaAdministrativa;
+    }
+    
+    attParcelaValorPresente(n: number): void {
+        this.parcelaVP = (this.parcela/Math.pow(1+this.config.Rentabilidade,n));
+    }
 
-    calculaCorrecaoTR(): void {
-        this.correcaoTR = (this.saldoDevedor1 * this.config.TRMensal);
+    attValorImovel(): void {
+        this.valorImovel = this.valorImovel*(1+this.mes);
+    }
+
+    attPatrimonio(): void {
+        this.patrimonio = this.valorImovel - this.saldoDevedor1;
+    }
+
+    attVariacaoPatrimonio(patrimonio: number) {
+        this.varPatrimonio = this.patrimonio - patrimonio;
+    }
+
+    attVariacaoValorPresente(n: number): void {
+        this.vpVariacao = (this.varPatrimonio/Math.pow(1+this.config.Rentabilidade,n));
     }
 }

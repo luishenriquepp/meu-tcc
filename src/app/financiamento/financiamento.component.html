@@ -1,0 +1,15 @@
+<div class="row">
+    <div class="col-lg-2">
+      <app-formulario [title]="'Financiamento'" (onCalcular)="onCalcular($event)"></app-formulario>
+    </div>
+    <div class="col-lg-3">
+      <app-resultado [financiamento]="financiamento" [exibirTabela]="exibir"></app-resultado>
+      <app-financiamento-propriedades [exibirConfig]="exibirPropriedades" [usuario]="usuario" [config]="financiamentoConfig" 
+        [teste]="fgtsConfig">        
+      </app-financiamento-propriedades>
+    </div>
+    <div class="col-lg-7">
+      <app-tabela-vpl [financiamento]="financiamento" [exibirTabela]="exibir"></app-tabela-vpl>
+      <!--<app-grafico-financiamento-2></app-grafico-financiamento-2>-->
+    </div>
+</div>
