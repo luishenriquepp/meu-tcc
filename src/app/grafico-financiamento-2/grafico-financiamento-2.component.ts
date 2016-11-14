@@ -24,8 +24,7 @@ export class GraficoFinanciamento2Component implements OnInit {
     } 
     
     loadChart(): void
-    {        
-      this.chart1.getDataGrid().setVisible(true);
+    {        ;
       this.PopulateProductSales(this.chart1);
       var titles = this.chart1.getTitles();
       var title = new cfx.TitleDockable();
