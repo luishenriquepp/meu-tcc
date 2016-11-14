@@ -11,7 +11,6 @@ export class FinanciamentoComFgtsNoSaldoDevedor  extends Financiamento {
             this.Fdc.saldoDevedor1 -= fgtsAcumulado;
             this.Fdc.saldoDevedor2 -= fgtsAcumulado;
             this.Fdc.fgts = fgtsAcumulado;
-            this.Fdc.patrimonio += fgtsAcumulado;
             fgtsAcumulado = 0;
         } else {
             temporizador = 1;
@@ -23,7 +22,7 @@ export class FinanciamentoComFgtsNoSaldoDevedor  extends Financiamento {
 
             var nFdc = new FinanciamentoFdc(this.Configuracao);
             nFdc.setProperties(this.Prestacoes[i-1]);
-            // nFdc.Atualizar(i,this.Prestacoes[i-1]);
+            nFdc.Atualizar(i,this.Prestacoes[i-1]);
             this.Prestacoes.push(nFdc);
             
             this.Resultado.IncrementaParcela(this.Prestacoes[i]);
@@ -32,7 +31,6 @@ export class FinanciamentoComFgtsNoSaldoDevedor  extends Financiamento {
                 this.Prestacoes[i].saldoDevedor1 -= fgtsAcumulado;
                 this.Prestacoes[i].saldoDevedor2 -= fgtsAcumulado;
                 this.Prestacoes[i].fgts = fgtsAcumulado;
-                this.Prestacoes[i].patrimonio += fgtsAcumulado;
                 fgtsAcumulado = 0;
                 temporizador += 2;
             }
