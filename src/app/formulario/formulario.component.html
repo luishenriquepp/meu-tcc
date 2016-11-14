@@ -38,10 +38,8 @@
       <input [(ngModel)]="usuario.FGTS" type="number" class="form-control input-sm" id="fgts" min="0" step="1000">
     </div>
     <div class="form-group text-center">
-      <button type="button" (click)="calcular()" class="btn btn-primary btn-sm">Calcular</button>
+      <button type="button" [disabled]="!validaForm()" (click)="calcular()" class="btn btn-primary btn-sm">Calcular</button>
     </div>
-
-    <!--[disabled]="!validaForm()"-->
   </div>
 </div>
 

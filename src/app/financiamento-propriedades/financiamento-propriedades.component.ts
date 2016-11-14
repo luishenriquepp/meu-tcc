@@ -16,7 +16,6 @@ export class FinanciamentoPropriedadesComponent implements OnInit{
   @Input() config: FinanciamentoConfig;
   @Input() teste: FinanciamentoFgtsConfig;
   @Input() usuario: Usuario;
-  @Input() exibirConfig: boolean;
 
   ngOnInit() {
     this.config.Seguro = new FinanciamentoSeguro(new SeguradoraSa());

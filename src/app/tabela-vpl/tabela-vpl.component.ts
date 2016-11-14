@@ -10,7 +10,6 @@ import { Financiamento } from'../models/financiamento';
 })
 export class TabelaVplComponent implements OnInit{ 
 
-  @Input() exibirTabela: boolean;
   @Input() financiamento: Financiamento;
 
   ngOnInit() {

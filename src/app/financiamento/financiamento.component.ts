@@ -19,20 +19,24 @@ export class FinanciamentoComponent {
   financiamento: Financiamento;
   fgtsConfig: FinanciamentoFgtsConfig;
   financiamentoConfig: FinanciamentoConfig;
-
-  exibir: boolean;
-  exibirPropriedades: boolean;
+  avancado: boolean;
+  fluxoDeCaixa: boolean;
+  resultado: boolean;
+  calculado: boolean;
 
   constructor() {
     this.usuario = new Usuario();
     this.fgtsConfig = new FinanciamentoFgtsConfig();
     this.financiamentoConfig = new FinanciamentoConfig(this.fgtsConfig);
-    this.exibir = false;
-    this.exibirPropriedades = true;
+    this.resultado = false;
+    this.fluxoDeCaixa = false;
+    this.avancado = false;
+    this.calculado = false;
   }
 
   onCalcular(user: Usuario) {
-    this.exibir = false;
+    this.avancado = false;
+    this.fluxoDeCaixa = false;
     this.usuario = user;
     this.financiamento = new FinanciamentoComFgtsNasParcelas(this.usuario, this.financiamentoConfig);
     this.financiamento.Configuracao = this.financiamentoConfig;
@@ -40,7 +44,26 @@ export class FinanciamentoComponent {
     this.financiamentoConfig.Seguro.Calcular();
     // alert('Taxa de seguro usada foi: '+this.financiamentoConfig.Seguro.MIP);
     this.financiamento.FluxoDeCaixa();
-    this.exibir = true;
+    this.calculado = true;
+    this.resultado = true;
+  }
+
+  exibeFluxoDeCaixa(): void {
+    this.avancado = false;
+    this.resultado = false;
+    this.fluxoDeCaixa = true;
+  }
+
+  exibeResultado(): void {
+    this.avancado = false;
+    this.fluxoDeCaixa = false;
+    this.resultado = true;
+  }
+
+  exibeAvancado(): void {
+    this.fluxoDeCaixa = false;
+    this.resultado = false;
+    this.avancado = true;
   }
 
 }

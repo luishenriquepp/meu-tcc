@@ -2,16 +2,54 @@
     <div class="col-lg-2">
       <app-formulario [title]="'Financiamento'" (onCalcular)="onCalcular($event)"></app-formulario>
     </div>
-    <div class="col-lg-3">
-      <app-resultado [financiamento]="financiamento" [exibirTabela]="exibir"></app-resultado>
-      <app-financiamento-propriedades [exibirConfig]="exibirPropriedades" [usuario]="usuario" [config]="financiamentoConfig" 
-        [teste]="fgtsConfig">        
-      </app-financiamento-propriedades>
-    </div>
-    <div class="col-lg-7">
-      <!--<app-tabela-vpl [financiamento]="financiamento" [exibirTabela]="exibir"></app-tabela-vpl>-->
-      <div *ngIf="exibir">
-          <app-grafico-financiamento-2></app-grafico-financiamento-2>
+    <div *ngIf="!calculado">
+      <div class="col-lg-3">
+        <app-financiamento-propriedades [usuario]="usuario" [config]="financiamentoConfig" 
+          [teste]="fgtsConfig">        
+        </app-financiamento-propriedades>
       </div>
     </div>
+    <div class="col-lg-10" *ngIf="calculado">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+            <div *ngIf="calculado">
+              <button class="btn btn-sm btn-warning text-center" (click)="exibeAvancado()">Avançado</button>
+              <button class="btn btn-sm btn-warning text-center" (click)="exibeFluxoDeCaixa()">Fluxo de Caixa</button>
+              <button class="btn btn-sm btn-warning text-center" (click)="exibeResultado()">Resultado</button>
+            </div>
+            <div *ngIf=!calculado>Calculando...</div>
+        </div>
+        
+        <div class="panel-body">
+          <div class="row">
+            
+            <div *ngIf="avancado">
+              <div class="col-lg-3">
+                <app-financiamento-propriedades [usuario]="usuario" [config]="financiamentoConfig" 
+                  [teste]="fgtsConfig">        
+                </app-financiamento-propriedades>
+              </div>
+            </div>
+            
+            <div *ngIf="fluxoDeCaixa">
+              <div class="col-lg-12">
+                <app-tabela-vpl [financiamento]="financiamento"></app-tabela-vpl>
+              </div>            
+            </div>
+            
+            <div *ngIf="resultado">
+              <div class="col-lg-3">
+                <app-resultado [financiamento]="financiamento"></app-resultado>
+              </div>
+              <div class="col-lg-9">
+                <div>
+                  <app-grafico-financiamento-2></app-grafico-financiamento-2>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+      </div>
+    </div>
+  </div>
 </div>

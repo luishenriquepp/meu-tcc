@@ -10,7 +10,6 @@ import { Financiamento } from'../models/financiamento';
 })
 export class ResultadoComponent implements OnInit {
 
-  @Input() exibirTabela: boolean;
   @Input() financiamento: Financiamento;
 
   comprometimento: number;
