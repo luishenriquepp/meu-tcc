@@ -14,6 +14,7 @@ export class FinanciamentoSemFgts extends Financiamento {
             this.Prestacoes.push(nFdc);
             
             this.Resultado.IncrementaParcela(this.Prestacoes[i]);
+            this.Resultado.IncrementaVariacao(this.Prestacoes[i],i);
         }        
     }
 }

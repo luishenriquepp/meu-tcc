@@ -44,11 +44,11 @@ export class FinanciamentoResultado {
     } 
 
     get PatrimonioVPTotal(): number {
-        return this._patrimonioVPTotal;
+        return this._patrimonioVPTotal+this._usuario.disponivel;
     } 
 
     get ValorLiquidoPresente(): number {
-        return this._patrimonioVPTotal-this._usuario.disponivel-this._parcelaVPTotal;
+        return this.PatrimonioVPTotal-this._usuario.disponivel-this._parcelaVPTotal;
     } 
 
     get ValorLiquidoNominal(): number {
@@ -58,7 +58,13 @@ export class FinanciamentoResultado {
     public IncrementaParcela(fdc: FinanciamentoFdc): void {
         this._parcelaTotal += fdc.parcela;
         this._parcelaVPTotal += fdc.parcelaVP;
-        this._patrimonioVPTotal += fdc.vpVariacao;
+    }
+
+    public IncrementaVariacao(fdc: FinanciamentoFdc, n): void {
+        this._patrimonioVPTotal += fdc.before.vpVariacao;
+        if(n == this._usuario.prestacoes) {
+            this._patrimonioVPTotal += fdc.vpVariacao;
+        }
     }
 
     set Parcela(parcela: FinanciamentoFdc[]) {
