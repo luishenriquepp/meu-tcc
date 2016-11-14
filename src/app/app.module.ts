@@ -14,8 +14,6 @@ import { MenuSuperiorComponent } from './menu-superior/menu-superior.component';
 import { MainComponent } from './main/main.component';
 import { TabelaVplComponent } from './tabela-vpl/tabela-vpl.component';
 import { ResultadoComponent } from './resultado/resultado.component';
-import { GoogleChartComponent } from './google-chart/google-chart.component';
-import { GraficoFinanciamentoComponent } from './grafico-financiamento/grafico-financiamento.component';
 import { GraficoFinanciamento2Component } from './grafico-financiamento-2/grafico-financiamento-2.component';
 import { FinanciamentoPropriedadesComponent } from './financiamento-propriedades/financiamento-propriedades.component';
 import { Routes } from './models/routes';
@@ -33,8 +31,6 @@ import { Routes } from './models/routes';
     ConsorcioComponent,
     TabelaVplComponent,
     ResultadoComponent,
-    GoogleChartComponent,
-    GraficoFinanciamentoComponent,
     GraficoFinanciamento2Component,
     FinanciamentoPropriedadesComponent
   ],
