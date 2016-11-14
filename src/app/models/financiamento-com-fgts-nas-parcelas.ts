@@ -21,7 +21,7 @@ export class FinanciamentoComFgtsNasParcelas extends Financiamento {
         for(var i=1; i<=this.Usuario.prestacoes;i++) {
             var nFdc = new FinanciamentoFdc(this.Configuracao);
             nFdc.setProperties(this.Prestacoes[i-1]);
-            nFdc.Atualizar(i,this.Prestacoes[i-1]);
+            // nFdc.Atualizar(i,this.Prestacoes[i-1]);
             this.Prestacoes.push(nFdc);
             
             parcelaAcumulado += this.Prestacoes[i].parcela;

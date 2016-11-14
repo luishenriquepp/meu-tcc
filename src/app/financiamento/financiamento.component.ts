@@ -38,7 +38,7 @@ export class FinanciamentoComponent {
     this.avancado = false;
     this.fluxoDeCaixa = false;
     this.usuario = user;
-    this.financiamento = new FinanciamentoComFgtsNasParcelas(this.usuario, this.financiamentoConfig);
+    this.financiamento = new FinanciamentoSemFgts(this.usuario, this.financiamentoConfig);
     this.financiamento.Configuracao = this.financiamentoConfig;
     this.financiamentoConfig.Seguro.Usuario = this.usuario;
     this.financiamentoConfig.Seguro.Calcular();

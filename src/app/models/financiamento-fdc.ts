@@ -12,6 +12,8 @@ export class FinanciamentoFdc {
     private ano: number = 0.0759;
     private mes: number = Math.pow((1+this.ano),1/12)-1; 
         
+    before: FinanciamentoFdc;
+    
     saldoDevedor1: number = 0;
     saldoDevedor2: number = 0;
     correcaoTR: number = 0;
@@ -51,8 +53,9 @@ export class FinanciamentoFdc {
         this.patrimonio = this.usuario.disponivel;
     }
 
-    Atualizar(n: number, fdc: FinanciamentoFdc): void {
-        this.attSaldoDevedor(fdc);
+    Atualizar(n: number, before: FinanciamentoFdc): void {
+        this.before = before;
+        this.attSaldoDevedor(before);
         this.attCorrecaoTR();
         this.attSaldoDevedor2();
         this.attAmortizacao(n);        
@@ -60,11 +63,20 @@ export class FinanciamentoFdc {
         this.attSeguro();
         this.attParcela();
         this.attParcelaValorPresente(n);
-        this.attValorImovel();        
-        var patri = this.patrimonio;
-        this.attPatrimonio();
-        this.attVariacaoPatrimonio(patri);
-        this.attVariacaoValorPresente(n);
+        this.attValorImovel();                
+        this.before.attPatrimonio(this.saldoDevedor1);
+        
+        if(before.before) {
+            this.before.attVariacaoPatrimonio(before.before.patrimonio);
+        }
+        
+        this.before.attVariacaoValorPresente(n-1);
+
+        if(n == this.usuario.prestacoes) {
+            this.attPatrimonio(0);
+            this.attVariacaoPatrimonio(before.patrimonio);
+            this.attVariacaoValorPresente(n);
+        }
     }
 
     attSaldoDevedor(fdc: FinanciamentoFdc) {
@@ -103,8 +115,8 @@ export class FinanciamentoFdc {
         this.valorImovel = this.valorImovel*(1+this.mes);
     }
 
-    attPatrimonio(): void {
-        this.patrimonio = this.valorImovel - this.saldoDevedor1;
+    attPatrimonio(saldoDevedor: number): void {
+        this.patrimonio = this.valorImovel - saldoDevedor;
     }
 
     attVariacaoPatrimonio(patrimonio: number) {

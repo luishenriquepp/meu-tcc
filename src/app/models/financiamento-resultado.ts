@@ -5,8 +5,8 @@ export class FinanciamentoResultado {
     private _usuario: Usuario;
     private _parcelaTotal: number = 0;
     private _parcelaVPTotal: number = 0;
-    private _patrimonioTotal: number = 0;
     private _patrimonioVPTotal: number = 0;
+    private _variacaoTotal: number = 0;
     private _parcelas: FinanciamentoFdc[];
     
     set Usuario(usuario: Usuario) {
@@ -44,15 +44,15 @@ export class FinanciamentoResultado {
     } 
 
     get PatrimonioVPTotal(): number {
-        return this._usuario.disponivel;
+        return this._patrimonioVPTotal;
     } 
 
     get ValorLiquidoPresente(): number {
-        return this._patrimonioVPTotal-this._usuario.disponivel-this.ParcelaVPTotal;
+        return this._patrimonioVPTotal-this._usuario.disponivel-this._parcelaVPTotal;
     } 
 
     get ValorLiquidoNominal(): number {
-        return this._patrimonioTotal-this._usuario.disponivel-this.ParcelaTotal;
+        return this.PatrimonioTotal-this._usuario.disponivel-this._parcelaTotal;
     } 
 
     public IncrementaParcela(fdc: FinanciamentoFdc): void {
