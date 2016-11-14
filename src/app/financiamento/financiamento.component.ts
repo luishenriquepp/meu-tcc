@@ -40,7 +40,6 @@ export class FinanciamentoComponent {
     this.financiamentoConfig.Seguro.Calcular();
     // alert('Taxa de seguro usada foi: '+this.financiamentoConfig.Seguro.MIP);
     this.financiamento.FluxoDeCaixa();
-    alert(this.financiamento.Resultado.PrimeiraParcela);
     this.exibir = true;
   }
 

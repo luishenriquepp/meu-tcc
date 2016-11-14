@@ -9,7 +9,9 @@
       </app-financiamento-propriedades>
     </div>
     <div class="col-lg-7">
-      <app-tabela-vpl [financiamento]="financiamento" [exibirTabela]="exibir"></app-tabela-vpl>
-      <!--<app-grafico-financiamento-2></app-grafico-financiamento-2>-->
+      <!--<app-tabela-vpl [financiamento]="financiamento" [exibirTabela]="exibir"></app-tabela-vpl>-->
+      <div *ngIf="exibir">
+          <app-grafico-financiamento-2></app-grafico-financiamento-2>
+      </div>
     </div>
 </div>

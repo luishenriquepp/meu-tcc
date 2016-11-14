@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { Financiamento } from '../models/financiamento';
 import { FinanciamentoFdc } from '../models/financiamento-fdc';
@@ -11,7 +11,7 @@ declare var cfx;
   styleUrls: ['./grafico-financiamento-2.component.css']
 })
 export class GraficoFinanciamento2Component implements OnInit {
-
+  
   constructor() {
     this.chart1 = new cfx.Chart(); 
    }
@@ -52,43 +52,33 @@ export class GraficoFinanciamento2Component implements OnInit {
     var items = [{
         "Month": "Jan",
         "White": 12560,
-        "Sparkling": 34500
     }, {
         "Month": "Feb",
         "White": 13400,
-        "Sparkling": 38900
     }, {
         "Month": "Mar",
         "White": 16700,
-        "Sparkling": 42100
     }, {
         "Month": "Apr",
         "White": 12000,
-        "Sparkling": 43800
     }, {
         "Month": "May",
         "White": 15800,
-        "Sparkling": 37540
     }, {
         "Month": "Jun",
         "White": 9800,
-        "Sparkling": 32580
     }, {
         "Month": "Jul",
         "White": 17800,
-        "Sparkling": 34000
     }, {
         "Month": "Aug",
         "White": 19800,
-        "Sparkling": 38000
     }, {
         "Month": "Sep",
         "White": 23200,
-        "Sparkling": 41300
     }, {
         "Month": "Oct",
         "White": 16700,
-        "Sparkling": 46590
     }];
 
     chart1.setDataSource(items);
