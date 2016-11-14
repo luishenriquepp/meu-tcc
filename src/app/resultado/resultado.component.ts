@@ -12,9 +12,18 @@ export class ResultadoComponent implements OnInit {
 
   @Input() financiamento: Financiamento;
 
-  comprometimento: number;
-
   ngOnInit() {
-    this.comprometimento = 0;
+    this.valor();
+  }
+
+  valor(): String {
+    if(this.financiamento.Resultado.Comprometimento > 0.25) {
+      return "text-danger";  
+    } else if (this.financiamento.Resultado.Comprometimento > 0.20) {
+      return "text-warning";
+    } else {
+      return "text-success";
+    }
+    
   }
 }

@@ -10,7 +10,7 @@
                 </tr>
                 <tr>
                     <td>Comprometimento</td>
-                    <td>{{ financiamento.Resultado.Comprometimento | percent }}</td>
+                    <td [class]="valor()">{{ financiamento.Resultado.Comprometimento | percent }}</td>
                 </tr>
                 <tr>
                     <td>Última Parcela</td>
@@ -32,12 +32,12 @@
                     <td class="text-right">{{ financiamento.Resultado.PatrimonioVPTotal | number:'1.2-2' }}</td>
                     <td class="text-right">{{ financiamento.Resultado.PatrimonioTotal | number:'1.2-2' }}</td>
                 </tr>
-                <tr class="warning">
+                <tr class="danger">
                     <td>Entrada</td>
                     <td class="text-right">{{ financiamento.Usuario.disponivel | number:'1.2-2' }}</td>
                     <td class="text-right">{{ financiamento.Usuario.disponivel | number:'1.2-2' }}</td>
                 </tr>
-                <tr class="warning">
+                <tr class="danger">
                     <td>Total de Parcelas</td>
                     <td class="text-right">{{financiamento.Resultado.ParcelaVPTotal | number:'1.2-2'}}</td>
                     <td class="text-right">{{financiamento.Resultado.ParcelaTotal | number:'1.2-2'}}</td>
