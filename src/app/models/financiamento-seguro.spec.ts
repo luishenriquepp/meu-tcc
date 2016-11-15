@@ -1,10 +1,12 @@
 /* tslint:disable:no-unused-variable */
 
-import { addProviders, async, inject } from '@angular/core/testing';
+import { async, inject } from '@angular/core/testing';
 import {FinanciamentoSeguro} from './financiamento-seguro';
+import {SeguradoraHdi} from './seguradora-hdi';
 
 describe('FinanciamentoSeguro', () => {
   it('should create an instance', () => {
-    expect(new FinanciamentoSeguro()).toBeTruthy();
+    let seguradora = new SeguradoraHdi();
+    expect(new FinanciamentoSeguro(seguradora)).toBeTruthy();
   });
 });

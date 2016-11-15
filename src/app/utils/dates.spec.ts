@@ -12,9 +12,4 @@ describe('Dates', () => {
     var idade = dateUtils.GetIdade();
     expect(28).toBe(idade);
   });
-    it('should test something', () => {
-    var dateUtils = new Dates(new Date(19, 4));
-    var idade = dateUtils.GetIdade();
-    expect(28).toBe(idade);
-  });
 });
