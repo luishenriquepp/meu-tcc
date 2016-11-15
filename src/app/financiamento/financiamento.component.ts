@@ -7,6 +7,7 @@ import { FinanciamentoFgtsConfig } from '../models/financiamento-fgts-config';
 import { FinanciamentoSemFgts } from '../models/financiamento-sem-fgts';
 import { FinanciamentoComFgtsNasParcelas } from '../models/financiamento-com-fgts-nas-parcelas';
 import { FinanciamentoComFgtsNoSaldoDevedor } from '../models/financiamento-com-fgts-no-saldo-devedor';
+import { FinanciamentoFactory } from '../utils/financiamento-factory';
 
 @Component({
   selector: 'app-financiamento',
@@ -33,12 +34,12 @@ export class FinanciamentoComponent {
     this.avancado = false;
     this.calculado = false;
   }
-
   onCalcular(user: Usuario) {
     this.avancado = false;
     this.fluxoDeCaixa = false;
-    this.usuario = user;
-    this.financiamento = new FinanciamentoSemFgts(this.usuario, this.financiamentoConfig);
+    this.usuario = user;    
+    let factory = new FinanciamentoFactory(this.usuario, this.financiamentoConfig);
+    this.financiamento = factory.Create();
     this.financiamento.Configuracao = this.financiamentoConfig;
     this.financiamentoConfig.Seguro.Usuario = this.usuario;
     this.financiamentoConfig.Seguro.Calcular();
@@ -46,27 +47,22 @@ export class FinanciamentoComponent {
     this.calculado = true;
     this.resultado = true;
   }
-
   onFgts(fgts: boolean) {
     this.usuario.usaFGTS = fgts;
   }
-
   exibeFluxoDeCaixa(): void {
     this.avancado = false;
     this.resultado = false;
     this.fluxoDeCaixa = true;
   }
-
   exibeResultado(): void {
     this.avancado = false;
     this.fluxoDeCaixa = false;
     this.resultado = true;
   }
-
   exibeAvancado(): void {
     this.fluxoDeCaixa = false;
     this.resultado = false;
     this.avancado = true;
   }
-
 }
