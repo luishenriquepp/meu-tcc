@@ -11,35 +11,59 @@ export class FormularioComponent implements OnInit {
 
   @Input() title;
   @Output() onCalcular = new EventEmitter<Usuario>();
-  usuario: Usuario;
-  dateUtils: Dates;
-  nascimento: string;
-
-  constructor() {}
+  @Output() onFgts = new EventEmitter<boolean>();
+  private dateUtils: Dates;
+  
+  private valorImovel: number;
+  private disponivel: number;
+  private prestacoes: number;
+  private renda: number;
+  private nascimento: string;
+  private possuiFGTS: boolean;
+  private fgtsAcumulado: number;
 
   ngOnInit() {
-    this.usuario = new Usuario();
-    this.usuario.disponivel = 25000;
-    this.usuario.valorImovel = 200000;
-    this.usuario.renda = 4500;    
+    this.valorImovel = 200000;
+    this.disponivel = 25000;
+    this.prestacoes = 24;
+    this.renda = 4500;
+    this.possuiFGTS = false;
+    this.nascimento = "21/04/1988";
+    this.fgtsAcumulado = 0;    
+  }
+  
+  get possuiFgtsModel(): boolean {
+    return this.possuiFGTS;
+  }
+  
+  set possuiFgtsModel(value) {
+    this.possuiFGTS = value;
+    this.onFgts.emit(value);
   }
   
   calcular(): void {
-    this.usuario.nascimento = new Date(this.nascimento);
-    this.onCalcular.emit(this.usuario);
+    var user = new Usuario();
+    user.valorImovel = this.valorImovel;
+    user.disponivel = this.disponivel;
+    user.prestacoes = this.prestacoes;
+    user.usaFGTS = this.possuiFGTS;
+    user.renda = this.renda;
+    user.FGTS = this.fgtsAcumulado;
+    user.nascimento = new Date(this.nascimento);
+    this.onCalcular.emit(user);
   }
 
   validaForm(): boolean {
-    if(this.usuario.valorImovel < 10000) {
+    if(this.valorImovel < 10000) {
       return false;
     }
-    if(this.usuario.disponivel < this.usuario.valorImovel*0.1 || this.usuario.disponivel > this.usuario.valorImovel*0.9) {
+    if(this.disponivel < this.valorImovel*0.1 || this.disponivel > this.valorImovel*0.9) {
       return false;
     }    
-    if(this.usuario.prestacoes < 12 || this.usuario.prestacoes > 480) {
+    if(this.prestacoes < 12 || this.prestacoes > 480) {
       return false;
     }
-    if(this.usuario.renda < 0) {
+    if(this.renda < 0) {
       return false;
     }
     if(!this.nascimento) {

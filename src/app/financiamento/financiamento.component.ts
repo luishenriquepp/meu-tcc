@@ -42,10 +42,13 @@ export class FinanciamentoComponent {
     this.financiamento.Configuracao = this.financiamentoConfig;
     this.financiamentoConfig.Seguro.Usuario = this.usuario;
     this.financiamentoConfig.Seguro.Calcular();
-    // alert('Taxa de seguro usada foi: '+this.financiamentoConfig.Seguro.MIP);
     this.financiamento.FluxoDeCaixa();
     this.calculado = true;
     this.resultado = true;
+  }
+
+  onFgts(fgts: boolean) {
+    this.usuario.usaFGTS = fgts;
   }
 
   exibeFluxoDeCaixa(): void {

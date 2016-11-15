@@ -14,7 +14,7 @@ import { Usuario } from '../models/usuario';
 export class FinanciamentoPropriedadesComponent implements OnInit{
 
   @Input() config: FinanciamentoConfig;
-  @Input() teste: FinanciamentoFgtsConfig;
+  @Input() fgtsConfig: FinanciamentoFgtsConfig;
   @Input() usuario: Usuario;
 
   ngOnInit() {

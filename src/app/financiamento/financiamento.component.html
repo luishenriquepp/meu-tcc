@@ -1,11 +1,16 @@
 <div class="row">
     <div class="col-lg-2">
-      <app-formulario [title]="'Financiamento'" (onCalcular)="onCalcular($event)"></app-formulario>
+      <app-formulario [title]="'Financiamento'"
+        (onCalcular)="onCalcular($event)"
+        (onFgts)="onFgts($event)">
+      </app-formulario>
     </div>
     <div *ngIf="!calculado">
       <div class="col-lg-3">
-        <app-financiamento-propriedades [usuario]="usuario" [config]="financiamentoConfig" 
-          [teste]="fgtsConfig">        
+        <app-financiamento-propriedades 
+          [usuario]="usuario"
+          [config]="financiamentoConfig" 
+          [fgtsConfig]="fgtsConfig">
         </app-financiamento-propriedades>
       </div>
     </div>
@@ -18,25 +23,23 @@
               <button class="btn btn-sm btn-warning text-center" (click)="exibeResultado()">Resultado</button>
             </div>
             <div *ngIf=!calculado>Calculando...</div>
-        </div>
-        
+        </div>        
         <div class="panel-body">
-          <div class="row">
-            
+          <div class="row">            
             <div *ngIf="avancado">
               <div class="col-lg-3">
-                <app-financiamento-propriedades [usuario]="usuario" [config]="financiamentoConfig" 
-                  [teste]="fgtsConfig">        
+                <app-financiamento-propriedades 
+                  [usuario]="usuario" 
+                  [config]="financiamentoConfig" 
+                  [fgtsConfig]="fgtsConfig">        
                 </app-financiamento-propriedades>
               </div>
-            </div>
-            
+            </div>            
             <div *ngIf="fluxoDeCaixa">
               <div class="col-lg-12">
                 <app-tabela-vpl [financiamento]="financiamento"></app-tabela-vpl>
               </div>            
             </div>
-            
             <div *ngIf="resultado">
               <div class="col-lg-4">
                 <app-resultado [financiamento]="financiamento"></app-resultado>
@@ -47,8 +50,7 @@
                 </div>
               </div>
             </div>
-          </div>
-          
+          </div>          
       </div>
     </div>
   </div>

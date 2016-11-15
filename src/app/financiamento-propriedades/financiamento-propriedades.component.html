@@ -30,11 +30,11 @@
       </div>
       <div *ngIf="usuario.usaFGTS">
         <div class="form-group">
-          <label><input [(ngModel)]="teste.Entrada" type="checkbox" value="true"> Abater da entrada</label>
+          <label><input [(ngModel)]="fgtsConfig.Entrada" type="checkbox" value="true"> Abater da entrada</label>
         </div>
         <div class="form-group">
           <label>Novos Créditos de FGTS</label>
-            <select [(ngModel)]="teste.Posterior" class="form-control input-sm">
+            <select [(ngModel)]="fgtsConfig.Posterior" class="form-control input-sm">
               <option value="2">Abater das próximas parcela</option>
               <option value="1">Abater do saldo devedor</option>
               <option value="0">Não usar mais</option>
