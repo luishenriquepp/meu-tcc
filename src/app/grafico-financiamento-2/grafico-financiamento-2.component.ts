@@ -12,37 +12,41 @@ declare var cfx;
 })
 export class GraficoFinanciamento2Component implements OnInit, OnChanges {
   
-  @Input() financiamento: Financiamento;
-  
-  constructor() {
-    this.chart1 = new cfx.Chart(); 
-   }
+    @Input() financiamento: Financiamento;
+
+    constructor() {
+        this.chart1 = new cfx.Chart(); 
+    }
     opaopa: HTMLDivElement;
     chart1: any;    
 
     ngOnInit() {
-        this.loadChart();
+        this.loadChart();        
+    }
+
+    onGraphChange(event): void {
+        this.PopulaComFinanciamento(event);
     }
 
     ngOnChanges() {
-        this.PopulaComFinanciamento();
+        this.PopulaComFinanciamento('patrimonio');
     }
     
     loadChart(): void {
-      var titles = this.chart1.getTitles();
-      var title = new cfx.TitleDockable();
-      title.setText("Evolução do Patrimônio a Valor Presente");
-      titles.add(title);
-      this.chart1.getAxisY().getLabelsFormat().setFormat(cfx.AxisFormat.Currency);
-
-      var opa = document.getElementById('oi');
-      this.chart1.create(opa);
+        this.chart1.getAnimations().getLoad().setEnabled(true);
+        var titles = this.chart1.getTitles();
+        var title = new cfx.TitleDockable();
+        title.setText("Evolução do Patrimônio a Valor Presente");
+        titles.add(title);
+        this.chart1.getAxisY().getLabelsFormat().setFormat(cfx.AxisFormat.Currency);
+        var opa = document.getElementById('oi');
+        this.chart1.create(opa);
      }
 	 
-	PopulaComFinanciamento(): void {
+	PopulaComFinanciamento(type: string): void {
         let items = [];
         for(var i=1;i<this.financiamento.Prestacoes.length;i++) {
-            items.push({ "Fin": this.financiamento.Prestacoes[i].vpVariacao });
+            items.push({ "Fin": this.financiamento.Prestacoes[i][type] });
         }
         this.chart1.setDataSource(items);
     }
