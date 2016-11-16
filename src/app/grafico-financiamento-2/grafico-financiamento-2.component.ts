@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 
 import { Financiamento } from '../models/financiamento';
 import { FinanciamentoFdc } from '../models/financiamento-fdc';
@@ -10,22 +10,25 @@ declare var cfx;
   templateUrl: './grafico-financiamento-2.component.html',
   styleUrls: ['./grafico-financiamento-2.component.css']
 })
-export class GraficoFinanciamento2Component implements OnInit {
+export class GraficoFinanciamento2Component implements OnInit, OnChanges {
+  
+  @Input() financiamento: Financiamento;
   
   constructor() {
     this.chart1 = new cfx.Chart(); 
    }
     opaopa: HTMLDivElement;
-    chart1: any;
-    teste: any;       
+    chart1: any;    
 
     ngOnInit() {
         this.loadChart();
-    } 
+    }
+
+    ngOnChanges() {
+        this.PopulaComFinanciamento();
+    }
     
-    loadChart(): void
-    {        ;
-      this.PopulateProductSales(this.chart1);
+    loadChart(): void {
       var titles = this.chart1.getTitles();
       var title = new cfx.TitleDockable();
       title.setText("Evolução do Patrimônio a Valor Presente");
@@ -36,50 +39,11 @@ export class GraficoFinanciamento2Component implements OnInit {
       this.chart1.create(opa);
      }
 	 
-	PopulaComFinanciamento(chart1: any, financiamento: Financiamento) {
-        var item = { "Month": "Jan", "Financiamento": 0 };
-        var colecao = [];
-
-        var intervalo = financiamento.Prestacoes.length/12;
-
-        for(var i = 0; i< financiamento.Prestacoes.length; i++) {
-
+	PopulaComFinanciamento(): void {
+        let items = [];
+        for(var i=1;i<this.financiamento.Prestacoes.length;i++) {
+            items.push({ "Fin": this.financiamento.Prestacoes[i].vpVariacao });
         }
+        this.chart1.setDataSource(items);
     }
-    
-    PopulateProductSales(chart1: any): void {
-    var items = [{
-        "Month": "Jan",
-        "White": 12560,
-    }, {
-        "Month": "Feb",
-        "White": 13400,
-    }, {
-        "Month": "Mar",
-        "White": 16700,
-    }, {
-        "Month": "Apr",
-        "White": 12000,
-    }, {
-        "Month": "May",
-        "White": 15800,
-    }, {
-        "Month": "Jun",
-        "White": 9800,
-    }, {
-        "Month": "Jul",
-        "White": 17800,
-    }, {
-        "Month": "Aug",
-        "White": 19800,
-    }, {
-        "Month": "Sep",
-        "White": 23200,
-    }, {
-        "Month": "Oct",
-        "White": 16700,
-    }];
-
-    chart1.setDataSource(items);
-  }
 }
