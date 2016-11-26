@@ -1,14 +1,14 @@
-import { MeuTccPage } from './app.po';
+import { UpgradeTccPage } from './app.po';
 
-describe('meu-tcc App', function() {
-  let page: MeuTccPage;
+describe('upgrade-tcc App', function() {
+  let page: UpgradeTccPage;
 
   beforeEach(() => {
-    page = new MeuTccPage();
+    page = new UpgradeTccPage();
   });
 
-  it('valor imovel must be enabled', () => {
+  it('should display message saying app works', () => {
     page.navigateTo();
-    expect(page.getInputState()).toEqual(true);
+    expect(page.getParagraphText()).toEqual('Página principal');
   });
 });

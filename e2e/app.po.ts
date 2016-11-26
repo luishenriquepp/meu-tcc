@@ -1,11 +1,11 @@
-import { browser, element, by } from 'protractor/globals';
+import { browser, element, by } from 'protractor';
 
-export class MeuTccPage {
+export class UpgradeTccPage {
   navigateTo() {
     return browser.get('/');
   }
 
-  getInputState() {
-    return element(by.id('valor-imovel')).isEnabled();
+  getParagraphText() {
+    return element(by.tagName('p')).getText();
   }
 }
