@@ -24,6 +24,7 @@ export class FinanciamentoComponent {
   fluxoDeCaixa: boolean;
   resultado: boolean;
   calculado: boolean;
+  fgts: boolean;
 
   constructor() {
     this.usuario = new Usuario();
@@ -51,18 +52,27 @@ export class FinanciamentoComponent {
     this.usuario.usaFGTS = fgts;
   }
   exibeFluxoDeCaixa(): void {
+    this.fgts = false;
     this.avancado = false;
     this.resultado = false;
     this.fluxoDeCaixa = true;
   }
   exibeResultado(): void {
+    this.fgts = false;
     this.avancado = false;
     this.fluxoDeCaixa = false;
     this.resultado = true;
   }
   exibeAvancado(): void {
+    this.fgts = false;
     this.fluxoDeCaixa = false;
     this.resultado = false;
     this.avancado = true;
+  }
+  exibeExtrato(): void {
+    this.fluxoDeCaixa = false;
+    this.resultado = false;
+    this.avancado = false;
+    this.fgts = true;
   }
 }
