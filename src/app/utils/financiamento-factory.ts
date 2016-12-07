@@ -1,6 +1,7 @@
 import { Financiamento } from '../models/financiamento';
 import { FinanciamentoComFgtsNasParcelas } from '../models/financiamento-com-fgts-nas-parcelas';
 import { FinanciamentoComFgtsNoSaldoDevedor } from '../models/financiamento-com-fgts-no-saldo-devedor';
+import { FinanciamentoComFgtsNaoUsarMais } from '../models/financiamento-com-fgts-nao-usar-mais';
 import { FinanciamentoSemFgts } from '../models/financiamento-sem-fgts';
 import { Usuario } from '../models/usuario';
 import { FinanciamentoConfig } from '../models/financiamento-config';
@@ -21,6 +22,8 @@ export class FinanciamentoFactory {
             return new FinanciamentoComFgtsNasParcelas(this._usuario, this._financiamentoConfig);
         } else if (this._financiamentoConfig.FGTSConfig.Posterior == 1) {
             return new FinanciamentoComFgtsNoSaldoDevedor(this._usuario, this._financiamentoConfig);
+        } else if(this._financiamentoConfig.FGTSConfig.Posterior == 0) {
+            return new FinanciamentoComFgtsNaoUsarMais(this._usuario, this._financiamentoConfig);
         } else {
             return new FinanciamentoSemFgts(this._usuario, this._financiamentoConfig);
         }

@@ -2,13 +2,15 @@ import { Usuario } from './usuario';
 import { FinanciamentoConfig } from'../models/financiamento-config';
 import { FinanciamentoFdc } from './financiamento-fdc';
 import { FinanciamentoResultado } from './financiamento-resultado';
+import { FgtsFdc } from './fgts-fdc';
 
 export abstract class Financiamento {    
     
-    private _usuario: Usuario;
     private _prestacoes: FinanciamentoFdc[] = new Array();
+    private _extratoFgts: FgtsFdc[] = new Array();
+    private _usuario: Usuario;
     private _config: FinanciamentoConfig;
-    private _vfdc: FinanciamentoFdc;
+    private _vfdc: FinanciamentoFdc;    
     private _resultado: FinanciamentoResultado;
 
     constructor(usuario: Usuario, config: FinanciamentoConfig) {
@@ -45,6 +47,14 @@ export abstract class Financiamento {
 
     public set Prestacoes(prestacoes: FinanciamentoFdc[]) {
         this._prestacoes = prestacoes;
+    }
+
+    public get ExtratoFgts(): FgtsFdc[] {
+        return this._extratoFgts;
+    } 
+
+    public set ExtratoFgts(value: FgtsFdc[]) {
+        this._extratoFgts = value;
     }
 
     public get Configuracao(): FinanciamentoConfig {

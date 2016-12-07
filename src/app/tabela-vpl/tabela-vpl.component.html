@@ -7,14 +7,14 @@
           <tr>
             <th class="col-1">N</th>
             <th class="text-right">Saldo Devedor</th>
-            <th class="text-right">Correção TR</th>
+            <!--<th class="text-right">Correção TR</th>-->
             <th class="text-right">Saldo Corrigido</th>
             <th class="text-right">Amortização</th>
             <th class="text-right">FGTS</th>
             <th class="text-right">Juros</th>
             <th class="text-right">Seguros</th>
             <th class="text-right">Parcela</th>
-            <th class="text-right">Parcela VP</th>
+            <!--<th class="text-right">Parcela VP</th>-->
             <th class="text-right">Valor Imovel</th>
             <th class="text-right">Patrimônio</th>
             <th class="text-right">Variação do Patrimônio</th>
@@ -25,14 +25,14 @@
           <tr *ngFor="let p of financiamento.Prestacoes; let i=index">
             <td>{{i}}</td>
             <td class="text-right">{{p.saldoDevedor1 | number:'1.2-2' }}</td> 
-            <td class="text-right">{{p.correcaoTR | number:'1.2-2' }}</td>
+            <!--<td class="text-right">{{p.correcaoTR | number:'1.2-2' }}</td>-->
             <td class="text-right">{{p.saldoDevedor2 | number:'1.2-2' }}</td>
             <td class="text-right">{{p.amortizacao | number:'1.2-2' }}</td>
             <td class="text-right">{{p.fgts | number:'1.2-2' }}</td>
             <td class="text-right">{{p.juros | number:'1.2-2' }}</td>
             <td class="text-right">{{p.seguros | number:'1.2-2' }}</td>
             <td class="text-right">{{p.parcela | number:'1.2-2' }}</td>
-            <td class="text-right">{{p.parcelaVP | number:'1.2-2' }}</td>
+            <!--<td class="text-right">{{p.parcelaVP | number:'1.2-2' }}</td>-->
             <td class="text-right">{{p.valorImovel | number:'1.2-2' }}</td>
             <td class="text-right">{{p.patrimonio | number:'1.2-2' }}</td>
             <td class="text-right">{{p.varPatrimonio | number:'1.2-2' }}</td>

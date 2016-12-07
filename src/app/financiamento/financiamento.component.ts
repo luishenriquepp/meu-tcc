@@ -34,9 +34,12 @@ export class FinanciamentoComponent {
     this.fluxoDeCaixa = false;
     this.avancado = false;
     this.calculado = false;
+    this.fgts = false;
   }
   onCalcular(user: Usuario) {
+    this.fgts = false;
     this.avancado = false;
+    this.fluxoDeCaixa = false;
     this.fluxoDeCaixa = false;
     this.usuario = user;    
     let factory = new FinanciamentoFactory(this.usuario, this.financiamentoConfig);

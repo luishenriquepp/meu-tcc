@@ -1,4 +1,5 @@
 import { FinanciamentoFdc } from './financiamento-fdc';
+import { FgtsFdc } from './fgts-fdc'
 import { Usuario } from './usuario';
 
 export class FinanciamentoResultado {
@@ -19,6 +20,10 @@ export class FinanciamentoResultado {
 
     get UltimaParcela(): number {
         return this._parcelas[this._parcelas.length-1].parcela;
+    }
+
+    set Parcela(parcela: FinanciamentoFdc[]) {
+        this._parcelas = parcela;
     } 
 
     get ParcelaTotal(): number {
@@ -67,7 +72,7 @@ export class FinanciamentoResultado {
         }
     }
 
-    set Parcela(parcela: FinanciamentoFdc[]) {
-        this._parcelas = parcela;
-    }     
+    public IncrementaFgts(fdc: FgtsFdc, n): void {
+        this._variacaoTotal += fdc.VariacaoVP;
+    }
 }

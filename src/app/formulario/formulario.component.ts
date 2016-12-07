@@ -24,12 +24,12 @@ export class FormularioComponent implements OnInit {
 
   ngOnInit() {
     this.valorImovel = 200000;
-    this.disponivel = 25000;
-    this.prestacoes = 24;
+    this.disponivel = 75000;
+    this.prestacoes = 420;
     this.renda = 4500;
-    this.possuiFGTS = false;
+    this.possuiFGTS = true;
     this.nascimento = "21/04/1988";
-    this.fgtsAcumulado = 0;    
+    this.fgtsAcumulado = 10000;    
   }
   
   get possuiFgtsModel(): boolean {

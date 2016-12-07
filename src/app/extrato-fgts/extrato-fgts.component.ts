@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+
+import { Financiamento } from'../models/financiamento';
 
 @Component({
   selector: 'app-extrato-fgts',
@@ -7,6 +9,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ExtratoFgtsComponent implements OnInit {
 
+  @Input() financiamento: Financiamento;
+  
   constructor() { }
 
   ngOnInit() {

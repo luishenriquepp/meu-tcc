@@ -1,6 +1,6 @@
 export class FinanciamentoFgtsConfig {
-    private _entrada: boolean = true;
-    private _posterior: Posterior = 2;
+    private _entrada: boolean = false;
+    private _posterior: Posterior = 1;
 
     get Entrada(): boolean {
         return this._entrada;        

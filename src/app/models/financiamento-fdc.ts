@@ -28,6 +28,7 @@ export class FinanciamentoFdc {
     patrimonio: number = 0;
     varPatrimonio: number = 0;
     vpVariacao: number = 0;
+    isNow: boolean = false;
 
     setProperties(fdc: this) {
         this.parcela = fdc.parcela;
@@ -46,9 +47,14 @@ export class FinanciamentoFdc {
     }
     
     setUsuario(usuario: Usuario): void {
-        this.usuario = usuario;
+        this.usuario = usuario;            
         this.saldoDevedor1 = this.usuario.valorImovel - this.usuario.disponivel;
         this.saldoDevedor2 = this.usuario.valorImovel - this.usuario.disponivel;
+        if(this.config.FGTSConfig.Entrada) {
+            this.saldoDevedor1 -= this.usuario.FGTS;
+            this.saldoDevedor2 -= this.usuario.FGTS;
+        }
+        
         this.valorImovel = this.usuario.valorImovel;
         this.patrimonio = this.usuario.disponivel;
     }
@@ -63,24 +69,18 @@ export class FinanciamentoFdc {
         this.attSeguro();
         this.attParcela();
         this.attParcelaValorPresente(n);
-        this.attValorImovel();                
-        this.before.attPatrimonio(this.saldoDevedor1);
-        
-        if(before.before) {
-            this.before.attVariacaoPatrimonio(before.before.patrimonio);
-        }
-        
-        this.before.attVariacaoValorPresente(n-1);
-
-        if(n == this.usuario.prestacoes) {
-            this.attPatrimonio(0);
-            this.attVariacaoPatrimonio(before.patrimonio);
-            this.attVariacaoValorPresente(n);
-        }
+        this.attValorImovel();                        
+        this.attPatrimonio();
+        this.attVariacaoPatrimonio(before.patrimonio);
+        this.attVariacaoValorPresente(n);
     }
 
     attSaldoDevedor(fdc: FinanciamentoFdc) {
-        this.saldoDevedor1 = fdc.saldoDevedor2 - fdc.amortizacao;
+        if(fdc.isNow) {
+            this.saldoDevedor1 = fdc.saldoDevedor2 - fdc.amortizacao - fdc.fgts;            
+        } else {
+            this.saldoDevedor1 = fdc.saldoDevedor2 - fdc.amortizacao;
+        }
     }
 
     attCorrecaoTR(): void {
@@ -115,8 +115,12 @@ export class FinanciamentoFdc {
         this.valorImovel = this.valorImovel*(1+this.mes);
     }
 
-    attPatrimonio(saldoDevedor: number): void {
-        this.patrimonio = this.valorImovel - saldoDevedor;
+    attPatrimonio(): void {
+        if(this.isNow) {
+            this.patrimonio = this.valorImovel - this.saldoDevedor2 - this.amortizacao + this.fgts;            
+        } else {
+            this.patrimonio = this.valorImovel - this.saldoDevedor2 - this.amortizacao;
+        }
     }
 
     attVariacaoPatrimonio(patrimonio: number) {

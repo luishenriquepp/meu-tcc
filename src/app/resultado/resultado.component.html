@@ -28,9 +28,14 @@
                 </thead>
                 <tbody>
                 <tr class="success">
-                    <td>Patrimônio</td>
+                    <td>Imóvel</td>
                     <td class="text-right">{{ financiamento.Resultado.PatrimonioVPTotal | number:'1.2-2' }}</td>
                     <td class="text-right">{{ financiamento.Resultado.PatrimonioTotal | number:'1.2-2' }}</td>
+                </tr>
+                <tr class="success">
+                    <td>FGTS</td>
+                    <td class="text-right">0</td>
+                    <td class="text-right">0</td>
                 </tr>
                 <tr class="danger">
                     <td>Entrada</td>
@@ -42,7 +47,7 @@
                     <td class="text-right">{{financiamento.Resultado.ParcelaVPTotal | number:'1.2-2'}}</td>
                     <td class="text-right">{{financiamento.Resultado.ParcelaTotal | number:'1.2-2'}}</td>
                 </tr>
-                <tr>
+                <tr class="warning">
                     <td><strong>Valor Líquido</strong></td>
                     <td class="text-right"><strong>{{ financiamento.Resultado.ValorLiquidoPresente | number:'1.2-2' }}</strong></td>
                     <td class="text-right"><strong>{{ financiamento.Resultado.ValorLiquidoNominal | number:'1.2-2' }}</strong></td>

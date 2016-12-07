@@ -42,10 +42,10 @@
               </div>            
             </div>
             <div *ngIf="resultado">
-              <div class="col-lg-4">
+              <div class="col-lg-5">
                 <app-resultado [financiamento]="financiamento"></app-resultado>
               </div>
-              <div class="col-lg-8">
+              <div class="col-lg-7">
                 <div>
                   <app-grafico-financiamento-2 [financiamento]="financiamento"></app-grafico-financiamento-2>
                 </div>
@@ -53,7 +53,7 @@
             </div>
             <div *ngIf="fgts">
               <div class="col-lg-12">
-                <app-extrato-fgts></app-extrato-fgts>
+                <app-extrato-fgts [financiamento]="financiamento"></app-extrato-fgts>
               </div>
             </div>
           </div>          

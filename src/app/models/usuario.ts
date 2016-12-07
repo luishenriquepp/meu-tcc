@@ -1,9 +1,9 @@
 export class Usuario {        
     valorImovel: number;
-    disponivel: number;
-    prestacoes: number = 24;
-    usaFGTS: boolean = false;
+    disponivel: number = 75000;
+    prestacoes: number = 420;
+    usaFGTS: boolean = true;
     nascimento: Date;
     renda: number;
-    FGTS: number = 0;    
+    FGTS: number = 10000;    
 }
