@@ -17,9 +17,9 @@ export class ResultadoComponent implements OnInit {
   }
 
   valor(): String {
-    if(this.financiamento.Resultado.Comprometimento > 0.25) {
+    if(this.financiamento.Resultado.Comprometimento > 0.30) {
       return "text-danger";  
-    } else if (this.financiamento.Resultado.Comprometimento > 0.20) {
+    } else if (this.financiamento.Resultado.Comprometimento > 0.25) {
       return "text-warning";
     } else {
       return "text-success";
