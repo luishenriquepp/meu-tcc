@@ -6,7 +6,8 @@ export class SeguradoraHdi implements ISeguro{
         return 0.0000792;
     }
     GetMIP(nascimento: Date): number {        
-        var idade = new Dates(nascimento).GetIdade();
+        let idade = new Dates(nascimento).GetIdade();
+        alert(idade);
         if(idade <= 30) {
             return 0.0000779;            
         } else if(idade <= 40) {
@@ -20,7 +21,7 @@ export class SeguradoraHdi implements ISeguro{
         } else if(idade <= 75) {
             return 0.0021656;
         } else {
-            return 0.0036050;
+            return 0.0000981;
         }
     }
 }

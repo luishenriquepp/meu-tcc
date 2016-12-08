@@ -49,7 +49,7 @@ export class FormularioComponent implements OnInit {
     user.usaFGTS = this.possuiFGTS;
     user.renda = this.renda;
     user.FGTS = this.fgtsAcumulado;
-    user.nascimento = new Date(this.nascimento);
+    user.nascimento = new Date(this.nascimento.split('/').reverse().join('/'));
     this.onCalcular.emit(user);
   }
 
@@ -72,9 +72,9 @@ export class FormularioComponent implements OnInit {
     if(!this.validaData()) {
       return false;
     }
-    
-    this.dateUtils = new Dates(new Date(this.nascimento));
-    var idade = this.dateUtils.GetIdade(); 
+    this.dateUtils = new Dates(new Date(this.nascimento.split('/').reverse().join('/')));
+    let idade = this.dateUtils.GetIdade();
+    console.log(idade); 
     if(idade < 18 || idade > 100) {
       return false;
     }
