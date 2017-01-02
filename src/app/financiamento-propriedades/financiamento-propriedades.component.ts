@@ -1,11 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { FinanciamentoConfig } from '../models/financiamento-config';
-import { FinanciamentoFgtsConfig } from '../models/financiamento-fgts-config';
 import { FinanciamentoSeguro } from'../models/financiamento-seguro';
 import { SeguradoraSa } from'../models/seguradora-sa';
 import { SeguradoraHdi } from'../models/seguradora-hdi';
-import { Usuario } from '../models/usuario';
 
 @Component({
   selector: 'app-financiamento-propriedades',
@@ -14,8 +12,6 @@ import { Usuario } from '../models/usuario';
 export class FinanciamentoPropriedadesComponent implements OnInit{
 
   @Input() config: FinanciamentoConfig;
-  @Input() fgtsConfig: FinanciamentoFgtsConfig;
-  @Input() usuario: Usuario;
 
   ngOnInit() {
     this.config.Seguro = new FinanciamentoSeguro(new SeguradoraSa());

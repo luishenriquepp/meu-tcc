@@ -11,3 +11,14 @@ option:not(:checked) {
     background-color: white; 
     color:#000;
 }
+
+.panel-heading {
+    background-color: #ccccb3;
+    color: #800000;
+    border-color: #800000;
+}
+
+.panel-body {
+    background-color: #ccccb3;
+    color: #2e2e1f;
+}

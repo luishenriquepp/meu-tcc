@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 
 import { Usuario } from '../models/usuario';
 import { Financiamento } from'../models/financiamento';
@@ -8,22 +8,26 @@ import { Financiamento } from'../models/financiamento';
   templateUrl: './resultado.component.html',
   styleUrls: ['./resultado.component.css']
 })
-export class ResultadoComponent implements OnInit {
+export class ResultadoComponent implements OnChanges {
 
   @Input() financiamento: Financiamento;
+  private valor: String;
+  private glyph: String;
 
-  ngOnInit() {
-    this.valor();
+  ngOnChanges() {
+    this.comprometimento();
   }
 
-  valor(): String {
+  comprometimento(): void {
     if(this.financiamento.Resultado.Comprometimento > 0.30) {
-      return "text-danger";  
+      this.valor = "text-danger";
+      this.glyph = "glyphicon glyphicon-remove";        
     } else if (this.financiamento.Resultado.Comprometimento > 0.25) {
-      return "text-warning";
+      this.valor = "text-warning";
+      this.glyph = "glyphicon glyphicon-ok"; 
     } else {
-      return "text-success";
-    }
-    
+      this.valor = "text-success";
+      this.glyph = "glyphicon glyphicon-ok";
+    }    
   }
 }

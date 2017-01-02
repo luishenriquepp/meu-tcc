@@ -1,0 +1,22 @@
+button {
+    font-weight: bold;
+    font-size: 12px;
+    border-color: firebrick !important; 
+    color: #800000;
+}
+
+#configuracoes {
+    background-color: #ffad99 !important;
+}
+
+#fdc {
+    background-color: #b3ff99 !important;
+}
+
+#fgts {
+    background-color: #e6ff99 !important;
+}
+
+#resultado {
+    background-color: #ccccb3 !important;
+}

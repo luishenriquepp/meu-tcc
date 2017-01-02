@@ -1,0 +1,32 @@
+<div class="panel panel-default">
+  <div class="panel-heading">Fundo de Garantia</div>
+  <div class="panel-body">
+    <div class="form-group">
+      <label>FGTS acumulado</label>
+      <div class="input-group">
+        <span class="input-group-addon">R$</span>
+        <input [(ngModel)]="usuario.FGTS" type="number" class="form-control input-sm" min="0" step="1000">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Expectativa de crescimento salarial anual</label>
+      <div class="input-group">
+        <input [(ngModel)]="usuario.crescimentoSalarial" type="number" class="form-control input-sm" step="0.01">
+        <span class="input-group-addon">{{ usuario.crescimentoSalarial | percent:'1.3-3' }}</span>              
+      </div>
+    </div>
+      <div class="form-group">
+        <label>
+          <input [(ngModel)]="fgtsConfig.Entrada" type="checkbox" value="true"> Usar o FGTS para dar entrada no imóvel
+        </label>
+      </div>  
+      <div class="form-group">
+        <label>Novos Créditos de FGTS</label>
+        <select [(ngModel)]="fgtsConfig.Posterior" class="form-control input-sm">
+          <option value="1">Abater do saldo devedor</option>
+          <option value="2">Abater das próximas parcela</option>
+          <option value="0">Não usar mais</option>
+        </select>
+      </div>
+  </div>
+</div>

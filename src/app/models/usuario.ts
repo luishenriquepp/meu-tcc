@@ -5,5 +5,6 @@ export class Usuario {
     usaFGTS: boolean = true;
     nascimento: Date;
     renda: number;
-    FGTS: number = 10000;    
+    FGTS: number = 10000;
+    crescimentoSalarial = 0.08;
 }

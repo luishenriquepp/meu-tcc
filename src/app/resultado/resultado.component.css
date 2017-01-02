@@ -1,0 +1,28 @@
+.panel-heading {
+    background-color: #ccccb3;
+    color: #800000;
+    border-color: #800000;
+}
+
+.panel-body {
+    background-color: #ccccb3;
+    color: #2e2e1f;
+}
+
+.first tr, .line {
+    border-bottom-style: 1px;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    border-top-width: 0px;
+    border-bottom-color: firebrick;
+    border-style: solid;
+}
+
+.text-success, .text-warning, .text-danger {
+    font-weight: 900 !important;
+    font-size: 13px;
+}
+
+.number {
+    font-size: 13px;
+}

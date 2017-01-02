@@ -5,7 +5,8 @@ import { Dates } from '../utils/dates';
 
 @Component({
   selector: 'app-formulario',
-  templateUrl: './formulario.component.html'
+  templateUrl: './formulario.component.html',
+  styleUrls: ['./formulario.component.css']
 })
 export class FormularioComponent implements OnInit {
 
@@ -74,7 +75,6 @@ export class FormularioComponent implements OnInit {
     }
     this.dateUtils = new Dates(new Date(this.nascimento.split('/').reverse().join('/')));
     let idade = this.dateUtils.GetIdade();
-    console.log(idade); 
     if(idade < 18 || idade > 100) {
       return false;
     }

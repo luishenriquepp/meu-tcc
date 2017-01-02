@@ -8,31 +8,31 @@
     <div *ngIf="!calculado">
       <div class="col-lg-3">
         <app-financiamento-propriedades 
-          [usuario]="usuario"
-          [config]="financiamentoConfig" 
-          [fgtsConfig]="fgtsConfig">
+          [config]="financiamentoConfig">
         </app-financiamento-propriedades>
+      </div>
+      <div *ngIf="usuario.usaFGTS">
+        <div class="col-lg-3">
+          <app-fgts [usuario]="usuario" [fgtsConfig]="fgtsConfig"></app-fgts>
+        </div>
       </div>
     </div>
     <div class="col-lg-10" *ngIf="calculado">
       <div class="panel panel-default">
         <div class="panel-heading">
             <div *ngIf="calculado">
-              <button class="btn btn-sm btn-warning text-center" (click)="exibeAvancado()">Avançado</button>
-              <button class="btn btn-sm btn-warning text-center" (click)="exibeFluxoDeCaixa()">Fluxo de Caixa</button>
-              <button class="btn btn-sm btn-warning text-center" (click)="exibeResultado()">Resultado</button>
-              <button class="btn btn-sm btn-warning text-center" (click)="exibeExtrato()">Extrato FGTS</button>
+              <button id="configuracoes" class="btn btn-sm btn-warning text-center" (click)="exibeAvancado()">Configurações</button>
+              <button id="resultado" class="btn btn-sm btn-warning text-center" (click)="exibeResultado()">Resultado</button>
+              <button id="fdc" class="btn btn-sm btn-warning text-center" (click)="exibeFluxoDeCaixa()">Fluxo de Caixa</button>
+              <button id="fgts" class="btn btn-sm btn-warning text-center" (click)="exibeExtrato()">Extrato FGTS</button>
             </div>
-            <div *ngIf=!calculado>Calculando...</div>
         </div>        
         <div class="panel-body">
           <div class="row">            
             <div *ngIf="avancado">
               <div class="col-lg-4">
-                <app-financiamento-propriedades 
-                  [usuario]="usuario" 
-                  [config]="financiamentoConfig" 
-                  [fgtsConfig]="fgtsConfig">        
+                <app-financiamento-propriedades  
+                  [config]="financiamentoConfig">        
                 </app-financiamento-propriedades>
               </div>
             </div>            

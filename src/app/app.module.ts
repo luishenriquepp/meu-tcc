@@ -18,6 +18,7 @@ import { GraficoFinanciamento2Component } from './grafico-financiamento-2/grafic
 import { FinanciamentoPropriedadesComponent } from './financiamento-propriedades/financiamento-propriedades.component';
 import { Routes } from './models/routes';
 import { ExtratoFgtsComponent } from './extrato-fgts/extrato-fgts.component';
+import { FgtsComponent } from './fgts/fgts.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { ExtratoFgtsComponent } from './extrato-fgts/extrato-fgts.component';
     ResultadoComponent,
     GraficoFinanciamento2Component,
     FinanciamentoPropriedadesComponent,
-    ExtratoFgtsComponent
+    ExtratoFgtsComponent,
+    FgtsComponent
   ],
   imports: [
     BrowserModule,

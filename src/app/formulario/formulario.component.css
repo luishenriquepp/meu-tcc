@@ -1,0 +1,11 @@
+button {
+    background-color: firebrick;
+    border-color: goldenrod;
+    font-style: bold;
+    font-size: 13px;    
+}
+
+button:hover {
+    background-color: goldenrod;
+    color: firebrick;
+}

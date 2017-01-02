@@ -1,0 +1,10 @@
+a {
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: 4px;
+    font-weight: 700;    
+}
+
+a:hover { 
+    background-color:cornsilk !important;
+    color: firebrick !important;
+}

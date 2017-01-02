@@ -2,19 +2,30 @@
     <div class="panel panel-default">
     <div class="panel-heading">Financiamento com prazo de {{financiamento.Usuario.prestacoes }} meses</div>
     <div class="panel-body">
-        <table class="table table-condensed">
+        <table class="table table-condensed first">
             <tbody>
                 <tr>
-                    <td>Primeira Parcela</td>
-                    <td>{{financiamento.Resultado.PrimeiraParcela | number:'1.2-2'}}</td>
+                    <td>Comprometimento salarial</td>
+                    <td [class]="valor">
+                        {{financiamento.Resultado.Comprometimento | percent}}
+                        <span [class]="glyph"></span>
+                    </td>
                 </tr>
                 <tr>
-                    <td>Comprometimento</td>
-                    <td [class]="valor()">{{ financiamento.Resultado.Comprometimento | percent }}</td>
+                    <td>Primeira parcela</td>
+                    <td class="number">{{financiamento.Resultado.PrimeiraParcela | number:'1.2-2'}}</td>
                 </tr>
                 <tr>
-                    <td>Última Parcela</td>
-                    <td>{{financiamento.Resultado.UltimaParcela | number:'1.2-2'}}</td>
+                    <td>Última parcela</td>
+                    <td class="number">{{financiamento.Resultado.UltimaParcela | number:'1.2-2'}}</td>
+                </tr>
+                <tr>
+                    <td>Juros pagos</td>
+                    <td class="number">{{financiamento.Resultado.JurosTotal | number:'1.2-2'}}</td>
+                </tr>
+                <tr>
+                    <td>Prazo total</td>
+                    <td class="number">{{financiamento.Prestacoes.length }}</td>
                 </tr>
             </tbody>    
         </table>
@@ -27,30 +38,30 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr class="success">
+                <tr>
                     <td>Imóvel</td>
-                    <td class="text-right">{{ financiamento.Resultado.PatrimonioVPTotal | number:'1.2-2' }}</td>
-                    <td class="text-right">{{ financiamento.Resultado.PatrimonioTotal | number:'1.2-2' }}</td>
+                    <td class="text-right text-success">{{ financiamento.Resultado.PatrimonioVPTotal | number:'1.2-2' }}</td>
+                    <td class="text-right text-success">{{ financiamento.Resultado.PatrimonioTotal | number:'1.2-2' }}</td>
                 </tr>
-                <tr class="success">
+                <tr>
                     <td>FGTS</td>
-                    <td class="text-right">0</td>
-                    <td class="text-right">0</td>
+                    <td class="text-right text-success">0</td>
+                    <td class="text-right text-success">0</td>
                 </tr>
-                <tr class="danger">
+                <tr>
                     <td>Entrada</td>
-                    <td class="text-right">{{ financiamento.Usuario.disponivel | number:'1.2-2' }}</td>
-                    <td class="text-right">{{ financiamento.Usuario.disponivel | number:'1.2-2' }}</td>
+                    <td class="text-right text-danger">{{ financiamento.Usuario.disponivel | number:'1.2-2' }}</td>
+                    <td class="text-right text-danger">{{ financiamento.Usuario.disponivel | number:'1.2-2' }}</td>
                 </tr>
-                <tr class="danger">
+                <tr class="line">
                     <td>Total de Parcelas</td>
-                    <td class="text-right">{{financiamento.Resultado.ParcelaVPTotal | number:'1.2-2'}}</td>
-                    <td class="text-right">{{financiamento.Resultado.ParcelaTotal | number:'1.2-2'}}</td>
+                    <td class="text-right text-danger">{{financiamento.Resultado.ParcelaVPTotal | number:'1.2-2'}}</td>
+                    <td class="text-right text-danger">{{financiamento.Resultado.ParcelaTotal | number:'1.2-2'}}</td>
                 </tr>
-                <tr class="warning">
+                <tr>
                     <td><strong>Valor Líquido</strong></td>
-                    <td class="text-right"><strong>{{ financiamento.Resultado.ValorLiquidoPresente | number:'1.2-2' }}</strong></td>
-                    <td class="text-right"><strong>{{ financiamento.Resultado.ValorLiquidoNominal | number:'1.2-2' }}</strong></td>
+                    <td class="text-right number"><strong>{{ financiamento.Resultado.ValorLiquidoPresente | number:'1.2-2' }}</strong></td>
+                    <td class="text-right number"><strong>{{ financiamento.Resultado.ValorLiquidoNominal | number:'1.2-2' }}</strong></td>
                 </tr>
             </tbody>    
         </table>
