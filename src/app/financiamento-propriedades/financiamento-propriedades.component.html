@@ -4,21 +4,21 @@
       <div class="row">
         <div class="form-group col-lg-6">  
           <label>Taxa Admnistrativa:</label>
-            <input [(ngModel)]="config.TaxaAdministrativa" type="number" class="form-control input-sm">
+            <input [(ngModel)]="config.TaxaAdministrativa" type="number" class="form-control input-sm" step="5">
         </div>
         <div class="form-group col-lg-6">
           <label>Juros Mensais</label>
-            <input [(ngModel)]="config.JurosMensais" type="number" class="form-control input-sm">
+            <input [(ngModel)]="config.JurosMensais" type="number" class="form-control input-sm" step="0.01">
         </div>
       </div>
       <div class="row">
         <div class="form-group col-lg-6">
           <label>TR Mensal</label>
-          <input [(ngModel)]="config.TRMensal" type="number" class="form-control input-sm">
+          <input [(ngModel)]="config.TRMensal" type="number" class="form-control input-sm" step="0.01">
         </div>
         <div class="form-group col-lg-6">
           <label>Rentabilidade</label>
-            <input [(ngModel)]="config.Rentabilidade" type="number" class="form-control input-sm">
+            <input [(ngModel)]="config.Rentabilidade" type="number" class="form-control input-sm" step="0.01">
         </div>
       </div>
       <div class="form-group">
