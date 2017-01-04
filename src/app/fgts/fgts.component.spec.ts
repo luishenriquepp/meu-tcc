@@ -6,23 +6,8 @@ import { DebugElement } from '@angular/core';
 import { FgtsComponent } from './fgts.component';
 
 describe('FgtsComponent', () => {
-  let component: FgtsComponent;
-  let fixture: ComponentFixture<FgtsComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ FgtsComponent ]
-    })
-    .compileComponents();
-  }));
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(FgtsComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
   it('should create', () => {
+    let component = new FgtsComponent();
     expect(component).toBeTruthy();
   });
 });
