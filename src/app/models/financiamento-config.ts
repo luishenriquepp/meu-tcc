@@ -6,7 +6,7 @@ export class FinanciamentoConfig {
     private _seguro: FinanciamentoSeguro;
     private _config: FinanciamentoFgtsConfig;
     private _taxaAdm: number = 25;
-    private _jurosMensais: number = 0.0090;
+    private _jurosAnuais: number = 0.11;
     private _trMensal: number = 0.001709;
     private _rentabilidade: number = 0.00948891;
 
@@ -47,11 +47,15 @@ export class FinanciamentoConfig {
     }
 
     get JurosMensais(): number {
-        return this._jurosMensais;
+        return this._jurosAnuais/12;
     }
 
-    set JurosMensais(juros: number) {
-        this._jurosMensais = juros;
+    get JurosAnuais(): number {
+        return this._jurosAnuais;
+    }
+
+    set JurosAnuais(juros: number) {
+        this._jurosAnuais = juros;
     }
 
     get TRMensal(): number {

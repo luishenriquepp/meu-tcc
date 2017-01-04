@@ -28,7 +28,7 @@ export class FgtsFdc {
         this._before = fdc;
         this._saldo = fdc._totalFGTS;
         this._correcaoTR = this._saldo*this._config.TRMensal;
-        this._creditos = this._usuario.renda*0.08;
+        this._creditos = (this._usuario.renda*(1 + (Math.floor(n/12)*this._usuario.crescimentoSalarial)))*(0.08);
         this._totalFGTS = this._saldo + this._correcaoTR + this._creditos;
         this._fgtsVaricao = this._totalFGTS - fdc.TotalFgts;
         this._variacaoVP = (this._fgtsVaricao/Math.pow(1+this._config.Rentabilidade,n));

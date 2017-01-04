@@ -35,6 +35,11 @@
                   [config]="financiamentoConfig">        
                 </app-financiamento-propriedades>
               </div>
+              <div *ngIf="usuario.usaFGTS">
+                <div class="col-lg-4">
+                  <app-fgts [usuario]="usuario" [fgtsConfig]="fgtsConfig"></app-fgts>
+                </div>
+            </div>    
             </div>            
             <div *ngIf="fluxoDeCaixa">
               <div class="col-lg-12">

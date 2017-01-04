@@ -41,6 +41,8 @@ export class FinanciamentoComponent {
     this.avancado = false;
     this.fluxoDeCaixa = false;
     this.fluxoDeCaixa = false;
+    user.FGTS = this.usuario.FGTS;
+    user.crescimentoSalarial = this.usuario.crescimentoSalarial;
     this.usuario = user;    
     let factory = new FinanciamentoFactory(this.usuario, this.financiamentoConfig);
     this.financiamento = factory.Create();

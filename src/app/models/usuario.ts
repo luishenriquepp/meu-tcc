@@ -6,5 +6,5 @@ export class Usuario {
     nascimento: Date;
     renda: number;
     FGTS: number = 10000;
-    crescimentoSalarial = 0.08;
+    crescimentoSalarial = 0.07;
 }
