@@ -1,14 +1,14 @@
-import { UpgradeTccPage } from './app.po';
+import { SimImoveisUpdatePage } from './app.po';
 
-describe('upgrade-tcc App', function() {
-  let page: UpgradeTccPage;
+describe('sim-imoveis-update App', () => {
+  let page: SimImoveisUpdatePage;
 
   beforeEach(() => {
-    page = new UpgradeTccPage();
+    page = new SimImoveisUpdatePage();
   });
 
   it('should display message saying app works', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Página principal');
+    expect(page.getParagraphText()).toEqual('app works!');
   });
 });

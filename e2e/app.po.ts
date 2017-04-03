@@ -1,11 +1,11 @@
 import { browser, element, by } from 'protractor';
 
-export class UpgradeTccPage {
+export class SimImoveisUpdatePage {
   navigateTo() {
     return browser.get('/');
   }
 
   getParagraphText() {
-    return element(by.tagName('p')).getText();
+    return element(by.css('app-root h1')).getText();
   }
 }
