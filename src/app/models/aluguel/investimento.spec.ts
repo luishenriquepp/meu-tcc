@@ -21,15 +21,6 @@ describe('investimento', () => {
         expect(investimento.ValorAcumulado).toBe(valor + valor * taxa);
     });
 
-    it('deve gerar extratos', () => {
-        let investimento = new Investimento();
-
-        investimento.Depositar();
-        investimento.Depositar();
-
-        expect(investimento.parcela.length).toBe(2);
-    })
-
     it('deve acumular o valor informado ao depositar', () => {
         let investimento = new Investimento();
         let valor = 5000;
