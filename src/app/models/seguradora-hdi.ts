@@ -7,7 +7,6 @@ export class SeguradoraHdi implements ISeguro{
     }
     GetMIP(nascimento: Date): number {        
         let idade = new Dates(nascimento).GetIdade();
-        alert(idade);
         if(idade <= 30) {
             return 0.0000779;            
         } else if(idade <= 40) {
