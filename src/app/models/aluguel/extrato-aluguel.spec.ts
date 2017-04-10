@@ -20,6 +20,6 @@ describe('extrato aluguel', () => {
 
         extratoAluguel.Aluguel = 1200;
 
-        expect(extratoAluguel.SaldoParcial()).toBe(800);
+        expect(extratoAluguel.SaldoParcial()).toBe(2000);
     });
 });
