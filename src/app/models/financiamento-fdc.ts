@@ -9,7 +9,7 @@ export class FinanciamentoFdc {
     private config: FinanciamentoConfig;
     private usuario: Usuario;
 
-    private ano: number = 0.0759;
+    private ano: number = 0.0459;
     private mes: number = Math.pow((1+this.ano),1/12)-1; 
         
     before: FinanciamentoFdc;
