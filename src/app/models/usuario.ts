@@ -4,7 +4,7 @@ export class Usuario {
     prestacoes: number = 420;
     usaFGTS: boolean = true;
     nascimento: Date;
-    renda: number;
+    renda: number = 4500;
     FGTS: number = 10000;
     crescimentoSalarial = 0.07;
 }

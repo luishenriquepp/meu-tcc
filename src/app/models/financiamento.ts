@@ -33,11 +33,11 @@ export abstract class Financiamento {
         this._vfdc = fdc;
     }
     
-    protected get Usuario(): Usuario {
+    public get Usuario(): Usuario {
         return this._usuario;
     } 
 
-    protected set Usuario(usuario: Usuario) {
+    public set Usuario(usuario: Usuario) {
         this._usuario = usuario;
     }
     

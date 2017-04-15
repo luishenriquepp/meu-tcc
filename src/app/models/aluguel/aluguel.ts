@@ -1,6 +1,7 @@
 import { LogicaTemporal } from '../../utils/logica-temporal';
 import { ValorPresente } from '../../utils/valor-presente';
 import { Financiamento } from '../financiamento';
+import { Usuario } from '../usuario';
 
 export class Comparador {
     private readonly _aluguel: Aluguel;
@@ -8,6 +9,7 @@ export class Comparador {
     private readonly _fundoFGTS: Investimento;
     private readonly _finInvestimento: Investimento;
     private readonly _financiamento: Financiamento;
+    private readonly _salario: Aluguel;
 
     public readonly Gerenciador: GerenciadorDoExtrato = new GerenciadorDoExtrato();
 
@@ -17,15 +19,16 @@ export class Comparador {
         this._financiamento = financiamento;
         this._fundoFGTS = fundoFGTS;
         this._finInvestimento = new Investimento();
+        this._salario = new Aluguel(financiamento.Usuario.renda, financiamento.Usuario.crescimentoSalarial);
     }
         
     public Processar(): void {
-        console.log('patrimonio instante 0 '+this._financiamento.Prestacoes[1].patrimonio);
         this.inicializar();
         for(let i=1;i<this._financiamento.Prestacoes.length;i++) {
             
             let fdc = this._financiamento.Prestacoes[i];
             this._aluguel.Pagar();
+            this._salario.Pagar();
                                 
             let valor = fdc.parcela - this._aluguel.PrestacaoAluguel;
 
@@ -50,7 +53,7 @@ export class Comparador {
             extratoAluguel.DepositoFundo = extInvestimento.Deposito;
             
             if(this._fundoFGTS) {
-                let extFGTS = this._fundoFGTS.Depositar(200);
+                let extFGTS = this._fundoFGTS.Depositar(this._salario.PrestacaoAluguel * 0.08);
                 extratoAluguel.RendimentoFGTS = extFGTS.Rendimento;
                 extratoAluguel.DepositoFGTS = extFGTS.Deposito;
                 extratoAluguel.MontanteFGTS = this._fundoFGTS.ValorAcumulado;

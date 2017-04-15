@@ -49,10 +49,10 @@ describe('compara aluguel com financiamento', () => {
         expect(extrato.DepositoFundo).toBe(800);
         expect(extrato.MontanteInvestimento).toBeCloseTo((40000*1.005)+800);
         expect(extrato.RendimentoFGTS).toBe(5000*0.005);
-        expect(extrato.DepositoFGTS).toBe(200);
-        expect(extrato.MontanteFGTS).toBeCloseTo(5000*1.005+200);
+        expect(extrato.DepositoFGTS).toBe(360);
+        expect(extrato.MontanteFGTS).toBeCloseTo(5000*1.005+360);
         expect(extrato.Aluguel).toBe(1000);
-        expect(extrato.Patrimonio()).toBeCloseTo(((40000*1.005)+800)+(5000*1.005)+200);
+        expect(extrato.Patrimonio()).toBeCloseTo(((40000*1.005)+800)+(5000*1.005)+360);
     });
 
     it('com fgts com aluguel mais alto que parcela desde o princípio', () => {
@@ -73,7 +73,7 @@ describe('compara aluguel com financiamento', () => {
         expect(extrato.DepositoFundo).toBe(0);
         expect(extrato.MontanteInvestimento).toBe(0);
         expect(extrato.Aluguel).toBe(2500);
-        expect(extrato.Patrimonio()).toBe(200);
+        expect(extrato.Patrimonio()).toBe(360);
     });
     
     it('com fgts com aluguel que fica mais caro que a parcela', () => {
