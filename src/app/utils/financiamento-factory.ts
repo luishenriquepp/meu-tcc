@@ -13,6 +13,8 @@ export class FinanciamentoFactory {
     constructor (usuario: Usuario, config: FinanciamentoConfig) {
         this._usuario = usuario;
         this._financiamentoConfig = config;
+        this._financiamentoConfig.Seguro.Usuario = usuario;
+        config.Seguro.Calcular();
     }
 
     Create(): Financiamento {
