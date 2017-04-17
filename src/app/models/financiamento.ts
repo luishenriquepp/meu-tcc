@@ -3,9 +3,13 @@ import { FinanciamentoConfig } from'../models/financiamento-config';
 import { FinanciamentoFdc } from './financiamento-fdc';
 import { FinanciamentoResultado } from './financiamento-resultado';
 import { FgtsFdc } from './fgts-fdc';
+import { IIdentifier } from './i-identifier';
 
-export abstract class Financiamento {    
-    
+export abstract class Financiamento implements IIdentifier {
+    Id: number;
+    Identificacao: string;
+    Descricao: string;
+
     private _prestacoes: FinanciamentoFdc[] = new Array();
     private _extratoFgts: FgtsFdc[] = new Array();
     private _usuario: Usuario;
