@@ -6,6 +6,8 @@ import { FinanciamentoSeguro } from '../financiamento-seguro';
 import { SeguradoraHdi } from '../seguradora-hdi';
 import { FinanciamentoSemFgts } from '../financiamento-sem-fgts';
 import { FinanciamentoFdc } from '../financiamento-fdc';
+import {FinanciamentoFactory} from '../../utils/financiamento-factory';
+import {UsuarioBuilder} from './usuario-builder';
 
 export class FinanciamentoBuilder {
     private _financiamentoSemFgts : Financiamento;
@@ -37,6 +39,26 @@ export class FinanciamentoBuilder {
         this._financiamentoSemFgts = new FinanciamentoSemFgts(usuario,config);
         this._financiamentoSemFgts.Prestacoes = this.criaParcelaFdc(prestacoes, primeiraParcela, acrescimo);
         return this._financiamentoSemFgts
+    }
+
+    public BuildRichUserWithFGTSFinanciamento(): Financiamento {
+        let builder = new UsuarioBuilder();
+        let user = builder.BuildRichUser();
+
+        let fgtsConfig = new FinanciamentoFgtsConfig();
+        fgtsConfig.Entrada = true;
+        fgtsConfig.Posterior = 0;
+        
+        let finConfig = new FinanciamentoConfig(fgtsConfig);
+        finConfig.Seguro = new FinanciamentoSeguro(new SeguradoraHdi());
+
+        let factory = new FinanciamentoFactory(user, finConfig);
+        let financiamento = factory.Create();
+        financiamento.FluxoDeCaixa();
+        financiamento.Id = 1;
+        financiamento.Descricao = "Descricao tal";
+        financiamento.Identificacao = "Financiamento de rico";
+        return financiamento;
     }
 
     private criaFinanciamentoConfig(): FinanciamentoConfig {
