@@ -7,7 +7,6 @@ import {IIdentifier} from '../../models/i-identifier';
 @Component({
   selector: 'app-formulario-aluguel',
   templateUrl: './formulario-aluguel.component.html',
-  styleUrls: ['./formulario-aluguel.component.css'],
   providers: [FinanciamentoService]
 })
 export class FormularioAluguelComponent implements OnInit {

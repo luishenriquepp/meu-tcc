@@ -7,7 +7,6 @@ import { Financiamento } from '../models/financiamento';
 @Component({
   selector: 'app-financiamento-save',
   templateUrl: './financiamento-save.component.html',
-  styleUrls: ['./financiamento-save.component.css'],
   providers: [FinanciamentoService]
 })
 export class FinanciamentoSaveComponent implements OnInit {

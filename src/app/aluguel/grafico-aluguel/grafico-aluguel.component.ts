@@ -4,8 +4,7 @@ declare var cfx;
 
 @Component({
   selector: 'app-grafico-aluguel',
-  templateUrl: './grafico-aluguel.component.html',
-  styleUrls: ['./grafico-aluguel.component.css']
+  templateUrl: './grafico-aluguel.component.html'
 })
 export class GraficoAluguelComponent implements OnInit {
 
