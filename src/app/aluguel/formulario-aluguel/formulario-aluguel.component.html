@@ -1,0 +1,28 @@
+<div class="panel panel-default">
+  <div class="panel-heading">Formulário Aluguel</div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="form-group">
+        <label>Valor inicial do aluguel:</label>
+        <input type="number" class="form-control" [(ngModel)]="aluguelInicial" placeholder="Parcela mensal, exemplo: R$2.000">
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group">
+        <label>Selecione um financiamento:</label>
+        <select class="form-control" [(ngModel)]="financiamentoSelecionado">
+          <option>Selecione</option>
+          <option *ngFor="let fin of financiamentos" [ngValue]="fin">{{fin.Identificacao}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group">
+        <textarea class="form-control" rows="5">{{descricaoFinanciamento}}</textarea>
+      </div>
+    </div>
+    <div class="row text-center">
+      <button class="btn btn-primary" (click)="comparar()">Comparar</button>
+    </div>
+  </div>
+</div>

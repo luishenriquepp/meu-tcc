@@ -19,6 +19,10 @@ import { FinanciamentoPropriedadesComponent } from './financiamento-propriedades
 import { Routes } from './models/routes';
 import { ExtratoFgtsComponent } from './extrato-fgts/extrato-fgts.component';
 import { FgtsComponent } from './fgts/fgts.component';
+import { FinanciamentoSaveComponent } from './financiamento-save/financiamento-save.component';
+import { FormularioAluguelComponent } from './aluguel/formulario-aluguel/formulario-aluguel.component';
+import { ExtratoAluguelComponent } from './aluguel/extrato-aluguel/extrato-aluguel.component';
+import { GraficoAluguelComponent } from './aluguel/grafico-aluguel/grafico-aluguel.component';
 
 
 @NgModule({
@@ -36,7 +40,11 @@ import { FgtsComponent } from './fgts/fgts.component';
     GraficoFinanciamento2Component,
     FinanciamentoPropriedadesComponent,
     ExtratoFgtsComponent,
-    FgtsComponent
+    FgtsComponent,
+    FinanciamentoSaveComponent,
+    FormularioAluguelComponent,
+    ExtratoAluguelComponent,
+    GraficoAluguelComponent
   ],
   imports: [
     BrowserModule,
