@@ -25,6 +25,7 @@ export class FinanciamentoComponent {
   resultado: boolean;
   calculado: boolean;
   fgts: boolean;
+  saveScreen: boolean;
 
   constructor() {
     this.usuario = new Usuario();
@@ -35,6 +36,7 @@ export class FinanciamentoComponent {
     this.avancado = false;
     this.calculado = false;
     this.fgts = false;
+    this.saveScreen = false;
   }
   onCalcular(user: Usuario) {
     this.fgts = false;
@@ -56,18 +58,21 @@ export class FinanciamentoComponent {
     this.fgts = false;
     this.avancado = false;
     this.resultado = false;
+    this.saveScreen = false;
     this.fluxoDeCaixa = true;
   }
   exibeResultado(): void {
     this.fgts = false;
     this.avancado = false;
     this.fluxoDeCaixa = false;
+    this.saveScreen = false;
     this.resultado = true;
   }
   exibeAvancado(): void {
     this.fgts = false;
     this.fluxoDeCaixa = false;
     this.resultado = false;
+    this.saveScreen = false;
     this.avancado = true;
   }
   exibeExtrato(): void {
@@ -75,5 +80,13 @@ export class FinanciamentoComponent {
     this.resultado = false;
     this.avancado = false;
     this.fgts = true;
+    this.saveScreen = false;
+  }
+  exibeSaveScreen(): void {
+    this.fluxoDeCaixa = false;
+    this.resultado = false;
+    this.avancado = false;
+    this.fgts = false;
+    this.saveScreen = true;
   }
 }

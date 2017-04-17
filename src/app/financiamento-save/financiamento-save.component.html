@@ -1,0 +1,14 @@
+<form>
+  <div class="form-group">
+    <label>Identificador</label>
+    <input [disabled]="isAdicionado" class="form-control" [(ngModel)]="identifier" name="iden" placeholder="Digite um nome/código para identificar o financiamento">
+  </div>
+  <div class="form-group">
+    <label>Descrição</label>
+    <textarea [disabled]="isAdicionado" class="form-control" [(ngModel)]="description" name="desc" rows="4">{{description}}</textarea>
+  </div>
+  <div class="form-group">
+    <button [disabled]="isAdicionado" (click)="adicionar()"class="btn btn-primary">Salvar</button>
+    <button [disabled]="isAdicionado" (click)="sugerir()" class="btn btn-primary">Sugerir</button>
+  </div>
+</form>
