@@ -5,6 +5,13 @@ a {
 }
 
 a:hover { 
-    background-color:cornsilk !important;
-    color: firebrick !important;
+    background-color: firebrick !important;
+    color: silver !important;
+    text-shadow: 1px 1px 2px black;
+}
+
+.active a {
+    background-color: firebrick !important;
+    color:goldenrod !important;
+    text-shadow: 1px 1px 3px black;
 }
