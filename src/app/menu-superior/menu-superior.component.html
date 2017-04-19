@@ -2,9 +2,9 @@
   <a class="navbar-brand" [routerLink]="['/home']"><span class="glyphicon glyphicon-home"></span>{{title}}</a>
 </div>
 <ul class="nav navbar-nav">
-  <li><a [routerLink]="['/financiamento']">{{financiamento}}</a></li>
-  <li><a [routerLink]="['/aluguel']">{{aluguel}}</a></li>
-  <li><a [routerLink]="['/consorcio']">{{consorcio}}</a></li>
+  <li routerLinkActive="active"><a [routerLink]="['/financiamento']">{{financiamento}}</a></li>
+  <li routerLinkActive="active"><a [routerLink]="['/aluguel']">{{aluguel}}</a></li>
+  <li routerLinkActive="active"><a [routerLink]="['/consorcio']">{{consorcio}}</a></li>
 </ul>
 
 
