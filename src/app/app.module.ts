@@ -24,6 +24,7 @@ import { FormularioAluguelComponent } from './aluguel/formulario-aluguel/formula
 import { ExtratoAluguelComponent } from './aluguel/extrato-aluguel/extrato-aluguel.component';
 import { GraficoAluguelComponent } from './aluguel/grafico-aluguel/grafico-aluguel.component';
 
+import { MyDatePickerModule } from 'mydatepicker';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { GraficoAluguelComponent } from './aluguel/grafico-aluguel/grafico-alugu
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(Routes)
+    RouterModule.forRoot(Routes),
+    MyDatePickerModule
   ],
   providers: [
     {
