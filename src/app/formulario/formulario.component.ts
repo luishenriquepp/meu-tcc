@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Output, Input, OnInit } from '@angular/core';
 
 import { Usuario } from '../models/usuario';
-import { Dates } from '../utils/dates';
 import {IMyOptions,IMyInputFieldChanged} from 'mydatepicker';
 
 @Component({
@@ -14,14 +13,14 @@ export class FormularioComponent implements OnInit {
   @Input() title;
   @Output() onCalcular = new EventEmitter<Usuario>();
   @Output() onFgts = new EventEmitter<boolean>();
-  private dateUtils: Dates;
   private dateValid = false;
+  private today = new Date();
 
   private myDatePickerOptions: IMyOptions = {
     showTodayBtn: false,
     dateFormat: 'dd.mm.yyyy',
-    minYear: 1900,
-    maxYear: 2017,
+    minYear: this.today.getFullYear() - 100,
+    maxYear: this.today.getFullYear(),
   }
   
   onInputFieldChanged(event: IMyInputFieldChanged) {
@@ -32,10 +31,9 @@ export class FormularioComponent implements OnInit {
   private disponivel: number;
   private prestacoes: number;
   private renda: number;
-  private nascimento: string;
   private possuiFGTS: boolean;
   private fgtsAcumulado: number;
-  private birthDay: Object;
+  private birthDay: any;
 
   ngOnInit() {
     this.valorImovel = 200000;
@@ -56,7 +54,7 @@ export class FormularioComponent implements OnInit {
     this.onFgts.emit(value);
   }
   
-  calcular(): void {
+  private calcular(): void {
     var user = new Usuario();
     user.valorImovel = this.valorImovel;
     user.disponivel = this.disponivel;
@@ -64,11 +62,12 @@ export class FormularioComponent implements OnInit {
     user.usaFGTS = this.possuiFGTS;
     user.renda = this.renda;
     user.FGTS = this.fgtsAcumulado;
-    user.nascimento = new Date(this.nascimento.split('/').reverse().join('/'));
+    user.nascimento = new Date(this.birthDay.date.year, this.birthDay.date.month, this.birthDay.date.day);
+
     this.onCalcular.emit(user);
   }
 
-  validaForm(): boolean {
+  private validaForm(): boolean {
     if(this.valorImovel < 10000)
       return false;
     if(this.disponivel < this.valorImovel*0.1 || this.disponivel > this.valorImovel*0.9)
@@ -76,8 +75,6 @@ export class FormularioComponent implements OnInit {
     if(this.prestacoes < 12 || this.prestacoes > 480)
       return false;
     if(this.renda < 0)
-      return false;
-    if(!this.nascimento)
       return false;
     if(!this.dateValid)
       return false;
