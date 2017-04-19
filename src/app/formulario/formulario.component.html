@@ -28,7 +28,7 @@
     </div>
     <div class="form-group">
       <label>Data de Nascimento</label>
-      <input [(ngModel)]="nascimento" type="date" class="form-control input-sm" id="nascimento">
+      <my-date-picker [options]="myDatePickerOptions" [(ngModel)]="birthDay" (inputFieldChanged)="onInputFieldChanged($event)"></my-date-picker>
     </div>
     <div class="form-group">
       <label><input [(ngModel)]="possuiFgtsModel" type="checkbox" value="true"> Possui FGTS</label>

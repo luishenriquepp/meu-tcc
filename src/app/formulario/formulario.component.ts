@@ -2,6 +2,7 @@ import { Component, EventEmitter, Output, Input, OnInit } from '@angular/core';
 
 import { Usuario } from '../models/usuario';
 import { Dates } from '../utils/dates';
+import {IMyOptions,IMyInputFieldChanged} from 'mydatepicker';
 
 @Component({
   selector: 'app-formulario',
@@ -14,6 +15,18 @@ export class FormularioComponent implements OnInit {
   @Output() onCalcular = new EventEmitter<Usuario>();
   @Output() onFgts = new EventEmitter<boolean>();
   private dateUtils: Dates;
+  private dateValid = false;
+
+  private myDatePickerOptions: IMyOptions = {
+    showTodayBtn: false,
+    dateFormat: 'dd.mm.yyyy',
+    minYear: 1900,
+    maxYear: 2017,
+  }
+  
+  onInputFieldChanged(event: IMyInputFieldChanged) {
+    this.dateValid = event.valid;
+  }
   
   private valorImovel: number;
   private disponivel: number;
@@ -22,6 +35,7 @@ export class FormularioComponent implements OnInit {
   private nascimento: string;
   private possuiFGTS: boolean;
   private fgtsAcumulado: number;
+  private birthDay: Object;
 
   ngOnInit() {
     this.valorImovel = 200000;
@@ -29,8 +43,8 @@ export class FormularioComponent implements OnInit {
     this.prestacoes = 420;
     this.renda = 4500;
     this.possuiFGTS = true;
-    this.nascimento = "21/04/1988";
-    this.fgtsAcumulado = 10000;    
+    this.fgtsAcumulado = 10000;
+    this.birthDay = { date: { year: 1988, month: 1, day: 21}};
   }
   
   get possuiFgtsModel(): boolean {
@@ -55,38 +69,18 @@ export class FormularioComponent implements OnInit {
   }
 
   validaForm(): boolean {
-    if(this.valorImovel < 10000) {
+    if(this.valorImovel < 10000)
       return false;
-    }
-    if(this.disponivel < this.valorImovel*0.1 || this.disponivel > this.valorImovel*0.9) {
+    if(this.disponivel < this.valorImovel*0.1 || this.disponivel > this.valorImovel*0.9)
       return false;
-    }    
-    if(this.prestacoes < 12 || this.prestacoes > 480) {
+    if(this.prestacoes < 12 || this.prestacoes > 480)
       return false;
-    }
-    if(this.renda < 0) {
+    if(this.renda < 0)
       return false;
-    }
-    if(!this.nascimento) {
+    if(!this.nascimento)
       return false;
-    }
-    if(!this.validaData()) {
+    if(!this.dateValid)
       return false;
-    }
-    this.dateUtils = new Dates(new Date(this.nascimento.split('/').reverse().join('/')));
-    let idade = this.dateUtils.GetIdade();
-    if(idade < 18 || idade > 100) {
-      return false;
-    }
     return true;
   } 
-
-  private validaData(): boolean {
-    var primeiroDigito = this.nascimento.substring(0,1);
-    if(parseInt(primeiroDigito) > 0) {
-      return true;
-    } else {
-      return false;
-    }
-  }
 }
