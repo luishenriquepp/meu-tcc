@@ -21,6 +21,7 @@ export class FormularioComponent implements OnInit {
     dateFormat: 'dd.mm.yyyy',
     minYear: this.today.getFullYear() - 100,
     maxYear: this.today.getFullYear(),
+    openSelectorTopOfInput: true
   }
   
   onInputFieldChanged(event: IMyInputFieldChanged) {
