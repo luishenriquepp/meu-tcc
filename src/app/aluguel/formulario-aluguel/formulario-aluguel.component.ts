@@ -31,6 +31,15 @@ export class FormularioAluguelComponent implements OnInit {
   }
 
   private onChangeFinanciamento(): void {
-    this.descricaoFinanciamento = this.financiamentoSelecionado.Descricao;
+    if(this.financiamentoSelecionado) {
+      this.descricaoFinanciamento = this.financiamentoSelecionado.Descricao;
+    } else {
+      this.descricaoFinanciamento = '';
+    }
+  }
+
+  private isValid(): boolean {
+    if(this.aluguelInicial > 0 && this.financiamentoSelecionado)
+      return true;
   }
 }
