@@ -17,13 +17,13 @@ export class AluguelComponent {
   private fluxoDeCaixa: boolean = false;
   private grafico: boolean = false;
 
-  private onComparar(financiamento: Financiamento): void {
-    let investimento = new Investimento(financiamento.Usuario.disponivel);
-    let aluguel = new Aluguel(3000);
-    let fgts = new Investimento(financiamento.Usuario.FGTS);
+  private onComparar(event: any): void {
+    let investimento = new Investimento(event.fin.Usuario.disponivel);
+    let aluguel = new Aluguel(event.aluguelInicial);
+    let fgts = new Investimento(event.fin.Usuario.FGTS);
 
     let comparador: Comparador;
-    comparador = new Comparador(investimento, aluguel, financiamento, fgts);
+    comparador = new Comparador(investimento, aluguel, event.fin, fgts);
     comparador.Processar();
 
     this.extratoAluguel = comparador.Gerenciador.ExtratoAluguel;
