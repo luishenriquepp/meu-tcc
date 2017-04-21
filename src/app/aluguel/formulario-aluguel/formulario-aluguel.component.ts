@@ -12,11 +12,11 @@ import {IIdentifier} from '../../models/i-identifier';
 export class FormularioAluguelComponent implements OnInit {
 
   private financiamentos: Array<IIdentifier>; 
-  private financiamentoSelecionado: Financiamento;
+  private financiamentoSelecionado: Financiamento = null;
   private aluguelInicial: number = 0;
   private descricaoFinanciamento: string;
 
-  @Output() sendFinanciamento = new EventEmitter<Financiamento>();
+  @Output() sendFinanciamento = new EventEmitter<any>();
   
   constructor(private financiamentoService: FinanciamentoService) {}
 
@@ -27,7 +27,7 @@ export class FormularioAluguelComponent implements OnInit {
   }
 
   private comparar(): void {
-    this.sendFinanciamento.emit(this.financiamentoSelecionado);
+    this.sendFinanciamento.emit({fin: this.financiamentoSelecionado, aluguelInicial: this.aluguelInicial});
   }
 
   private onChangeFinanciamento(): void {
