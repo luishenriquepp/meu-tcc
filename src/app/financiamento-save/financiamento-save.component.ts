@@ -26,7 +26,9 @@ export class FinanciamentoSaveComponent implements OnInit {
   }
 
   private sugerir(): void {
-      this.description = this.toString.toString();
+      this.toString.Process();
+      this.identifier = this.toString.Identificacao;
+      this.description = this.toString.Descricao;
   }
 
   private adicionar(): void {

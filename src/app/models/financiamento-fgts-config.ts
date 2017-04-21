@@ -19,8 +19,8 @@ export class FinanciamentoFgtsConfig {
     }
 }
 
-export enum Posterior{
-    Parcelas = 2,
+export enum Posterior {
+    NaoUsar = 0,
     SaldoDevedor = 1,
-    NaoUsar = 0
+    Parcelas = 2
 }
