@@ -14,6 +14,8 @@ export class FormularioAluguelComponent implements OnInit {
   private financiamentos: Array<IIdentifier>; 
   private financiamentoSelecionado: Financiamento;
   private aluguelInicial: number = 0;
+  private descricaoFinanciamento: string;
+
   @Output() sendFinanciamento = new EventEmitter<Financiamento>();
   
   constructor(private financiamentoService: FinanciamentoService) {}
@@ -26,5 +28,9 @@ export class FormularioAluguelComponent implements OnInit {
 
   private comparar(): void {
     this.sendFinanciamento.emit(this.financiamentoSelecionado);
+  }
+
+  private onChangeFinanciamento(): void {
+    this.descricaoFinanciamento = this.financiamentoSelecionado.Descricao;
   }
 }
