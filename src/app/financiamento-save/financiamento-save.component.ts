@@ -42,4 +42,9 @@ export class FinanciamentoSaveComponent implements OnInit {
     })
   }
 
+  private isValid(): boolean {
+    if(this.identifier)
+      return true;
+  }
+
 }
