@@ -4,6 +4,7 @@ import { FormularioComponent } from '../formulario/formulario.component';
 import { AluguelComponent } from '../aluguel/aluguel.component';
 import { FinanciamentoComponent } from '../financiamento/financiamento.component';
 import { ConsorcioComponent } from '../consorcio/consorcio.component';
+import { GlobalConfigurationComponent } from '../global-configuration/global-configuration.component';
 
 export const Routes  = [
     { path: '', component: HomeComponent },
@@ -11,4 +12,5 @@ export const Routes  = [
     { path: 'financiamento', component: FinanciamentoComponent },
     { path: 'aluguel', component: AluguelComponent },
     { path: 'consorcio', component: ConsorcioComponent },
+    { path: 'configuracoes', component: GlobalConfigurationComponent },
 ];

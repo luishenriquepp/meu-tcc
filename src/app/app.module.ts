@@ -25,6 +25,7 @@ import { ExtratoAluguelComponent } from './aluguel/extrato-aluguel/extrato-alugu
 import { GraficoAluguelComponent } from './aluguel/grafico-aluguel/grafico-aluguel.component';
 
 import { MyDatePickerModule } from 'mydatepicker';
+import { GlobalConfigurationComponent } from './global-configuration/global-configuration.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { MyDatePickerModule } from 'mydatepicker';
     FinanciamentoSaveComponent,
     FormularioAluguelComponent,
     ExtratoAluguelComponent,
-    GraficoAluguelComponent
+    GraficoAluguelComponent,
+    GlobalConfigurationComponent
   ],
   imports: [
     BrowserModule,
