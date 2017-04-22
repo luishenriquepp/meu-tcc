@@ -8,27 +8,31 @@ declare var cfx;
 })
 export class GraficoAluguelComponent implements OnInit {
 
-  private chart: any;
+  private areaChart: any;
   @Input() extratoAluguel: Array<ExtratoAluguel>;
   
   constructor() { }
 
   ngOnInit() {
-    this.chart = new cfx.Chart();
+    this.areaChart = new cfx.Chart();
+    this.areaChart.getLegendBox().setVisible(true);
+    // this.areaChart.getAxisY().getGrids().getMajor().setVisible(false);
+    this.areaChart.getAxisY().getLabelsFormat().setFormat(cfx.AxisFormat.Currency);
+    this.areaChart.setGallery(cfx.Gallery.Area);
+    this.areaChart.getAllSeries().setStacked(cfx.Stacked.Normal);
+    this.areaChart.getAnimations().getLoad().setEnabled(true);
+
+    let title = new cfx.TitleDockable();
+    title.setText("Comparação patrimônio");
+    
+    this.areaChart.getTitles().add(title);
+    
     this.construirGrafico();
   }
   
   private construirGrafico(): void {
-    // this.chart.getAnimations().getLoad().setEnabled(true);
-    var td;
-    td = new cfx.TitleDockable();
-    td.setText("3D Normal Stacked Area");
-    this.chart.getTitles().add(td);
-    this.chart.getLegendBox().setVisible(false);
-    this.chart.setGallery(cfx.Gallery.Area);
-    this.chart.getView3D().setEnabled(true);
-    this.chart.getAllSeries().setStacked(cfx.Stacked.Normal);
-    var data = this.chart.getData();
+    
+    let data = this.areaChart.getData();
     data.setSeries(2);
     data.setPoints(this.extratoAluguel.length);
 
@@ -37,7 +41,6 @@ export class GraficoAluguelComponent implements OnInit {
       data.setItem(1, i, this.extratoAluguel[i].PatrimonioFinTotal());
     }
 
-    var opa = document.getElementById('div_Chart');
-    this.chart.create(opa);
+    this.areaChart.create(document.getElementById('areaChart'));
   }
 }
