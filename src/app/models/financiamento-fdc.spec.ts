@@ -5,6 +5,7 @@ import { FinanciamentoFdc } from './financiamento-fdc';
 import { Usuario } from './usuario';
 import { FinanciamentoConfig } from './financiamento-config';
 import { FinanciamentoFgtsConfig } from'./financiamento-fgts-config';
+import {GlobalConfiguration} from './global-configuration';
 
 describe('FinanciamentoFdc', () => {
   it('should create an instance', () => {
@@ -47,12 +48,14 @@ describe('FinanciamentoFdc', () => {
     let fgtsConfig = new FinanciamentoFgtsConfig();
     let financiamentoConfig = new FinanciamentoConfig(fgtsConfig);
     let finanFdc = new FinanciamentoFdc(financiamentoConfig);
+    let user = new Usuario();
+    user.GlobalConfiguration = new GlobalConfiguration();
+    finanFdc.setUsuario(user);
     
-    financiamentoConfig.TRMensal = 0.08;
     finanFdc.saldoDevedor1 = 200000;
 
     finanFdc.attCorrecaoTR();
 
-    expect(0.08*200000).toBe(finanFdc.correcaoTR);
+    expect(user.GlobalConfiguration.Referencial*200000).toBe(finanFdc.correcaoTR);
   });
 });

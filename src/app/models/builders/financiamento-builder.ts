@@ -8,6 +8,7 @@ import { FinanciamentoSemFgts } from '../financiamento-sem-fgts';
 import { FinanciamentoFdc } from '../financiamento-fdc';
 import {FinanciamentoFactory} from '../../utils/financiamento-factory';
 import {UsuarioBuilder} from './usuario-builder';
+import {GlobalConfiguration} from '../global-configuration';
 
 export class FinanciamentoBuilder {
     private _financiamentoSemFgts : Financiamento;
@@ -35,6 +36,7 @@ export class FinanciamentoBuilder {
 
     public GetFinanciamento(prestacoes: number, primeiraParcela: number, acrescimo: number): Financiamento {
         let usuario = new Usuario();
+        usuario.GlobalConfiguration = new GlobalConfiguration();
         let config = this.criaFinanciamentoConfig();
         this._financiamentoSemFgts = new FinanciamentoSemFgts(usuario,config);
         this._financiamentoSemFgts.Prestacoes = this.criaParcelaFdc(prestacoes, primeiraParcela, acrescimo);
