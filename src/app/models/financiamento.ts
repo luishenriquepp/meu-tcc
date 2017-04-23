@@ -15,16 +15,13 @@ export abstract class Financiamento implements IIdentifier {
     private _usuario: Usuario;
     private _config: FinanciamentoConfig;
     private _vfdc: FinanciamentoFdc;    
-    private _resultado: FinanciamentoResultado;
+    private _resultado: FinanciamentoResultado  = new FinanciamentoResultado(this);
 
     constructor(usuario: Usuario, config: FinanciamentoConfig) {
         this._usuario = usuario;
         this._config = config;
         this._vfdc = new FinanciamentoFdc(this._config);
         this._vfdc.setUsuario(this.Usuario);
-        this._resultado = new FinanciamentoResultado();
-        this._resultado.Usuario = this._usuario;
-        this._resultado.Parcela = this._prestacoes;
     }    
     
     FluxoDeCaixa(): void { }
