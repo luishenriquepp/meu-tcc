@@ -8,10 +8,7 @@ export class FinanciamentoFdc {
     
     private config: FinanciamentoConfig;
     private usuario: Usuario;
-
-    private ano: number = 0.0459;
-    private mes: number = Math.pow((1+this.ano),1/12)-1; 
-        
+            
     before: FinanciamentoFdc;
     
     saldoDevedor1: number = 0;
@@ -84,7 +81,7 @@ export class FinanciamentoFdc {
     }
 
     attCorrecaoTR(): void {
-        this.correcaoTR = (this.saldoDevedor1 * this.config.TRMensal);
+        this.correcaoTR = (this.saldoDevedor1 * this.usuario.GlobalConfiguration.Referencial);
     }
 
     attSaldoDevedor2(): void {
@@ -108,11 +105,11 @@ export class FinanciamentoFdc {
     }
     
     attParcelaValorPresente(n: number): void {
-        this.parcelaVP = (this.parcela/Math.pow(1+this.config.Rentabilidade,n));
+        this.parcelaVP = (this.parcela/Math.pow(1+this.usuario.GlobalConfiguration.RentabilidadeLiquidaMensal(),n));
     }
 
     attValorImovel(): void {
-        this.valorImovel = this.valorImovel*(1+this.mes);
+        this.valorImovel = this.valorImovel*(1+this.usuario.GlobalConfiguration.Imovel);
     }
 
     attPatrimonio(): void {
@@ -128,6 +125,6 @@ export class FinanciamentoFdc {
     }
 
     attVariacaoValorPresente(n: number): void {
-        this.vpVariacao = (this.varPatrimonio/Math.pow(1+this.config.Rentabilidade,n));
+        this.vpVariacao = (this.varPatrimonio/Math.pow(1+this.usuario.GlobalConfiguration.Interna,n));
     }
 }

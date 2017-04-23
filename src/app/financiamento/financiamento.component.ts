@@ -4,15 +4,15 @@ import { Usuario } from '../models/usuario';
 import { Financiamento } from'../models/financiamento';
 import { FinanciamentoConfig } from'../models/financiamento-config';
 import { FinanciamentoFgtsConfig } from '../models/financiamento-fgts-config';
-import { FinanciamentoSemFgts } from '../models/financiamento-sem-fgts';
-import { FinanciamentoComFgtsNasParcelas } from '../models/financiamento-com-fgts-nas-parcelas';
-import { FinanciamentoComFgtsNoSaldoDevedor } from '../models/financiamento-com-fgts-no-saldo-devedor';
 import { FinanciamentoFactory } from '../utils/financiamento-factory';
+import {GlobalConfiguration} from '../models/global-configuration';
+import {ConfigurationService} from '../services/configuration-service';
 
 @Component({
   selector: 'app-financiamento',
   templateUrl: './financiamento.component.html',
-  styleUrls: ['./financiamento.component.css']
+  styleUrls: ['./financiamento.component.css'],
+  providers: [ConfigurationService]
 })
 export class FinanciamentoComponent {
   
@@ -26,8 +26,9 @@ export class FinanciamentoComponent {
   calculado: boolean;
   fgts: boolean;
   saveScreen: boolean;
+  private globalConfiguration: GlobalConfiguration;
 
-  constructor() {
+  constructor(private configurationService: ConfigurationService) {
     this.usuario = new Usuario();
     this.fgtsConfig = new FinanciamentoFgtsConfig();
     this.financiamentoConfig = new FinanciamentoConfig(this.fgtsConfig);
@@ -37,6 +38,7 @@ export class FinanciamentoComponent {
     this.calculado = false;
     this.fgts = false;
     this.saveScreen = false;
+    this.globalConfiguration = this.configurationService.Busca();
   }
   onCalcular(user: Usuario) {
     this.fgts = false;
@@ -44,7 +46,8 @@ export class FinanciamentoComponent {
     this.fluxoDeCaixa = false;
     user.FGTS = this.usuario.FGTS;
     user.crescimentoSalarial = this.usuario.crescimentoSalarial;
-    this.usuario = user;    
+    this.usuario = user;
+    this.usuario.GlobalConfiguration = this.globalConfiguration;
     let factory = new FinanciamentoFactory(this.usuario, this.financiamentoConfig);
     this.financiamento = factory.Create();
     this.financiamento.FluxoDeCaixa();

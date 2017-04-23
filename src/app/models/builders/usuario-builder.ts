@@ -1,4 +1,5 @@
 import {Usuario} from '../usuario';
+import {GlobalConfiguration} from '../global-configuration';
 
 export class UsuarioBuilder {
     
@@ -41,6 +42,7 @@ export class UsuarioBuilder {
         usuario.usaFGTS = usaFGTS;
         usuario.FGTS = FGTS;
         usuario.crescimentoSalarial = crescimentoSalarial;
+        usuario.GlobalConfiguration = new GlobalConfiguration();
         
         return usuario;
     }

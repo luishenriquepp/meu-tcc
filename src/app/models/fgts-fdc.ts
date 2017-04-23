@@ -27,11 +27,11 @@ export class FgtsFdc {
     Atualizar(fdc: FgtsFdc, n): void {
         this._before = fdc;
         this._saldo = fdc._totalFGTS;
-        this._correcaoTR = this._saldo*this._config.TRMensal;
+        this._correcaoTR = this._saldo*this._usuario.GlobalConfiguration.Referencial;
         this._creditos = (this._usuario.renda*(1 + (Math.floor(n/12)*this._usuario.crescimentoSalarial)))*(0.08);
         this._totalFGTS = this._saldo + this._correcaoTR + this._creditos;
         this._fgtsVaricao = this._totalFGTS - fdc.TotalFgts;
-        this._variacaoVP = (this._fgtsVaricao/Math.pow(1+this._config.Rentabilidade,n));
+        this._variacaoVP = (this._fgtsVaricao/Math.pow(1+this._usuario.GlobalConfiguration.RentabilidadeLiquidaMensal(),n));
     }
 
     Resgatar(valor: number,n): void {
@@ -40,14 +40,14 @@ export class FgtsFdc {
             this._resgate = this._saldo;
             if(n) {
                 this._fgtsVaricao = this._totalFGTS - this._before.TotalFgts;
-                this._variacaoVP = (this._fgtsVaricao/Math.pow(1+this._config.Rentabilidade,n));
+                this._variacaoVP = (this._fgtsVaricao/Math.pow(1+this._usuario.GlobalConfiguration.Interna,n));
             }
         } else {
             this._totalFGTS -= valor;
             this._resgate = valor;
             if(n) {
                 this._fgtsVaricao = this._totalFGTS - this._before.TotalFgts;
-                this._variacaoVP = (this._fgtsVaricao/Math.pow(1+this._config.Rentabilidade,n));
+                this._variacaoVP = (this._fgtsVaricao/Math.pow(1+this._usuario.GlobalConfiguration.Interna,n));
             }
         }
     }

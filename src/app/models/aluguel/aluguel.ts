@@ -1,7 +1,6 @@
 import { LogicaTemporal } from '../../utils/logica-temporal';
 import { ValorPresente } from '../../utils/valor-presente';
 import { Financiamento } from '../financiamento';
-import { Usuario } from '../usuario';
 
 export class Comparador {
     private readonly _aluguel: Aluguel;
@@ -18,7 +17,7 @@ export class Comparador {
         this._aluguel = aluguel;
         this._financiamento = financiamento;
         this._fundoFGTS = fundoFGTS;
-        this._finInvestimento = new Investimento();
+        this._finInvestimento = new Investimento(0,this._financiamento.Usuario.GlobalConfiguration.RentabilidadeLiquidaMensal());
         this._salario = new Aluguel(financiamento.Usuario.renda, financiamento.Usuario.crescimentoSalarial);
     }
         
