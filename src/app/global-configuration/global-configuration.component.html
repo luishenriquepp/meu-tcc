@@ -1,3 +1,81 @@
-<p>
-  global-configuration works!
-</p>
+<div class="panel panel-default">
+  <div class="panel-heading">Configurações gerais da aplicação</div>
+  <div class="panel-body">    
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-lg-1"></div>
+          <div class="col-lg-4">
+            <div class="form-group">  
+              <label>Taxa referencial</label>
+              <div class="input-group">
+                <input type="number" [(ngModel)]="configuration.Referencial" class="form-control input-sm" step="0.01">
+                <span class="input-group-addon percent">{{ configuration.Referencial | percent:'1.3-3' }} am</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Taxa interna de retorno</label>
+              <div class="input-group">
+                <input type="number" [(ngModel)]="configuration.Interna" class="form-control input-sm" step="0.01">
+                <span class="input-group-addon percent">{{ configuration.Interna | percent:'1.3-3' }} am</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Taxa de atualização da prestação do aluguel anual</label>
+              <div class="input-group">
+                <input type="number" [(ngModel)]="configuration.Aluguel" class="form-control input-sm" step="0.01">
+                <span class="input-group-addon percent">{{ configuration.Aluguel | percent:'1.3-3' }} aa</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Taxa de valorização de imóvel mensal</label>
+              <div class="input-group">
+                <input type="number" [(ngModel)]="configuration.Imovel" class="form-control input-sm" step="0.01">
+                <span class="input-group-addon percent">{{ configuration.Imovel | percent:'1.3-3' }} am</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Rendimento do Fundo de Garantia ao mes</label>
+              <div class="input-group">
+                <input type="number" [(ngModel)]="configuration.Fundo" class="form-control input-sm" step="0.01">
+                <span class="input-group-addon percent">{{ configuration.Fundo | percent:'1.3-3' }} am</span>
+              </div>
+            </div>
+          </div>  
+          <div class="col-lg-2"></div>        
+          <div class="col-lg-4">
+            <div class="form-group">
+              <label>Taxa de rentabilidade de aplicação financeira ao ano</label>
+              <div class="input-group">
+                <input type="number" [(ngModel)]="configuration.Rentabilidade" class="form-control input-sm" step="0.01">
+                <span class="input-group-addon percent">{{ configuration.Rentabilidade | percent:'1.3-3' }} aa</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Imposto de renda sobre rendimentos</label>
+               <div class="input-group"> 
+                <input type="number" [(ngModel)]="configuration.ImpostoRenda" class="form-control input-sm" step="0.01">
+                <span class="input-group-addon percent">{{ configuration.ImpostoRenda | percent:'1.3-3' }}</span>
+               </div>
+            </div>
+            <div class="form-group">
+              <label>Taxa de rentabilidade líquida ao ano</label>
+              <div class="input-group">
+                <input [disabled]="true" [ngModel]="configuration.RentabilidadeLiquida()" type="number" class="form-control input-sm" step="0.01">
+                <span class="input-group-addon percent">{{ configuration.RentabilidadeLiquida() | percent:'1.3-3' }} aa</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Taxa de rentabilidade líquida ao mês</label>
+              <div class="input-group">
+                <input [disabled]="true" [ngModel]="configuration.RentabilidadeLiquidaMensal()" type="number" class="form-control input-sm" step="0.01">
+                <span class="input-group-addon percent">{{ configuration.RentabilidadeLiquidaMensal() | percent:'1.3-3' }} am</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-1"></div>
+        </div>
+      </div>
+    </div>          
+  </div>
+</div>
