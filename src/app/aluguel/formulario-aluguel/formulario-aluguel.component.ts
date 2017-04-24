@@ -13,7 +13,7 @@ export class FormularioAluguelComponent implements OnInit {
 
   private financiamentos: Array<IIdentifier>; 
   private financiamentoSelecionado: Financiamento = null;
-  private aluguelInicial: number = 0;
+  private aluguelInicial: number = 2200;
   private descricaoFinanciamento: string;
 
   @Output() sendFinanciamento = new EventEmitter<any>();
