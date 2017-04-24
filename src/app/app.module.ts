@@ -26,6 +26,7 @@ import { GraficoAluguelComponent } from './aluguel/grafico-aluguel/grafico-alugu
 
 import { MyDatePickerModule } from 'mydatepicker';
 import { GlobalConfigurationComponent } from './global-configuration/global-configuration.component';
+import { AluguelResultadoComponent } from './aluguel/aluguel-resultado/aluguel-resultado.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { GlobalConfigurationComponent } from './global-configuration/global-conf
     FormularioAluguelComponent,
     ExtratoAluguelComponent,
     GraficoAluguelComponent,
-    GlobalConfigurationComponent
+    GlobalConfigurationComponent,
+    AluguelResultadoComponent
   ],
   imports: [
     BrowserModule,

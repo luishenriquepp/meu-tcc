@@ -8,6 +8,7 @@
           <div *ngIf="calculado">
             <button id="grafico" class="btn btn-sm btn-warning text-center" (click)="exibeGrafico()">Gráfico</button>
             <button id="fdc" class="btn btn-sm btn-warning text-center" (click)="exibeFluxoDeCaixa()">Fluxo de Caixa</button>
+            <button id="resultado" class="btn btn-sm btn-warning text-center" (click)="exibeResultado()">Resultado</button>
           </div>
       </div>        
       <div class="panel-body">
@@ -20,7 +21,12 @@
           <div class="col-lg-12">
             <app-grafico-aluguel [extratoAluguel]="extratoAluguel"></app-grafico-aluguel>
           </div>
-        </div>      
+        </div>
+        <div class="row" *ngIf="resultado">            
+          <div class="col-lg-12">
+            <app-aluguel-resultado [extratoAluguel]="extratoAluguel"></app-aluguel-resultado>
+          </div>
+        </div>    
       </div>
     </div>
   </div>

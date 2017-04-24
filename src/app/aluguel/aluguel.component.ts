@@ -20,6 +20,7 @@ export class AluguelComponent implements OnInit {
   private fluxoDeCaixa: boolean = false;
   private grafico: boolean = false;
   private globalConfiguration: GlobalConfiguration;
+  private resultado: boolean = false;
 
   constructor(private configurationService: ConfigurationService) { }
 
@@ -43,10 +44,17 @@ export class AluguelComponent implements OnInit {
   }
   private exibeFluxoDeCaixa(): void {
     this.grafico = false;
+    this.resultado = false;
     this.fluxoDeCaixa = true;
   }
   private exibeGrafico(): void {
     this.fluxoDeCaixa = false;
+    this.resultado = false;
     this.grafico = true;
+  }
+  private exibeResultado(): void {
+    this.fluxoDeCaixa = false;
+    this.grafico = false;
+    this.resultado = true;
   }
 }
