@@ -77,6 +77,10 @@ export class Comparador {
         extratoAluguel.MontanteInvestimento = this._investimento.ValorAcumulado;
         this.Gerenciador.Adicionar(extratoAluguel);
     }
+
+    public Financiamento(): Financiamento {
+        return this._financiamento;
+    }
 }
 
 export class Aluguel {

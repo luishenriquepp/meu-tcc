@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {ExtratoAluguel} from '../../models/aluguel/aluguel';
+import {ExtratoAluguel,Comparador} from '../../models/aluguel/aluguel';
 
 @Component({
   selector: 'app-aluguel-resultado',
@@ -9,6 +9,7 @@ import {ExtratoAluguel} from '../../models/aluguel/aluguel';
 export class AluguelResultadoComponent implements OnInit {
 
   @Input() extratoAluguel: Array<ExtratoAluguel>;
+  @Input() comparador: Comparador;
   public investimentoInicial: number;
   public investimentoRendimentos: number;
   public investimentoAportes: number;
@@ -24,6 +25,7 @@ export class AluguelResultadoComponent implements OnInit {
   public finInvestimentoAportes: number;
   public finInvestimentoRendimentos: number;
   public valorImovel: number;
+  public disponibilidade: number;
 
   ngOnInit() {
     this.investimentoRendimentos = this.buscaTotalDeRendimentos();
@@ -38,8 +40,8 @@ export class AluguelResultadoComponent implements OnInit {
     this.finInvestimentoRendimentos = this.buscaTotalFinInvestimentoRendimentos();
     // this.finFgtsAportes = TODO
     // this.finFgtsRendimentos = TODO
-    // this.valorImovel = TODO
-    // this.parcelas = TODO
+    this.valorImovel = this.comparador.Financiamento().Prestacoes[this.comparador.Financiamento().Prestacoes.length-1].valorImovel;
+    this.disponibilidade = this.comparador.Financiamento().Usuario.disponivel;
   }
 
   private buscaTotalDeRendimentos(): number  {

@@ -1,12 +1,14 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AluguelResultadoComponent } from './aluguel-resultado.component';
-import {ExtratoAluguel} from '../../models/aluguel/aluguel';
+import {ExtratoAluguel,Comparador} from '../../models/aluguel/aluguel';
+import {FinanciamentoBuilder} from '../../models/builders/financiamento-builder';
 
 describe('AluguelResultadoComponent', () => {
   let component: AluguelResultadoComponent;
   let fixture: ComponentFixture<AluguelResultadoComponent>;
   let extrato: Array<ExtratoAluguel>;
+  let comparador: Comparador;
 
   beforeEach(async(() => {
     
@@ -21,6 +23,10 @@ describe('AluguelResultadoComponent', () => {
       this.extrato.push(ex);
     }
 
+    let builder = new FinanciamentoBuilder();
+    let fin = builder.BuildRichUserWithFGTSFinanciamento();
+    this.comparador = new Comparador(null,null,fin);
+
     TestBed.configureTestingModule({
       declarations: [ AluguelResultadoComponent ]
     })
@@ -31,6 +37,7 @@ describe('AluguelResultadoComponent', () => {
     fixture = TestBed.createComponent(AluguelResultadoComponent);
     component = fixture.componentInstance;
     component.extratoAluguel = this.extrato;
+    component.comparador = this.comparador;
     fixture.detectChanges();
   });
 

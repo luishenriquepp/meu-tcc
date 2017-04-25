@@ -1,3 +1,4 @@
+<!--Aluguel-->
 <div class="col-lg-6">  
   <div class="panel-heading text-center">Valor nominal do aluguel</div>    
   <div class="panel panel-default">
@@ -17,7 +18,7 @@
             <div class="list-group-item patri-main-3">Rendimentos<span class="pull-right">R$ {{investimentoRendimentos | number:'1.2-2'}}</span></div>
           </div>
         <a href="#patr-fgts" class="list-group-item patri-main-2" data-toggle="collapse">
-          Fgts:<span class="pull-right">R$: {{FgtsTotal() | number:'1.2-2'}} </span>
+          Fgts:<span class="pull-right">R$ {{FgtsTotal() | number:'1.2-2'}} </span>
         </a>
           <div class="list-group collapse" id="patr-fgts">
             <div class="list-group-item patri-main-3">Inicial <span class="pull-right">R$ {{fgtsInicial | number:'1.2-2'}}</span></div>
@@ -44,7 +45,7 @@
             <div class="list-group-item cust-main-3">Aportes <span class="pull-right">R$ {{investimentoAportes | number:'1.2-2'}}</span></div>
           </div>
         <a href="#cust-fgts" class="list-group-item cust-main-2" data-toggle="collapse">
-          Fgts:<span class="pull-right">R$: {{ fgtsInicial + fgtsAportes | number:'1.2-2'}}</span>
+          Fgts:<span class="pull-right">R$ {{ fgtsInicial + fgtsAportes | number:'1.2-2'}}</span>
         </a>
           <div class="list-group collapse" id="cust-fgts">
             <div class="list-group-item cust-main-3">Inicial <span class="pull-right">R$ {{fgtsInicial | number:'1.2-2'}}</span></div>
@@ -59,8 +60,66 @@
     </div>
   </div>
 </div>
-
+<!--Financiamento-->
 <div class="col-lg-6">
-  <div class="panel-heading text-center">Valor nominal do financiamento</div> 
+  <div class="panel-heading text-center">Valor nominal do financiamento</div>
+  <div class="panel panel-default">
+    <div class="panel-heading patri-main-1">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" href="#finPatrimonio">Patrimônio: <span class="pull-right">R$ {{valorImovel + finInvestimentoAportes + finInvestimentoRendimentos | number:'1.2-2'}}</span></a>
+      </h4>
+    </div>
+    <div id="finPatrimonio" class="panel-collapse collapse">
+      <ul class="list-group">
+        <div class="list-group-item patri-main-2">Valor do imóvel <span class="pull-right">R$ {{valorImovel | number:'1.2-2'}}</span></div>
+        <a href="#finPatriInv" class="list-group-item patri-main-2" data-toggle="collapse">
+          Investimento:<span class="pull-right">R$ {{finInvestimentoAportes + finInvestimentoRendimentos | number:'1.2-2'}} </span>
+        </a>
+          <div class="list-group collapse" id="finPatriInv">
+            <div class="list-group-item patri-main-3">Aportes<span class="pull-right">R$ {{finInvestimentoAportes | number:'1.2-2'}}</span></div>
+            <div class="list-group-item patri-main-3">Rendimentos<span class="pull-right">R$ {{finInvestimentoRendimentos | number:'1.2-2'}}</span></div>
+          </div>
+        <a href="#finPatriFgts" class="list-group-item patri-main-2" data-toggle="collapse">
+          Fgts:<span class="pull-right">R$ {{0 | number:'1.2-2'}}</span>
+        </a>
+          <div class="list-group collapse" id="finPatriFgts">
+            <div class="list-group-item patri-main-3">Aportes <span class="pull-right">R$ {{0 | number:'1.2-2'}}</span></div>
+            <div class="list-group-item patri-main-3">Rendimentos <span class="pull-right">R$ {{0 | number:'1.2-2'}}</span></div>
+          </div>
+      </ul>
+    </div>
+  </div>
+  <!--Custo financiamento-->
+  <div class="panel panel-default">
+    <div class="panel-heading cust-main-1">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" href="#finCusto">Custo:<span class="pull-right">R$ {{parcelas + investimentoInicial + finInvestimentoAportes + fgtsInicial + fgtsAportes | number:'1.2-2'}}</span></a>
+      </h4>
+    </div>
+    <div id="finCusto" class="panel-collapse collapse">
+      <ul class="list-group">
+        <div class="list-group-item cust-main-2">Parcelas <span class="pull-right">R$ {{parcelas | number:'1.2-2'}}</span></div>
+        <a href="#finCustInv" class="list-group-item cust-main-2" data-toggle="collapse">
+          Investimento:<span class="pull-right">R$ {{investimentoInicial + finInvestimentoAportes| number:'1.2-2'}}</span>
+        </a>
+          <div class="list-group collapse" id="finCustInv">
+            <div class="list-group-item cust-main-3">Inicial <span class="pull-right">R$ {{investimentoInicial | number:'1.2-2'}}</span></div>            
+            <div class="list-group-item cust-main-3">Aportes <span class="pull-right">R$ {{finInvestimentoAportes | number:'1.2-2'}}</span></div>
+          </div>
+        <a href="#finCustFgts" class="list-group-item cust-main-2" data-toggle="collapse">
+          Fgts:<span class="pull-right">R$ {{fgtsInicial + fgtsAportes | number:'1.2-2'}}</span>
+        </a>
+          <div class="list-group collapse" id="finCustFgts">
+            <div class="list-group-item cust-main-3">Inicial <span class="pull-right">R$ {{fgtsInicial | number:'1.2-2'}}</span></div>
+            <div class="list-group-item cust-main-3">Aportes <span class="pull-right">R$ {{fgtsAportes | number:'1.2-2'}}</span></div>
+          </div>
+      </ul>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="panel-title">Patrimônio líquido:<span class="pull-right">R$ {{valorImovel + finInvestimentoRendimentos - parcelas - fgtsInicial - fgtsAportes - disponibilidade | number:'1.2-2'}}</span></div>
+    </div>
+  </div>
 </div>
 

@@ -21,6 +21,7 @@ export class AluguelComponent implements OnInit {
   private grafico: boolean = false;
   private globalConfiguration: GlobalConfiguration;
   private resultado: boolean = false;
+  private comparador: Comparador;
 
   constructor(private configurationService: ConfigurationService) { }
 
@@ -33,12 +34,13 @@ export class AluguelComponent implements OnInit {
     let aluguel = new Aluguel(event.aluguelInicial, this.globalConfiguration.Aluguel);
     let fgts = new Investimento(event.fin.Usuario.FGTS, this.globalConfiguration.Fundo);
     event.fin.Usuario.GlobalConfiguration = this.globalConfiguration;
+    event.fin.Prestacoes = [];
+    event.fin.FluxoDeCaixa();
 
-    let comparador: Comparador;
-    comparador = new Comparador(investimento, aluguel, event.fin, fgts);
-    comparador.Processar();
+    this.comparador = new Comparador(investimento, aluguel, event.fin, fgts);
+    this.comparador.Processar();
 
-    this.extratoAluguel = comparador.Gerenciador.ExtratoAluguel;
+    this.extratoAluguel = this.comparador.Gerenciador.ExtratoAluguel;
     this.calculado = true;
     this.grafico = true;
   }

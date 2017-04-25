@@ -23,11 +23,11 @@ export class GraficoAluguelComponent implements OnInit {
     this.areaChart.getAnimations().getLoad().setEnabled(true);
 
     let title = new cfx.TitleDockable();
-    title.setText("Comparação patrimônio");
+    title.setText("Comparação da evolução do patrimônio líquido");
     
     this.areaChart.getTitles().add(title);
     
-    this.construirGrafico();
+    this.buildPatrimonioLiquidoChart();
   }
   
   private construirGrafico(): void {
@@ -39,6 +39,23 @@ export class GraficoAluguelComponent implements OnInit {
     for (let i=0; i<this.extratoAluguel.length;i++){
       data.setItem(0, i, this.extratoAluguel[i].Patrimonio());
       data.setItem(1, i, this.extratoAluguel[i].PatrimonioFinTotal());
+    }
+
+    this.areaChart.create(document.getElementById('areaChart'));
+  }
+  
+  private buildPatrimonioLiquidoChart(): void {
+    let data = this.areaChart.getData();
+    data.setSeries(2);
+    data.setPoints(this.extratoAluguel.length);
+    
+    let custoAcumulado: number = this.extratoAluguel[0].MontanteFGTS + this.extratoAluguel[0].MontanteInvestimento;
+    let custoFinAcumulado: number = 0;
+
+    for (let i=0; i<this.extratoAluguel.length;i++) {      
+      custoAcumulado += this.extratoAluguel[i].DepositoFGTS + this.extratoAluguel[i].DepositoFundo;
+      data.setItem(0, i, this.extratoAluguel[i].Patrimonio()-custoAcumulado);
+      // data.setItem(1, i, this.extratoAluguel[i].PatrimonioFinTotal()-custoFinAcumulado);
     }
 
     this.areaChart.create(document.getElementById('areaChart'));
