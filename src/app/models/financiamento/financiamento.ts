@@ -2,6 +2,7 @@ import {Investimento,Aluguel} from '../aluguel/aluguel';
 import {Usuario} from '../usuario';
 import {GlobalConfiguration} from '../global-configuration';
 import {FinanciamentoConfig} from '../financiamento-config';
+import {FgtsNasParcelas} from './fgts-nas-parcelas';
 
 export class ProcessadorFinanciamento {
     private financiamento: Financiamento;
@@ -22,6 +23,7 @@ export class ProcessadorFinanciamento {
         this.imovel = new Investimento(20000, 0.005);
         this.fundoGarantia = new Investimento(5000, 0.003);
         this.salario = new Aluguel(4000, 0.005);
+        let processador = new FgtsNasParcelas();
 
         this.initialize();
 
@@ -43,6 +45,8 @@ export class ProcessadorFinanciamento {
                 ex.RendimentoFgts = extFgts.Rendimento;
                 ex.DepositoFgts = extFgts.Deposito;
                 ex.MontanteFgts = this.fundoGarantia.ValorAcumulado;
+
+                processador.ProcessarFgts(this.Extrato, i);
             }
         }
     }
