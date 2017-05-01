@@ -1,15 +1,9 @@
 import {ExtratoFinanciamento} from './extrato-financiamento';
 import {Investimento} from '../aluguel/aluguel';
-import {GlobalConfiguration} from '../global-configuration';
+
 
 export class FgtsNasParcelas {
-
-    private readonly _configuration: GlobalConfiguration;    
-    
-    constructor(configuration: GlobalConfiguration) {
-        this._configuration = configuration;
-    }
-    
+      
     private _parcelaAcumulada : number = 0;
     public get ParcelaAcumulada() : number {
         return this._parcelaAcumulada;
@@ -18,7 +12,8 @@ export class FgtsNasParcelas {
         this._parcelaAcumulada = v;
     }
         
-    public ProcessarFgts(extrato: Array<ExtratoFinanciamento>, mes: number): void {
+    public ProcessarFgts(extrato: Array<ExtratoFinanciamento>, mes: number, fundo: Investimento): void {
+
         this._parcelaAcumulada += extrato[mes].Parcela.Parcela();
         if(mes % 12 == 0) { 
             let taxa: number;
@@ -30,17 +25,20 @@ export class FgtsNasParcelas {
                 return;
             }
             
-            extrato[mes-11].Resgate = this._parcelaAcumulada * taxa;
-            extrato[mes-11].MontanteFgts -= this._parcelaAcumulada * taxa;
+            const valorResgatado = this._parcelaAcumulada * taxa;
+
+            extrato[mes-11].Resgate = valorResgatado;
+            extrato[mes-11].MontanteFgts -= valorResgatado;
             extrato[mes-11].Parcela.DescontaParcela(taxa);
             
-            let fundo = new Investimento(extrato[mes-11].MontanteFgts, this._configuration.Fundo);
+            fundo.Sacar(valorResgatado);
             
             for(let i=10; i>=0; i--) {
-                let ex = fundo.Depositar(extrato[mes-i].DepositoFgts);
+                let ex = fundo.Depositar(extrato[1].DepositoFgts);
                 extrato[mes-i].RendimentoFgts = ex.Rendimento;
                 extrato[mes-i].MontanteFgts = fundo.ValorAcumulado;
-                extrato[mes-i].Parcela.DescontaParcela(taxa); 
+                extrato[mes-i].Parcela.DescontaParcela(taxa);
+                console.log(fundo.ValorAcumulado);
             }
             this._parcelaAcumulada = 0;
         }
