@@ -26,7 +26,7 @@ export class ProcessadorFinanciamento {
         this.imovel = new Investimento(20000, this.user.GlobalConfiguration.Imovel);
         this.fundoGarantia = new Investimento(5000, this.user.GlobalConfiguration.Fundo);
         this.salario = new Aluguel(4000, this.user.crescimentoSalarial);
-        let processador = new FgtsNasParcelas(this.user.GlobalConfiguration);
+        let processador = new FgtsNasParcelas();
 
         this.initialize();
 
@@ -49,7 +49,7 @@ export class ProcessadorFinanciamento {
                 ex.DepositoFgts = extFgts.Deposito;
                 ex.MontanteFgts = this.fundoGarantia.ValorAcumulado;
 
-                processador.ProcessarFgts(this.Extrato, i);
+                processador.ProcessarFgts(this.Extrato, i, this.fundoGarantia);
             }
         }
     }
