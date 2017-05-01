@@ -127,6 +127,10 @@ export class Investimento {
         return new ExtratoInvestimento(valor, rendimento);
     }
 
+    public Sacar(valor: number = 0): void {
+        this._valorAcumulado -= valor;
+    }
+
     private render(): number {
         let rendimento = this._valorAcumulado*this.rendimentoMensal;
         this._valorAcumulado += rendimento;
