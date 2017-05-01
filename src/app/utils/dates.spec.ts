@@ -10,6 +10,6 @@ describe('Dates', () => {
   it('should return the correct age', () => {
     var dateUtils = new Dates(new Date(1988, 4));
     var idade = dateUtils.GetIdade();
-    expect(28).toBe(idade);
+    expect(29).toBe(idade);
   });
 });

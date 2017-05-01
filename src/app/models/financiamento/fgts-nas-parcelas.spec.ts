@@ -1,4 +1,6 @@
-import {ExtratoFinanciamento,Parcela,ProcessadorFinanciamento} from './financiamento';
+import {ExtratoFinanciamento} from './extrato-financiamento';
+import {Parcela} from './parcela';
+import {ProcessadorFinanciamento} from './processador-financiamento';
 import {Usuario} from '../usuario';
 import {FinanciamentoConfigBuilder} from '../builders/financiamento-config-builder';
 import {ExtratoFinanciamentoBuilder} from '../builders/extrato-financiamento-builder';

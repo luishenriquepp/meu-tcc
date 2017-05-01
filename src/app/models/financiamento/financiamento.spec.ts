@@ -1,4 +1,5 @@
-import {Financiamento,ProcessadorFinanciamento} from './financiamento';
+import {Financiamento} from './financiamento';
+import {ProcessadorFinanciamento} from './processador-financiamento';
 import {Usuario} from '../usuario';
 import {FinanciamentoConfigBuilder} from '../builders/financiamento-config-builder';
 

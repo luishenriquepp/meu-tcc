@@ -1,4 +1,4 @@
-import {ExtratoFinanciamento} from './financiamento';
+import {ExtratoFinanciamento} from './extrato-financiamento';
 import {Investimento} from '../aluguel/aluguel';
 
 export class FgtsNasParcelas {
