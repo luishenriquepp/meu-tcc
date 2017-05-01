@@ -3,7 +3,7 @@ import {ProcessadorFinanciamento} from './processador-financiamento';
 import {Usuario} from '../usuario';
 import {FinanciamentoConfigBuilder} from '../builders/financiamento-config-builder';
 
-describe('financiamento', () => {
+describe('processador financiamento', () => {
     
     xit('deve inicializar o instante zero', () => {
 

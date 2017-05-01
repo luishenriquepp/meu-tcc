@@ -1,8 +1,15 @@
 import {ExtratoFinanciamento} from './extrato-financiamento';
 import {Investimento} from '../aluguel/aluguel';
+import {GlobalConfiguration} from '../global-configuration';
 
 export class FgtsNasParcelas {
-        
+
+    private readonly _configuration: GlobalConfiguration;    
+    
+    constructor(configuration: GlobalConfiguration) {
+        this._configuration = configuration;
+    }
+    
     private _parcelaAcumulada : number = 0;
     public get ParcelaAcumulada() : number {
         return this._parcelaAcumulada;
@@ -27,7 +34,7 @@ export class FgtsNasParcelas {
             extrato[mes-11].MontanteFgts -= this._parcelaAcumulada * taxa;
             extrato[mes-11].Parcela.DescontaParcela(taxa);
             
-            let fundo = new Investimento(extrato[mes-11].MontanteFgts, 0.003);
+            let fundo = new Investimento(extrato[mes-11].MontanteFgts, this._configuration.Fundo);
             
             for(let i=10; i>=0; i--) {
                 let ex = fundo.Depositar(extrato[mes-i].DepositoFgts);

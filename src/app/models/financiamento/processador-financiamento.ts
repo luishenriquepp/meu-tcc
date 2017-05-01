@@ -22,11 +22,11 @@ export class ProcessadorFinanciamento {
     }
 
     public Processar(): void {
-        this.financiamento = new Financiamento(4000, 0.02);
-        this.imovel = new Investimento(20000, 0.005);
-        this.fundoGarantia = new Investimento(5000, 0.003);
-        this.salario = new Aluguel(4000, 0.005);
-        let processador = new FgtsNasParcelas();
+        this.financiamento = new Financiamento(4000, this.user.GlobalConfiguration.RentabilidadeLiquidaMensal());
+        this.imovel = new Investimento(20000, this.user.GlobalConfiguration.Imovel);
+        this.fundoGarantia = new Investimento(5000, this.user.GlobalConfiguration.Fundo);
+        this.salario = new Aluguel(4000, this.user.crescimentoSalarial);
+        let processador = new FgtsNasParcelas(this.user.GlobalConfiguration);
 
         this.initialize();
 

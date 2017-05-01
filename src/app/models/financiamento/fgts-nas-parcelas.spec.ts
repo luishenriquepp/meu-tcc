@@ -5,19 +5,22 @@ import {Usuario} from '../usuario';
 import {FinanciamentoConfigBuilder} from '../builders/financiamento-config-builder';
 import {ExtratoFinanciamentoBuilder} from '../builders/extrato-financiamento-builder';
 import {FgtsNasParcelas} from './fgts-nas-parcelas';
+import {GlobalConfiguration} from '.././global-configuration';
 
 describe('fgts-nas-parcelas', () => {
+
+    let global = new GlobalConfiguration();
 
     it('deve resgatar pela primeira vez no mes 1', () => {
         
         let builder = new ExtratoFinanciamentoBuilder();
         let extrato = builder.Build(12);
         
-        let processor = new FgtsNasParcelas();
+        let regra = new FgtsNasParcelas(global);
 
-        processor.ParcelaAcumulada = 6000;
+        regra.ParcelaAcumulada = 6000;
         extrato[1].MontanteFgts = 10000;
-        processor.ProcessarFgts(extrato,12);
+        regra.ProcessarFgts(extrato,12);
 
         expect(extrato[1].Resgate).toBeGreaterThan(0);
     });
@@ -27,11 +30,11 @@ describe('fgts-nas-parcelas', () => {
         let builder = new ExtratoFinanciamentoBuilder();
         let extrato = builder.Build(24);
         
-        let processor = new FgtsNasParcelas();
-        processor.ParcelaAcumulada = 6000;
+        let regra = new FgtsNasParcelas(global);
+        regra.ParcelaAcumulada = 6000;
         extrato[13].MontanteFgts = 10000;
-        processor.ProcessarFgts(extrato, 12);
-        processor.ProcessarFgts(extrato, 24);
+        regra.ProcessarFgts(extrato, 12);
+        regra.ProcessarFgts(extrato, 24);
         
         expect(extrato[1].Resgate).toBe(0);
         expect(extrato[13].Resgate).toBeGreaterThan(0);
@@ -42,13 +45,13 @@ describe('fgts-nas-parcelas', () => {
         let builder = new ExtratoFinanciamentoBuilder();
         let extrato = builder.Build(36);
         
-        let processor = new FgtsNasParcelas();
-        processor.ParcelaAcumulada = 6000;
+        let regra = new FgtsNasParcelas(global);
+        regra.ParcelaAcumulada = 6000;
         extrato[25].MontanteFgts = 10000;
         
-        processor.ProcessarFgts(extrato, 12);
-        processor.ProcessarFgts(extrato, 24);
-        processor.ProcessarFgts(extrato, 36);
+        regra.ProcessarFgts(extrato, 12);
+        regra.ProcessarFgts(extrato, 24);
+        regra.ProcessarFgts(extrato, 36);
         
         expect(extrato[1].Resgate).toBe(0);
         expect(extrato[13].Resgate).toBe(0);
@@ -60,10 +63,10 @@ describe('fgts-nas-parcelas', () => {
         let builder = new ExtratoFinanciamentoBuilder();
         let extrato = builder.Build(12);
 
-        let processor = new FgtsNasParcelas();
-        processor.ParcelaAcumulada = 6000;
+        let regra = new FgtsNasParcelas(global);
+        regra.ParcelaAcumulada = 6000;
         extrato[1].MontanteFgts = 12000;
-        processor.ProcessarFgts(extrato, 12);
+        regra.ProcessarFgts(extrato, 12);
 
         let parcelaTotal = 6000 + extrato[12].Parcela.Parcela();
         
@@ -75,10 +78,10 @@ describe('fgts-nas-parcelas', () => {
         let builder = new ExtratoFinanciamentoBuilder();
         let extrato = builder.Build(12);
         
-        let processor = new FgtsNasParcelas();
-        processor.ParcelaAcumulada = 6000;
+        let regra = new FgtsNasParcelas(global);
+        regra.ParcelaAcumulada = 6000;
         extrato[1].MontanteFgts = 3000;
-        processor.ProcessarFgts(extrato, 12);
+        regra.ProcessarFgts(extrato, 12);
 
         let parcelaTotal = 6000 + extrato[12].Parcela.Parcela();
         let tax = 3000/parcelaTotal;
@@ -91,12 +94,12 @@ describe('fgts-nas-parcelas', () => {
         let builder = new ExtratoFinanciamentoBuilder();
         let extrato = builder.Build(12);
         
-        let processor = new FgtsNasParcelas();
-        processor.ParcelaAcumulada = 6000;
+        let regra = new FgtsNasParcelas(global);
+        regra.ParcelaAcumulada = 6000;
         extrato[1].MontanteFgts = 10000;
-        processor.ProcessarFgts(extrato, 12);
+        regra.ProcessarFgts(extrato, 12);
         
-        expect(processor.ParcelaAcumulada).toBe(0);
+        expect(regra.ParcelaAcumulada).toBe(0);
     });
 
     it('nao deve resgatar fgts se financiamento acabar antes do proximo ano', () => {
@@ -104,12 +107,12 @@ describe('fgts-nas-parcelas', () => {
         let builder = new ExtratoFinanciamentoBuilder();
         let extrato = builder.Build(12);
         
-        let processor = new FgtsNasParcelas();
-        processor.ParcelaAcumulada = 6000;
+        let regra = new FgtsNasParcelas(global);
+        regra.ParcelaAcumulada = 6000;
         extrato[1].MontanteFgts = 10000;
 
         for(let i=1;i<=11;i++) {
-            processor.ProcessarFgts(extrato, i);
+            regra.ProcessarFgts(extrato, i);
         }
         
         expect(extrato[1].Resgate).toBe(0);
@@ -120,12 +123,12 @@ describe('fgts-nas-parcelas', () => {
         let builder = new ExtratoFinanciamentoBuilder();
         let extrato = builder.Build(12);
         
-        let processor = new FgtsNasParcelas();
+        let regra = new FgtsNasParcelas(global);
 
         for (let i=1;i<=12;i++) {
-            let parcelaAcumulada = processor.ParcelaAcumulada;
-            processor.ProcessarFgts(extrato,i);
-            expect(processor.ParcelaAcumulada).toBeGreaterThan(parcelaAcumulada);
+            let parcelaAcumulada = regra.ParcelaAcumulada;
+            regra.ProcessarFgts(extrato,i);
+            expect(regra.ParcelaAcumulada).toBeGreaterThan(parcelaAcumulada);
         }
     });
 
@@ -134,10 +137,10 @@ describe('fgts-nas-parcelas', () => {
         let builder = new ExtratoFinanciamentoBuilder();
         let extrato = builder.Build(12);
         
-        let processor = new FgtsNasParcelas();
-        processor.ParcelaAcumulada = 6000;
+        let regra = new FgtsNasParcelas(global);
+        regra.ParcelaAcumulada = 6000;
         extrato[1].MontanteFgts = 10000;
-        processor.ProcessarFgts(extrato, 12);
+        regra.ProcessarFgts(extrato, 12);
         
         for (let i=1;i<=12;i++) {
             expect(extrato[i].Parcela.ParcelaDescontada()).toBeLessThan(extrato[i].Parcela.Parcela());
@@ -150,10 +153,10 @@ describe('fgts-nas-parcelas', () => {
         let builder = new ExtratoFinanciamentoBuilder();
         let extrato = builder.Build(12);
         
-        let processor = new FgtsNasParcelas();
-        processor.ParcelaAcumulada = 6000;
+        let regra = new FgtsNasParcelas(global);
+        regra.ParcelaAcumulada = 6000;
         extrato[1].MontanteFgts = 10;
-        processor.ProcessarFgts(extrato, 12);
+        regra.ProcessarFgts(extrato, 12);
 
         for (let i=1;i<=12;i++) {
             expect(extrato[i].Parcela.ParcelaDescontada()).toBe(extrato[i].Parcela.Parcela());
