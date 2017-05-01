@@ -22,4 +22,8 @@ export class Financiamento {
     public Pagar(amortizacao: number) {
         this._saldoDevedor -= amortizacao;
     }
+
+    public Abater(valor: number) {
+        this._saldoDevedor -= valor;
+    }
 }
