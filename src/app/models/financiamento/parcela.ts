@@ -29,7 +29,7 @@ export class Parcela {
     }  
     
     public TaxaAdministrativa(): number{
-        return 10;
+        return this.config.TaxaAdministrativa;
     }
 
     public Amortizacao(saldoCorrigido: number, mesesRestantes: number): number {
@@ -40,7 +40,7 @@ export class Parcela {
     }
 
     public Parcela(): number {
-        return this._amortizacao + this._seguros + this._juros;
+        return this._amortizacao + this._seguros + this._juros + this.TaxaAdministrativa();
     }
 
     public ParcelaDescontada(): number {
@@ -52,8 +52,7 @@ export class Parcela {
     }
 
     private calculaSeguro(saldo: number): void {
-        // this._seguros = (this.config.Seguro.DFI * this.user.valorImovel) + (this.config.Seguro.MIP * saldo);
-        this._seguros = 20;
+        this._seguros = (this.config.Seguro.DFI * this.user.valorImovel) + (this.config.Seguro.MIP * saldo);
     }
 
     public DescontaParcela(taxa: number): void {

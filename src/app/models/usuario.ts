@@ -1,7 +1,7 @@
 import {GlobalConfiguration} from './global-configuration';
 
 export class Usuario {        
-    valorImovel: number;
+    valorImovel: number = 200000;
     disponivel: number = 75000;
     prestacoes: number = 420;
     usaFGTS: boolean = true;

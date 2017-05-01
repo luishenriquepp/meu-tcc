@@ -33,7 +33,7 @@ export class ProcessadorFinanciamento {
         for(let i=0; i<this.user.prestacoes;i++) {
             this.imovel.Depositar();            
             let sc = this.financiamento.SaldoCorrigido();
-            let p = new Parcela(this.config,this.user); //TODO
+            let p = new Parcela(this.config,this.user);
             let amortizacao = p.Amortizacao(sc, this.user.prestacoes-i);
             this.financiamento.Pagar(amortizacao);
             this.salario.Pagar();
