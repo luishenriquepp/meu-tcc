@@ -5,6 +5,6 @@ import {FinanciamentoResultado} from './financiamento-resultado';
 
 describe('FinanciamentoResultado', () => {
   it('should create an instance', () => {
-    expect(new FinanciamentoResultado()).toBeTruthy();
+    expect(new FinanciamentoResultado(null)).toBeTruthy();
   });
 });
