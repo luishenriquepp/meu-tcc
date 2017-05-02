@@ -44,7 +44,7 @@ export class ProcessadorFinanciamento {
             ex.ValorImovel = this.imovel.ValorAcumulado;
 
             if(this.fundoGarantia != null) {
-                let extFgts = this.fundoGarantia.Depositar(400);
+                let extFgts = this.fundoGarantia.Depositar(this.salario.PrestacaoAluguel * this.user.GlobalConfiguration.Fundo);
                 ex.RendimentoFgts = extFgts.Rendimento;
                 ex.DepositoFgts = extFgts.Deposito;
                 ex.MontanteFgts = this.fundoGarantia.ValorAcumulado;
