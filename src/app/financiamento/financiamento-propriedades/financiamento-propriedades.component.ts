@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { FinanciamentoConfig } from '../models/financiamento-config';
-import { FinanciamentoSeguro } from'../models/financiamento-seguro';
-import { SeguradoraSa } from'../models/seguradora-sa';
-import { SeguradoraHdi } from'../models/seguradora-hdi';
+import { FinanciamentoConfig } from '../../models/financiamento-config';
+import { FinanciamentoSeguro } from'../../models/financiamento-seguro';
+import { SeguradoraSa } from'../../models/seguradora-sa';
+import { SeguradoraHdi } from'../../models/seguradora-hdi';
 
 @Component({
   selector: 'app-financiamento-propriedades',

@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FinanciamentoToString } from '../utils/financiamento-to-string';
-import { FinanciamentoService } from '../services/financiamento-services';
+import { FinanciamentoToString } from '../../utils/financiamento-to-string';
+import { FinanciamentoService } from '../../services/financiamento-services';
 
-import { Financiamento } from '../models/financiamento';
+import { Financiamento } from '../../models/financiamento';
 
 @Component({
   selector: 'app-financiamento-save',

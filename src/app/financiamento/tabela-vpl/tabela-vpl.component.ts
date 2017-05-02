@@ -1,18 +1,14 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { Usuario } from '../models/usuario';
-import { Financiamento } from'../models/financiamento';
+import { Usuario } from '../../models/usuario';
+import { Financiamento } from'../../models/financiamento';
 
 @Component({
   selector: 'app-tabela-vpl',
   templateUrl: './tabela-vpl.component.html',
   styleUrls: ['./tabela-vpl.component.css']
 })
-export class TabelaVplComponent implements OnInit{ 
+export class TabelaVplComponent { 
 
   @Input() financiamento: Financiamento;
-
-  ngOnInit() {
-    console.log('TabelaVplComponent');
-  }
 }

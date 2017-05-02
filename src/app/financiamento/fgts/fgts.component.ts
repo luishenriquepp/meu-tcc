@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 
-import { FinanciamentoFgtsConfig } from '../models/financiamento-fgts-config';
-import { Usuario } from '../models/usuario';
-import {Posterior} from '../models/financiamento-fgts-config';
+import { FinanciamentoFgtsConfig } from '../../models/financiamento-fgts-config';
+import { Usuario } from '../../models/usuario';
+import {Posterior} from '../../models/financiamento-fgts-config';
 
 @Component({
   selector: 'app-fgts',

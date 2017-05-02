@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output, Input, OnInit } from '@angular/core';
 
-import { Usuario } from '../models/usuario';
+import { Usuario } from '../../models/usuario';
 import {IMyOptions,IMyInputFieldChanged} from 'mydatepicker';
 
 @Component({
