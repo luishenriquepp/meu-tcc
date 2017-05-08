@@ -4,6 +4,7 @@ import {ExtratoFinanciamentoBuilder} from '../builders/extrato-financiamento-bui
 import {FgtsNoSaldoDevedor} from './fgts-no-saldo-devedor';
 import {Investimento} from '../aluguel/aluguel';
 import {Financiamento} from './financiamento';
+import {FgtsDependency} from './fgts-dependency';
 
 describe('fgts no saldo devedor', () => {
 
@@ -40,9 +41,10 @@ describe('fgts no saldo devedor', () => {
         extrato[13].MontanteFgts = 5000;
         extrato[13].SaldoAtual = 20000;
         let fundo = new Investimento(5000);
+        let dependency = new FgtsDependency(extrato, financiamento, fundo)
 
         let regra = new FgtsNoSaldoDevedor(config.FGTSConfig);
-        regra.ProcessarFgts(extrato, 13, fundo, financiamento);
+        regra.Process(dependency, 13);
 
         expect(fundo.ValorAcumulado).toBe(0);
     });
@@ -54,9 +56,10 @@ describe('fgts no saldo devedor', () => {
         extrato[13].MontanteFgts = 5500;
         extrato[13].SaldoAtual = 5000;
         let fundo = new Investimento(5500);
+        let dependency = new FgtsDependency(extrato, financiamento, fundo)
 
         let regra = new FgtsNoSaldoDevedor(config.FGTSConfig);
-        regra.ProcessarFgts(extrato, 13, fundo, financiamento);
+        regra.Process(dependency, 13);
 
         expect(fundo.ValorAcumulado).toBe(500);
     });
@@ -67,9 +70,10 @@ describe('fgts no saldo devedor', () => {
         let extrato = builder.Build(13);
         extrato[13].MontanteFgts = 5500;
         let fundo = new Investimento(5500);
+        let dependency = new FgtsDependency(extrato, financiamento, fundo)
 
         let regra = new FgtsNoSaldoDevedor(config.FGTSConfig);
-        regra.ProcessarFgts(extrato, 13, fundo, financiamento);
+        regra.Process(dependency, 13);
 
         expect(regra.Anualidade).toBe(3);
     });
@@ -80,11 +84,12 @@ describe('fgts no saldo devedor', () => {
         let extrato = builder.Build(13);
         extrato[13].MontanteFgts = 5500;
         let fundo = new Investimento(5500);
+        let dependency = new FgtsDependency(extrato, financiamento, fundo)
 
         spyOn(fundo, 'Sacar');
 
         let regra = new FgtsNoSaldoDevedor(config.FGTSConfig);
-        regra.ProcessarFgts(extrato, 13, fundo, financiamento);
+        regra.Process(dependency, 13);
 
         expect(fundo.Sacar).toHaveBeenCalled();
     });
@@ -95,11 +100,12 @@ describe('fgts no saldo devedor', () => {
         let extrato = builder.Build(13);
         extrato[13].MontanteFgts = 5500;
         let fundo = new Investimento(5500);
+        let dependency = new FgtsDependency(extrato, financiamento, fundo)
 
         spyOn(financiamento, 'Abater');
 
         let regra = new FgtsNoSaldoDevedor(config.FGTSConfig);
-        regra.ProcessarFgts(extrato, 13, fundo, financiamento);
+        regra.Process(dependency, 13);
 
         expect(financiamento.Abater).toHaveBeenCalled();
     });
@@ -111,9 +117,10 @@ describe('fgts no saldo devedor', () => {
         extrato[13].MontanteFgts = 5500;
         extrato[13].SaldoAtual = 10000;
         let fundo = new Investimento(5500);
+        let dependency = new FgtsDependency(extrato, financiamento, fundo)
 
         let regra = new FgtsNoSaldoDevedor(config.FGTSConfig);
-        regra.ProcessarFgts(extrato, 13, fundo, financiamento);
+        regra.Process(dependency, 13);
         
         expect(extrato[13].Resgate).toBe(5500);
         expect(extrato[13].SaldoAtual).toBe(4500);
@@ -127,13 +134,14 @@ describe('fgts no saldo devedor', () => {
         extrato[13].MontanteFgts = 5500;
         extrato[13].SaldoAtual = 10000;
         let fundo = new Investimento(5500);
+        let dependency = new FgtsDependency(extrato, financiamento, fundo)
 
         spyOn(fundo, 'Sacar');
 
         let regra = new FgtsNoSaldoDevedor(config.FGTSConfig);
         
         for(let i=1;i<=13;i++) {
-            regra.ProcessarFgts(extrato, i, fundo, financiamento);
+            regra.Process(dependency, i);
         }
         
         expect(fundo.Sacar).toHaveBeenCalledTimes(1);

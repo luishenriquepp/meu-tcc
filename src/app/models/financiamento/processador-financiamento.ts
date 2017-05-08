@@ -1,19 +1,20 @@
 import {Investimento,Aluguel} from '../aluguel/aluguel';
 import {Usuario} from '../usuario';
-import {GlobalConfiguration} from '../global-configuration';
 import {FinanciamentoConfig} from '../financiamento-config';
-import {FgtsNasParcelas} from './fgts-nas-parcelas'
 import {Financiamento} from './financiamento';
 import {ExtratoFinanciamento} from './extrato-financiamento';
 import {Parcela} from './parcela';
+import {IProcessFgts} from './i-process-fgts';
+import {FgtsDependency} from './fgts-dependency';
 
 export class ProcessadorFinanciamento {
-    private financiamento: Financiamento;
-    private imovel: Investimento;
-    private fundoGarantia: Investimento;
-    private salario: Aluguel;
+    private readonly financiamento: Financiamento;
+    private readonly imovel: Investimento;
+    private readonly fundoGarantia: Investimento;
+    private readonly salario: Aluguel;
     private readonly user: Usuario;
     private readonly config: FinanciamentoConfig;
+    private fgtsProcessor: IProcessFgts;
     public Extrato: Array<ExtratoFinanciamento> = new Array<ExtratoFinanciamento>();
 
     constructor(user: Usuario, config: FinanciamentoConfig) {
@@ -21,12 +22,12 @@ export class ProcessadorFinanciamento {
         this.config = config;
     }
 
+    public set Processor(processor: IProcessFgts) {
+        this.fgtsProcessor = processor;
+    }    
+
     public Processar(): void {
-        this.financiamento = new Financiamento(4000, this.user.GlobalConfiguration.RentabilidadeLiquidaMensal());
-        this.imovel = new Investimento(20000, this.user.GlobalConfiguration.Imovel);
-        this.fundoGarantia = new Investimento(5000, this.user.GlobalConfiguration.Fundo);
-        this.salario = new Aluguel(4000, this.user.crescimentoSalarial);
-        let processador = new FgtsNasParcelas();
+        let dependency = new FgtsDependency(this.Extrato, this.financiamento, this.fundoGarantia);
 
         this.initialize();
 
@@ -49,7 +50,7 @@ export class ProcessadorFinanciamento {
                 ex.DepositoFgts = extFgts.Deposito;
                 ex.MontanteFgts = this.fundoGarantia.ValorAcumulado;
 
-                processador.ProcessarFgts(this.Extrato, i, this.fundoGarantia);
+                this.fgtsProcessor.Process(dependency, i);
             }
         }
     }

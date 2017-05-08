@@ -1,9 +1,8 @@
-import {ExtratoFinanciamento} from './extrato-financiamento';
-import {Financiamento} from './financiamento';
-import {Investimento} from '../aluguel/aluguel';
 import {FinanciamentoFgtsConfig} from '../financiamento-fgts-config';
+import {IProcessFgts} from './i-process-fgts';
+import {FgtsDependency} from './fgts-dependency';
 
-export class FgtsNoSaldoDevedor {
+export class FgtsNoSaldoDevedor implements IProcessFgts {
 
     private anualidade: number;
     public get Anualidade(): number {
@@ -18,20 +17,20 @@ export class FgtsNoSaldoDevedor {
         }
     }
     
-    public ProcessarFgts(extrato: Array<ExtratoFinanciamento>, mes: number, fundo: Investimento, financiamento: Financiamento): void {
+    public Process(dependency: FgtsDependency, mes: number): void {
                              
         if(mes > 1 && (mes-1) % (this.anualidade * 12) == 0) {
-            let valorResgatado = extrato[mes].MontanteFgts;
+            let valorResgatado = dependency.Extrato[mes].MontanteFgts;
             
-            if(extrato[mes].MontanteFgts > extrato[mes].SaldoAtual) {
-                valorResgatado = extrato[mes].SaldoAtual;
+            if(dependency.Extrato[mes].MontanteFgts > dependency.Extrato[mes].SaldoAtual) {
+                valorResgatado = dependency.Extrato[mes].SaldoAtual;
             }
-            fundo.Sacar(valorResgatado);
-            financiamento.Abater(valorResgatado);
+            dependency.Fundo.Sacar(valorResgatado);
+            dependency.Financiamento.Abater(valorResgatado);
             
-            extrato[mes].Resgate = valorResgatado;
-            extrato[mes].SaldoAtual -= valorResgatado;
-            extrato[mes].MontanteFgts -= valorResgatado;
+            dependency.Extrato[mes].Resgate = valorResgatado;
+            dependency.Extrato[mes].SaldoAtual -= valorResgatado;
+            dependency.Extrato[mes].MontanteFgts -= valorResgatado;
             this.anualidade += 2;
         }
     }

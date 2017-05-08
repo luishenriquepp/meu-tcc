@@ -1,8 +1,7 @@
-import {ExtratoFinanciamento} from './extrato-financiamento';
-import {Investimento} from '../aluguel/aluguel';
+import {IProcessFgts} from './i-process-fgts';
+import {FgtsDependency} from './fgts-dependency';
 
-
-export class FgtsNasParcelas {
+export class FgtsNasParcelas implements IProcessFgts {
       
     private _parcelaAcumulada : number = 0;
     public get ParcelaAcumulada() : number {
@@ -12,33 +11,32 @@ export class FgtsNasParcelas {
         this._parcelaAcumulada = v;
     }
         
-    public ProcessarFgts(extrato: Array<ExtratoFinanciamento>, mes: number, fundo: Investimento): void {
+    public Process(dependency: FgtsDependency, mes: number): void {
 
-        this._parcelaAcumulada += extrato[mes].Parcela.Parcela();
+        this._parcelaAcumulada += dependency.Extrato[mes].Parcela.Parcela();
         if(mes % 12 == 0) { 
             let taxa: number;
-            if(extrato[mes-11].MontanteFgts >= this._parcelaAcumulada*0.8) {
+            if(dependency.Extrato[mes-11].MontanteFgts >= this._parcelaAcumulada*0.8) {
                 taxa = 0.8;
-            } else if(extrato[mes-11].MontanteFgts >= this._parcelaAcumulada*0.005){
-                taxa = extrato[mes-11].MontanteFgts/this._parcelaAcumulada;
+            } else if(dependency.Extrato[mes-11].MontanteFgts >= this._parcelaAcumulada*0.005){
+                taxa = dependency.Extrato[mes-11].MontanteFgts/this._parcelaAcumulada;
             } else {
                 return;
             }
             
             const valorResgatado = this._parcelaAcumulada * taxa;
 
-            extrato[mes-11].Resgate = valorResgatado;
-            extrato[mes-11].MontanteFgts -= valorResgatado;
-            extrato[mes-11].Parcela.DescontaParcela(taxa);
+            dependency.Extrato[mes-11].Resgate = valorResgatado;
+            dependency.Extrato[mes-11].MontanteFgts -= valorResgatado;
+            dependency.Extrato[mes-11].Parcela.DescontaParcela(taxa);
             
-            fundo.Sacar(valorResgatado);
+            dependency.Fundo.Sacar(valorResgatado);
             
             for(let i=10; i>=0; i--) {
-                let ex = fundo.Depositar(extrato[1].DepositoFgts);
-                extrato[mes-i].RendimentoFgts = ex.Rendimento;
-                extrato[mes-i].MontanteFgts = fundo.ValorAcumulado;
-                extrato[mes-i].Parcela.DescontaParcela(taxa);
-                console.log(fundo.ValorAcumulado);
+                let ex = dependency.Fundo.Depositar(dependency.Extrato[1].DepositoFgts);
+                dependency.Extrato[mes-i].RendimentoFgts = ex.Rendimento;
+                dependency.Extrato[mes-i].MontanteFgts = dependency.Fundo.ValorAcumulado;
+                dependency.Extrato[mes-i].Parcela.DescontaParcela(taxa);
             }
             this._parcelaAcumulada = 0;
         }
