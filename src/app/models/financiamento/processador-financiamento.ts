@@ -17,13 +17,20 @@ export class ProcessadorFinanciamento {
     private fgtsProcessor: IProcessFgts;
     public Extrato: Array<ExtratoFinanciamento> = new Array<ExtratoFinanciamento>();
 
-    constructor(user: Usuario, config: FinanciamentoConfig) {
+    constructor(financiamento: Financiamento, imovel: Investimento, salario: Aluguel, user: Usuario, config: FinanciamentoConfig, fundo: Investimento = null) {
+        this.financiamento = financiamento;
+        this.imovel = imovel;
+        this.salario = salario;
         this.user = user;
         this.config = config;
+        this.fundoGarantia = fundo;
     }
 
     public set Processor(processor: IProcessFgts) {
         this.fgtsProcessor = processor;
+    } 
+    public get Processor() {
+        return this.fgtsProcessor;
     }    
 
     public Processar(): void {
@@ -32,7 +39,7 @@ export class ProcessadorFinanciamento {
         this.initialize();
 
         for(let i=0; i<this.user.prestacoes;i++) {
-            this.imovel.Depositar();            
+            this.imovel.Depositar();         
             let sc = this.financiamento.SaldoCorrigido();
             let p = new Parcela(this.config,this.user);
             let amortizacao = p.Amortizacao(sc, this.user.prestacoes-i);
@@ -44,21 +51,30 @@ export class ProcessadorFinanciamento {
             ex.Parcela = p;
             ex.ValorImovel = this.imovel.ValorAcumulado;
 
-            if(this.fundoGarantia != null) {
+            if(this.user.usaFGTS) {
+                console.log(this.fundoGarantia);
                 let extFgts = this.fundoGarantia.Depositar(this.salario.PrestacaoAluguel * this.user.GlobalConfiguration.Fundo);
+                console.log(extFgts);
                 ex.RendimentoFgts = extFgts.Rendimento;
                 ex.DepositoFgts = extFgts.Deposito;
                 ex.MontanteFgts = this.fundoGarantia.ValorAcumulado;
 
                 this.fgtsProcessor.Process(dependency, i);
             }
+            this.Extrato.push(ex);
         }
     }
 
     private initialize(): void {
         let ex = new ExtratoFinanciamento();
         ex.ValorImovel = this.user.valorImovel;
-        ex.SaldoAtual = this.user.valorImovel - this.user.disponivel - this.user.FGTS;
+        ex.SaldoAtual = this.user.valorImovel - this.user.disponivel;
+        
+        if(this.user.usaFGTS && this.config.FGTSConfig.Entrada) {
+            ex.SaldoAtual -= this.user.FGTS
+            this.fundoGarantia.Sacar(this.user.FGTS);
+        };
+
         this.Extrato.push(ex);
     }
 }
