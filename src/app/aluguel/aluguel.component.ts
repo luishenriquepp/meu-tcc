@@ -1,6 +1,6 @@
 import {Component,OnInit} from '@angular/core';
 import {ExtratoAluguel} from '../models/aluguel/aluguel';
-import {Financiamento} from '../models/financiamento';
+import {Financiamento} from '../models/financiamento-old/financiamento';
 import {FinanciamentoService} from '../services/financiamento-services';
 import {IIdentifier} from '../models/i-identifier';
 import {Comparador,Investimento,Aluguel} from '../models/aluguel/aluguel';

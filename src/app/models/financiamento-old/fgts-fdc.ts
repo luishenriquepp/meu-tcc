@@ -1,5 +1,5 @@
-import { Usuario } from './usuario';
-import { FinanciamentoConfig } from'../models/financiamento-config';
+import { Usuario } from '../usuario';
+import { FinanciamentoConfig } from'../financiamento-config';
 
 export class FgtsFdc {
     private _saldo: number = 0;

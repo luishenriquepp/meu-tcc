@@ -1,8 +1,8 @@
-import { Financiamento } from '../models/financiamento';
-import { FinanciamentoComFgtsNasParcelas } from '../models/financiamento-com-fgts-nas-parcelas';
-import { FinanciamentoComFgtsNoSaldoDevedor } from '../models/financiamento-com-fgts-no-saldo-devedor';
-import { FinanciamentoComFgtsNaoUsarMais } from '../models/financiamento-com-fgts-nao-usar-mais';
-import { FinanciamentoSemFgts } from '../models/financiamento-sem-fgts';
+import { Financiamento } from '../models/financiamento-old/financiamento';
+import { FinanciamentoComFgtsNasParcelas } from '../models/financiamento-old/financiamento-com-fgts-nas-parcelas';
+import { FinanciamentoComFgtsNoSaldoDevedor } from '../models/financiamento-old/financiamento-com-fgts-no-saldo-devedor';
+import { FinanciamentoComFgtsNaoUsarMais } from '../models/financiamento-old/financiamento-com-fgts-nao-usar-mais';
+import { FinanciamentoSemFgts } from '../models/financiamento-old/financiamento-sem-fgts';
 import { Usuario } from '../models/usuario';
 import { FinanciamentoConfig } from '../models/financiamento-config';
 

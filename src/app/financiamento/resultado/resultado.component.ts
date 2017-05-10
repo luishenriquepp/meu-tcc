@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges } from '@angular/core';
 
 import { Usuario } from '../../models/usuario';
-import { Financiamento } from'../../models/financiamento';
+import { Financiamento } from'../../models/financiamento-old/financiamento';
 
 @Component({
   selector: 'app-resultado',

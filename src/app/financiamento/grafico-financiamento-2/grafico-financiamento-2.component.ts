@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 
-import { Financiamento } from '../../models/financiamento';
-import { FinanciamentoFdc } from '../../models/financiamento-fdc';
+import { Financiamento } from '../../models/financiamento-old/financiamento';
+import { FinanciamentoFdc } from '../../models/financiamento-old/financiamento-fdc';
 
 declare var cfx;
 

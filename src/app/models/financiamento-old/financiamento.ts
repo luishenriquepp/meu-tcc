@@ -1,9 +1,9 @@
-import { Usuario } from './usuario';
-import { FinanciamentoConfig } from'../models/financiamento-config';
+import { Usuario } from '../usuario';
+import { FinanciamentoConfig } from'../financiamento-config';
 import { FinanciamentoFdc } from './financiamento-fdc';
 import { FinanciamentoResultado } from './financiamento-resultado';
 import { FgtsFdc } from './fgts-fdc';
-import { IIdentifier } from './i-identifier';
+import { IIdentifier } from '../i-identifier';
 
 export abstract class Financiamento implements IIdentifier {
     Id: number;

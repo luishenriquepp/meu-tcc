@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { Financiamento } from'../../models/financiamento';
+import { Financiamento } from'../../models/financiamento-old/financiamento';
 
 @Component({
   selector: 'app-extrato-fgts',

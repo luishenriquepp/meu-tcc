@@ -1,11 +1,11 @@
 import { Usuario } from '../usuario';
 import { FinanciamentoConfig } from '../financiamento-config';
-import { Financiamento } from '../financiamento';
+import { Financiamento } from '../financiamento-old/financiamento';
 import { FinanciamentoFgtsConfig } from '../financiamento-fgts-config';
 import { FinanciamentoSeguro } from '../financiamento-seguro';
 import { SeguradoraHdi } from '../seguradora-hdi';
-import { FinanciamentoSemFgts } from '../financiamento-sem-fgts';
-import { FinanciamentoFdc } from '../financiamento-fdc';
+import { FinanciamentoSemFgts } from '../financiamento-old/financiamento-sem-fgts';
+import { FinanciamentoFdc } from '../financiamento-old/financiamento-fdc';
 import {FinanciamentoFactory} from '../../utils/financiamento-factory';
 import {UsuarioBuilder} from './usuario-builder';
 import {GlobalConfiguration} from '../global-configuration';

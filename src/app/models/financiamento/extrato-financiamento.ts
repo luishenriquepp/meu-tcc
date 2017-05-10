@@ -68,8 +68,16 @@ export  class ExtratoFinanciamento {
     public set MontanteFgts(v: number) {
         this._montanteFgts = v;
     }
+
+    private _saldo: number = 0;
+    public get Saldo() : number {
+        return this._saldo;
+    }
+    public set Saldo(v: number) {
+        this._saldo = v;
+    }
         
-    public get PatrimonioTotal(): number {
+    public PatrimonioTotal(): number {
         return this.Patrimonio() + this._montanteFgts;
     }
 }

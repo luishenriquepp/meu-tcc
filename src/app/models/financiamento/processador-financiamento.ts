@@ -1,6 +1,7 @@
 import {Investimento,Aluguel} from '../aluguel/aluguel';
 import {Usuario} from '../usuario';
 import {FinanciamentoConfig} from '../financiamento-config';
+import {FinanciamentoFgtsConfig} from '../financiamento-fgts-config';
 import {Financiamento} from './financiamento';
 import {ExtratoFinanciamento} from './extrato-financiamento';
 import {Parcela} from './parcela';
@@ -38,17 +39,21 @@ export class ProcessadorFinanciamento {
 
         this.initialize();
 
-        for(let i=0; i<this.user.prestacoes;i++) {
-            this.imovel.Depositar();         
-            let sc = this.financiamento.SaldoCorrigido();
-            let p = new Parcela(this.config,this.user);
-            let amortizacao = p.Amortizacao(sc, this.user.prestacoes-i);
+        for(let i=1; i<this.user.prestacoes;i++) {
+            let ex = new ExtratoFinanciamento();
+            this.Extrato.push(ex);            
+            this.imovel.Depositar();           
+            ex.Saldo = this.financiamento.SaldoDevedor;
+            this.financiamento.Corrigir();
+
+            let parcela = new Parcela(this.config,this.user);
+            let amortizacao = parcela.Amortizar(this.financiamento.SaldoDevedor, this.user.prestacoes-i);
             this.financiamento.Pagar(amortizacao);
             this.salario.Pagar();
-
-            let ex = new ExtratoFinanciamento();
-            ex.SaldoAtual = sc - amortizacao;
-            ex.Parcela = p;
+            
+            ex.CorrecaoTaxaReferencial = this.financiamento.CorrecaoTaxaReferencial;
+            ex.SaldoAtual = ex.Saldo + this.financiamento.CorrecaoTaxaReferencial - amortizacao;
+            ex.Parcela = parcela;
             ex.ValorImovel = this.imovel.ValorAcumulado;
 
             if(this.user.usaFGTS) {
@@ -59,18 +64,26 @@ export class ProcessadorFinanciamento {
 
                 this.fgtsProcessor.Process(dependency, i);
             }
-            this.Extrato.push(ex);
         }
     }
 
     private initialize(): void {
         let ex = new ExtratoFinanciamento();
+        ex.Parcela = new Parcela(this.config, this.user);
         ex.ValorImovel = this.user.valorImovel;
         ex.SaldoAtual = this.user.valorImovel - this.user.disponivel;
+        ex.Saldo = this.user.valorImovel;
+        this.financiamento.Abater(this.user.disponivel);
         
-        if(this.user.usaFGTS && this.config.FGTSConfig.Entrada) {
-            ex.SaldoAtual -= this.user.FGTS
-            this.fundoGarantia.Sacar(this.user.FGTS);
+        if(this.user.usaFGTS) {            
+            const valorAbatido = this.fundoGarantia.ValorAcumulado;
+            ex.MontanteFgts = valorAbatido;
+            if(this.config.FGTSConfig.Entrada) {
+                this.financiamento.Abater(valorAbatido);
+                this.fundoGarantia.Sacar(valorAbatido);
+                ex.Resgate = valorAbatido;
+                ex.SaldoAtual -= valorAbatido;
+            }
         };
 
         this.Extrato.push(ex);

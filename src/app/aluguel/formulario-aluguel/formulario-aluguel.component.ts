@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 
-import {Financiamento} from '../../models/financiamento';
+import {Financiamento} from '../../models/financiamento-old/financiamento';
 import {FinanciamentoService} from '../../services/financiamento-services';
 import {IIdentifier} from '../../models/i-identifier';
 

@@ -2,10 +2,10 @@
 
 import { async, inject } from '@angular/core/testing';
 import { FinanciamentoFdc } from './financiamento-fdc';
-import { Usuario } from './usuario';
-import { FinanciamentoConfig } from './financiamento-config';
-import { FinanciamentoFgtsConfig } from'./financiamento-fgts-config';
-import {GlobalConfiguration} from './global-configuration';
+import { Usuario } from '../usuario';
+import { FinanciamentoConfig } from '../financiamento-config';
+import { FinanciamentoFgtsConfig } from'../financiamento-fgts-config';
+import {GlobalConfiguration} from '../global-configuration';
 
 describe('FinanciamentoFdc', () => {
   it('should create an instance', () => {

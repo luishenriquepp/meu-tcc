@@ -11,15 +11,15 @@ export class FgtsNoSaldoDevedor implements IProcessFgts {
     
     constructor(fgtsConfig: FinanciamentoFgtsConfig) {
         if(fgtsConfig.Entrada) {
-            this.anualidade = 2;
+            this.anualidade = 25;
         } else {
-            this.anualidade = 1;
+            this.anualidade = 13;
         }
     }
     
     public Process(dependency: FgtsDependency, mes: number): void {
                              
-        if(mes > 1 && (mes-1) % (this.anualidade * 12) == 0) {
+        if(mes % this.anualidade == 0) {
             let valorResgatado = dependency.Extrato[mes].MontanteFgts;
             
             if(dependency.Extrato[mes].MontanteFgts > dependency.Extrato[mes].SaldoAtual) {
@@ -31,7 +31,7 @@ export class FgtsNoSaldoDevedor implements IProcessFgts {
             dependency.Extrato[mes].Resgate = valorResgatado;
             dependency.Extrato[mes].SaldoAtual -= valorResgatado;
             dependency.Extrato[mes].MontanteFgts -= valorResgatado;
-            this.anualidade += 2;
+            this.anualidade += 24;
         }
     }
 }

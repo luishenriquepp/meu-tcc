@@ -1,7 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-
-import { Usuario } from '../../models/usuario';
-import { Financiamento } from'../../models/financiamento';
+import {ExtratoFinanciamento} from '../../models/financiamento/extrato-financiamento';
 
 @Component({
   selector: 'app-tabela-vpl',
@@ -10,5 +8,5 @@ import { Financiamento } from'../../models/financiamento';
 })
 export class TabelaVplComponent { 
 
-  @Input() financiamento: Financiamento;
+  @Input() extrato: Array<ExtratoFinanciamento>;
 }

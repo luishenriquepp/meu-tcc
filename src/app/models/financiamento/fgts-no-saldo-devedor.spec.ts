@@ -113,7 +113,7 @@ describe('fgts no saldo devedor', () => {
     it('deve alterar o extrato', () => {
         let config = configBuilder.Build(user);
         config.FGTSConfig.Entrada = false;
-        let extrato = builder.Build(13);
+        let extrato = builder.Build(14);
         extrato[13].MontanteFgts = 5500;
         extrato[13].SaldoAtual = 10000;
         let fundo = new Investimento(5500);
@@ -125,6 +125,7 @@ describe('fgts no saldo devedor', () => {
         expect(extrato[13].Resgate).toBe(5500);
         expect(extrato[13].SaldoAtual).toBe(4500);
         expect(extrato[13].MontanteFgts).toBe(0);
+        expect(extrato[14].SaldoAtual).toBeLessThan(extrato[13].SaldoAtual);
     });
 
     it('nao deve resgatar fora do periodo', () => {

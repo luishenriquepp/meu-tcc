@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Financiamento } from '../models/financiamento';
+import { Financiamento } from '../models/financiamento-old/financiamento';
 import { FinanciamentoRepository } from '../repository/financiamento-repository';
 
 @Injectable()

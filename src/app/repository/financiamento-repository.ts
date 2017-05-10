@@ -1,4 +1,4 @@
-import {Financiamento} from '../models/financiamento';
+import {Financiamento} from '../models/financiamento-old/financiamento';
 import {FinanciamentoBuilder} from '../models/builders/financiamento-builder';
 
 export class FinanciamentoRepository {

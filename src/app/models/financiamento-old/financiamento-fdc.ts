@@ -1,5 +1,5 @@
-import { FinanciamentoConfig } from './financiamento-config';
-import { Usuario } from './usuario';
+import { FinanciamentoConfig } from '../financiamento-config';
+import { Usuario } from '../usuario';
 
 export class FinanciamentoFdc {    
     constructor(config: FinanciamentoConfig) {

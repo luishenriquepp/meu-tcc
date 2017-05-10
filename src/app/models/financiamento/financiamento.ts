@@ -6,17 +6,25 @@ import {FgtsNasParcelas} from './fgts-nas-parcelas';
 
 export class Financiamento {
     private readonly _taxaReferencial: number;        
-    private _saldoDevedor : number;
+    
+    private _saldoDevedor: number;
+    public get SaldoDevedor(): number {
+        return this._saldoDevedor;
+    }
+    
     private _correcaoTaxaReferencial : number;
+    public get CorrecaoTaxaReferencial(): number {
+        return this._correcaoTaxaReferencial;
+    }
     
     constructor(saldoDevedorInicial: number, taxaReferencial: number) {
         this._saldoDevedor = saldoDevedorInicial;
         this._taxaReferencial = taxaReferencial;
     }
     
-    public SaldoCorrigido(): number {
+    public Corrigir(): void {
         this._correcaoTaxaReferencial = this._saldoDevedor * this._taxaReferencial;
-        return this._saldoDevedor + this._correcaoTaxaReferencial;
+        this._saldoDevedor += this._correcaoTaxaReferencial;
     }
 
     public Pagar(amortizacao: number) {

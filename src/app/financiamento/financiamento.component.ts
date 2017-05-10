@@ -4,14 +4,14 @@ import { Usuario } from '../models/usuario';
 import { FinanciamentoConfig } from'../models/financiamento-config';
 import { FinanciamentoFgtsConfig } from '../models/financiamento-fgts-config';
 import {ConfigurationService} from '../services/configuration-service';
-
-import {ProcessadorFinanciamento} from '../models/financiamento/processador-financiamento';;
+import {FinanciamentoProcessorService} from '../services/financiamento-processor-service';
+import {ExtratoFinanciamento} from '../models/financiamento/extrato-financiamento';
 
 @Component({
   selector: 'app-financiamento',
   templateUrl: './financiamento.component.html',
   styleUrls: ['./financiamento.component.css'],
-  providers: [ConfigurationService]
+  providers: [ConfigurationService, FinanciamentoProcessorService]
 })
 export class FinanciamentoComponent {
   
@@ -24,9 +24,10 @@ export class FinanciamentoComponent {
   calculado: boolean;
   fgts: boolean;
   saveScreen: boolean;
-  private processador: ProcessadorFinanciamento;
 
-  constructor(private configurationService: ConfigurationService) {
+  private extrato: Array<ExtratoFinanciamento> = [];
+
+  constructor(private configurationService: ConfigurationService, private processorService: FinanciamentoProcessorService) {
     this.usuario = new Usuario();
     this.fgtsConfig = new FinanciamentoFgtsConfig();
     this.financiamentoConfig = new FinanciamentoConfig(this.fgtsConfig);
@@ -36,7 +37,6 @@ export class FinanciamentoComponent {
     this.calculado = false;
     this.fgts = false;
     this.saveScreen = false;
-    this.globalConfiguration = this.configurationService.Busca();
   }
   onCalcular(user: Usuario) {
     this.fgts = false;
@@ -46,6 +46,8 @@ export class FinanciamentoComponent {
     user.crescimentoSalarial = this.usuario.crescimentoSalarial;
     this.usuario = user;
       
+    this.extrato = this.processorService.Process(this.usuario,this.financiamentoConfig);
+
     this.calculado = true;
     this.resultado = true;
   }

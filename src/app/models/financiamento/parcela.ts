@@ -2,7 +2,6 @@ import {Usuario} from '../usuario';
 import {FinanciamentoConfig} from '../financiamento-config';
 
 export class Parcela {
-    private _amortizacao: number = 0;       ;
     private _desconto: number = 0;
     private readonly config: FinanciamentoConfig;
     private readonly user: Usuario;
@@ -10,6 +9,11 @@ export class Parcela {
     constructor(config: FinanciamentoConfig, user: Usuario) {
         this.config = config;
         this.user = user;
+    }
+
+    private _amortizacao: number = 0;
+    public get Amortizacao(): number {
+        return this._amortizacao;
     }
         
     private _juros : number = 0;
@@ -29,10 +33,10 @@ export class Parcela {
     }  
     
     public TaxaAdministrativa(): number{
-        return this.config.TaxaAdministrativa;
+        return this.config.TaxaAdministrativa | 20;
     }
 
-    public Amortizacao(saldoCorrigido: number, mesesRestantes: number): number {
+    public Amortizar(saldoCorrigido: number, mesesRestantes: number): number {
         this._amortizacao = (saldoCorrigido)/(mesesRestantes);
         this.calculaSeguro(saldoCorrigido);
         this.calculaJuros(saldoCorrigido);
@@ -52,7 +56,8 @@ export class Parcela {
     }
 
     private calculaSeguro(saldo: number): void {
-        this._seguros = (this.config.Seguro.DFI * this.user.valorImovel) + (this.config.Seguro.MIP * saldo);
+        // this._seguros = (this.config.Seguro.DFI * this.user.valorImovel) + (this.config.Seguro.MIP * saldo);
+        this._seguros = 20;
     }
 
     public DescontaParcela(taxa: number): void {

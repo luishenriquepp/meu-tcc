@@ -2,45 +2,46 @@
   <div class="panel-heading">Fluxo de caixa do financiamento</div>
   <div class="panel-body">      
     <div class="table table-responsive">  
-      <table class="table  table-striped table-condensed">
+      <table class="table table-striped table-condensed">
         <thead>
           <tr>
-            <th class="col-1">N</th>
-            <th class="text-right">Saldo Devedor</th>
-            <!--<th class="text-right">Correção TR</th>-->
-            <th class="text-right">Saldo Corrigido</th>
+            <th class="col-1">Mês</th>
+            <th class="text-right">Saldo Inicial</th>
+            <th class="text-right">Correção TR</th>
+            <th class="text-right">Saldo Atual</th>
             <th class="text-right">Amortização</th>
-            <th class="text-right">FGTS</th>
             <th class="text-right">Juros</th>
             <th class="text-right">Seguros</th>
             <th class="text-right">Parcela</th>
-            <!--<th class="text-right">Parcela VP</th>-->
             <th class="text-right">Valor Imovel</th>
             <th class="text-right">Patrimônio</th>
-            <th class="text-right">Variação do Patrimônio</th>
-            <th class="text-right">Variação VP</th>
+            <th class="text-right">Patrimonio Total</th>
+            <th class="text-right">Resgate</th>
+            <th class="text-right">DepositoFgts</th>
+            <th class="text-right">RendimentoFgts</th>
+            <th class="text-right">MontanteFgts</th>  
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let p of financiamento.Prestacoes; let i=index">
+          <tr *ngFor="let ext of extrato; let i=index">
             <td>{{i}}</td>
-            <td class="text-right">{{p.saldoDevedor1 | number:'1.2-2' }}</td> 
-            <!--<td class="text-right">{{p.correcaoTR | number:'1.2-2' }}</td>-->
-            <td class="text-right">{{p.saldoDevedor2 | number:'1.2-2' }}</td>
-            <td class="text-right">{{p.amortizacao | number:'1.2-2' }}</td>
-            <td class="text-right">{{p.fgts | number:'1.2-2' }}</td>
-            <td class="text-right">{{p.juros | number:'1.2-2' }}</td>
-            <td class="text-right">{{p.seguros | number:'1.2-2' }}</td>
-            <td class="text-right">{{p.parcela | number:'1.2-2' }}</td>
-            <!--<td class="text-right">{{p.parcelaVP | number:'1.2-2' }}</td>-->
-            <td class="text-right">{{p.valorImovel | number:'1.2-2' }}</td>
-            <td class="text-right">{{p.patrimonio | number:'1.2-2' }}</td>
-            <td class="text-right">{{p.varPatrimonio | number:'1.2-2' }}</td>
-            <td class="text-right">{{p.vpVariacao | number:'1.2-2' }}</td>
+            <td class="text-right">{{ext.Saldo | number:'1.2-2' }}</td> 
+            <td class="text-right">{{ext.CorrecaoTaxaReferencial | number:'1.2-2' }}</td>
+            <td class="text-right">{{ext.SaldoAtual | number:'1.2-2' }}</td> 
+            <td class="text-right">{{ext.Parcela.Amortizacao | number:'1.2-2' }}</td>
+            <td class="text-right">{{ext.Parcela.Juros | number:'1.2-2' }}</td>
+            <td class="text-right">{{ext.Parcela.Seguros | number:'1.2-2' }}</td>
+            <td class="text-right">{{ext.Parcela.Parcela() | number:'1.2-2' }}</td>
+            <td class="text-right">{{ext.ValorImovel | number:'1.2-2' }}</td>
+            <td class="text-right">{{ext.Patrimonio() | number:'1.2-2' }}</td>
+            <td class="text-right">{{ext.PatrimonioTotal() | number:'1.2-2' }}</td>
+            <td class="text-right">{{ext.Resgate | number:'1.2-2' }}</td>
+            <td class="text-right">{{ext.DepositoFgts | number:'1.2-2' }}</td>
+            <td class="text-right">{{ext.RendimentoFgts | number:'1.2-2' }}</td>
+            <td class="text-right">{{ext.MontanteFgts | number:'1.2-2' }}</td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
 </div>
-

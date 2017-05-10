@@ -1,4 +1,4 @@
-import {Financiamento} from '../models/financiamento';
+import {Financiamento} from '../models/financiamento-old/financiamento';
 import {Posterior} from '../models/financiamento-fgts-config';
 
 export class FinanciamentoToString {

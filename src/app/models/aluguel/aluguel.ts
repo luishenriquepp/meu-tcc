@@ -1,6 +1,6 @@
 import { LogicaTemporal } from '../../utils/logica-temporal';
 import { ValorPresente } from '../../utils/valor-presente';
-import { Financiamento } from '../financiamento';
+import { Financiamento } from '../financiamento-old/financiamento';
 
 export class Comparador {
     private readonly _aluguel: Aluguel;
