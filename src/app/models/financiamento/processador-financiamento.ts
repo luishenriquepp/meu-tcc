@@ -52,9 +52,7 @@ export class ProcessadorFinanciamento {
             ex.ValorImovel = this.imovel.ValorAcumulado;
 
             if(this.user.usaFGTS) {
-                console.log(this.fundoGarantia);
                 let extFgts = this.fundoGarantia.Depositar(this.salario.PrestacaoAluguel * this.user.GlobalConfiguration.Fundo);
-                console.log(extFgts);
                 ex.RendimentoFgts = extFgts.Rendimento;
                 ex.DepositoFgts = extFgts.Deposito;
                 ex.MontanteFgts = this.fundoGarantia.ValorAcumulado;

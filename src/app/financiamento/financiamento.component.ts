@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Usuario } from '../models/usuario';
-import { Financiamento } from'../models/financiamento';
 import { FinanciamentoConfig } from'../models/financiamento-config';
 import { FinanciamentoFgtsConfig } from '../models/financiamento-fgts-config';
-import { FinanciamentoFactory } from '../utils/financiamento-factory';
-import {GlobalConfiguration} from '../models/global-configuration';
 import {ConfigurationService} from '../services/configuration-service';
+
+import {ProcessadorFinanciamento} from '../models/financiamento/processador-financiamento';;
 
 @Component({
   selector: 'app-financiamento',
@@ -17,7 +16,6 @@ import {ConfigurationService} from '../services/configuration-service';
 export class FinanciamentoComponent {
   
   usuario: Usuario;
-  financiamento: Financiamento;
   fgtsConfig: FinanciamentoFgtsConfig;
   financiamentoConfig: FinanciamentoConfig;
   avancado: boolean;
@@ -26,7 +24,7 @@ export class FinanciamentoComponent {
   calculado: boolean;
   fgts: boolean;
   saveScreen: boolean;
-  private globalConfiguration: GlobalConfiguration;
+  private processador: ProcessadorFinanciamento;
 
   constructor(private configurationService: ConfigurationService) {
     this.usuario = new Usuario();
@@ -47,10 +45,7 @@ export class FinanciamentoComponent {
     user.FGTS = this.usuario.FGTS;
     user.crescimentoSalarial = this.usuario.crescimentoSalarial;
     this.usuario = user;
-    this.usuario.GlobalConfiguration = this.globalConfiguration;
-    let factory = new FinanciamentoFactory(this.usuario, this.financiamentoConfig);
-    this.financiamento = factory.Create();
-    this.financiamento.FluxoDeCaixa();
+      
     this.calculado = true;
     this.resultado = true;
   }

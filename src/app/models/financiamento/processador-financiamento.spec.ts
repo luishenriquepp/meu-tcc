@@ -126,20 +126,6 @@ describe('processador financiamento', () => {
         expect(iProcessor.Process).toHaveBeenCalledTimes(12);
     });
 
-    xit('deve chamar o metodo depositar do fundo de garantia se o usuario usar fgts', () => {
-        
-        user.prestacoes = 12;
-        user.usaFGTS = true;
-
-        let processador = new ProcessadorFinanciamento(fin, imovel, salario, user, config, fundo);
-        processador.Processor = new FgtsNoSaldoDevedor(config.FGTSConfig);  
-        spyOn(fundo, 'Depositar');
-
-        processador.Processar();
-
-        expect(fundo.Depositar).toHaveBeenCalledTimes(12);
-    });
-
     it('deve gerar o tamanho do extrato de acordo com as prestacoes do usuario', () => {
         
         user.prestacoes = 12;
@@ -153,7 +139,7 @@ describe('processador financiamento', () => {
         expect(processador.Extrato.length).toBe(13);
     });
 
-    xit('deve preencher os campos do extrato', () => {
+    it('deve preencher os campos do extrato', () => {
         
         user.prestacoes = 2;
         user.usaFGTS = false;
