@@ -30,10 +30,7 @@
         </div>        
         <div class="panel-body">
           <div class="row">
-              <div class="col-lg-12">
-                <app-tabela-vpl [extrato]="extrato"></app-tabela-vpl>
-              </div>           
-            <!--<div *ngIf="avancado">
+            <div *ngIf="avancado">
               <div class="col-lg-4">
                 <app-financiamento-propriedades  
                   [config]="financiamentoConfig">        
@@ -43,33 +40,33 @@
                 <div class="col-lg-4">
                   <app-fgts [usuario]="usuario" [fgtsConfig]="fgtsConfig"></app-fgts>
                 </div>
-            </div>    
+              </div>    
             </div>            
             <div *ngIf="fluxoDeCaixa">
               <div class="col-lg-12">
-                <app-tabela-vpl [financiamento]="financiamento"></app-tabela-vpl>
+                <app-tabela-vpl [extrato]="extrato"></app-tabela-vpl>
               </div>         
             </div>
             <div *ngIf="resultado">
               <div class="col-lg-5">
-                <app-resultado [financiamento]="financiamento"></app-resultado>
+                <!--<app-resultado [financiamento]="financiamento"></app-resultado>-->
               </div>
               <div class="col-lg-7">
                 <div>
-                  <app-grafico-financiamento-2 [financiamento]="financiamento"></app-grafico-financiamento-2>
+                  <!--<app-grafico-financiamento-2 [financiamento]="financiamento"></app-grafico-financiamento-2>-->
                 </div>
               </div>
             </div>
             <div *ngIf="fgts">
               <div class="col-lg-12">
-                <app-extrato-fgts [financiamento]="financiamento"></app-extrato-fgts>
+                <app-extrato-fgts [extrato]="extrato"></app-extrato-fgts>
               </div>
             </div>
             <div *ngIf="saveScreen">
               <div class="col-lg-12">
-                <app-financiamento-save [financiamento]='financiamento'></app-financiamento-save>
+                <!--<app-financiamento-save [financiamento]='financiamento'></app-financiamento-save>-->
               </div>
-            </div>-->
+            </div>
           </div>      
       </div>
     </div>

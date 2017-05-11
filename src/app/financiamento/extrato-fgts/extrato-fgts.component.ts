@@ -1,19 +1,13 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
-import { Financiamento } from'../../models/financiamento-old/financiamento';
+import {ExtratoFinanciamento} from '../../models/financiamento/extrato-financiamento';
 
 @Component({
   selector: 'app-extrato-fgts',
-  templateUrl: './extrato-fgts.component.html',
-  styleUrls: ['./extrato-fgts.component.css']
+  templateUrl: './extrato-fgts.component.html'
 })
-export class ExtratoFgtsComponent implements OnInit {
+export class ExtratoFgtsComponent {
 
-  @Input() financiamento: Financiamento;
+  @Input() extrato: Array<ExtratoFinanciamento>;
   
-  constructor() { }
-
-  ngOnInit() {
-  }
-
 }

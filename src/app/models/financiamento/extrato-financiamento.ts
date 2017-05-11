@@ -80,4 +80,8 @@ export  class ExtratoFinanciamento {
     public PatrimonioTotal(): number {
         return this.Patrimonio() + this._montanteFgts;
     }
+
+    public FgtsSaldoInicial(): number {
+        return this._montanteFgts + this._resgate - this._depositoFgts - this._rendimentoFgts;
+    }
 }

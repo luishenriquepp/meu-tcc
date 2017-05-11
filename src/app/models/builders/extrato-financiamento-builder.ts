@@ -15,7 +15,7 @@ export class ExtratoFinanciamentoBuilder {
         for (let i=1;i<=parcelas;i++) {
             let ex = new ExtratoFinanciamento();
             ex.Parcela = new Parcela(config, user);
-            ex.Parcela.Amortizacao(10000,i);
+            ex.Parcela.Amortizar(10000,i);
             extrato.push(ex);
         }
         return extrato;
