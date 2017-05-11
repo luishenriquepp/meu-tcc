@@ -6,20 +6,18 @@
         <thead>
           <tr>
             <th class="col-1">Mês</th>
-            <th class="text-right">Saldo Inicial</th>
+            <th class="text-right">Dívida Inicial</th>
             <th class="text-right">Correção TR</th>
-            <th class="text-right">Saldo Atual</th>
             <th class="text-right">Amortização</th>
             <th class="text-right">Juros</th>
             <th class="text-right">Seguros</th>
             <th class="text-right">Parcela</th>
+            <th class="text-right">Parcela Descontada</th>
+            <th class="text-right">Resgate FGTS</th>
+            <th class="text-right">Dívida Atualizada</th>
             <th class="text-right">Valor Imovel</th>
             <th class="text-right">Patrimônio</th>
             <th class="text-right">Patrimonio Total</th>
-            <th class="text-right">Resgate</th>
-            <th class="text-right">DepositoFgts</th>
-            <th class="text-right">RendimentoFgts</th>
-            <th class="text-right">MontanteFgts</th>  
           </tr>
         </thead>
         <tbody>
@@ -27,18 +25,16 @@
             <td>{{i}}</td>
             <td class="text-right">{{ext.Saldo | number:'1.2-2' }}</td> 
             <td class="text-right">{{ext.CorrecaoTaxaReferencial | number:'1.2-2' }}</td>
-            <td class="text-right">{{ext.SaldoAtual | number:'1.2-2' }}</td> 
             <td class="text-right">{{ext.Parcela.Amortizacao | number:'1.2-2' }}</td>
             <td class="text-right">{{ext.Parcela.Juros | number:'1.2-2' }}</td>
             <td class="text-right">{{ext.Parcela.Seguros | number:'1.2-2' }}</td>
             <td class="text-right">{{ext.Parcela.Parcela() | number:'1.2-2' }}</td>
+            <td class="text-right">{{ext.Parcela.ParcelaDescontada() | number:'1.2-2' }}</td>
+            <td class="text-right">{{ext.Resgate | number:'1.2-2' }}</td>
+            <td class="text-right">{{ext.SaldoAtual | number:'1.2-2' }}</td> 
             <td class="text-right">{{ext.ValorImovel | number:'1.2-2' }}</td>
             <td class="text-right">{{ext.Patrimonio() | number:'1.2-2' }}</td>
             <td class="text-right">{{ext.PatrimonioTotal() | number:'1.2-2' }}</td>
-            <td class="text-right">{{ext.Resgate | number:'1.2-2' }}</td>
-            <td class="text-right">{{ext.DepositoFgts | number:'1.2-2' }}</td>
-            <td class="text-right">{{ext.RendimentoFgts | number:'1.2-2' }}</td>
-            <td class="text-right">{{ext.MontanteFgts | number:'1.2-2' }}</td>
           </tr>
         </tbody>
       </table>
