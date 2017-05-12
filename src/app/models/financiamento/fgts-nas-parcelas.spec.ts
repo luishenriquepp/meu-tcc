@@ -5,7 +5,7 @@ import {FinanciamentoConfigBuilder} from '../builders/financiamento-config-build
 import {ExtratoFinanciamentoBuilder} from '../builders/extrato-financiamento-builder';
 import {FgtsNasParcelas} from './fgts-nas-parcelas';
 import {GlobalConfiguration} from '.././global-configuration';
-import {Investimento} from '../aluguel/aluguel';
+import {Investimento} from '../aluguel/investimento';
 import {FgtsDependency} from './fgts-dependency';
 
 describe('fgts-nas-parcelas', () => {

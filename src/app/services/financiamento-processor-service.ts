@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import {Financiamento} from '../models/financiamento/financiamento';
 import {ExtratoFinanciamento} from '../models/financiamento/extrato-financiamento';
 import {Aluguel} from '../models/aluguel/aluguel';
-import {Investimento} from '../models/aluguel/aluguel';
+import {Investimento} from '../models/aluguel/investimento';
 import {Usuario} from '../models/usuario';
 import {ProcessadorFinanciamento} from '../models/financiamento/processador-financiamento';
 import {ConfigurationService} from '../services/configuration-service';

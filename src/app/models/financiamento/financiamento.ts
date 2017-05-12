@@ -1,4 +1,5 @@
-import {Investimento,Aluguel} from '../aluguel/aluguel';
+import {Aluguel} from '../aluguel/aluguel';
+import {Investimento} from '../aluguel/investimento';
 import {Usuario} from '../usuario';
 import {GlobalConfiguration} from '../global-configuration';
 import {FinanciamentoConfig} from '../financiamento-config';

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {ExtratoAluguel,Comparador} from '../../models/aluguel/aluguel';
+import {ExtratoAluguel} from '../../models/aluguel/extrato-aluguel';
+import {Comparador} from '../../models/aluguel/comparador';
 
 @Component({
   selector: 'app-aluguel-resultado',

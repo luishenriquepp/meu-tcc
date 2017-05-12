@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {ExtratoAluguel} from '../../models/aluguel/aluguel';
+import {ExtratoAluguel} from '../../models/aluguel/extrato-aluguel';
 declare var cfx;
 
 @Component({

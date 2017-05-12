@@ -1,4 +1,4 @@
-import {Investimento} from '../aluguel/aluguel';
+import {Investimento} from '../aluguel/investimento';
 import {Financiamento} from './financiamento';
 import {ExtratoFinanciamento} from './extrato-financiamento';
 
