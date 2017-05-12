@@ -1,7 +1,6 @@
 import {Parcela} from './parcela';
 import {ProcessadorFinanciamento} from './processador-financiamento';
 import {Usuario} from '../usuario';
-import {FinanciamentoConfigBuilder} from '../builders/financiamento-config-builder';
 import {ExtratoFinanciamentoBuilder} from '../builders/extrato-financiamento-builder';
 import {FgtsNasParcelas} from './fgts-nas-parcelas';
 import {GlobalConfiguration} from '.././global-configuration';

@@ -1,4 +1,4 @@
-import { Investimento } from './aluguel';
+import { Investimento } from './investimento';
 
 describe('investimento', () => {
     
