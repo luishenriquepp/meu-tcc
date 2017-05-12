@@ -1,14 +1,11 @@
-import {Usuario} from '../usuario';
-import {FinanciamentoConfig} from '../financiamento-config';
+import {AdvancedProperties} from './advanced-properties';
 
 export class Parcela {
     private _desconto: number = 0;
-    private readonly config: FinanciamentoConfig;
-    private readonly user: Usuario;
+    private readonly properties: AdvancedProperties;
 
-    constructor(config: FinanciamentoConfig, user: Usuario) {
-        this.config = config;
-        this.user = user;
+    constructor(properties: AdvancedProperties) {
+        this.properties = properties;
     }
 
     private _amortizacao: number = 0;
@@ -33,7 +30,7 @@ export class Parcela {
     }  
     
     public TaxaAdministrativa(): number{
-        return this.config.TaxaAdministrativa | 20;
+        return this.properties.TaxaAdministrativa();
     }
 
     public Amortizar(saldoCorrigido: number, mesesRestantes: number): number {
@@ -52,7 +49,7 @@ export class Parcela {
     }
 
     private calculaJuros(saldo: number): void {
-        this._juros = (this.config.JurosMensais * saldo);
+        this._juros = (this.properties.JurosMensais() * saldo);
     }
 
     private calculaSeguro(saldo: number): void {

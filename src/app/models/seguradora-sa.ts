@@ -1,12 +1,11 @@
 import { ISeguro } from './iseguro';
-import { Dates } from '../utils/dates';
+
 
 export class SeguradoraSa implements ISeguro {
     GetDFI(): number {
         return 0.0000926;
     }
-    GetMIP(nascimento: Date): number {                
-        var idade = new Dates(nascimento).GetIdade();
+    GetMIP(idade: number): number {                
         if(idade <= 30) {
             return 0.0000897;            
         } else if(idade <= 40) {
