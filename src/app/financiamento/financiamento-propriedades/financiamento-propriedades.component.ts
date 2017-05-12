@@ -14,14 +14,14 @@ export class FinanciamentoPropriedadesComponent implements OnInit{
   @Input() config: FinanciamentoConfig;
 
   ngOnInit() {
-    this.config.Seguro = new FinanciamentoSeguro(new SeguradoraSa());
+    // this.config.Seguro = new FinanciamentoSeguro(new SeguradoraSa());
   }
 
   selecionaSeguro(event): void {
       if(event.target.value == "sa") {
-        this.config.Seguro = new FinanciamentoSeguro(new SeguradoraSa());
+        // this.config.Seguro = new FinanciamentoSeguro(new SeguradoraSa());
       } else {
-        this.config.Seguro = new FinanciamentoSeguro(new SeguradoraHdi());
+        // this.config.Seguro = new FinanciamentoSeguro(new SeguradoraHdi());
       }
   }
 }

@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { FinanciamentoFgtsConfig } from '../../models/financiamento-fgts-config';
-import { Usuario } from '../../models/usuario';
+import {FinanciamentoFgtsConfig} from '../../models/financiamento-fgts-config';
 import {Posterior} from '../../models/financiamento-fgts-config';
 
 @Component({
@@ -12,7 +11,6 @@ import {Posterior} from '../../models/financiamento-fgts-config';
 export class FgtsComponent {
 
   @Input() fgtsConfig: FinanciamentoFgtsConfig;
-  @Input() usuario: Usuario;
 
   onChangePosterior(value: string) {
     if(value == '0') {

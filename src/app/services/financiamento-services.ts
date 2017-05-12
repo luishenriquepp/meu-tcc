@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 
-import { Financiamento } from '../models/financiamento-old/financiamento';
-import { FinanciamentoRepository } from '../repository/financiamento-repository';
+import {FinanciamentoRepository} from '../repository/financiamento-repository';
+import {AdvancedProperties} from '../models/financiamento/advanced-properties';
 
 @Injectable()
 export class FinanciamentoService {
     private repository: FinanciamentoRepository = new FinanciamentoRepository();
 
-    public Busca(id: number): Promise<Financiamento> {
-        let promise: Promise<Financiamento> = new Promise((financiamento) => {
+    public Busca(id: number): Promise<AdvancedProperties> {
+        let promise: Promise<AdvancedProperties> = new Promise((financiamento) => {
             setTimeout(() => {
                 let fin = this.repository.Buscar(id);
                 financiamento(fin);
@@ -17,8 +17,8 @@ export class FinanciamentoService {
         return promise;
     }
 
-    public Adiciona(financiamento: Financiamento): Promise<Financiamento> {
-        let promise: Promise<Financiamento> = new Promise((finan) => {
+    public Adiciona(financiamento: AdvancedProperties): Promise<AdvancedProperties> {
+        let promise: Promise<AdvancedProperties> = new Promise((finan) => {
             setTimeout(() => {
                 this.repository.Adiciona(financiamento);
                 finan(financiamento);
@@ -27,8 +27,8 @@ export class FinanciamentoService {
         return promise;
     }
 
-    public BuscaTodos(): Promise<Financiamento[]> {
-        let promise: Promise<Array<Financiamento>> = new Promise((financiamentos) => {
+    public BuscaTodos(): Promise<AdvancedProperties[]> {
+        let promise: Promise<Array<AdvancedProperties>> = new Promise((financiamentos) => {
             setTimeout(() => {
                 let fin = this.repository.BuscaTodos();
                 financiamentos(fin);

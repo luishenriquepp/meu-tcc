@@ -8,30 +8,41 @@ import {Usuario} from '../models/usuario';
 import {ProcessadorFinanciamento} from '../models/financiamento/processador-financiamento';
 import {ConfigurationService} from '../services/configuration-service';
 import {FinanciamentoConfig} from '../models/financiamento-config';
+import {FinanciamentoSeguro} from '../models/financiamento-seguro';
 import {Posterior} from '../models/financiamento-fgts-config';
 import {FgtsNasParcelas} from '../models/financiamento/fgts-nas-parcelas';
 import {FgtsNoSaldoDevedor} from '../models/financiamento/fgts-no-saldo-devedor';
+import {AdvancedProperties} from '../models/financiamento/advanced-properties';
+import {Seguradora} from '../models/financiamento-config';
+import {SeguradoraHdi} from '../models/seguradora-hdi';
+import {SeguradoraSa} from '../models/seguradora-sa';
 
 @Injectable()
 export class FinanciamentoProcessorService {
 
     constructor(private configuration: ConfigurationService) { }
     
-    public Process(user: Usuario, config: FinanciamentoConfig): Array<ExtratoFinanciamento> {
+    public Process(properties: AdvancedProperties): Array<ExtratoFinanciamento> {
         let global = this.configuration.Busca();
-        user.GlobalConfiguration = global;
+        properties.GlobalConfiguration = global;
 
-        let imovel = new Investimento(user.valorImovel, global.Imovel);
-        let salario = new Aluguel(user.renda, user.crescimentoSalarial);        
-        let fundo = new Investimento(user.FGTS, global.Fundo);
-        let financiamento = new Financiamento(user.valorImovel, global.Referencial);
+        let imovel = new Investimento(properties.ValorImovel(), global.Imovel);
+        let salario = new Aluguel(properties.Renda(), properties.CrescimentoSalarial());        
+        let fundo = new Investimento(properties.Fgts(), global.Fundo);
+        let financiamento = new Financiamento(properties.ValorImovel(), global.Referencial);
         
-        let processador = new ProcessadorFinanciamento(financiamento,imovel,salario,user,config, fundo);
+        let processador = new ProcessadorFinanciamento(financiamento,imovel,salario,properties,fundo);
 
-        if(config.FGTSConfig.Posterior == Posterior.Parcelas) {
+        if(properties.Seguradora() == Seguradora.HDI) {
+            properties.Seguro = new FinanciamentoSeguro(new SeguradoraHdi());
+        } else if (properties.Seguradora() == Seguradora.SULAMERICA) {
+            properties.Seguro = new FinanciamentoSeguro(new SeguradoraSa());
+        }
+        
+        if(properties.Posterior() == Posterior.Parcelas) {
             processador.Processor = new FgtsNasParcelas();
-        } else if (config.FGTSConfig.Posterior == Posterior.SaldoDevedor) {
-            processador.Processor = new FgtsNoSaldoDevedor(config.FGTSConfig);
+        } else if (properties.Posterior() == Posterior.SaldoDevedor) {
+            processador.Processor = new FgtsNoSaldoDevedor(properties.UsaComoEntrada());
         }
 
         processador.Processar();

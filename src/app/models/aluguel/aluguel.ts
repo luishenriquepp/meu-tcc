@@ -1,35 +1,41 @@
 import { LogicaTemporal } from '../../utils/logica-temporal';
 import { ValorPresente } from '../../utils/valor-presente';
-import { Financiamento } from '../financiamento-old/financiamento';
+import { ExtratoFinanciamento } from '../financiamento/extrato-financiamento';
 
 export class Comparador {
     private readonly _aluguel: Aluguel;
     private readonly _investimento: Investimento;
     private readonly _fundoFGTS: Investimento;
     private readonly _finInvestimento: Investimento;
-    private readonly _financiamento: Financiamento;
+    private readonly _extratoFinanciamento: Array<ExtratoFinanciamento>;
     private readonly _salario: Aluguel;
 
     public readonly Gerenciador: GerenciadorDoExtrato = new GerenciadorDoExtrato();
 
-    constructor(investimento: Investimento, aluguel: Aluguel, financiamento: Financiamento, fundoFGTS: Investimento = null) {
-        this._investimento = investimento;
-        this._aluguel = aluguel;
-        this._financiamento = financiamento;
-        this._fundoFGTS = fundoFGTS;
-        this._finInvestimento = new Investimento(0,this._financiamento.Usuario.GlobalConfiguration.RentabilidadeLiquidaMensal());
-        this._salario = new Aluguel(financiamento.Usuario.renda, financiamento.Usuario.crescimentoSalarial);
+    constructor(
+        investimento: Investimento, 
+        aluguel: Aluguel, 
+        extrato: Array<ExtratoFinanciamento>,
+        investimentoFinanciamento: Investimento,
+        salario: Aluguel, 
+        fundoFGTS: Investimento = null) {
+            this._investimento = investimento;
+            this._aluguel = aluguel;
+            this._extratoFinanciamento = extrato;
+            this._fundoFGTS = fundoFGTS;
+            this._finInvestimento = investimentoFinanciamento;
+            this._salario = salario;
     }
         
     public Processar(): void {
         this.inicializar();
-        for(let i=1;i<this._financiamento.Prestacoes.length;i++) {
+        for(let i=1;i<this._extratoFinanciamento.length;i++) {
             
-            let fdc = this._financiamento.Prestacoes[i];
+            let fdc = this._extratoFinanciamento[i];
             this._aluguel.Pagar();
             this._salario.Pagar();
                                 
-            let valor = fdc.parcela - this._aluguel.PrestacaoAluguel;
+            let valor = fdc.Parcela.Parcela() - this._aluguel.PrestacaoAluguel;
 
             let extInvestimento: ExtratoInvestimento;
             let extFinInvestimento: ExtratoInvestimento;
@@ -58,11 +64,11 @@ export class Comparador {
                 extratoAluguel.MontanteFGTS = this._fundoFGTS.ValorAcumulado;
             }
             
-            extratoAluguel.PatrimonioFinanciamento = fdc.patrimonio;
+            extratoAluguel.PatrimonioFinanciamento = fdc.PatrimonioTotal();
             extratoAluguel.RendimentoFinInvestimento = extFinInvestimento.Rendimento;
             extratoAluguel.MontanteFinInvestimento = this._finInvestimento.ValorAcumulado;
             extratoAluguel.DepositoFinInvestimento = extFinInvestimento.Deposito;
-            extratoAluguel.Parcela = fdc.parcela;
+            extratoAluguel.Parcela = fdc.Parcela.Parcela();
             
             this.Gerenciador.Adicionar(extratoAluguel);
         }    
@@ -73,13 +79,13 @@ export class Comparador {
         if(this._fundoFGTS) {
             extratoAluguel.MontanteFGTS = this._fundoFGTS.ValorAcumulado;
         }
-        extratoAluguel.PatrimonioFinanciamento = this._financiamento.Prestacoes[0].patrimonio;
+        extratoAluguel.PatrimonioFinanciamento = this._extratoFinanciamento[0].PatrimonioTotal();
         extratoAluguel.MontanteInvestimento = this._investimento.ValorAcumulado;
         this.Gerenciador.Adicionar(extratoAluguel);
     }
 
-    public Financiamento(): Financiamento {
-        return this._financiamento;
+    public ExtratoFinanciamento(): Array<ExtratoFinanciamento> {
+        return this._extratoFinanciamento;
     }
 }
 

@@ -1,20 +1,16 @@
 import {ExtratoFinanciamento} from '../financiamento/extrato-financiamento';
 import {Parcela} from '../financiamento/parcela';
-import {Usuario} from '../usuario';
-import {FinanciamentoConfigBuilder} from '../builders/financiamento-config-builder';
+import {AdvancedProperties} from '../financiamento/advanced-properties';
 
 export class ExtratoFinanciamentoBuilder {
     public Build(parcelas: number): Array<ExtratoFinanciamento> {
-        let user = new Usuario();
-        let builder = new FinanciamentoConfigBuilder();
-        let config = builder.Build(user);
 
         let extrato = new Array<ExtratoFinanciamento>();
         extrato.push(new ExtratoFinanciamento());
 
         for (let i=1;i<=parcelas;i++) {
             let ex = new ExtratoFinanciamento();
-            ex.Parcela = new Parcela(config, user);
+            ex.Parcela = new Parcela(null);
             ex.Parcela.Amortizar(10000,i);
             extrato.push(ex);
         }

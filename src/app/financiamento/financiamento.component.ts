@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Usuario } from '../models/usuario';
-import { FinanciamentoConfig } from'../models/financiamento-config';
-import { FinanciamentoFgtsConfig } from '../models/financiamento-fgts-config';
+import {Usuario} from '../models/usuario';
+import {FinanciamentoConfig} from'../models/financiamento-config';
+import {FinanciamentoFgtsConfig} from '../models/financiamento-fgts-config';
 import {ConfigurationService} from '../services/configuration-service';
 import {FinanciamentoProcessorService} from '../services/financiamento-processor-service';
 import {ExtratoFinanciamento} from '../models/financiamento/extrato-financiamento';
+import {AdvancedProperties} from '../models/financiamento/advanced-properties';
 
 @Component({
   selector: 'app-financiamento',
@@ -15,22 +16,26 @@ import {ExtratoFinanciamento} from '../models/financiamento/extrato-financiament
 })
 export class FinanciamentoComponent {
   
-  usuario: Usuario;
-  fgtsConfig: FinanciamentoFgtsConfig;
-  financiamentoConfig: FinanciamentoConfig;
-  avancado: boolean;
-  fluxoDeCaixa: boolean;
-  resultado: boolean;
-  calculado: boolean;
-  fgts: boolean;
-  saveScreen: boolean;
+  private properties: AdvancedProperties;
+  private usuario: Usuario;
+  private fgtsConfig: FinanciamentoFgtsConfig;
+  private financiamentoConfig: FinanciamentoConfig;
+  private avancado: boolean;
+  private fluxoDeCaixa: boolean;
+  private resultado: boolean;
+  private calculado: boolean;
+  private fgts: boolean;
+  private saveScreen: boolean;
 
   private extrato: Array<ExtratoFinanciamento> = [];
 
-  constructor(private configurationService: ConfigurationService, private processorService: FinanciamentoProcessorService) {
+  constructor(private processorService: FinanciamentoProcessorService) {
     this.usuario = new Usuario();
     this.fgtsConfig = new FinanciamentoFgtsConfig();
-    this.financiamentoConfig = new FinanciamentoConfig(this.fgtsConfig);
+    this.financiamentoConfig = new FinanciamentoConfig();
+    
+    this.properties = new AdvancedProperties(this.usuario, this.financiamentoConfig, this.fgtsConfig, null);
+    
     this.resultado = false;
     this.fluxoDeCaixa = false;
     this.avancado = false;
@@ -42,12 +47,9 @@ export class FinanciamentoComponent {
     this.fgts = false;
     this.avancado = false;
     this.fluxoDeCaixa = false;
-    user.FGTS = this.usuario.FGTS;
-    user.crescimentoSalarial = this.usuario.crescimentoSalarial;
-    this.usuario = user;
-      
-    this.extrato = this.processorService.Process(this.usuario,this.financiamentoConfig);
-
+    this.usuario = user;      
+    this.extrato = this.processorService.Process(this.properties);
+    console.log(this.properties);
     this.calculado = true;
     this.resultado = true;
   }

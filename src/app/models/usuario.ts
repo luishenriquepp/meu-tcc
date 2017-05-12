@@ -7,8 +7,6 @@ export class Usuario {
     usaFGTS: boolean = true;
     nascimento: Date;
     renda: number = 4500;
-    FGTS: number = 10000;
-    crescimentoSalarial = 0.07;
     
     private _globalConfiguration : GlobalConfiguration;
     public get GlobalConfiguration() : GlobalConfiguration {

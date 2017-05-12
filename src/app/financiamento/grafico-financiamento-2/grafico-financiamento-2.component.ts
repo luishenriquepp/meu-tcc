@@ -1,7 +1,5 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 
-import { Financiamento } from '../../models/financiamento-old/financiamento';
-import { FinanciamentoFdc } from '../../models/financiamento-old/financiamento-fdc';
 
 declare var cfx;
 
@@ -12,8 +10,6 @@ declare var cfx;
 })
 export class GraficoFinanciamento2Component implements OnInit, OnChanges {
   
-    @Input() financiamento: Financiamento;
-
     constructor() {
         this.chart1 = new cfx.Chart(); 
     }
@@ -45,9 +41,9 @@ export class GraficoFinanciamento2Component implements OnInit, OnChanges {
 	 
 	PopulaComFinanciamento(type: string): void {
         let items = [];
-        for(var i=1;i<this.financiamento.Prestacoes.length;i++) {
-            items.push({ "Fin": this.financiamento.Prestacoes[i][type] });
-        }
+        // for(var i=1;i<this.financiamento.Prestacoes.length;i++) {
+        //     items.push({ "Fin": this.financiamento.Prestacoes[i][type] });
+        // }
         this.chart1.setDataSource(items);
     }
 }

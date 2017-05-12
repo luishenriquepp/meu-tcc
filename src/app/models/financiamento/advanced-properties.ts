@@ -48,15 +48,18 @@ export class AdvancedProperties implements IIdentifier {
     }
 
     public Fgts(): number {
-        return this._usuario.FGTS;
+        return this._fgtsConfig.Fgts;
     }
     
     public CrescimentoSalarial(): number {
-        return this._usuario.crescimentoSalarial;
+        return this._fgtsConfig.CrescimentoSalarial;
     }
 
-    public GlobalConfiguration(): GlobalConfiguration {
+    public get GlobalConfiguration(): GlobalConfiguration {
         return this._usuario.GlobalConfiguration;
+    }
+    public set GlobalConfiguration(value: GlobalConfiguration) {
+        this._usuario.GlobalConfiguration = value;
     }
 
     public TaxaAdministrativa(): number {
@@ -88,5 +91,9 @@ export class AdvancedProperties implements IIdentifier {
         this._seguro.Calcular(age.GetIdade());
 
         return this._seguro.MIP;
+    }
+
+    public set Seguro(value: FinanciamentoSeguro) {
+        this._seguro = value;
     }
 }

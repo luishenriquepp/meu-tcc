@@ -1,20 +1,38 @@
 export class FinanciamentoFgtsConfig {
     private _entrada: boolean = false;
     private _posterior: Posterior = 1;
+    private _fgts: number = 10000;
+    private _crescimentoSalarial = 0.07;
 
-    get Entrada(): boolean {
+    public get Entrada(): boolean {
         return this._entrada;        
     }
 
-    set Entrada(entrada: boolean) {
+    public set Entrada(entrada: boolean) {
         this._entrada = entrada;
     }
 
-    get Posterior(): Posterior {
+    public get Fgts(): number {
+        return this._fgts;        
+    }
+
+    public set Fgts(fgts: number) {
+        this._fgts = fgts;
+    }
+
+    public get CrescimentoSalarial(): number {
+        return this._crescimentoSalarial;        
+    }
+
+    public set CrescimentoSalarial(crescimento: number) {
+        this._crescimentoSalarial = crescimento;
+    }
+
+    public get Posterior(): Posterior {
         return this._posterior;        
     }
 
-    set Posterior(posterior: Posterior) {
+    public set Posterior(posterior: Posterior) {
         this._posterior = posterior;
     }
 }

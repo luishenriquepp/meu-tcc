@@ -1,7 +1,6 @@
 import { Component, Input, OnChanges } from '@angular/core';
 
 import { Usuario } from '../../models/usuario';
-import { Financiamento } from'../../models/financiamento-old/financiamento';
 
 @Component({
   selector: 'app-resultado',
@@ -10,7 +9,6 @@ import { Financiamento } from'../../models/financiamento-old/financiamento';
 })
 export class ResultadoComponent implements OnChanges {
 
-  @Input() financiamento: Financiamento;
   private valor: String;
   private glyph: String;
 
@@ -19,15 +17,15 @@ export class ResultadoComponent implements OnChanges {
   }
 
   comprometimento(): void {
-    if(this.financiamento.Resultado.Comprometimento > 0.30) {
-      this.valor = "text-danger";
-      this.glyph = "glyphicon glyphicon-remove";        
-    } else if (this.financiamento.Resultado.Comprometimento > 0.25) {
-      this.valor = "text-warning";
-      this.glyph = "glyphicon glyphicon-ok"; 
-    } else {
-      this.valor = "text-success";
-      this.glyph = "glyphicon glyphicon-ok";
-    }    
+    // if(this.financiamento.Resultado.Comprometimento > 0.30) {
+    //   this.valor = "text-danger";
+    //   this.glyph = "glyphicon glyphicon-remove";        
+    // } else if (this.financiamento.Resultado.Comprometimento > 0.25) {
+    //   this.valor = "text-warning";
+    //   this.glyph = "glyphicon glyphicon-ok"; 
+    // } else {
+    //   this.valor = "text-success";
+    //   this.glyph = "glyphicon glyphicon-ok";
+    // }    
   }
 }

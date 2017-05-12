@@ -42,7 +42,6 @@ export class FormularioComponent implements OnInit {
     this.prestacoes = 420;
     this.renda = 4500;
     this.possuiFGTS = true;
-    this.fgtsAcumulado = 10000;
     this.birthDay = { date: { year: 1988, month: 1, day: 21}};
   }
   
@@ -62,7 +61,6 @@ export class FormularioComponent implements OnInit {
     user.prestacoes = this.prestacoes;
     user.usaFGTS = this.possuiFGTS;
     user.renda = this.renda;
-    user.FGTS = this.fgtsAcumulado;
     user.nascimento = new Date(this.birthDay.date.year, this.birthDay.date.month, this.birthDay.date.day);
 
     this.onCalcular.emit(user);

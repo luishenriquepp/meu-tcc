@@ -56,7 +56,7 @@ export class ProcessadorFinanciamento {
             ex.ValorImovel = this.imovel.ValorAcumulado;
 
             if(this.properties.UsaFgts) {
-                let extFgts = this.fundoGarantia.Depositar(this.salario.PrestacaoAluguel * this.properties.GlobalConfiguration().Fundo);
+                let extFgts = this.fundoGarantia.Depositar(this.salario.PrestacaoAluguel * this.properties.GlobalConfiguration.Fundo);
                 ex.RendimentoFgts = extFgts.Rendimento;
                 ex.DepositoFgts = extFgts.Deposito;
                 ex.MontanteFgts = this.fundoGarantia.ValorAcumulado;
@@ -73,11 +73,11 @@ export class ProcessadorFinanciamento {
         ex.SaldoAtual = this.properties.ValorImovel() - this.properties.Disponivel();
         ex.Saldo = this.properties.ValorImovel();
         this.financiamento.Abater(this.properties.Disponivel());
-        
+
         if(this.properties.UsaFgts) {            
             const valorAbatido = this.fundoGarantia.ValorAcumulado;
             ex.MontanteFgts = valorAbatido;
-            if(this.properties.UsaComoEntrada) {
+            if(this.properties.UsaComoEntrada()) {
                 this.financiamento.Abater(valorAbatido);
                 this.fundoGarantia.Sacar(valorAbatido);
                 ex.Resgate = valorAbatido;

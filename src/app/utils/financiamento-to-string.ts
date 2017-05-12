@@ -1,8 +1,8 @@
-import {Financiamento} from '../models/financiamento-old/financiamento';
 import {Posterior} from '../models/financiamento-fgts-config';
+import {AdvancedProperties} from '../models/financiamento/advanced-properties';
 
 export class FinanciamentoToString {
-    private readonly financiamento: Financiamento;
+    private readonly financiamento: AdvancedProperties;
     
     private _descricao : string;
     public get Descricao() : string {
@@ -20,20 +20,18 @@ export class FinanciamentoToString {
         this._identificacao = v;
     }
     
-    constructor(financiamento: Financiamento) {
+    constructor(financiamento: AdvancedProperties) {
         this.financiamento = financiamento;
     }
 
     public Process(): void {
-        let user = this.financiamento.Usuario;
-        let finConfig = this.financiamento.Configuracao;
 
-        this._identificacao = `fin${user.valorImovel/1000}v${user.disponivel/1000}d${user.prestacoes}p`;
+        this._identificacao = `fin${this.financiamento.ValorImovel()/1000}v${this.financiamento.Disponivel()/1000}d${this.financiamento.Prestacoes()}p`;
                         
         this._descricao = 
-`Financiamento de imóvel com valor R$ ${this.toLocale(user.valorImovel)} e entrada R$ ${this.toLocale(user.disponivel)} com previsão de ${user.prestacoes} prestações.
-Usuário com renda mensal R$ ${this.toLocale(user.renda)} e crescimento salarial de ${this.toPercent(user.crescimentoSalarial)} ao ano.
-Financiamento com juros de ${this.toPercent(finConfig.JurosAnuais)} e Taxa administrativa de R$ ${finConfig.TaxaAdministrativa} por mês.
+`Financiamento de imóvel com valor R$ ${this.toLocale(this.financiamento.ValorImovel())} e entrada R$ ${this.toLocale(this.financiamento.Disponivel())} com previsão de ${this.financiamento.Prestacoes()} prestações.
+Usuário com renda mensal R$ ${this.toLocale(this.financiamento.Renda())} e crescimento salarial de ${this.toPercent(this.financiamento.CrescimentoSalarial())} ao ano.
+Financiamento com juros de ${this.toPercent(this.financiamento.JurosMensais())} e Taxa administrativa de R$ ${this.financiamento.TaxaAdministrativa()} por mês.
 ${this.fgts()}`;
     }
 
@@ -43,16 +41,16 @@ ${this.fgts()}`;
     }
 
     private fgts(): string {
-        if(!this.financiamento.Usuario.usaFGTS) {
+        if(!this.financiamento.UsaFgts()) {
             return 'Sem fundo de garantia.';
         }
-        let msg = `Valor de FGTS inicial R$ ${this.toLocale(this.financiamento.Usuario.FGTS)}`;
-        if(this.financiamento.Configuracao.FGTSConfig.Entrada) {
+        let msg = `Valor de FGTS inicial R$ ${this.toLocale(this.financiamento.Fgts())}`;
+        if(this.financiamento.UsaComoEntrada()) {
             msg += ' abatido do salvo devedor na entrada e posteriormente ';
         } else {
             msg += ' não utilizado na entrada e posteriormente ';
         }
-        switch(this.financiamento.Configuracao.FGTSConfig.Posterior) {
+        switch(this.financiamento.Posterior()) {
             case Posterior.NaoUsar: 
                 msg += 'não utilizado.';
                 break;

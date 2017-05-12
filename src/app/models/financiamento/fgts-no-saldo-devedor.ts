@@ -1,4 +1,3 @@
-import {FinanciamentoFgtsConfig} from '../financiamento-fgts-config';
 import {IProcessFgts} from './i-process-fgts';
 import {FgtsDependency} from './fgts-dependency';
 
@@ -9,8 +8,8 @@ export class FgtsNoSaldoDevedor implements IProcessFgts {
         return this.anualidade;
     }
     
-    constructor(fgtsConfig: FinanciamentoFgtsConfig) {
-        if(fgtsConfig.Entrada) {
+    constructor(entrada: boolean) {
+        if(entrada) {
             this.anualidade = 25;
         } else {
             this.anualidade = 13;

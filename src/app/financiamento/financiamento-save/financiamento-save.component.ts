@@ -1,8 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FinanciamentoToString } from '../../utils/financiamento-to-string';
-import { FinanciamentoService } from '../../services/financiamento-services';
-
-import { Financiamento } from '../../models/financiamento-old/financiamento';
+import {Component,OnInit,Input} from '@angular/core';
+import {FinanciamentoToString} from '../../utils/financiamento-to-string';
+import {FinanciamentoService} from '../../services/financiamento-services';
+import {AdvancedProperties} from '../../models/financiamento/advanced-properties';
 
 @Component({
   selector: 'app-financiamento-save',
@@ -11,7 +10,7 @@ import { Financiamento } from '../../models/financiamento-old/financiamento';
 })
 export class FinanciamentoSaveComponent implements OnInit {
 
-  @Input() financiamento: Financiamento;
+  @Input() financiamento: AdvancedProperties;
 
   private toString: FinanciamentoToString;
 

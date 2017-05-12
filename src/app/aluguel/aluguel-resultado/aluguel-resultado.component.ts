@@ -40,8 +40,8 @@ export class AluguelResultadoComponent implements OnInit {
     this.finInvestimentoRendimentos = this.buscaTotalFinInvestimentoRendimentos();
     // this.finFgtsAportes = TODO
     // this.finFgtsRendimentos = TODO
-    this.valorImovel = this.comparador.Financiamento().Prestacoes[this.comparador.Financiamento().Prestacoes.length-1].valorImovel;
-    this.disponibilidade = this.comparador.Financiamento().Usuario.disponivel;
+    // this.valorImovel = this.comparador.Financiamento().Prestacoes[this.comparador.Financiamento().Prestacoes.length-1].valorImovel;
+    // this.disponibilidade = this.comparador.Financiamento().Usuario.disponivel;
   }
 
   private buscaTotalDeRendimentos(): number  {

@@ -1,21 +1,20 @@
-import {Financiamento} from '../models/financiamento-old/financiamento';
-import {FinanciamentoBuilder} from '../models/builders/financiamento-builder';
+import {AdvancedProperties} from '../models/financiamento/advanced-properties';
 
 export class FinanciamentoRepository {
-    private static financiamentos: Array<Financiamento> = [
-        new FinanciamentoBuilder().BuildRichUserWithFGTSFinanciamento()
+    private static financiamentos: Array<AdvancedProperties> = [
+
     ];
     private static counter: number = 0;
 
-    public Buscar(id: number): Financiamento {
+    public Buscar(id: number): AdvancedProperties {
         return FinanciamentoRepository.financiamentos.find(t => t.Id == id);
     }
 
-    public BuscaTodos(): Array<Financiamento> {
+    public BuscaTodos(): Array<AdvancedProperties> {
         return FinanciamentoRepository.financiamentos;
     }
 
-    public Adiciona(financiamento: Financiamento) {
+    public Adiciona(financiamento: AdvancedProperties) {
         FinanciamentoRepository.counter++;
         financiamento.Id = FinanciamentoRepository.counter;
         FinanciamentoRepository.financiamentos.push(financiamento);

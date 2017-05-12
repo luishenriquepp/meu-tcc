@@ -13,7 +13,7 @@
       </div>
       <div *ngIf="usuario.usaFGTS">
         <div class="col-lg-3">
-          <app-fgts [usuario]="usuario" [fgtsConfig]="fgtsConfig"></app-fgts>
+          <app-fgts [fgtsConfig]="fgtsConfig"></app-fgts>
         </div>
       </div>
     </div>
@@ -38,7 +38,7 @@
               </div>
               <div *ngIf="usuario.usaFGTS">
                 <div class="col-lg-4">
-                  <app-fgts [usuario]="usuario" [fgtsConfig]="fgtsConfig"></app-fgts>
+                  <!--<app-fgts [fgtsConfig]="fgtsConfig"></app-fgts>-->
                 </div>
               </div>    
             </div>            
@@ -64,7 +64,7 @@
             </div>
             <div *ngIf="saveScreen">
               <div class="col-lg-12">
-                <app-financiamento-save [financiamento]='financiamento'></app-financiamento-save>
+                <app-financiamento-save [financiamento]='properties'></app-financiamento-save>
               </div>
             </div>
           </div>      
