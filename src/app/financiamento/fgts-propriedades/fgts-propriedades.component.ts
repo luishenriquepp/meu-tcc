@@ -4,11 +4,10 @@ import {FinanciamentoFgtsConfig} from '../../models/financiamento-fgts-config';
 import {Posterior} from '../../models/financiamento-fgts-config';
 
 @Component({
-  selector: 'app-fgts',
-  templateUrl: './fgts.component.html',
-  styleUrls: ['./fgts.component.css']
+  selector: 'fgts-propriedades',
+  templateUrl: './fgts-propriedades.component.html'
 })
-export class FgtsComponent {
+export class FgtsPropriedadesComponent {
 
   @Input() fgtsConfig: FinanciamentoFgtsConfig;
 

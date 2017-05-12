@@ -3,11 +3,11 @@ import { Component, Input, OnChanges } from '@angular/core';
 import { Usuario } from '../../models/usuario';
 
 @Component({
-  selector: 'app-resultado',
-  templateUrl: './resultado.component.html',
-  styleUrls: ['./resultado.component.css']
+  selector: 'resultado-financiamento',
+  templateUrl: './resultado-financiamento.component.html',
+  styleUrls: ['./resultado-financiamento.component.css']
 })
-export class ResultadoComponent implements OnChanges {
+export class ResultadoFinanciamentoComponent implements OnChanges {
 
   private valor: String;
   private glyph: String;

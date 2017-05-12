@@ -3,11 +3,10 @@ import {ExtratoFinanciamento} from '../../models/financiamento/extrato-financiam
 import {Posterior} from '../../models/financiamento-fgts-config';
 
 @Component({
-  selector: 'app-tabela-vpl',
-  templateUrl: './tabela-vpl.component.html',
-  styleUrls: ['./tabela-vpl.component.css']
+  selector: 'extrato-financiamento',
+  templateUrl: './extrato-financiamento.component.html'
 })
-export class TabelaVplComponent { 
+export class ExtratoFinanciamentoComponent { 
   @Input() naoUsaFgts: boolean;
   @Input() posterior: Posterior;
   @Input() extrato: Array<ExtratoFinanciamento>;

@@ -4,7 +4,7 @@ import {FinanciamentoService} from '../../services/financiamento-services';
 import {AdvancedProperties} from '../../models/financiamento/advanced-properties';
 
 @Component({
-  selector: 'app-financiamento-save',
+  selector: 'financiamento-save',
   templateUrl: './financiamento-save.component.html',
   providers: [FinanciamentoService]
 })

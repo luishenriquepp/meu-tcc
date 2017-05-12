@@ -12,13 +12,13 @@ import { ConsorcioComponent } from './consorcio/consorcio.component';
 import { FormularioComponent } from './financiamento/formulario/formulario.component';
 import { MenuSuperiorComponent } from './menu-superior/menu-superior.component';
 import { MainComponent } from './main/main.component';
-import { TabelaVplComponent } from './financiamento/tabela-vpl/tabela-vpl.component';
-import { ResultadoComponent } from './financiamento/resultado/resultado.component';
-import { GraficoFinanciamento2Component } from './financiamento/grafico-financiamento-2/grafico-financiamento-2.component';
+import { ExtratoFinanciamentoComponent } from './financiamento/extrato-financiamento/extrato-financiamento.component';
+import { ResultadoFinanciamentoComponent } from './financiamento/resultado-financiamento/resultado-financiamento.component';
+import { GraficoFinanciamentoComponent } from './financiamento/grafico-financiamento/grafico-financiamento.component';
 import { FinanciamentoPropriedadesComponent } from './financiamento/financiamento-propriedades/financiamento-propriedades.component';
 import { Routes } from './models/routes';
 import { ExtratoFgtsComponent } from './financiamento/extrato-fgts/extrato-fgts.component';
-import { FgtsComponent } from './financiamento/fgts/fgts.component';
+import { FgtsPropriedadesComponent } from './financiamento/fgts-propriedades/fgts-propriedades.component';
 import { FinanciamentoSaveComponent } from './financiamento/financiamento-save/financiamento-save.component';
 import { FormularioAluguelComponent } from './aluguel/formulario-aluguel/formulario-aluguel.component';
 import { ExtratoAluguelComponent } from './aluguel/extrato-aluguel/extrato-aluguel.component';
@@ -38,12 +38,12 @@ import { AluguelResultadoComponent } from './aluguel/aluguel-resultado/aluguel-r
     FinanciamentoComponent,
     AluguelComponent,
     ConsorcioComponent,
-    TabelaVplComponent,
-    ResultadoComponent,
-    GraficoFinanciamento2Component,
+    ExtratoFinanciamentoComponent,
+    ResultadoFinanciamentoComponent,
+    GraficoFinanciamentoComponent,
     FinanciamentoPropriedadesComponent,
     ExtratoFgtsComponent,
-    FgtsComponent,
+    FgtsPropriedadesComponent,
     FinanciamentoSaveComponent,
     FormularioAluguelComponent,
     ExtratoAluguelComponent,

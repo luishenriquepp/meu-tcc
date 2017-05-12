@@ -1,14 +1,13 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 
-
 declare var cfx;
 
 @Component({
-  selector: 'app-grafico-financiamento-2',
-  templateUrl: './grafico-financiamento-2.component.html',
-  styleUrls: ['./grafico-financiamento-2.component.css']
+  selector: 'grafico-financiamento',
+  templateUrl: './grafico-financiamento.component.html',
+  styleUrls: ['./grafico-financiamento.component.css']
 })
-export class GraficoFinanciamento2Component implements OnInit, OnChanges {
+export class GraficoFinanciamentoComponent implements OnInit, OnChanges {
   
     constructor() {
         this.chart1 = new cfx.Chart(); 

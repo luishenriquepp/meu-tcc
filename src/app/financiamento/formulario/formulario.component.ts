@@ -4,7 +4,7 @@ import { Usuario } from '../../models/usuario';
 import {IMyOptions,IMyInputFieldChanged} from 'mydatepicker';
 
 @Component({
-  selector: 'app-formulario',
+  selector: 'formulario',
   templateUrl: './formulario.component.html',
   styleUrls: ['./formulario.component.css']
 })

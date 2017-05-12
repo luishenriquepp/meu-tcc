@@ -6,7 +6,7 @@ import { SeguradoraSa } from'../../models/seguradora-sa';
 import { SeguradoraHdi } from'../../models/seguradora-hdi';
 
 @Component({
-  selector: 'app-financiamento-propriedades',
+  selector: 'financiamento-propriedades',
   templateUrl: './financiamento-propriedades.component.html'
 })
 export class FinanciamentoPropriedadesComponent implements OnInit{
