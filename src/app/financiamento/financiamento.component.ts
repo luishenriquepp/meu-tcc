@@ -26,6 +26,7 @@ export class FinanciamentoComponent {
   private calculado: boolean;
   private fgts: boolean;
   private saveScreen: boolean;
+  private isUsingFgts: boolean;
 
   private extrato: Array<ExtratoFinanciamento> = [];
 
@@ -47,11 +48,11 @@ export class FinanciamentoComponent {
     this.fgts = false;
     this.avancado = false;
     this.fluxoDeCaixa = false;
-    this.usuario = user;      
-    this.extrato = this.processorService.Process(this.properties);
-    console.log(this.properties);
+    Object.assign(user, this.usuario);
+    this.extrato = this.processorService.Process(this.properties);    
     this.calculado = true;
     this.resultado = true;
+    this.isUsingFgts = this.properties.UsaFgts();
   }
   onFgts(fgts: boolean) {
     this.usuario.usaFGTS = fgts;

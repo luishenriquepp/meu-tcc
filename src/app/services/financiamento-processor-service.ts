@@ -29,8 +29,8 @@ export class FinanciamentoProcessorService {
 
         let imovel = new Investimento(properties.ValorImovel(), global.Imovel);
         let salario = new Aluguel(properties.Renda(), properties.CrescimentoSalarial());        
-        let fundo = new Investimento(properties.Fgts(), global.Fundo);
         let financiamento = new Financiamento(properties.ValorImovel(), global.Referencial);
+        let fundo: Investimento = properties.UsaFgts() ? new Investimento(properties.Fgts(), global.Fundo) : null;
         
         let processador = new ProcessadorFinanciamento(financiamento,imovel,salario,properties,fundo);
 

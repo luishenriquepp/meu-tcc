@@ -7,6 +7,6 @@ import {ExtratoFinanciamento} from '../../models/financiamento/extrato-financiam
   styleUrls: ['./tabela-vpl.component.css']
 })
 export class TabelaVplComponent { 
-
+  @Input() fgts: boolean;
   @Input() extrato: Array<ExtratoFinanciamento>;
 }
