@@ -12,6 +12,7 @@ import {FinanciamentoSeguro} from '../models/financiamento-seguro';
 import {Posterior} from '../models/financiamento-fgts-config';
 import {FgtsNasParcelas} from '../models/financiamento/fgts-nas-parcelas';
 import {FgtsNoSaldoDevedor} from '../models/financiamento/fgts-no-saldo-devedor';
+import {FgtsNaoUsarMais} from '../models/financiamento/fgts-nao-usar-mais';
 import {AdvancedProperties} from '../models/financiamento/advanced-properties';
 import {Seguradora} from '../models/financiamento-config';
 import {SeguradoraHdi} from '../models/seguradora-hdi';
@@ -43,6 +44,8 @@ export class FinanciamentoProcessorService {
             processador.Processor = new FgtsNasParcelas();
         } else if (properties.Posterior() == Posterior.SaldoDevedor) {
             processador.Processor = new FgtsNoSaldoDevedor(properties.UsaComoEntrada());
+        } else {
+            processador.Processor = new FgtsNaoUsarMais();
         }
 
         processador.Processar();

@@ -1,6 +1,5 @@
 import { ISeguro } from './iseguro';
 
-
 export class SeguradoraSa implements ISeguro {
     GetDFI(): number {
         return 0.0000926;
