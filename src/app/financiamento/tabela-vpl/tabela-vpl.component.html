@@ -12,8 +12,8 @@
             <th class="text-right">Juros</th>
             <th class="text-right">Seguros</th>
             <th class="text-right">Parcela</th>
-            <th class="text-right">Parcela Descontada</th>
-            <th class="text-right" [hidden]="!fgts">Resgate FGTS</th>
+            <th class="text-right" [hidden]="posterior != 2">Parcela Descontada</th>
+            <th class="text-right" [hidden]="!naoUsaFgts">Resgate FGTS</th>
             <th class="text-right">Dívida Atualizada</th>
             <th class="text-right">Valor Imovel</th>
             <th class="text-right">Patrimônio</th>
@@ -29,8 +29,8 @@
             <td class="text-right">{{ext.Parcela.Juros | number:'1.2-2' }}</td>
             <td class="text-right">{{ext.Parcela.Seguros | number:'1.2-2' }}</td>
             <td class="text-right">{{ext.Parcela.Parcela() | number:'1.2-2' }}</td>
-            <td class="text-right">{{ext.Parcela.ParcelaDescontada() | number:'1.2-2' }}</td>
-            <td class="text-right" [hidden]="!fgts">{{ext.Resgate | number:'1.2-2' }}</td>
+            <td class="text-right" [hidden]="posterior != 2">{{ext.Parcela.ParcelaDescontada() | number:'1.2-2' }}</td>
+            <td class="text-right" [hidden]="!naoUsaFgts">{{ext.Resgate | number:'1.2-2' }}</td>
             <td class="text-right">{{ext.SaldoAtual | number:'1.2-2' }}</td> 
             <td class="text-right">{{ext.ValorImovel | number:'1.2-2' }}</td>
             <td class="text-right">{{ext.Patrimonio() | number:'1.2-2' }}</td>

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {ExtratoFinanciamento} from '../../models/financiamento/extrato-financiamento';
+import {Posterior} from '../../models/financiamento-fgts-config';
 
 @Component({
   selector: 'app-tabela-vpl',
@@ -7,6 +8,7 @@ import {ExtratoFinanciamento} from '../../models/financiamento/extrato-financiam
   styleUrls: ['./tabela-vpl.component.css']
 })
 export class TabelaVplComponent { 
-  @Input() fgts: boolean;
+  @Input() naoUsaFgts: boolean;
+  @Input() posterior: Posterior;
   @Input() extrato: Array<ExtratoFinanciamento>;
 }

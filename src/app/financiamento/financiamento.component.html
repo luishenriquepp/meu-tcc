@@ -44,7 +44,7 @@
             </div>            
             <div *ngIf="fluxoDeCaixa">
               <div class="col-lg-12">
-                <app-tabela-vpl [fgts]="isUsingFgts"[extrato]="extrato"></app-tabela-vpl>
+                <app-tabela-vpl [naoUsaFgts]="isUsingFgts" [posterior]="posterior" [extrato]="extrato"></app-tabela-vpl>
               </div>         
             </div>
             <div *ngIf="resultado">

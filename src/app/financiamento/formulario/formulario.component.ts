@@ -62,7 +62,6 @@ export class FormularioComponent implements OnInit {
     user.usaFGTS = this.possuiFGTS;
     user.renda = this.renda;
     user.nascimento = new Date(this.birthDay.date.year, this.birthDay.date.month, this.birthDay.date.day);
-
     this.onCalcular.emit(user);
   }
 
