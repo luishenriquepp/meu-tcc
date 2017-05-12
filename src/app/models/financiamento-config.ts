@@ -1,5 +1,4 @@
-import { FinanciamentoSeguro } from './financiamento-seguro';
-import { FinanciamentoFgtsConfig } from './financiamento-fgts-config';
+import {FinancialMath} from '../utils/financial-math';
 
 export class FinanciamentoConfig {
     
@@ -16,7 +15,7 @@ export class FinanciamentoConfig {
     }
 
     get JurosMensais(): number {
-        return this._jurosAnuais/12;
+        return FinancialMath.YearToMonth(this._jurosAnuais);
     }
 
     get JurosAnuais(): number {
