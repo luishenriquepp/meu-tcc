@@ -9,18 +9,18 @@ describe('fgts no saldo devedor', () => {
     let builder = new ExtratoFinanciamentoBuilder();
     let financiamento = new Financiamento(20000,0.005);
     
-    it('deve ter anualidade 2 se fgts tiver sido usado na entrada', () => {
+    it('deve ter anualidade 25 se fgts tiver sido usado na entrada', () => {
 
         let regra = new FgtsNoSaldoDevedor(true);
 
-        expect(regra.Anualidade).toBe(2);
+        expect(regra.Anualidade).toBe(25);
     });
 
-    it('deve ter anualidade 1 se fgts nao tiver sido usado na entrada', () => {
+    it('deve ter anualidade 13 se fgts nao tiver sido usado na entrada', () => {
         
         let regra = new FgtsNoSaldoDevedor(false);
 
-        expect(regra.Anualidade).toBe(1);
+        expect(regra.Anualidade).toBe(13);
     });
 
     it('deve resgatar todo o fundo de garantia se o saldo devedor permitir', () => {
@@ -51,7 +51,7 @@ describe('fgts no saldo devedor', () => {
         expect(fundo.ValorAcumulado).toBe(500);
     });
 
-    it('deve aumentar a unidade em 2 anos apos resgatar', () => {
+    it('deve aumentar a unidade em 24 anos apos resgatar', () => {
 
         let extrato = builder.Build(13);
         extrato[13].MontanteFgts = 5500;
@@ -61,7 +61,7 @@ describe('fgts no saldo devedor', () => {
         let regra = new FgtsNoSaldoDevedor(false);
         regra.Process(dependency, 13);
 
-        expect(regra.Anualidade).toBe(3);
+        expect(regra.Anualidade).toBe(37);
     });
 
     it('deve chamar o metodo de saque do fundo', () => {

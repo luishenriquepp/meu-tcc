@@ -39,7 +39,7 @@ export class ProcessadorFinanciamento {
 
         this.initialize();
 
-        for(let i=1; i<this.properties.Prestacoes();i++) {
+        for(let i=1; i<=this.properties.Prestacoes();i++) {
             let ex = new ExtratoFinanciamento();
             this.Extrato.push(ex);            
             this.imovel.Depositar();           

@@ -13,7 +13,7 @@ export class Comparador {
     private readonly _extratoFinanciamento: Array<ExtratoFinanciamento>;
     private readonly _salario: Aluguel;
 
-    public readonly Gerenciador: GerenciadorDoExtrato = new GerenciadorDoExtrato();
+    public Gerenciador: GerenciadorDoExtrato = new GerenciadorDoExtrato();
 
     constructor(
         investimento: Investimento, 
@@ -26,8 +26,8 @@ export class Comparador {
             this._aluguel = aluguel;
             this._extratoFinanciamento = extrato;
             this._fundoFGTS = fundoFGTS;
-            this._finInvestimento = investimentoFinanciamento;
             this._salario = salario;
+            this._finInvestimento = investimentoFinanciamento;
     }
         
     public Processar(): void {
@@ -74,7 +74,7 @@ export class Comparador {
             extratoAluguel.Parcela = fdc.Parcela.Parcela();
             
             this.Gerenciador.Adicionar(extratoAluguel);
-        }    
+        }
     }
 
     private inicializar(): void {

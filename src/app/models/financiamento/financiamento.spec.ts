@@ -12,12 +12,11 @@ describe('financiamento', () => {
         expect(financiamento).toBeTruthy();
     });
     
-    it('deve inicializar o saldo devedor e a taxa referencial com o valor passado pelo construtor', () => {
+    it('deve inicializar o saldo devedor com o valor passado pelo construtor', () => {
         
         let financiamento = new Financiamento(saldoDevedor,taxaReferencial);
         
         expect(financiamento.SaldoDevedor).toBe(saldoDevedor);
-        expect(financiamento.CorrecaoTaxaReferencial).toBe(taxaReferencial);
     });
     
     it('deve trazer o saldo corrigido pela taxa referencial', () => {

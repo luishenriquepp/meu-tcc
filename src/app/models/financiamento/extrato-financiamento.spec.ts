@@ -22,7 +22,7 @@ describe('extrato financiamento', () => {
 
     it('deve calcular o valor do patrimonio total do financiamento junto do fgts', () => {
 
-        expect(extrato.Patrimonio()).toBe(100-50+5);
+        expect(extrato.PatrimonioTotal()).toBe(100-50+30);
     });
 
     it('deve clcular o saldo inicial do fgts', () => {

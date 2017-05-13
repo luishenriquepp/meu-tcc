@@ -3,11 +3,11 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { FgtsComponent } from './fgts.component';
+import { FgtsPropriedadesComponent } from './fgts-propriedades.component';
 
 describe('FgtsComponent', () => {
   it('should create', () => {
-    let component = new FgtsComponent();
+    let component = new FgtsPropriedadesComponent();
     expect(component).toBeTruthy();
   });
 });
