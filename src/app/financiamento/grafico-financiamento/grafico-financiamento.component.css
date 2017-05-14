@@ -18,7 +18,7 @@ option:not(:checked) {
     border-color: #800000;
 }
 
-.panel-body {
+/*.panel-body {
     background-color: #ccccb3;
     color: #2e2e1f;
-}
+}*/

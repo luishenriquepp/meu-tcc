@@ -21,7 +21,7 @@ export class FinanciamentoComponent {
   private usuario: Usuario;
   private fgtsConfig: FinanciamentoFgtsConfig;
   private financiamentoConfig: FinanciamentoConfig;
-  private avancado: boolean;
+  private grafico: boolean;
   private fluxoDeCaixa: boolean;
   private resultado: boolean;
   private calculado: boolean;
@@ -41,14 +41,14 @@ export class FinanciamentoComponent {
     
     this.resultado = false;
     this.fluxoDeCaixa = false;
-    this.avancado = false;
+    this.grafico = false;
     this.calculado = false;
     this.fgts = false;
     this.saveScreen = false;
   }
   onCalcular(user: Usuario) {
     this.fgts = false;
-    this.avancado = false;
+    this.grafico = false;
     this.fluxoDeCaixa = false;
     Object.assign(this.usuario, user);
     this.extrato = this.processorService.Process(this.properties);    
@@ -56,43 +56,42 @@ export class FinanciamentoComponent {
     this.posterior = this.properties.Posterior();
     this.calculado = true;
     this.resultado = true;
-    console.log(this.posterior);
   }
   onFgts(fgts: boolean) {
     this.usuario.usaFGTS = fgts;
   }
   exibeFluxoDeCaixa(): void {
     this.fgts = false;
-    this.avancado = false;
+    this.grafico = false;
     this.resultado = false;
     this.saveScreen = false;
     this.fluxoDeCaixa = true;
   }
   exibeResultado(): void {
     this.fgts = false;
-    this.avancado = false;
+    this.grafico = false;
     this.fluxoDeCaixa = false;
     this.saveScreen = false;
     this.resultado = true;
   }
-  exibeAvancado(): void {
+  exibeGrafico(): void {
     this.fgts = false;
     this.fluxoDeCaixa = false;
     this.resultado = false;
     this.saveScreen = false;
-    this.avancado = true;
+    this.grafico = true;
   }
   exibeExtrato(): void {
     this.fluxoDeCaixa = false;
     this.resultado = false;
-    this.avancado = false;
+    this.grafico = false;
     this.fgts = true;
     this.saveScreen = false;
   }
   exibeSaveScreen(): void {
     this.fluxoDeCaixa = false;
     this.resultado = false;
-    this.avancado = false;
+    this.grafico = false;
     this.fgts = false;
     this.saveScreen = true;
   }

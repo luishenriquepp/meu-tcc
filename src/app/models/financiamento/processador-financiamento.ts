@@ -47,7 +47,7 @@ export class ProcessadorFinanciamento {
             this.financiamento.Corrigir();
 
             let parcela = new Parcela(this.properties);
-            let amortizacao = parcela.Amortizar(this.financiamento.SaldoDevedor, this.properties.Prestacoes()-i);
+            let amortizacao = parcela.Amortizar(this.financiamento.SaldoDevedor, this.properties.Prestacoes()-(i-1));
             this.financiamento.Pagar(amortizacao);
             this.salario.Pagar();
             

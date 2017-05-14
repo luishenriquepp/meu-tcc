@@ -34,6 +34,7 @@ export class Parcela {
     }
 
     public Amortizar(saldoCorrigido: number, mesesRestantes: number): number {
+        
         this._amortizacao = (saldoCorrigido)/(mesesRestantes);
         this.calculaSeguro(saldoCorrigido);
         this.calculaJuros(saldoCorrigido);

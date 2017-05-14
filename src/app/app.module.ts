@@ -23,6 +23,7 @@ import { FinanciamentoSaveComponent } from './financiamento/financiamento-save/f
 import { FormularioAluguelComponent } from './aluguel/formulario-aluguel/formulario-aluguel.component';
 import { ExtratoAluguelComponent } from './aluguel/extrato-aluguel/extrato-aluguel.component';
 import { GraficoAluguelComponent } from './aluguel/grafico-aluguel/grafico-aluguel.component';
+import { ResultadoParcialComponent } from './financiamento/resultado-parcial/resultado-parcial.component';
 
 import { MyDatePickerModule } from 'mydatepicker';
 import { GlobalConfigurationComponent } from './global-configuration/global-configuration.component';
@@ -49,7 +50,8 @@ import { AluguelResultadoComponent } from './aluguel/aluguel-resultado/aluguel-r
     ExtratoAluguelComponent,
     GraficoAluguelComponent,
     GlobalConfigurationComponent,
-    AluguelResultadoComponent
+    AluguelResultadoComponent,
+    ResultadoParcialComponent
   ],
   imports: [
     BrowserModule,

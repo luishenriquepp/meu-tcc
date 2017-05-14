@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 
+import {ExtratoFinanciamento} from '../../models/financiamento/extrato-financiamento';
+
 declare var cfx;
 
 @Component({
@@ -9,6 +11,8 @@ declare var cfx;
 })
 export class GraficoFinanciamentoComponent implements OnInit, OnChanges {
   
+    @Input() extrato: Array<ExtratoFinanciamento>;
+    
     constructor() {
         this.chart1 = new cfx.Chart(); 
     }
@@ -24,7 +28,7 @@ export class GraficoFinanciamentoComponent implements OnInit, OnChanges {
     }
 
     ngOnChanges() {
-        this.PopulaComFinanciamento('patrimonio');
+        this.PopulaComFinanciamento('PatrimonioTotal()');
     }
     
     loadChart(): void {
@@ -40,9 +44,9 @@ export class GraficoFinanciamentoComponent implements OnInit, OnChanges {
 	 
 	PopulaComFinanciamento(type: string): void {
         let items = [];
-        // for(var i=1;i<this.financiamento.Prestacoes.length;i++) {
-        //     items.push({ "Fin": this.financiamento.Prestacoes[i][type] });
-        // }
+        for(var i=1;i<this.extrato.length;i++) {
+            items.push({ "Fin": this.extrato[i][type] });
+        }
         this.chart1.setDataSource(items);
     }
 }
