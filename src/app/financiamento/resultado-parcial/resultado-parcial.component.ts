@@ -17,32 +17,72 @@ export class ResultadoParcialComponent implements OnInit {
 
   private valorImovel: number = 0;
   private parcelas: number = 0;
-  private patrimonioTotal: number = 0;
-  private custoTotal: number = 0;
-  private patrimonioLiquido: number = 0;
-  private aportesFgts: number = 0;
-  private rendimentosFgts: number = 0;
-  private fgtsTotal: number = 0;
+  private fgtsAportesCusto: number = 0;
+  private fgtsRendimentosCusto: number = 0;
+  private fgtsAportesPatrimonio: number = 0;
+  private fgtsRendimentosPatrimonio: number = 0;
   private fgtsEntrada: number = 0;
 
   ngOnInit(): void {
+    
+    this.initialize();
+    let aportes = this.extrato.reduce((a,b) => a + b.DepositoFgts, 0);
+    let rendimentos = this.extrato.reduce((a,b) => a + b.RendimentoFgts, 0);
+
     if(this.user.usaFGTS) {
+      
       if(this.fgtsConfig.Entrada) {
         this.fgtsEntrada = this.fgtsConfig.Fgts;
-        this.custoTotal += this.fgtsEntrada;
       }
+      
       if(this.fgtsConfig.Posterior == Posterior.NaoUsar) {
-        this.aportesFgts = this.extrato.reduce((a,b) => a + b.DepositoFgts,0);
-        this.rendimentosFgts = this.extrato.reduce((a,b) => a + b.RendimentoFgts,0);
-        this.fgtsTotal = this.aportesFgts + this.rendimentosFgts;
+      
+        this.fgtsAportesPatrimonio = aportes;
+        this.fgtsRendimentosPatrimonio = rendimentos;
+        this.fgtsAportesCusto = aportes;
+
+      } else if (this.fgtsConfig.Posterior == Posterior.SaldoDevedor) {
+
+        this.fgtsAportesCusto = aportes;
+        this.fgtsRendimentosCusto = rendimentos;
+
+      } else if (this.fgtsConfig.Posterior == Posterior.Parcelas) {
+
+        this.fgtsAportesCusto = aportes;
+        this.fgtsRendimentosCusto = rendimentos;
+
       }
     }
-    
-    this.valorImovel = this.extrato[this.extrato.length-1].ValorImovel;
-    this.parcelas = this.extrato.reduce((a,b) => a + b.Parcela.Parcela(),0);
-    this.patrimonioTotal = this.valorImovel + this.fgtsTotal;
-    this.custoTotal += this.parcelas + this.user.disponivel + this.aportesFgts;
-    this.patrimonioLiquido = this.patrimonioTotal - this.custoTotal;
   }
 
+  
+  private initialize() {
+    this.valorImovel = this.extrato[this.extrato.length-1].ValorImovel;
+    
+    if(this.fgtsConfig.Posterior == Posterior.Parcelas) {
+      this.parcelas = this.extrato.reduce((a,b) => a + b.Parcela.ParcelaDescontada(),0);
+    } else {
+      this.parcelas = this.extrato.reduce((a,b) => a + b.Parcela.Parcela(),0);
+    }
+  }
+
+  public Patrimonio(): number {
+    return this.valorImovel + this.FgtsPatrimonio();
+  }
+
+  public Custo(): number {
+    return this.parcelas + +this.user.disponivel + this.fgtsEntrada + this.FgtsCusto();
+  }
+
+  public FgtsPatrimonio(): number {
+    return this.fgtsAportesPatrimonio + this.fgtsRendimentosPatrimonio;
+  }
+
+  public FgtsCusto(): number {
+    return this.fgtsAportesCusto + this.fgtsRendimentosCusto;
+  }
+
+  public PatrimonioLiquido(): number {
+    return this.Patrimonio() - this.Custo();
+  }
 }

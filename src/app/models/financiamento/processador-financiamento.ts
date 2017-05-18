@@ -55,6 +55,7 @@ export class ProcessadorFinanciamento {
             ex.SaldoAtual = ex.Saldo + this.financiamento.CorrecaoTaxaReferencial - amortizacao;
             ex.Parcela = parcela;
             ex.ValorImovel = this.imovel.ValorAcumulado;
+            ex.Mes = i;
 
             if(this.properties.UsaFgts()) {
                 let extFgts = this.fundoGarantia.Depositar(this.salario.PrestacaoAluguel * this.properties.GlobalConfiguration.Fundo);
@@ -84,6 +85,7 @@ export class ProcessadorFinanciamento {
                 ex.Resgate = valorAbatido;
                 ex.SaldoAtual -= valorAbatido;
             }
+            console.log(ex);
         };
 
         this.Extrato.push(ex);

@@ -1,6 +1,16 @@
 import {Parcela} from './parcela';
+import {rowData} from '../../financiamento/extrato-fgts/extrato-fgts.component';
 
-export  class ExtratoFinanciamento {
+export  class ExtratoFinanciamento  implements rowData {
+    
+    private _mes: number = 0;
+    public get Mes(): number {
+        return this._mes;
+    }
+    public set Mes(v: number) {
+        this._mes = v;
+    }
+    
     private _saldoAtual: number = 0;
     public get SaldoAtual(): number {
         return this._saldoAtual;
@@ -83,5 +93,25 @@ export  class ExtratoFinanciamento {
 
     public FgtsSaldoInicial(): number {
         return this._montanteFgts + this._resgate - this._depositoFgts - this._rendimentoFgts;
+    }
+
+    public TaxaAdministrativa(): number {
+        return this._parcela.TaxaAdministrativa();
+    }
+
+    public Juros(): number {
+        return this._parcela.Juros;
+    }
+
+    public Amortizacao(): number {
+        return this._parcela.Amortizacao;
+    }
+
+    public ParcelaDescontada(): number {
+        return this._parcela.ParcelaDescontada();
+    }
+
+    public Seguro(): number {
+        return this._parcela.Seguros;
     }
 }

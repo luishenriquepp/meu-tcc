@@ -1,29 +1,18 @@
 <div class="panel panel-default">
-  <div class="panel-heading">Extrato do Fundo de Garantia</div>
+  <div class="panel-heading">
+    <div class="row">
+      <div class="col-md-4">Extrato do Fundo de Garantia</div>
+      <div class="col-md-6">
+        <gt-pagination [gtClasses]="'pagination pagination-sm justify-content-center happy'" [genericTable]="myTable" style="margin: 0px;"></gt-pagination>
+      </div>
+      <div class="col-md-2">
+        <button class="btn btn-primary btn-md" style="padding: 6px 14px;" (click)="export()"d>Exportar</button>
+      </div>
+    </div>    
+  </div>
   <div class="panel-body">      
-    <div class="table table-responsive">  
-      <table class="table  table-striped table-condensed">
-        <thead>
-          <tr>
-            <th class="col-1">Mês</th>
-            <th class="text-right">Saldo Inicial</th>
-            <th class="text-right">Rendimentos</th>
-            <th class="text-right">Créditos</th>
-            <th class="text-right">Resgate</th>
-            <th class="text-right">Total FGTS</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr [ngClass]="{ 'danger' : ext.Resgate > 0 }" *ngFor="let ext of extrato; let i=index">
-            <td>{{i}}</td>
-            <td class="text-right">{{ext.FgtsSaldoInicial() | number:'1.2-2' }}</td> 
-            <td class="text-right">{{ext.RendimentoFgts | number:'1.2-2' }}</td>
-            <td class="text-right">{{ext.DepositoFgts | number:'1.2-2' }}</td>
-            <td class="text-right">{{ext.Resgate | number:'1.2-2' }}</td>
-            <td class="text-right">{{ext.MontanteFgts | number:'1.2-2' }}</td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="table table-responsive">
+      <generic-table [gtClasses]="'table-striped'" #myTable [gtSettings]="configObject.settings" [gtFields]="configObject.fields" [(gtData)]="configObject.data"></generic-table>
     </div>
   </div>
 </div>

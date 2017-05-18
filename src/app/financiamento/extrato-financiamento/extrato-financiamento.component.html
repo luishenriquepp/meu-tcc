@@ -1,43 +1,18 @@
 <div class="panel panel-default">
-  <div class="panel-heading">Fluxo de caixa do financiamento</div>
+  <div class="panel-heading">
+    <div class="row">
+      <div class="col-md-4">Extrato do Fundo de Garantia</div>
+      <div class="col-md-6">
+        <gt-pagination [gtClasses]="'pagination pagination-sm justify-content-center happy'" [genericTable]="myTable" style="margin: 0px;"></gt-pagination>
+      </div>
+      <div class="col-md-2">
+        <button class="btn btn-primary btn-md" style="padding: 6px 14px;" (click)="export()"d>Exportar</button>
+      </div>
+    </div> 
+  </div>
   <div class="panel-body">      
     <div class="table table-responsive">  
-      <table class="table table-striped table-condensed">
-        <thead>
-          <tr>
-            <th class="col-1">Mês</th>
-            <th class="text-right">Dívida Inicial</th>
-            <th class="text-right">Correção TR</th>
-            <th class="text-right">Amortização</th>
-            <th class="text-right">Juros</th>
-            <th class="text-right">Seguros</th>
-            <th class="text-right">Parcela</th>
-            <th class="text-right" [hidden]="posterior != 2">Parcela Descontada</th>
-            <th class="text-right" [hidden]="!naoUsaFgts">Resgate FGTS</th>
-            <th class="text-right">Dívida Atualizada</th>
-            <th class="text-right">Valor Imovel</th>
-            <th class="text-right">Patrimônio</th>
-            <th class="text-right">Patrimonio Total</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let ext of extrato; let i=index">
-            <td>{{i}}</td>
-            <td class="text-right">{{ext.Saldo | number:'1.2-2' }}</td> 
-            <td class="text-right">{{ext.CorrecaoTaxaReferencial | number:'1.2-2' }}</td>
-            <td class="text-right">{{ext.Parcela.Amortizacao | number:'1.2-2' }}</td>
-            <td class="text-right">{{ext.Parcela.Juros | number:'1.2-2' }}</td>
-            <td class="text-right">{{ext.Parcela.Seguros | number:'1.2-2' }}</td>
-            <td class="text-right">{{ext.Parcela.Parcela() | number:'1.2-2' }}</td>
-            <td class="text-right" [hidden]="posterior != 2">{{ext.Parcela.ParcelaDescontada() | number:'1.2-2' }}</td>
-            <td class="text-right" [hidden]="!naoUsaFgts">{{ext.Resgate | number:'1.2-2' }}</td>
-            <td class="text-right">{{ext.SaldoAtual | number:'1.2-2' }}</td> 
-            <td class="text-right">{{ext.ValorImovel | number:'1.2-2' }}</td>
-            <td class="text-right">{{ext.Patrimonio() | number:'1.2-2' }}</td>
-            <td class="text-right">{{ext.PatrimonioTotal() | number:'1.2-2' }}</td>
-          </tr>
-        </tbody>
-      </table>
+      <generic-table [gtClasses]="'table-striped'" #myTable [gtSettings]="tableConfig.settings" [gtFields]="tableConfig.fields" [(gtData)]="tableConfig.data"></generic-table>
     </div>
   </div>
 </div>
