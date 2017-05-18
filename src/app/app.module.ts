@@ -29,6 +29,9 @@ import { MyDatePickerModule } from 'mydatepicker';
 import { GlobalConfigurationComponent } from './global-configuration/global-configuration.component';
 import { AluguelResultadoComponent } from './aluguel/aluguel-resultado/aluguel-resultado.component';
 
+import { GenericTableModule } from '@angular-generic-table/core';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,7 +61,8 @@ import { AluguelResultadoComponent } from './aluguel/aluguel-resultado/aluguel-r
     FormsModule,
     HttpModule,
     RouterModule.forRoot(Routes),
-    MyDatePickerModule
+    MyDatePickerModule,
+    GenericTableModule
   ],
   providers: [
     {
