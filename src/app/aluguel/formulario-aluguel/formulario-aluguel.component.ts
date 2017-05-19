@@ -1,8 +1,8 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 
-import {Financiamento} from '../../models/financiamento';
 import {FinanciamentoService} from '../../services/financiamento-services';
 import {IIdentifier} from '../../models/i-identifier';
+import {AdvancedProperties} from '../../models/financiamento/advanced-properties';
 
 @Component({
   selector: 'app-formulario-aluguel',
@@ -12,7 +12,7 @@ import {IIdentifier} from '../../models/i-identifier';
 export class FormularioAluguelComponent implements OnInit {
 
   private financiamentos: Array<IIdentifier>; 
-  private financiamentoSelecionado: Financiamento = null;
+  private financiamentoSelecionado: AdvancedProperties = null;
   private aluguelInicial: number = 2200;
   private descricaoFinanciamento: string;
 

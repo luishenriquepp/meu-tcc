@@ -9,24 +9,28 @@ import { HomeComponent } from './home/home.component';
 import { FinanciamentoComponent } from './financiamento/financiamento.component';
 import { AluguelComponent } from './aluguel/aluguel.component';
 import { ConsorcioComponent } from './consorcio/consorcio.component';
-import { FormularioComponent } from './formulario/formulario.component';
+import { FormularioComponent } from './financiamento/formulario/formulario.component';
 import { MenuSuperiorComponent } from './menu-superior/menu-superior.component';
 import { MainComponent } from './main/main.component';
-import { TabelaVplComponent } from './tabela-vpl/tabela-vpl.component';
-import { ResultadoComponent } from './resultado/resultado.component';
-import { GraficoFinanciamento2Component } from './grafico-financiamento-2/grafico-financiamento-2.component';
-import { FinanciamentoPropriedadesComponent } from './financiamento-propriedades/financiamento-propriedades.component';
+import { ExtratoFinanciamentoComponent } from './financiamento/extrato-financiamento/extrato-financiamento.component';
+import { ResultadoFinanciamentoComponent } from './financiamento/resultado-financiamento/resultado-financiamento.component';
+import { GraficoFinanciamentoComponent } from './financiamento/grafico-financiamento/grafico-financiamento.component';
+import { FinanciamentoPropriedadesComponent } from './financiamento/financiamento-propriedades/financiamento-propriedades.component';
 import { Routes } from './models/routes';
-import { ExtratoFgtsComponent } from './extrato-fgts/extrato-fgts.component';
-import { FgtsComponent } from './fgts/fgts.component';
-import { FinanciamentoSaveComponent } from './financiamento-save/financiamento-save.component';
+import { ExtratoFgtsComponent } from './financiamento/extrato-fgts/extrato-fgts.component';
+import { FgtsPropriedadesComponent } from './financiamento/fgts-propriedades/fgts-propriedades.component';
+import { FinanciamentoSaveComponent } from './financiamento/financiamento-save/financiamento-save.component';
 import { FormularioAluguelComponent } from './aluguel/formulario-aluguel/formulario-aluguel.component';
 import { ExtratoAluguelComponent } from './aluguel/extrato-aluguel/extrato-aluguel.component';
 import { GraficoAluguelComponent } from './aluguel/grafico-aluguel/grafico-aluguel.component';
+import { ResultadoParcialComponent } from './financiamento/resultado-parcial/resultado-parcial.component';
 
 import { MyDatePickerModule } from 'mydatepicker';
 import { GlobalConfigurationComponent } from './global-configuration/global-configuration.component';
 import { AluguelResultadoComponent } from './aluguel/aluguel-resultado/aluguel-resultado.component';
+
+import { GenericTableModule } from '@angular-generic-table/core';
+
 
 @NgModule({
   declarations: [
@@ -38,25 +42,27 @@ import { AluguelResultadoComponent } from './aluguel/aluguel-resultado/aluguel-r
     FinanciamentoComponent,
     AluguelComponent,
     ConsorcioComponent,
-    TabelaVplComponent,
-    ResultadoComponent,
-    GraficoFinanciamento2Component,
+    ExtratoFinanciamentoComponent,
+    ResultadoFinanciamentoComponent,
+    GraficoFinanciamentoComponent,
     FinanciamentoPropriedadesComponent,
     ExtratoFgtsComponent,
-    FgtsComponent,
+    FgtsPropriedadesComponent,
     FinanciamentoSaveComponent,
     FormularioAluguelComponent,
     ExtratoAluguelComponent,
     GraficoAluguelComponent,
     GlobalConfigurationComponent,
-    AluguelResultadoComponent
+    AluguelResultadoComponent,
+    ResultadoParcialComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     RouterModule.forRoot(Routes),
-    MyDatePickerModule
+    MyDatePickerModule,
+    GenericTableModule
   ],
   providers: [
     {

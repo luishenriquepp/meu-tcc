@@ -1,0 +1,13 @@
+.imgwrapper #oi{
+   background-size:100% auto;
+}
+
+select{
+    background: #d6d6c2 !important;
+    color:#206040;
+    text-shadow:0 1px 0 rgba(0,0,0,0.4);
+}
+option:not(:checked) { 
+    background-color: white; 
+    color:#000;
+}

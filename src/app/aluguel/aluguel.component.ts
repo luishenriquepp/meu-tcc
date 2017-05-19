@@ -1,17 +1,22 @@
 import {Component,OnInit} from '@angular/core';
-import {ExtratoAluguel} from '../models/aluguel/aluguel';
-import {Financiamento} from '../models/financiamento';
+import {ExtratoAluguel} from '../models/aluguel/extrato-aluguel';
 import {FinanciamentoService} from '../services/financiamento-services';
 import {IIdentifier} from '../models/i-identifier';
-import {Comparador,Investimento,Aluguel} from '../models/aluguel/aluguel';
+import {Aluguel} from '../models/aluguel/aluguel';
+import {Comparador} from '../models/aluguel/comparador';
+import {Investimento} from '../models/aluguel/investimento';
 import {GlobalConfiguration} from '../models/global-configuration';
 import {ConfigurationService} from '../services/configuration-service';
+import {FinanciamentoProcessorService} from '../services/financiamento-processor-service';
+import {AdvancedProperties} from '../models/financiamento/advanced-properties';
+import {Usuario} from '../models/usuario';
+import {FinanciamentoFgtsConfig} from '../models/financiamento-fgts-config';
 
 @Component({
   selector: 'app-aluguel',
   templateUrl: './aluguel.component.html',
   styleUrls: ['./aluguel.component.css'],
-  providers: [ConfigurationService]
+  providers: [ConfigurationService, FinanciamentoProcessorService]
 })
 export class AluguelComponent implements OnInit {
 
@@ -22,27 +27,35 @@ export class AluguelComponent implements OnInit {
   private globalConfiguration: GlobalConfiguration;
   private resultado: boolean = false;
   private comparador: Comparador;
+  private fgtsConfig: FinanciamentoFgtsConfig;
+  private user: Usuario;
 
-  constructor(private configurationService: ConfigurationService) { }
+  constructor(
+    private configurationService: ConfigurationService,
+    private financiamentoProcessorService: FinanciamentoProcessorService) { }
 
   ngOnInit(): void {
     this.globalConfiguration = this.configurationService.Busca();
   }
 
   private onComparar(event: any): void {
-    let investimento = new Investimento(event.fin.Usuario.disponivel, this.globalConfiguration.RentabilidadeLiquidaMensal());
+    this.propertyToUserToFgtsConfig(event.fin);
+    let investimento = new Investimento(event.fin.Disponivel(), this.globalConfiguration.RentabilidadeLiquidaMensal());
     let aluguel = new Aluguel(event.aluguelInicial, this.globalConfiguration.Aluguel);
-    let fgts = new Investimento(event.fin.Usuario.FGTS, this.globalConfiguration.Fundo);
-    event.fin.Usuario.GlobalConfiguration = this.globalConfiguration;
-    event.fin.Prestacoes = [];
-    event.fin.FluxoDeCaixa();
+    let investimentoFinanciamento = new Investimento(0, this.globalConfiguration.RentabilidadeLiquidaMensal());
+    let salario = new Aluguel(event.fin.Renda(), event.fin.CrescimentoSalarial());
+    let fgts: Investimento;
+    if(this.user.usaFGTS) { fgts =  new Investimento(event.fin.Fgts(), this.globalConfiguration.Fundo) };
+    
+    let extratoFinanciamento = this.financiamentoProcessorService.Process(event.fin);
 
-    this.comparador = new Comparador(investimento, aluguel, event.fin, fgts);
+
+    this.comparador = new Comparador(investimento, aluguel, extratoFinanciamento, investimentoFinanciamento, salario, fgts);
     this.comparador.Processar();
 
     this.extratoAluguel = this.comparador.Gerenciador.ExtratoAluguel;
     this.calculado = true;
-    this.grafico = true;
+    this.resultado = true;
   }
   private exibeFluxoDeCaixa(): void {
     this.grafico = false;
@@ -58,5 +71,15 @@ export class AluguelComponent implements OnInit {
     this.fluxoDeCaixa = false;
     this.grafico = false;
     this.resultado = true;
+  }
+
+  private propertyToUserToFgtsConfig(property: AdvancedProperties): void {
+    this.user = new Usuario();
+    this.user.disponivel = property.Disponivel();
+    this.user.usaFGTS = property.UsaFgts();
+    this.fgtsConfig = new FinanciamentoFgtsConfig();
+    this.fgtsConfig.Posterior = property.Posterior();
+    this.fgtsConfig.Entrada = property.UsaComoEntrada();
+    this.fgtsConfig.Fgts = property.Fgts();
   }
 }

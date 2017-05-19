@@ -23,8 +23,11 @@
           </div>
         </div>
         <div class="row" *ngIf="resultado">            
-          <div class="col-lg-12">
-            <app-aluguel-resultado [extratoAluguel]="extratoAluguel" [comparador]="comparador"></app-aluguel-resultado>
+          <div class="col-lg-6">
+            <app-aluguel-resultado [extratoAluguel]="extratoAluguel"></app-aluguel-resultado>
+          </div>
+          <div class="col-lg-6">
+            <resultado-parcial [extrato]="comparador.ExtratoFinanciamento()" [extratoAluguel]="extratoAluguel" [user]="user" [fgtsConfig]="fgtsConfig"></resultado-parcial>
           </div>
         </div>    
       </div>

@@ -1,0 +1,60 @@
+<div class="panel-heading text-center">Valor nominal do financiamento</div>
+<div class="panel panel-default">
+<div class="panel-heading patri-main-1">
+    <h4 class="panel-title">
+    <a data-toggle="collapse" href="#finPatrimonio">Patrimônio: <span class="pull-right">R$ {{Patrimonio() | number: '1.2-2'}}</span></a>
+    </h4>
+</div>
+<div id="finPatrimonio" class="panel-collapse collapse">
+    <ul class="list-group">
+    <div class="list-group-item patri-main-2">Valor do imóvel <span class="pull-right">R$ {{valorImovel | number:'1.2-2'}}</span></div>
+    <div *ngIf="extratoAluguel">
+        <a href="#finInv" class="list-group-item patri-main-2" data-toggle="collapse">
+            Investimento:<span class="pull-right">R$ {{InvestimentoTotal() | number:'1.2-2'}}</span>
+        </a>
+        <div class="list-group collapse" id="finInv">
+            <div class="list-group-item patri-main-3">Aportes <span class="pull-right">R$ {{investimentoAportesPatrimonio | number:'1.2-2'}}</span></div>
+            <div class="list-group-item patri-main-3">Rendimentos <span class="pull-right">R$ {{investimentoRendimentosPatrimonio | number:'1.2-2'}}</span></div>
+        </div>
+    </div>
+    <div *ngIf="user.usaFGTS">
+        <a href="#finPatriFgts" class="list-group-item patri-main-2" data-toggle="collapse">
+            Fgts:<span class="pull-right">R$ {{FgtsPatrimonio() | number:'1.2-2'}}</span>
+        </a>
+        <div class="list-group collapse" id="finPatriFgts">
+            <div class="list-group-item patri-main-3">Aportes <span class="pull-right">R$ {{fgtsAportesPatrimonio | number:'1.2-2'}}</span></div>
+            <div class="list-group-item patri-main-3">Rendimentos <span class="pull-right">R$ {{fgtsRendimentosPatrimonio | number:'1.2-2'}}</span></div>
+        </div>
+    </div>
+    </ul>
+</div>
+</div>
+
+<div class="panel panel-default">
+<div class="panel-heading cust-main-1">
+    <h4 class="panel-title">
+    <a data-toggle="collapse" href="#finCusto">Custo:<span class="pull-right">R$ {{Custo() | number:'1.2-2'}}</span></a>
+    </h4>
+</div>
+<div id="finCusto" class="panel-collapse collapse">
+    <ul class="list-group">
+    <div class="list-group-item cust-main-2">Parcelas <span class="pull-right">R$ {{parcelas | number:'1.2-2'}}</span></div>
+    <div class="list-group-item cust-main-2">Disponibilidade <span class="pull-right">R$ {{user.disponivel | number:'1.2-2'}}</span></div>
+    <div *ngIf="extratoAluguel" class="list-group-item cust-main-2">Aportes <span class="pull-right">R$ {{investimentoAportesCusto | number:'1.2-2'}}</span></div>
+    <div *ngIf="user.usaFGTS">
+        <a href="#finCustFgts" class="list-group-item cust-main-2" data-toggle="collapse">
+            Fgts:<span class="pull-right">R$ {{FgtsCusto() | number:'1.2-2'}}</span>
+        </a>
+        <div class="list-group collapse" id="finCustFgts">
+            <div *ngIf="fgtsConfig.Entrada" class="list-group-item cust-main-3">Entrada <span class="pull-right">R$ {{fgtsEntrada | number:'1.2-2'}}</span></div>
+            <div class="list-group-item cust-main-3">Aportes <span class="pull-right">R$ {{fgtsAportesCusto | number:'1.2-2'}}</span></div>
+        </div>
+    </div>
+    </ul>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+    <div class="panel-title">Patrimônio líquido:<span class="pull-right">R$ {{PatrimonioLiquido() | number:'1.2-2'}}</span></div>
+</div>
+</div>

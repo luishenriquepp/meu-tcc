@@ -1,4 +1,4 @@
-import { Investimento } from './aluguel';
+import { Investimento } from './investimento';
 
 describe('investimento', () => {
     
@@ -41,5 +41,17 @@ describe('investimento', () => {
 
         expect(investimento.ValorAcumulado)
         .toBe(valor+depositoInicial+(depositoInicial*taxa));        
+    });
+
+    it('deve retornar o extrato mensal ao depositar', () => {
+        let valor = 5000;
+        let depositoInicial = 20000;
+        let taxa = 0.01;
+
+        let investimento = new Investimento(depositoInicial, taxa);
+
+        let extrato = investimento.Depositar(valor);
+
+        expect(extrato).toBeDefined();
     });
 });

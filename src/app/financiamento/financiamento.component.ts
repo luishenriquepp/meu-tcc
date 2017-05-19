@@ -1,56 +1,59 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Usuario } from '../models/usuario';
-import { Financiamento } from'../models/financiamento';
-import { FinanciamentoConfig } from'../models/financiamento-config';
-import { FinanciamentoFgtsConfig } from '../models/financiamento-fgts-config';
-import { FinanciamentoFactory } from '../utils/financiamento-factory';
-import {GlobalConfiguration} from '../models/global-configuration';
+import {Usuario} from '../models/usuario';
+import {FinanciamentoConfig} from'../models/financiamento-config';
+import {FinanciamentoFgtsConfig} from '../models/financiamento-fgts-config';
 import {ConfigurationService} from '../services/configuration-service';
+import {FinanciamentoProcessorService} from '../services/financiamento-processor-service';
+import {ExtratoFinanciamento} from '../models/financiamento/extrato-financiamento';
+import {AdvancedProperties} from '../models/financiamento/advanced-properties';
+import {Posterior} from '../models/financiamento-fgts-config';
 
 @Component({
   selector: 'app-financiamento',
   templateUrl: './financiamento.component.html',
   styleUrls: ['./financiamento.component.css'],
-  providers: [ConfigurationService]
+  providers: [ConfigurationService, FinanciamentoProcessorService]
 })
 export class FinanciamentoComponent {
   
-  usuario: Usuario;
-  financiamento: Financiamento;
-  fgtsConfig: FinanciamentoFgtsConfig;
-  financiamentoConfig: FinanciamentoConfig;
-  avancado: boolean;
-  fluxoDeCaixa: boolean;
-  resultado: boolean;
-  calculado: boolean;
-  fgts: boolean;
-  saveScreen: boolean;
-  private globalConfiguration: GlobalConfiguration;
+  private properties: AdvancedProperties;
+  private usuario: Usuario;
+  private fgtsConfig: FinanciamentoFgtsConfig;
+  private financiamentoConfig: FinanciamentoConfig;
+  private grafico: boolean;
+  private fluxoDeCaixa: boolean;
+  private resultado: boolean;
+  private calculado: boolean;
+  private fgts: boolean;
+  private saveScreen: boolean;
+  private isUsingFgts: boolean;
+  private posterior: Posterior = Posterior.NaoUsar;
 
-  constructor(private configurationService: ConfigurationService) {
+  private extrato: Array<ExtratoFinanciamento> = [];
+
+  constructor(private processorService: FinanciamentoProcessorService) {
     this.usuario = new Usuario();
     this.fgtsConfig = new FinanciamentoFgtsConfig();
-    this.financiamentoConfig = new FinanciamentoConfig(this.fgtsConfig);
+    this.financiamentoConfig = new FinanciamentoConfig();
+    
+    this.properties = new AdvancedProperties(this.usuario, this.financiamentoConfig, this.fgtsConfig, null);
+    
     this.resultado = false;
     this.fluxoDeCaixa = false;
-    this.avancado = false;
+    this.grafico = false;
     this.calculado = false;
     this.fgts = false;
     this.saveScreen = false;
-    this.globalConfiguration = this.configurationService.Busca();
   }
   onCalcular(user: Usuario) {
     this.fgts = false;
-    this.avancado = false;
+    this.grafico = false;
     this.fluxoDeCaixa = false;
-    user.FGTS = this.usuario.FGTS;
-    user.crescimentoSalarial = this.usuario.crescimentoSalarial;
-    this.usuario = user;
-    this.usuario.GlobalConfiguration = this.globalConfiguration;
-    let factory = new FinanciamentoFactory(this.usuario, this.financiamentoConfig);
-    this.financiamento = factory.Create();
-    this.financiamento.FluxoDeCaixa();
+    Object.assign(this.usuario, user);
+    this.extrato = this.processorService.Process(this.properties);    
+    this.isUsingFgts = this.properties.UsaFgts();
+    this.posterior = this.properties.Posterior();
     this.calculado = true;
     this.resultado = true;
   }
@@ -59,36 +62,36 @@ export class FinanciamentoComponent {
   }
   exibeFluxoDeCaixa(): void {
     this.fgts = false;
-    this.avancado = false;
+    this.grafico = false;
     this.resultado = false;
     this.saveScreen = false;
     this.fluxoDeCaixa = true;
   }
   exibeResultado(): void {
     this.fgts = false;
-    this.avancado = false;
+    this.grafico = false;
     this.fluxoDeCaixa = false;
     this.saveScreen = false;
     this.resultado = true;
   }
-  exibeAvancado(): void {
+  exibeGrafico(): void {
     this.fgts = false;
     this.fluxoDeCaixa = false;
     this.resultado = false;
     this.saveScreen = false;
-    this.avancado = true;
+    this.grafico = true;
   }
   exibeExtrato(): void {
     this.fluxoDeCaixa = false;
     this.resultado = false;
-    this.avancado = false;
+    this.grafico = false;
     this.fgts = true;
     this.saveScreen = false;
   }
   exibeSaveScreen(): void {
     this.fluxoDeCaixa = false;
     this.resultado = false;
-    this.avancado = false;
+    this.grafico = false;
     this.fgts = false;
     this.saveScreen = true;
   }

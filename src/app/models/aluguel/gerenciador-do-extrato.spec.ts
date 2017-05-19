@@ -1,4 +1,5 @@
-import { GerenciadorDoExtrato, ExtratoAluguel } from './aluguel';
+import {GerenciadorDoExtrato} from './gerenciador-do-extrato';
+import {ExtratoAluguel} from './extrato-aluguel';
 
 describe('gerenciador do extrato', () => {    
     it('deve adicionar um extrato de aluguel', () => {

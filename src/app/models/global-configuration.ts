@@ -1,3 +1,5 @@
+import {FinancialMath} from '../utils/financial-math';
+
 export class GlobalConfiguration {
     private _referencial : number = 0.001708;
     public get Referencial() : number {
@@ -60,6 +62,6 @@ export class GlobalConfiguration {
     }
 
     public RentabilidadeLiquidaMensal(): number {
-        return Math.pow((1+this.Rentabilidade),1/12)-1
+        return FinancialMath.YearToMonth(this._rentabilidade);
     }      
 }

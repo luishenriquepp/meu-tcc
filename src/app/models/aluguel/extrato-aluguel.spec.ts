@@ -1,4 +1,4 @@
-import { ExtratoAluguel } from './aluguel';
+import { ExtratoAluguel } from './extrato-aluguel';
 
 describe('extrato aluguel', () => {
 

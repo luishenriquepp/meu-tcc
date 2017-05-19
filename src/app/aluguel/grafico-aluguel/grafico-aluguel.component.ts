@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {ExtratoAluguel} from '../../models/aluguel/aluguel';
+import {ExtratoAluguel} from '../../models/aluguel/extrato-aluguel';
 declare var cfx;
 
 @Component({
@@ -16,7 +16,6 @@ export class GraficoAluguelComponent implements OnInit {
   ngOnInit() {
     this.areaChart = new cfx.Chart();
     this.areaChart.getLegendBox().setVisible(true);
-    // this.areaChart.getAxisY().getGrids().getMajor().setVisible(false);
     this.areaChart.getAxisY().getLabelsFormat().setFormat(cfx.AxisFormat.Currency);
     this.areaChart.setGallery(cfx.Gallery.Area);
     this.areaChart.getAllSeries().setStacked(cfx.Stacked.Normal);
