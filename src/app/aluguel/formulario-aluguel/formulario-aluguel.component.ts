@@ -7,6 +7,7 @@ import {AdvancedProperties} from '../../models/financiamento/advanced-properties
 @Component({
   selector: 'app-formulario-aluguel',
   templateUrl: './formulario-aluguel.component.html',
+  styleUrls: ['../../financiamento/formulario/formulario.component.css'],
   providers: [FinanciamentoService]
 })
 export class FormularioAluguelComponent implements OnInit {

@@ -21,11 +21,11 @@
       <div class="panel panel-default">
         <div class="panel-heading">
             <div *ngIf="calculado">
-              <button id="configuracoes" class="btn btn-sm btn-warning text-center" (click)="exibeGrafico()">Gráfico</button>
-              <button id="resultado" class="btn btn-sm btn-warning text-center" (click)="exibeResultado()">Resultado</button>
-              <button id="fdc" class="btn btn-sm btn-warning text-center" (click)="exibeFluxoDeCaixa()">Fluxo de Caixa</button>
-              <button id="fgts" class="btn btn-sm btn-warning text-center" *ngIf="isUsingFgts" (click)="exibeExtrato()">Extrato FGTS</button>
-              <button id="save" class="btn btn-sm btn-primary text-center" (click)="exibeSaveScreen()">Salvar</button>
+              <button id="configuracoes" class="btn btn-warning text-center" (click)="exibeGrafico()">Gráfico</button>
+              <button id="resultado" class="btn btn-warning text-center" (click)="exibeResultado()">Resultado</button>
+              <button id="fdc" class="btn btn-warning text-center" (click)="exibeFluxoDeCaixa()">Fluxo de Caixa</button>
+              <button id="fgts" class="btn btn-warning text-center" *ngIf="isUsingFgts" (click)="exibeExtrato()">Extrato FGTS</button>
+              <button id="save" class="btn btn-primary text-center" (click)="exibeSaveScreen()">Salvar</button>
             </div>
         </div>        
         <div class="panel-body">

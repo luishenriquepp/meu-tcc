@@ -4,19 +4,19 @@
     <div class="form-group">
       <label>Juros Anuais</label>
       <div class="input-group">
-        <input [(ngModel)]="config.JurosAnuais" type="number" class="form-control input-sm" step="0.01">
+        <input [(ngModel)]="config.JurosAnuais" type="number" class="form-control input" step="0.01">
         <span class="input-group-addon percent">{{ config.JurosAnuais | percent:'1.3-3' }}</span>
       </div>
     </div>
     <div class="form-group">  
-      <label>Taxa Admnistrativa:</label>
+      <label>Taxa Admnistrativa</label>
       <div class="input-group">
         <span class="input-group-addon">R$</span>
-        <input [(ngModel)]="config.TaxaAdministrativa" type="number" class="form-control input-sm" step="5">
+        <input [(ngModel)]="config.TaxaAdministrativa" type="number" class="form-control input" step="5">
     </div>
     <div class="form-group">
       <label>Seguros</label>
-      <select class="form-control input-sm" (change)="selecionaSeguro($event)">
+      <select class="form-control input" (change)="selecionaSeguro($event)">
         <option value="sa" selected>Sul América</option>
         <option value="hdi">HDI</option>
       </select>

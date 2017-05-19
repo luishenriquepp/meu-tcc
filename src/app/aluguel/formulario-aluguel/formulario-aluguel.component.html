@@ -1,15 +1,15 @@
 <div class="panel panel-default">
-  <div class="panel-heading">Formulário Aluguel</div>
+  <div class="panel-heading">Aluguel</div>
   <div class="panel-body">
     <div class="form-group">
-      <label>Valor inicial do aluguel:</label>
+      <label>Valor inicial do aluguel</label>
       <div class="input-group">
         <span class="input-group-addon">R$</span>
         <input type="number" class="form-control" [(ngModel)]="aluguelInicial" placeholder="Parcela mensal, exemplo: R$2.000">
       </div>
     </div>
     <div class="form-group">
-      <label>Selecione um financiamento:</label>
+      <label>Selecione um financiamento</label>
       <select class="form-control" [(ngModel)]="financiamentoSelecionado" (change)="onChangeFinanciamento()">
         <option [ngValue]="null">Selecione</option>
         <option *ngFor="let fin of financiamentos" [ngValue]="fin">{{fin.Identificacao}}</option>

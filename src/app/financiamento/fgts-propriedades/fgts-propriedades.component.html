@@ -5,13 +5,13 @@
       <label>Saldo FGTS</label>
       <div class="input-group">
         <span class="input-group-addon">R$</span>
-        <input [(ngModel)]="fgtsConfig.Fgts" type="number" class="form-control input-sm" min="0" step="1000">
+        <input [(ngModel)]="fgtsConfig.Fgts" type="number" class="form-control input" min="0" step="1000">
       </div>
     </div>
     <div class="form-group">
       <label>Expectativa de crescimento salarial anual</label>
       <div class="input-group">
-        <input [(ngModel)]="fgtsConfig.CrescimentoSalarial" type="number" class="form-control input-sm" step="0.01">
+        <input [(ngModel)]="fgtsConfig.CrescimentoSalarial" type="number" class="form-control input" step="0.01">
         <span class="input-group-addon percent">{{ fgtsConfig.CrescimentoSalarial | percent:'1.3-3' }}</span>              
       </div>
     </div>
@@ -22,7 +22,7 @@
       </div>  
       <div class="form-group">
         <label>Novos Créditos de FGTS</label>
-        <select (change)="onChangePosterior($event.target.value)" class="form-control input-sm">
+        <select (change)="onChangePosterior($event.target.value)" class="form-control input">
           <option value="1">Abater do saldo devedor</option>
           <option value="2">Abater das próximas parcelas</option>
           <option value="0" selected>Não usar mais</option>
