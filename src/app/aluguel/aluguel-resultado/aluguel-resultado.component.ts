@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnChanges, Input } from '@angular/core';
 import {ExtratoAluguel} from '../../models/aluguel/extrato-aluguel';
 import {Comparador} from '../../models/aluguel/comparador';
 
@@ -7,10 +7,9 @@ import {Comparador} from '../../models/aluguel/comparador';
   templateUrl: './aluguel-resultado.component.html',
   styleUrls: ['./aluguel-resultado.component.css']
 })
-export class AluguelResultadoComponent implements OnInit {
+export class AluguelResultadoComponent implements OnChanges {
 
   @Input() extratoAluguel: Array<ExtratoAluguel>;
-  @Input() comparador: Comparador;
   public investimentoInicial: number;
   public investimentoRendimentos: number;
   public investimentoAportes: number;
@@ -19,30 +18,13 @@ export class AluguelResultadoComponent implements OnInit {
   public fgtsRendimentos: number;
   public fgtsAportes: number;  
 
-  public parcelas: number;
-  public entrada: number;
-  public finFgtsAportes: number;
-  public finFgtsRendimentos: number;
-  public finInvestimentoAportes: number;
-  public finInvestimentoRendimentos: number;
-  public valorImovel: number;
-  public disponibilidade: number;
-
-  ngOnInit() {
+  ngOnChanges() {
     this.investimentoRendimentos = this.buscaTotalDeRendimentos();
     this.investimentoAportes = this.buscaTotalDeAportes();
     this.investimentoInicial = this.extratoAluguel[0].MontanteInvestimento;
     this.fgtsRendimentos = this.buscaTotalDeRendimentosFgts();
     this.fgtsAportes = this.buscaTotalDeAportesFgts();
-    this.fgtsInicial = this.extratoAluguel[0].MontanteFGTS;
-    
-    this.parcelas = this.buscaTotalDeParcelas();
-    this.finInvestimentoAportes = this.buscaTotalFinInvestimentoAportes();
-    this.finInvestimentoRendimentos = this.buscaTotalFinInvestimentoRendimentos();
-    // this.finFgtsAportes = TODO
-    // this.finFgtsRendimentos = TODO
-    // this.valorImovel = this.comparador.Financiamento().Prestacoes[this.comparador.Financiamento().Prestacoes.length-1].valorImovel;
-    // this.disponibilidade = this.comparador.Financiamento().Usuario.disponivel;
+    this.fgtsInicial = this.extratoAluguel[0].MontanteFGTS;  
   }
 
   private buscaTotalDeRendimentos(): number  {
@@ -75,17 +57,5 @@ export class AluguelResultadoComponent implements OnInit {
 
   public SaldoPatrimonialLiquido(): number {
     return this.fgtsRendimentos + this.investimentoRendimentos;
-  }
-
-  private buscaTotalDeParcelas(): number {
-    return this.extratoAluguel.reduce((a,b) => a + b.Parcela,0);
-  }
-
-  private buscaTotalFinInvestimentoAportes(): number {
-    return this.extratoAluguel.reduce((a,b) => a + b.DepositoFinInvestimento,0);
-  }
-
-  private buscaTotalFinInvestimentoRendimentos(): number {
-    return this.extratoAluguel.reduce((a,b) => a + b.RendimentoFinInvestimento,0);
   }
 }

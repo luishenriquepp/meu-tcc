@@ -1,6 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnChanges, Input } from '@angular/core';
 
 import {ExtratoFinanciamento} from '../../models/financiamento/extrato-financiamento';
+import {ExtratoAluguel} from '../../models/aluguel/extrato-aluguel';
 import {Usuario} from '../../models/usuario';
 import {FinanciamentoFgtsConfig} from '../../models/financiamento-fgts-config';
 import {Posterior} from '../../models/financiamento-fgts-config';
@@ -10,7 +11,8 @@ import {Posterior} from '../../models/financiamento-fgts-config';
   templateUrl: './resultado-parcial.component.html',
   styleUrls: ['./resultado-parcial.component.css']
 })
-export class ResultadoParcialComponent implements OnInit {
+export class ResultadoParcialComponent implements OnChanges {
+  @Input() extratoAluguel: Array<ExtratoAluguel>;
   @Input() extrato: Array<ExtratoFinanciamento>;
   @Input() user: Usuario;
   @Input() fgtsConfig: FinanciamentoFgtsConfig;
@@ -22,9 +24,15 @@ export class ResultadoParcialComponent implements OnInit {
   private fgtsAportesPatrimonio: number = 0;
   private fgtsRendimentosPatrimonio: number = 0;
   private fgtsEntrada: number = 0;
+  private investimentoAportesPatrimonio: number = 0;
+  private investimentoRendimentosPatrimonio: number = 0;
+  private investimentoAportesCusto: number = 0;
 
-  ngOnInit(): void {
-    
+  ngOnChanges(): void {
+    this.calculateResult();
+  }
+
+  private calculateResult(): void {
     this.initialize();
     let aportes = this.extrato.reduce((a,b) => a + b.DepositoFgts, 0);
     let rendimentos = this.extrato.reduce((a,b) => a + b.RendimentoFgts, 0);
@@ -52,10 +60,15 @@ export class ResultadoParcialComponent implements OnInit {
         this.fgtsRendimentosCusto = rendimentos;
 
       }
+
+      if(this.extratoAluguel) {
+        this.investimentoAportesPatrimonio = this.extratoAluguel.reduce((a,b) => a + b.DepositoFinInvestimento, 0);
+        this.investimentoRendimentosPatrimonio = this.extratoAluguel.reduce((a,b) => a + b.RendimentoFinInvestimento, 0);
+        this.investimentoAportesCusto = this.investimentoAportesPatrimonio;
+      }
     }
   }
 
-  
   private initialize() {
     this.valorImovel = this.extrato[this.extrato.length-1].ValorImovel;
     
@@ -67,11 +80,11 @@ export class ResultadoParcialComponent implements OnInit {
   }
 
   public Patrimonio(): number {
-    return this.valorImovel + this.FgtsPatrimonio();
+    return this.valorImovel + this.FgtsPatrimonio() + this.InvestimentoTotal();
   }
 
   public Custo(): number {
-    return this.parcelas + +this.user.disponivel + this.fgtsEntrada + this.FgtsCusto();
+    return this.parcelas + +this.user.disponivel + this.fgtsEntrada + this.FgtsCusto() - this.investimentoAportesCusto;
   }
 
   public FgtsPatrimonio(): number {
@@ -84,5 +97,9 @@ export class ResultadoParcialComponent implements OnInit {
 
   public PatrimonioLiquido(): number {
     return this.Patrimonio() - this.Custo();
+  }
+
+  public InvestimentoTotal(): number {
+    return this.investimentoRendimentosPatrimonio + this.investimentoRendimentosPatrimonio;
   }
 }

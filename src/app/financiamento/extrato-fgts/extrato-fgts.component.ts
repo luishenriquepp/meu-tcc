@@ -16,7 +16,6 @@ export interface rowData {
 @Component({
   selector: 'extrato-fgts',
   templateUrl: './extrato-fgts.component.html',
-  styleUrls: ['./extrato-fgts.component.css'],
   providers: [DecimalPipe]
 })
 export class ExtratoFgtsComponent implements OnInit {
