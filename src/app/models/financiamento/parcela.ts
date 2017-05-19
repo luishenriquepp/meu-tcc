@@ -42,7 +42,9 @@ export class Parcela {
     }
 
     public Parcela(): number {
-        return this._amortizacao + this._seguros + this._juros + this.TaxaAdministrativa();
+        let parcela = this._amortizacao + this._seguros + this._juros;
+        if (parcela > 0) return parcela + this.TaxaAdministrativa();
+        return 0;
     }
 
     public ParcelaDescontada(): number {

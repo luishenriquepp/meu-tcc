@@ -17,7 +17,9 @@ export class ProcessadorFinanciamento {
     private readonly salario: Aluguel;
     private readonly properties: AdvancedProperties;
     private fgtsProcessor: IProcessFgts;
+    private saldoDevedor: number = 0;
     public Extrato: Array<ExtratoFinanciamento> = new Array<ExtratoFinanciamento>();
+
 
     constructor(financiamento: Financiamento, imovel: Investimento, salario: Aluguel, properties: AdvancedProperties, fundo: Investimento = null) {
         this.financiamento = financiamento;
@@ -36,10 +38,10 @@ export class ProcessadorFinanciamento {
 
     public Processar(): void {
         let dependency = new FgtsDependency(this.Extrato, this.financiamento, this.fundoGarantia);
-
+        let month: number = 1;
         this.initialize();
-
-        for(let i=1; i<=this.properties.Prestacoes();i++) {
+            
+        while(this.saldoDevedor > 0) {
             let ex = new ExtratoFinanciamento();
             this.Extrato.push(ex);            
             this.imovel.Depositar();           
@@ -47,7 +49,7 @@ export class ProcessadorFinanciamento {
             this.financiamento.Corrigir();
 
             let parcela = new Parcela(this.properties);
-            let amortizacao = parcela.Amortizar(this.financiamento.SaldoDevedor, this.properties.Prestacoes()-(i-1));
+            let amortizacao = parcela.Amortizar(this.financiamento.SaldoDevedor, this.properties.Prestacoes()-(month-1));
             this.financiamento.Pagar(amortizacao);
             this.salario.Pagar();
             
@@ -55,16 +57,18 @@ export class ProcessadorFinanciamento {
             ex.SaldoAtual = ex.Saldo + this.financiamento.CorrecaoTaxaReferencial - amortizacao;
             ex.Parcela = parcela;
             ex.ValorImovel = this.imovel.ValorAcumulado;
-            ex.Mes = i;
+            ex.Mes = month;
 
             if(this.properties.UsaFgts()) {
-                let extFgts = this.fundoGarantia.Depositar(this.salario.PrestacaoAluguel * this.properties.GlobalConfiguration.Fundo);
+                let extFgts = this.fundoGarantia.Depositar(this.salario.PrestacaoAluguel * 0.08);
                 ex.RendimentoFgts = extFgts.Rendimento;
                 ex.DepositoFgts = extFgts.Deposito;
                 ex.MontanteFgts = this.fundoGarantia.ValorAcumulado;
 
-                this.fgtsProcessor.Process(dependency, i);
+                this.fgtsProcessor.Process(dependency, month);
             }
+            month++;
+            this.saldoDevedor = ex.SaldoAtual;
         }
     }
 
@@ -73,7 +77,8 @@ export class ProcessadorFinanciamento {
         ex.Parcela = new Parcela(this.properties);
         ex.ValorImovel = this.properties.ValorImovel();
         ex.SaldoAtual = this.properties.ValorImovel() - this.properties.Disponivel();
-        ex.Saldo = this.properties.ValorImovel();
+        ex.Saldo = ex.SaldoAtual;
+        
         this.financiamento.Abater(this.properties.Disponivel());
 
         if(this.properties.UsaFgts()) {            
@@ -84,10 +89,10 @@ export class ProcessadorFinanciamento {
                 this.fundoGarantia.Sacar(valorAbatido);
                 ex.Resgate = valorAbatido;
                 ex.SaldoAtual -= valorAbatido;
+                ex.Saldo = ex.SaldoAtual;
             }
-            console.log(ex);
         };
-
+        this.saldoDevedor = ex.Saldo;
         this.Extrato.push(ex);
     }
 }
