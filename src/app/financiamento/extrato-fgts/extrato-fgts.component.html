@@ -2,8 +2,10 @@
   <div class="panel-heading">
     <div class="row">
       <div class="col-md-4">Extrato do Fundo de Garantia</div>
-      <div class="col-md-6">      </div>
-      <div class="col-md-2">
+      <div class="col-md-6" style=" margin-top: -20px; position: absolute; display: inline-flex;">
+        <gt-pagination [gtClasses]="'pagination pagination-sm justify-content-center happy'" [genericTable]="myTable" style="margin: 0px;"></gt-pagination>
+      </div>
+      <div class="col-md-2" style="float: right">
         <button class="btn btn-primary btn-md" style="padding: 6px 14px;" (click)="export()"d>Exportar</button>
       </div>
     </div>    
@@ -12,6 +14,5 @@
     <div class="table table-responsive">
       <generic-table [gtClasses]="'table-striped'" #myTable [gtSettings]="configObject.settings" [gtFields]="configObject.fields" [(gtData)]="configObject.data"></generic-table>
     </div>
-    <gt-pagination [gtClasses]="'pagination pagination-sm justify-content-center happy'" [genericTable]="myTable" style="margin: 0px;"></gt-pagination>
   </div>
 </div>

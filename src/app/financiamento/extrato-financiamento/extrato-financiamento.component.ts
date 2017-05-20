@@ -7,6 +7,7 @@ import {GtConfig, GenericTableComponent} from '@angular-generic-table/core';
 @Component({
   selector: 'extrato-financiamento',
   templateUrl: './extrato-financiamento.component.html',
+  styleUrls: ['./extrato-financiamento.component.css'],
   providers: [DecimalPipe]
 })
 export class ExtratoFinanciamentoComponent { 
