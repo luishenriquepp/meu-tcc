@@ -84,7 +84,7 @@ export class ResultadoParcialComponent implements OnChanges {
   }
 
   public Custo(): number {
-    return this.parcelas + +this.user.disponivel + this.fgtsEntrada + this.FgtsCusto() - this.investimentoAportesCusto;
+    return this.parcelas + +this.user.disponivel + this.fgtsEntrada + this.FgtsCusto() + this.investimentoAportesCusto;
   }
 
   public FgtsPatrimonio(): number {
@@ -100,6 +100,6 @@ export class ResultadoParcialComponent implements OnChanges {
   }
 
   public InvestimentoTotal(): number {
-    return this.investimentoRendimentosPatrimonio + this.investimentoRendimentosPatrimonio;
+    return this.investimentoRendimentosPatrimonio + this.investimentoAportesPatrimonio;
   }
 }
