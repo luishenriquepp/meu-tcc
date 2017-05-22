@@ -6,11 +6,15 @@ export class FinanciamentoRepository {
     private static builder = new AdvancedPropertiesBuilder();
     
     private static financiamentos: Array<AdvancedProperties> = [
-        FinanciamentoRepository.builder.AdvancedRichWithFgtsSaldoDevedor(), 
-        FinanciamentoRepository.builder.AdvancedRichWithFgtsNaoUsarMais(),
-        FinanciamentoRepository.builder.AdvancedRichWithoutFgts(),
+        FinanciamentoRepository.builder.RichWithFgtsSaldoDevedor(), 
+        FinanciamentoRepository.builder.RichWithFgtsNaoUsarMais(),
+        FinanciamentoRepository.builder.RichWithoutFgts(),
+        FinanciamentoRepository.builder.MediumWithFgtsSaldoDevedor(),
+        FinanciamentoRepository.builder.MediumWithoutFgts(),
+        FinanciamentoRepository.builder.PoorWithFgtsParcelas(),
+        FinanciamentoRepository.builder.PoorWithFgtsDevedor()
     ];
-    private static counter: number = 3;
+    private static counter: number = 7;
 
     public Buscar(id: number): AdvancedProperties {
         return FinanciamentoRepository.financiamentos.find(t => t.Id == id);
