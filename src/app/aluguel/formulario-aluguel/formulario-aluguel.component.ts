@@ -48,7 +48,7 @@ export class FormularioAluguelComponent implements OnInit {
     aluguel.property = this.financiamentoSelecionado;
     aluguel.configuration = this.configurationSelecionado;
     aluguel.property.GlobalConfiguration = aluguel.configuration;
-    aluguel.aluguelInicial = this.maskService.ConvertToNumber(this.aluguelInicial);
+    aluguel.aluguelInicial = this.compensar ? this.maskService.ConvertToNumber(this.aluguelInicial) : 0;
     this.sendFinanciamento.emit(aluguel);
   }
 
@@ -61,7 +61,12 @@ export class FormularioAluguelComponent implements OnInit {
   }
 
   private isValid(): boolean {
-    if(this.aluguelInicial && this.maskService.ConvertToNumber(this.aluguelInicial) > 0 && this.financiamentoSelecionado)
-      return true;
+    if(this.compensar) {
+        if(this.aluguelInicial && this.maskService.ConvertToNumber(this.aluguelInicial) > 0 && this.financiamentoSelecionado)
+          return true;
+    } else {
+        if(this.financiamentoSelecionado)
+          return true;
+    } 
   }
 }
