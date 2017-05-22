@@ -15,6 +15,8 @@ export class GlobalConfigurationComponent implements OnInit {
   private configurations: Array<GlobalConfiguration>;
   private configuration: GlobalConfiguration = new GlobalConfiguration();
   private mask = this.maskService.percentMask;
+  private Identificacao: string;
+  private Descricao: string;
   
   constructor(
     private conService: ConfigurationService,
@@ -126,6 +128,10 @@ export class GlobalConfigurationComponent implements OnInit {
     this.taxaJuros = v;
   }
 
-  private Identificacao: string;
-  private Descricao: string;
+  private isValid(): boolean {
+    if(!this.taxaAluguel || !this.taxaFundo || !this.taxaImovel || !this.taxaImpostoRenda || !this.taxaInterna || !this.taxaJuros || !this.taxaReferencial || !this.taxaRentabilidade) {
+      return false;
+    }
+    return true;
+  }
 }
