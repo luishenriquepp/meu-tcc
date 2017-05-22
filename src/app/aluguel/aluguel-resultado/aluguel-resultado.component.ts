@@ -19,6 +19,8 @@ export class AluguelResultadoComponent implements OnChanges {
   public fgtsAportes: number;  
 
   ngOnChanges() {
+    this.clearFields();
+    
     this.investimentoRendimentos = this.buscaTotalDeRendimentos();
     this.investimentoAportes = this.buscaTotalDeAportes();
     this.investimentoInicial = this.extratoAluguel[0].MontanteInvestimento;
@@ -57,5 +59,14 @@ export class AluguelResultadoComponent implements OnChanges {
 
   public SaldoPatrimonialLiquido(): number {
     return this.fgtsRendimentos + this.investimentoRendimentos;
+  }
+
+  private clearFields(): void {
+    this.investimentoInicial = 0;
+    this.investimentoRendimentos = 0;
+    this.investimentoAportes = 0;
+    this.fgtsInicial = 0;
+    this.fgtsRendimentos = 0;
+    this.fgtsAportes = 0;  
   }
 }

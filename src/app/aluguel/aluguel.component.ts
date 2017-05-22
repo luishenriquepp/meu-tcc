@@ -32,6 +32,9 @@ export class AluguelComponent {
   constructor(private financiamentoProcessorService: FinanciamentoProcessorService) { }
 
   private onComparar(aluguelConfig: AluguelConfig): void {
+    this.fluxoDeCaixa = false;
+    this.grafico = false;
+    
     this.propertyToUserToFgtsConfig(aluguelConfig.property);
     let investimento = new Investimento(aluguelConfig.property.Disponivel(), aluguelConfig.configuration.RentabilidadeLiquidaMensal());
     let aluguel = new Aluguel(aluguelConfig.aluguelInicial, aluguelConfig.configuration.Aluguel);
