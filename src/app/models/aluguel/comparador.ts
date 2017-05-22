@@ -36,6 +36,7 @@ export class Comparador {
         for(let i=1;i<this._extratoFinanciamento.length;i++) {
             
             let extratoAluguel = new ExtratoAluguel();
+            extratoAluguel.Mes = i;
             let fdc = this._extratoFinanciamento[i];
             this._aluguel.Pagar();
             this._salario.Pagar();

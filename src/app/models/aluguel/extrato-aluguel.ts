@@ -1,4 +1,12 @@
 export class ExtratoAluguel {      
+    private _mes: number = 0;
+    public get Mes(): number {
+        return this._mes;
+    }
+    public set Mes(v: number) {
+        this._mes = v;
+    }
+
     private _aluguel : number = 0;
     public get Aluguel() : number {
         return this._aluguel;
