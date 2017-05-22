@@ -12,5 +12,5 @@ export const Routes  = [
     { path: 'financiamento', component: FinanciamentoComponent },
     { path: 'aluguel', component: AluguelComponent },
     { path: 'consorcio', component: ConsorcioComponent },
-    { path: 'configuracoes', component: GlobalConfigurationComponent },
+    { path: 'taxas', component: GlobalConfigurationComponent },
 ];
