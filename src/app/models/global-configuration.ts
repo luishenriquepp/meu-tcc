@@ -1,7 +1,12 @@
+import {IIdentifier} from './i-identifier';
 import {FinancialMath} from '../utils/financial-math';
 
-export class GlobalConfiguration {
-    private _referencial : number = 0.001708;
+export class GlobalConfiguration implements IIdentifier {
+    public Id: number;
+    public Identificacao: string;
+    public Descricao: string;
+
+    private _referencial: number;
     public get Referencial() : number {
         return this._referencial;
     }
@@ -9,7 +14,7 @@ export class GlobalConfiguration {
         this._referencial = v;
     }
         
-    private _interna : number = 0.00848891;
+    private _interna : number;
     public get Interna() : number {
         return this._interna;
     }
@@ -17,7 +22,7 @@ export class GlobalConfiguration {
         this._interna = v;
     }
     
-    private _rentabilidade : number = 0.11;
+    private _rentabilidade : number;
     public get Rentabilidade() : number {
         return this._rentabilidade;
     }
@@ -25,7 +30,7 @@ export class GlobalConfiguration {
         this._rentabilidade = v;
     }
     
-    private _imovel : number = 0.001;
+    private _imovel: number;
     public get Imovel() : number {
         return this._imovel;
     }
@@ -33,15 +38,15 @@ export class GlobalConfiguration {
         this._imovel = v;
     }
     
-    private _fundo : number = 0.003;
-    public get Fundo() : number {
+    private _fundo: number;
+    public get Fundo(): number {
         return this._fundo;
     }
     public set Fundo(v : number) {
         this._fundo = v;
     }
     
-    private _aluguel : number = 0.08;
+    private _aluguel: number;
     public get Aluguel() : number {
         return this._aluguel;
     }
@@ -49,12 +54,20 @@ export class GlobalConfiguration {
         this._aluguel = v;
     }
     
-    private _impostoRenda : number  = 0.017;
+    private _impostoRenda: number;
     public get ImpostoRenda() : number {
         return this._impostoRenda;
     }
     public set ImpostoRenda(v : number) {
         this._impostoRenda = v;
+    }
+
+    private _juros: number;
+    public get Juros() : number {
+        return this._juros;
+    }
+    public set Juros(v : number) {
+        this._juros = v;
     }
 
     public RentabilidadeLiquida(): number {

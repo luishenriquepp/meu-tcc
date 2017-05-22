@@ -2,7 +2,7 @@ export class FinanciamentoFgtsConfig {
     private _entrada: boolean = false;
     private _posterior: Posterior = 0;
     private _fgts: number = 0;
-    private _crescimentoSalarial = 0.07;
+    private _crescimentoSalarial = 0.0682;
 
     public get Entrada(): boolean {
         return this._entrada;        

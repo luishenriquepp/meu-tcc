@@ -5,8 +5,14 @@
       <label>Valor inicial do aluguel</label>
       <div class="input-group">
         <span class="input-group-addon">R$</span>
-        <input type="number" class="form-control" [(ngModel)]="aluguelInicial" placeholder="Parcela mensal, exemplo: R$2.000">
+        <input type="text" [textMask]="{mask: mask}" class="form-control" [(ngModel)]="aluguelInicial" placeholder="Parcela mensal: R$2.000">
       </div>
+    </div>
+    <div class="form-group">
+      <label>Taxas</label>
+      <select name="configuration" class="form-control" [(ngModel)]="configurationSelecionado">
+        <option *ngFor="let config of configurations" [ngValue]="config">{{config.Identificacao}}</option>
+      </select>
     </div>
     <div class="form-group">
       <label>Selecione um financiamento</label>

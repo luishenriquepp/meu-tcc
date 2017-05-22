@@ -6,7 +6,6 @@ import {Aluguel} from '../models/aluguel/aluguel';
 import {Investimento} from '../models/aluguel/investimento';
 import {Usuario} from '../models/usuario';
 import {ProcessadorFinanciamento} from '../models/financiamento/processador-financiamento';
-import {ConfigurationService} from '../services/configuration-service';
 import {FinanciamentoConfig} from '../models/financiamento-config';
 import {FinanciamentoSeguro} from '../models/financiamento-seguro';
 import {Posterior} from '../models/financiamento-fgts-config';
@@ -17,20 +16,19 @@ import {AdvancedProperties} from '../models/financiamento/advanced-properties';
 import {Seguradora} from '../models/financiamento-config';
 import {SeguradoraHdi} from '../models/seguradora-hdi';
 import {SeguradoraSa} from '../models/seguradora-sa';
+import {FinancialMath} from '../utils/financial-math';
 
 @Injectable()
 export class FinanciamentoProcessorService {
-
-    constructor(private configuration: ConfigurationService) { }
     
     public Process(properties: AdvancedProperties): Array<ExtratoFinanciamento> {
-        let global = this.configuration.Busca();
-        properties.GlobalConfiguration = global;
+        let global = properties.GlobalConfiguration;
 
-        let imovel = new Investimento(properties.ValorImovel(), global.Imovel);
-        let salario = new Aluguel(properties.Renda(), properties.CrescimentoSalarial());        
-        let financiamento = new Financiamento(properties.ValorImovel(), global.Referencial);
-        let fundo: Investimento = properties.UsaFgts() ? new Investimento(properties.Fgts(), global.Fundo) : null;
+
+        let imovel = new Investimento(properties.ValorImovel(), FinancialMath.YearToMonth(global.Imovel));
+        let salario = new Aluguel(properties.Renda(), properties.CrescimentoSalarial());
+        let financiamento = new Financiamento(properties.ValorImovel(), FinancialMath.YearToMonth(global.Referencial));
+        let fundo: Investimento = properties.UsaFgts() ? new Investimento(properties.Fgts(), FinancialMath.YearToMonth(global.Fundo)) : null;
         
         let processador = new ProcessadorFinanciamento(financiamento,imovel,salario,properties,fundo);
 

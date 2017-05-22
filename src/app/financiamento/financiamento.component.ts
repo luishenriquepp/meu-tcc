@@ -8,6 +8,7 @@ import {FinanciamentoProcessorService} from '../services/financiamento-processor
 import {ExtratoFinanciamento} from '../models/financiamento/extrato-financiamento';
 import {AdvancedProperties} from '../models/financiamento/advanced-properties';
 import {Posterior} from '../models/financiamento-fgts-config';
+import {GlobalConfiguration} from '../models/global-configuration';
 
 @Component({
   selector: 'app-financiamento',
@@ -29,6 +30,7 @@ export class FinanciamentoComponent {
   private saveScreen: boolean;
   private isUsingFgts: boolean;
   private posterior: Posterior = Posterior.NaoUsar;
+  private configuration: GlobalConfiguration;
 
   private extrato: Array<ExtratoFinanciamento> = [];
 
@@ -36,8 +38,10 @@ export class FinanciamentoComponent {
     this.usuario = new Usuario();
     this.fgtsConfig = new FinanciamentoFgtsConfig();
     this.financiamentoConfig = new FinanciamentoConfig();
+    this.configuration = new GlobalConfiguration();
     
     this.properties = new AdvancedProperties(this.usuario, this.financiamentoConfig, this.fgtsConfig, null);
+    this.properties.GlobalConfiguration = this.configuration;
     
     this.resultado = false;
     this.fluxoDeCaixa = false;

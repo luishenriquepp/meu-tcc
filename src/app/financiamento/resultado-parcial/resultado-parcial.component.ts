@@ -29,6 +29,7 @@ export class ResultadoParcialComponent implements OnChanges {
   private investimentoAportesCusto: number = 0;
 
   ngOnChanges(): void {
+    this.clear();
     this.calculateResult();
   }
 
@@ -77,6 +78,19 @@ export class ResultadoParcialComponent implements OnChanges {
     } else {
       this.parcelas = this.extrato.reduce((a,b) => a + b.Parcela.Parcela(),0);
     }
+  }
+
+  private clear(): void {
+      this.valorImovel = 0;
+      this.parcelas = 0;
+      this.fgtsAportesCusto = 0;
+      this.fgtsRendimentosCusto = 0;
+      this.fgtsAportesPatrimonio = 0;
+      this.fgtsRendimentosPatrimonio = 0;
+      this.fgtsEntrada = 0;
+      this.investimentoAportesPatrimonio = 0;
+      this.investimentoRendimentosPatrimonio = 0;
+      this.investimentoAportesCusto = 0;
   }
 
   public Patrimonio(): number {

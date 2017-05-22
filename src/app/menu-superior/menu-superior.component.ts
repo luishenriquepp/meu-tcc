@@ -11,5 +11,5 @@ export class MenuSuperiorComponent {
   private aluguel: string = 'Aluguel';
   private financiamento: string = 'Financiamento';
   private consorcio: string = 'Consórcio';
-  private global: string = 'Configurações';
+  private global: string = 'Taxas';
 }

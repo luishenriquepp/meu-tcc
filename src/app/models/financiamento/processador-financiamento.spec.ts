@@ -5,6 +5,7 @@ import {Investimento} from '../aluguel/investimento';
 import {Usuario} from '../usuario';
 import {FgtsNasParcelas} from './fgts-nas-parcelas';
 import {FgtsNoSaldoDevedor} from './fgts-no-saldo-devedor';
+import {FgtsNaoUsarMais} from './fgts-nao-usar-mais';
 import {GlobalConfiguration} from '../global-configuration';
 import {AdvancedProperties} from './advanced-properties';
 import {FinanciamentoFgtsConfig} from '../financiamento-fgts-config';
@@ -91,13 +92,14 @@ describe('processador financiamento', () => {
         spyOn(imovel, 'Depositar');
         
         let fgtsConfig = new FinanciamentoFgtsConfig();
-        fgtsConfig.Entrada = true;
+        fgtsConfig.Entrada = false;
         let config = new FinanciamentoConfig();
         config.JurosAnuais = 0.12;
-        let properties = new AdvancedProperties(user, config, fgtsConfig, null);  
+        let properties = new AdvancedProperties(user, config, fgtsConfig, null);
         
+        fin = new Financiamento(150000, 0.005);
         let processador = new ProcessadorFinanciamento(fin, imovel, salario, properties);
-        processador.Processor = new FgtsNoSaldoDevedor(false);
+        processador.Processor = new FgtsNaoUsarMais();
         processador.Processar();
 
         expect(imovel.Depositar).toHaveBeenCalledTimes(12);
@@ -107,7 +109,6 @@ describe('processador financiamento', () => {
 
         user.prestacoes = 12;
 
-        spyOn(fin, 'Pagar');
 
         let fgtsConfig = new FinanciamentoFgtsConfig();
         fgtsConfig.Entrada = true;
@@ -115,6 +116,8 @@ describe('processador financiamento', () => {
         config.JurosAnuais = 0.12;
         let properties = new AdvancedProperties(user, config, fgtsConfig, null);  
         
+        fin = new Financiamento(150000, 0.005);
+        spyOn(fin, 'Pagar');
         let processador = new ProcessadorFinanciamento(fin, imovel, salario, properties);
         processador.Processor = new FgtsNoSaldoDevedor(false);
         processador.Processar();    
@@ -134,6 +137,7 @@ describe('processador financiamento', () => {
         config.JurosAnuais = 0.12;
         let properties = new AdvancedProperties(user, config, fgtsConfig, null);  
         
+        fin = new Financiamento(150000, 0.005);
         let processador = new ProcessadorFinanciamento(fin, imovel, salario, properties);
         processador.Processor = new FgtsNoSaldoDevedor(false);
         processador.Processar();    
@@ -152,6 +156,7 @@ describe('processador financiamento', () => {
         config.JurosAnuais = 0.12;
         let properties = new AdvancedProperties(user, config, fgtsConfig, null);  
         
+        fin = new Financiamento(150000, 0.005);
         let processador = new ProcessadorFinanciamento(fin, imovel, salario, properties, fundo);
 
         let iProcessor = new FgtsNoSaldoDevedor(true); 
@@ -172,6 +177,7 @@ describe('processador financiamento', () => {
         config.JurosAnuais = 0.12;
         let properties = new AdvancedProperties(user, config, fgtsConfig, null);  
         
+        fin = new Financiamento(150000, 0.005);
         let processador = new ProcessadorFinanciamento(fin, imovel, salario, properties);
         processador.Processor = new FgtsNoSaldoDevedor(false);  
 
@@ -180,7 +186,7 @@ describe('processador financiamento', () => {
         expect(processador.Extrato.length).toBe(13);
     });
 
-    xit('deve preencher os campos do extrato', () => {
+    it('deve preencher os campos do extrato', () => {
         
         user.prestacoes = 2;
         user.usaFGTS = false;
@@ -190,6 +196,7 @@ describe('processador financiamento', () => {
         config.JurosAnuais = 0.12;
         let properties = new AdvancedProperties(user, config, fgtsConfig, null);  
         
+        fin = new Financiamento(150000, 0.005);
         let processador = new ProcessadorFinanciamento(fin, imovel, salario, properties);
         processador.Processor = new FgtsNoSaldoDevedor(false);
         processador.Processar();
