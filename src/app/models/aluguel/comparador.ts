@@ -60,7 +60,8 @@ export class Comparador {
                 extratoAluguel.DepositoFinInvestimento = extFinInvestimento.Deposito;
                 extratoAluguel.RendimentoFinInvestimento = extFinInvestimento.Rendimento;
             } else {
-                this._investimento.Depositar();
+                let ex = this._investimento.Depositar();
+                extratoAluguel.RendimentoFundo = ex.Rendimento;
             }
             
             extratoAluguel.Aluguel = this._aluguel.PrestacaoAluguel;            
