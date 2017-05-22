@@ -6,7 +6,7 @@ import {MaskService} from '../../services/mask-service';
 import {IIdentifier} from '../../models/i-identifier';
 import {AdvancedProperties} from '../../models/financiamento/advanced-properties';
 import {GlobalConfiguration} from '../../models/global-configuration';
-import {AluguelDto} from '../../models/aluguel/aluguel-dto';
+import {AluguelConfig} from '../../models/aluguel/aluguel-config';
 
 @Component({
   selector: 'app-formulario-aluguel',
@@ -23,6 +23,7 @@ export class FormularioAluguelComponent implements OnInit {
   private aluguelInicial: string;
   private descricaoFinanciamento: string;
   private mask = this.maskService.numberMask;
+  private compensar: boolean = true;
 
   @Output() sendFinanciamento = new EventEmitter<any>();
   
@@ -42,7 +43,8 @@ export class FormularioAluguelComponent implements OnInit {
   }
 
   private comparar(): void {
-    let aluguel = new AluguelDto();
+    let aluguel = new AluguelConfig();
+    aluguel.compensar = this.compensar;
     aluguel.property = this.financiamentoSelecionado;
     aluguel.configuration = this.configurationSelecionado;
     aluguel.property.GlobalConfiguration = aluguel.configuration;

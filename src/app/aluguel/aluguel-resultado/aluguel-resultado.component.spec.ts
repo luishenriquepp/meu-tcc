@@ -41,7 +41,6 @@ describe('AluguelResultadoComponent', () => {
     fixture = TestBed.createComponent(AluguelResultadoComponent);
     component = fixture.componentInstance;
     component.extratoAluguel = extrato;
-    component.comparador = comparador;
     fixture.detectChanges();
   });
 

@@ -9,7 +9,7 @@ import {FinanciamentoProcessorService} from '../services/financiamento-processor
 import {AdvancedProperties} from '../models/financiamento/advanced-properties';
 import {Usuario} from '../models/usuario';
 import {FinanciamentoFgtsConfig} from '../models/financiamento-fgts-config';
-import {AluguelDto} from '../models/aluguel/aluguel-dto';
+import {AluguelConfig} from '../models/aluguel/aluguel-config';
 import {FinancialMath} from '../utils/financial-math';
 
 @Component({
@@ -31,18 +31,19 @@ export class AluguelComponent {
 
   constructor(private financiamentoProcessorService: FinanciamentoProcessorService) { }
 
-  private onComparar(aluguelDto: AluguelDto): void {
-    this.propertyToUserToFgtsConfig(aluguelDto.property);
-    let investimento = new Investimento(aluguelDto.property.Disponivel(), aluguelDto.configuration.RentabilidadeLiquidaMensal());
-    let aluguel = new Aluguel(aluguelDto.aluguelInicial, aluguelDto.configuration.Aluguel);
-    let investimentoFinanciamento = new Investimento(0, aluguelDto.configuration.RentabilidadeLiquidaMensal());
-    let salario = new Aluguel(aluguelDto.property.Renda(), aluguelDto.property.CrescimentoSalarial());
+  private onComparar(aluguelConfig: AluguelConfig): void {
+    this.propertyToUserToFgtsConfig(aluguelConfig.property);
+    let investimento = new Investimento(aluguelConfig.property.Disponivel(), aluguelConfig.configuration.RentabilidadeLiquidaMensal());
+    let aluguel = new Aluguel(aluguelConfig.aluguelInicial, aluguelConfig.configuration.Aluguel);
+    let investimentoFinanciamento = new Investimento(0, aluguelConfig.configuration.RentabilidadeLiquidaMensal());
+    let salario = new Aluguel(aluguelConfig.property.Renda(), aluguelConfig.property.CrescimentoSalarial());
     let fgts: Investimento;
-    if(this.user.usaFGTS) { fgts =  new Investimento(aluguelDto.property.Fgts(), FinancialMath.YearToMonth(aluguelDto.configuration.Fundo)) };
+    if(this.user.usaFGTS) { fgts =  new Investimento(aluguelConfig.property.Fgts(), FinancialMath.YearToMonth(aluguelConfig.configuration.Fundo)) };
     
-    let extratoFinanciamento = this.financiamentoProcessorService.Process(aluguelDto.property);
+    let extratoFinanciamento = this.financiamentoProcessorService.Process(aluguelConfig.property);
 
     this.comparador = new Comparador(investimento, aluguel, extratoFinanciamento, investimentoFinanciamento, salario, fgts);
+    this.comparador.compensar = aluguelConfig.compensar;
     this.comparador.Processar();
 
     this.extratoAluguel = this.comparador.Gerenciador.ExtratoAluguel;

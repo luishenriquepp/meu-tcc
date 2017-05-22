@@ -9,6 +9,9 @@
       </div>
     </div>
     <div class="form-group">
+      <label><input [(ngModel)]="compensar" type="checkbox" value="true"> Realizar compensação da diferença</label>
+    </div>
+    <div class="form-group">
       <label>Taxas</label>
       <select name="configuration" class="form-control" [(ngModel)]="configurationSelecionado">
         <option *ngFor="let config of configurations" [ngValue]="config">{{config.Identificacao}}</option>
