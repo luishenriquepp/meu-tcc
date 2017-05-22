@@ -5,14 +5,13 @@
       <label>Saldo FGTS</label>
       <div class="input-group">
         <span class="input-group-addon">R$</span>
-        <input [(ngModel)]="fgtsConfig.Fgts" type="number" class="form-control input" min="0" step="1000">
+        <input [textMask]="{mask: nMask}" [(ngModel)]="Fgts" type="text" class="form-control">
       </div>
     </div>
     <div class="form-group">
       <label>Expectativa de crescimento salarial anual</label>
       <div class="input-group">
-        <input [(ngModel)]="fgtsConfig.CrescimentoSalarial" type="number" class="form-control input" step="0.01">
-        <span class="input-group-addon percent">{{ fgtsConfig.CrescimentoSalarial | percent:'1.3-3' }}</span>              
+        <input [textMask]="{mask: pMask}" [(ngModel)]="CrescimentoSalarial" type="text" class="form-control">
       </div>
     </div>
       <div class="form-group">
