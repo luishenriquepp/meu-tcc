@@ -19,6 +19,7 @@ export class ProcessadorFinanciamento {
     private fgtsProcessor: IProcessFgts;
     private saldoDevedor: number = 0;
     public Extrato: Array<ExtratoFinanciamento> = new Array<ExtratoFinanciamento>();
+    public jurosMensais: number;
 
 
     constructor(financiamento: Financiamento, imovel: Investimento, salario: Aluguel, properties: AdvancedProperties, fundo: Investimento = null) {
@@ -48,7 +49,7 @@ export class ProcessadorFinanciamento {
             ex.Saldo = this.financiamento.SaldoDevedor;
             this.financiamento.Corrigir();
 
-            let parcela = new Parcela(this.properties);
+            let parcela = new Parcela(this.jurosMensais, this.properties.TaxaAdministrativa());
             let amortizacao = parcela.Amortizar(this.financiamento.SaldoDevedor, this.properties.Prestacoes()-(month-1));
             this.financiamento.Pagar(amortizacao);
             this.salario.Pagar();
@@ -74,7 +75,7 @@ export class ProcessadorFinanciamento {
 
     private initialize(): void {
         let ex = new ExtratoFinanciamento();
-        ex.Parcela = new Parcela(this.properties);
+        ex.Parcela = new Parcela(0, 0);
         ex.ValorImovel = this.properties.ValorImovel();
         ex.SaldoAtual = this.properties.ValorImovel() - this.properties.Disponivel();
         ex.Saldo = ex.SaldoAtual;

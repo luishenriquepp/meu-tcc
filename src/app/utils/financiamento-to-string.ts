@@ -30,8 +30,8 @@ export class FinanciamentoToString {
                         
         this._descricao = 
 `Financiamento de imóvel com valor R$ ${this.toLocale(this.financiamento.ValorImovel())} e entrada R$ ${this.toLocale(this.financiamento.Disponivel())} com previsão de ${this.financiamento.Prestacoes()} prestações.
-Usuário com renda mensal R$ ${this.toLocale(this.financiamento.Renda())} e crescimento salarial de ${this.toPercent(this.financiamento.CrescimentoSalarial())} ao ano.
-Financiamento com juros de ${this.toPercent(this.financiamento.JurosMensais())} e Taxa administrativa de R$ ${this.financiamento.TaxaAdministrativa()} por mês.
+Usuário com renda mensal R$ ${this.toLocale(this.financiamento.Renda())} e crescimento salarial de ${this.toPercent(this.financiamento.CrescimentoSalarial())} ao ano. 
+Taxa administrativa de R$ ${this.financiamento.TaxaAdministrativa()} por mês.
 ${this.fgts()}`;
     }
 

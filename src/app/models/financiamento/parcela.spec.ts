@@ -1,18 +1,12 @@
 import {Parcela} from './parcela';
-import {Usuario} from '../usuario';
-import {FinanciamentoConfig} from '../financiamento-config';
-import {AdvancedProperties} from './advanced-properties';
 
 describe('parcela', () => {
     
     const saldoCorrigido = 2000;
-    let user = new Usuario();
-    let config = new FinanciamentoConfig();
-    config.TaxaAdministrativa = 100;
-    config.JurosAnuais = 20;
+    const juros = 0.11;
+    const taxaAdministrativa = 100;
     
-    let properties = new AdvancedProperties(null, config, null, null);
-    let parcela = new Parcela(properties);
+    let parcela = new Parcela(juros, taxaAdministrativa);
     parcela.Amortizar(saldoCorrigido,10);
     
     it('deve calcular a amortizacao', () => {
@@ -34,7 +28,7 @@ describe('parcela', () => {
 
     it('deve calcular os juros', () => {
         
-        expect(parcela.Juros).toBe(saldoCorrigido*config.JurosMensais);
+        expect(parcela.Juros).toBe(saldoCorrigido*juros);
     });
 
     it('deve retornar a parcela cheia', () => {

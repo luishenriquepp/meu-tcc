@@ -38,11 +38,9 @@ describe('advanced properties ', () => {
     it('deve buscar as propriedades do objeto FinanciamentoConfig', () => {        
         
         config.TaxaAdministrativa = 100;
-        config.JurosAnuais = 20;
         config.Seguradora = Seguradora.HDI;
 
         expect(properties.TaxaAdministrativa()).toBe(config.TaxaAdministrativa);
-        expect(properties.JurosMensais()).toBe(config.JurosMensais);
         expect(properties.Seguradora()).toBe(config.Seguradora);
     });
 

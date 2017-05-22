@@ -17,6 +17,7 @@ describe('processador financiamento', () => {
         let user = new Usuario();
         user.GlobalConfiguration = global;
         const fgts = 10000;
+        const juros = 0.12;
 
         let fin = new Financiamento(150000, 0.005);
         let imovel = new Investimento(200000);
@@ -30,11 +31,11 @@ describe('processador financiamento', () => {
         let fgtsConfig = new FinanciamentoFgtsConfig();
         fgtsConfig.Entrada = true;
         let config = new FinanciamentoConfig();
-        config.JurosAnuais = 0.12;
 
         let properties = new AdvancedProperties(user, config, fgtsConfig, null);       
         
         let processador = new ProcessadorFinanciamento(fin, imovel, salario, properties, fundo);
+        processador.jurosMensais = juros;
         processador.Processor = new FgtsNoSaldoDevedor(true);
         processador.Processar();
 
@@ -59,11 +60,11 @@ describe('processador financiamento', () => {
         let fgtsConfig = new FinanciamentoFgtsConfig();
         fgtsConfig.Entrada = false;
         let config = new FinanciamentoConfig();
-        config.JurosAnuais = 0.12;
 
         let properties = new AdvancedProperties(user, config, fgtsConfig, null);
 
         let processador = new ProcessadorFinanciamento(fin, imovel, salario, properties, fundo);
+        processador.jurosMensais = juros;
         processador.Processor = new FgtsNoSaldoDevedor(false);
         processador.Processar();
 
@@ -94,11 +95,11 @@ describe('processador financiamento', () => {
         let fgtsConfig = new FinanciamentoFgtsConfig();
         fgtsConfig.Entrada = false;
         let config = new FinanciamentoConfig();
-        config.JurosAnuais = 0.12;
         let properties = new AdvancedProperties(user, config, fgtsConfig, null);
         
         fin = new Financiamento(150000, 0.005);
         let processador = new ProcessadorFinanciamento(fin, imovel, salario, properties);
+        processador.jurosMensais = juros;
         processador.Processor = new FgtsNaoUsarMais();
         processador.Processar();
 
@@ -113,12 +114,12 @@ describe('processador financiamento', () => {
         let fgtsConfig = new FinanciamentoFgtsConfig();
         fgtsConfig.Entrada = true;
         let config = new FinanciamentoConfig();
-        config.JurosAnuais = 0.12;
         let properties = new AdvancedProperties(user, config, fgtsConfig, null);  
         
         fin = new Financiamento(150000, 0.005);
         spyOn(fin, 'Pagar');
         let processador = new ProcessadorFinanciamento(fin, imovel, salario, properties);
+        processador.jurosMensais = juros;
         processador.Processor = new FgtsNoSaldoDevedor(false);
         processador.Processar();    
 
@@ -134,11 +135,11 @@ describe('processador financiamento', () => {
         let fgtsConfig = new FinanciamentoFgtsConfig();
         fgtsConfig.Entrada = true;
         let config = new FinanciamentoConfig();
-        config.JurosAnuais = 0.12;
         let properties = new AdvancedProperties(user, config, fgtsConfig, null);  
         
         fin = new Financiamento(150000, 0.005);
         let processador = new ProcessadorFinanciamento(fin, imovel, salario, properties);
+        processador.jurosMensais = juros;
         processador.Processor = new FgtsNoSaldoDevedor(false);
         processador.Processar();    
 
@@ -153,12 +154,11 @@ describe('processador financiamento', () => {
         let fgtsConfig = new FinanciamentoFgtsConfig();
         fgtsConfig.Entrada = true;
         let config = new FinanciamentoConfig();
-        config.JurosAnuais = 0.12;
         let properties = new AdvancedProperties(user, config, fgtsConfig, null);  
         
         fin = new Financiamento(150000, 0.005);
         let processador = new ProcessadorFinanciamento(fin, imovel, salario, properties, fundo);
-
+        processador.jurosMensais = juros;
         let iProcessor = new FgtsNoSaldoDevedor(true); 
         processador.Processor = iProcessor;                
         spyOn(iProcessor, 'Process');
@@ -174,11 +174,11 @@ describe('processador financiamento', () => {
 
         let fgtsConfig = new FinanciamentoFgtsConfig();
         let config = new FinanciamentoConfig();
-        config.JurosAnuais = 0.12;
         let properties = new AdvancedProperties(user, config, fgtsConfig, null);  
         
         fin = new Financiamento(150000, 0.005);
         let processador = new ProcessadorFinanciamento(fin, imovel, salario, properties);
+        processador.jurosMensais = juros;
         processador.Processor = new FgtsNoSaldoDevedor(false);  
 
         processador.Processar();
@@ -193,11 +193,11 @@ describe('processador financiamento', () => {
 
         let fgtsConfig = new FinanciamentoFgtsConfig();
         let config = new FinanciamentoConfig();
-        config.JurosAnuais = 0.12;
         let properties = new AdvancedProperties(user, config, fgtsConfig, null);  
         
         fin = new Financiamento(150000, 0.005);
         let processador = new ProcessadorFinanciamento(fin, imovel, salario, properties);
+        processador.jurosMensais = juros;
         processador.Processor = new FgtsNoSaldoDevedor(false);
         processador.Processar();
 

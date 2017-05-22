@@ -2,10 +2,12 @@ import {AdvancedProperties} from './advanced-properties';
 
 export class Parcela {
     private _desconto: number = 0;
-    private readonly properties: AdvancedProperties;
+    private readonly jurosMensais: number;
+    private readonly taxaAdministrativa: number;
 
-    constructor(properties: AdvancedProperties) {
-        this.properties = properties;
+    constructor(juros: number, taxaAdministrativa: number) {
+        this.jurosMensais = juros;
+        this.taxaAdministrativa = taxaAdministrativa;
     }
 
     private _amortizacao: number = 0;
@@ -30,7 +32,7 @@ export class Parcela {
     }  
     
     public TaxaAdministrativa(): number{
-        return this.properties.TaxaAdministrativa();
+        return this.taxaAdministrativa;
     }
 
     public Amortizar(saldoCorrigido: number, mesesRestantes: number): number {
@@ -42,9 +44,7 @@ export class Parcela {
     }
 
     public Parcela(): number {
-        let parcela = this._amortizacao + this._seguros + this._juros;
-        if (parcela > 0) return parcela + this.TaxaAdministrativa();
-        return 0;
+        return this._amortizacao + this._seguros + this._juros + this.taxaAdministrativa;
     }
 
     public ParcelaDescontada(): number {
@@ -52,7 +52,7 @@ export class Parcela {
     }
 
     private calculaJuros(saldo: number): void {
-        this._juros = (this.properties.JurosMensais() * saldo);
+        this._juros = (this.jurosMensais * saldo);
     }
 
     private calculaSeguro(saldo: number): void {

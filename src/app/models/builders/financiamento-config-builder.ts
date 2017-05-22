@@ -7,7 +7,6 @@ export class FinanciamentoConfigBuilder {
         let config = new FinanciamentoConfig();
         config.Seguradora = Seguradora.HDI;
         config.TaxaAdministrativa = 35;
-        config.JurosAnuais = 0.11;
 
         return config;
     }

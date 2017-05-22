@@ -66,10 +66,6 @@ export class AdvancedProperties implements IIdentifier {
         return this._financiamentoConfig.TaxaAdministrativa;
     }
 
-    public JurosMensais(): number {
-        return this._financiamentoConfig.JurosMensais;
-    }
-
     public UsaComoEntrada(): boolean {
         return this._fgtsConfig.Entrada;
     }

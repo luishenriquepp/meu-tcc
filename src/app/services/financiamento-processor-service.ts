@@ -24,13 +24,13 @@ export class FinanciamentoProcessorService {
     public Process(properties: AdvancedProperties): Array<ExtratoFinanciamento> {
         let global = properties.GlobalConfiguration;
 
-
         let imovel = new Investimento(properties.ValorImovel(), FinancialMath.YearToMonth(global.Imovel));
         let salario = new Aluguel(properties.Renda(), properties.CrescimentoSalarial());
         let financiamento = new Financiamento(properties.ValorImovel(), FinancialMath.YearToMonth(global.Referencial));
         let fundo: Investimento = properties.UsaFgts() ? new Investimento(properties.Fgts(), FinancialMath.YearToMonth(global.Fundo)) : null;
         
         let processador = new ProcessadorFinanciamento(financiamento,imovel,salario,properties,fundo);
+        processador.jurosMensais = FinancialMath.YearToMonth(global.Juros);
 
         if(properties.Seguradora() == Seguradora.HDI) {
             properties.Seguro = new FinanciamentoSeguro(new SeguradoraHdi());
