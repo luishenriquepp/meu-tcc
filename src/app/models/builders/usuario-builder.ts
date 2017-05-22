@@ -3,15 +3,9 @@ import {GlobalConfiguration} from '../global-configuration';
 
 export class UsuarioBuilder {
     
-    public BuildRichUser(withFGTS = true): Usuario {        
-        let user = this.createUser(700000, 250000, 360, 8000, new Date(1970,5,12), withFGTS, 80000, 0.05);         
+    public Build(valorImovel: number, disponivel: number, prestacoes: number, renda: number, withFGTS = true): Usuario {        
+        let user = this.createUser(valorImovel, disponivel, prestacoes, renda, withFGTS);
         
-        return user;
-    }
-
-    public BuildPoorUser(withFGTS = true): Usuario {
-        let user = this.createUser(160000, 20000, 420, 3000, new Date(1997, 2, 20), withFGTS, 12000, 0.12);
-
         return user;
     }
     
@@ -20,17 +14,14 @@ export class UsuarioBuilder {
         disponivel: number, 
         prestacoes: number,
         renda: number,
-        nascimento: Date,
-        usaFGTS: boolean,
-        FGTS: number,
-        crescimentoSalarial: number): Usuario{
+        usaFGTS: boolean): Usuario{
         
         let usuario = new Usuario();
         usuario.valorImovel = valorImovel;
         usuario.disponivel = disponivel;
         usuario.prestacoes = prestacoes;
         usuario.renda = renda;
-        usuario.nascimento = nascimento;
+        usuario.nascimento = new Date(1980,5,12);
         usuario.usaFGTS = usaFGTS;
         usuario.GlobalConfiguration = new GlobalConfiguration();
         

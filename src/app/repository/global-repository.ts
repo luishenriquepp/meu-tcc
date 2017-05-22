@@ -18,11 +18,28 @@ export class GlobalRepository {
 
         return prop;
     }
+
+    public static defaultProperty2(): GlobalConfiguration {
+        let prop = new GlobalConfiguration();
+        prop.Id = 2;
+        prop.Identificacao = 'Padrão com maior t.Imovel';
+        prop.Descricao = 'Taxas que são carregadas inicialmente com a aplicação. Possui taxa de valorização de imóvel 2x maior que o padrão.';
+        prop.Referencial = 0.020689;
+        prop.Interna = 0.106760;
+        prop.Rentabilidade = 0.11;
+        prop.Imovel = 0.024;
+        prop.Fundo = 0.07;
+        prop.Aluguel = 0.08;
+        prop.ImpostoRenda = 0.017;
+        prop.Juros = 0.11;
+
+        return prop;
+    }
     
     private static properties: Array<GlobalConfiguration> = [
-        GlobalRepository.defaultProperty()
+        GlobalRepository.defaultProperty(), GlobalRepository.defaultProperty2()
     ];
-    private static counter: number = 1;
+    private static counter: number = 2;
 
     public Buscar(id: number): GlobalConfiguration {
         return GlobalRepository.properties.find(t => t.Id == id);
