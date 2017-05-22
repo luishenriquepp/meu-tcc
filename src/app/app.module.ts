@@ -30,6 +30,7 @@ import { GlobalConfigurationComponent } from './global-configuration/global-conf
 import { AluguelResultadoComponent } from './aluguel/aluguel-resultado/aluguel-resultado.component';
 
 import { GenericTableModule } from '@angular-generic-table/core';
+import { TextMaskModule } from 'angular2-text-mask';
 
 
 @NgModule({
@@ -62,7 +63,8 @@ import { GenericTableModule } from '@angular-generic-table/core';
     HttpModule,
     RouterModule.forRoot(Routes),
     MyDatePickerModule,
-    GenericTableModule
+    GenericTableModule,
+    TextMaskModule
   ],
   providers: [
     {
