@@ -31,7 +31,18 @@ import { AluguelResultadoComponent } from './aluguel/aluguel-resultado/aluguel-r
 
 import { GenericTableModule } from '@angular-generic-table/core';
 import { TextMaskModule } from 'angular2-text-mask';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
+export const firebaseConfig = {
+    apiKey: "AIzaSyAw3u-PIldtyxFVOFrReZyIT2vpfSjpNXk",
+    authDomain: "meu-tcc.firebaseapp.com",
+    databaseURL: "https://meu-tcc.firebaseio.com",
+    projectId: "meu-tcc",
+    storageBucket: "meu-tcc.appspot.com",
+    messagingSenderId: "177611840966"
+};
 
 @NgModule({
   declarations: [
@@ -64,7 +75,10 @@ import { TextMaskModule } from 'angular2-text-mask';
     RouterModule.forRoot(Routes),
     MyDatePickerModule,
     GenericTableModule,
-    TextMaskModule
+    TextMaskModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
   providers: [
     {
