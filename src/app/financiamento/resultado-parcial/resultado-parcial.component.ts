@@ -16,6 +16,14 @@ export class ResultadoParcialComponent implements OnChanges {
   @Input() extrato: Array<ExtratoFinanciamento>;
   @Input() user: Usuario;
   @Input() fgtsConfig: FinanciamentoFgtsConfig;
+  @Input() checkExpandir: boolean = false;
+
+  private collapsed: boolean = false;
+
+  private collapse(): string {
+    let panel: string = 'panel-collapse';
+    return this.collapsed ? panel+ ' collapse in' : panel+' collapse';
+  } 
 
   private valorImovel: number = 0;
   private parcelas: number = 0;
