@@ -19,29 +19,29 @@
     </div>
     <div class="col-lg-10" *ngIf="calculado">
       <div class="panel panel-default">
-            <div *ngIf="calculado">              
-              <nav class="navbar navbar-default">
-                <div class="navi container-fluid">
-                    <div class="navbar-header">
-                      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                      </button>
-                      <a (click)="changeScreen('r')" [ngClass]="selected == 'r' ? 'active' : ''"class="navbar-brand">Resultado</a>
-                    </div>
-                  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                      <li><a (click)="changeScreen('g')" [ngClass]="selected == 'g' ? 'active' : ''">Gráficos</a></li>
-                      <li><a (click)="changeScreen('e')" [ngClass]="selected == 'e' ? 'active' : ''">Fluxo de Caixa</a></li>
-                      <li><a (click)="changeScreen('f')" [ngClass]="selected == 'f' ? 'active' : ''" *ngIf="isUsingFgts">Extrato Fgts</a></li>
-                      <li><a (click)="changeScreen('s')" [ngClass]="selected == 's' ? 'active' : ''">Salvar</a></li>
-                    </ul>
-                  </div>
+        <div *ngIf="calculado">              
+          <nav class="navbar navbar-default">
+            <div class="navi container-fluid">
+                <div class="navbar-header">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                  <a (click)="changeScreen('r')" [ngClass]="selected == 'r' ? 'active' : ''"class="navbar-brand">Resultado</a>
                 </div>
-              </nav>
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                  <li><a (click)="changeScreen('g')" [ngClass]="selected == 'g' ? 'active' : ''">Gráficos</a></li>
+                  <li><a (click)="changeScreen('e')" [ngClass]="selected == 'e' ? 'active' : ''">Fluxo de Caixa</a></li>
+                  <li><a (click)="changeScreen('f')" [ngClass]="selected == 'f' ? 'active' : ''" *ngIf="isUsingFgts">Extrato Fgts</a></li>
+                  <li><a (click)="changeScreen('s')" [ngClass]="selected == 's' ? 'active' : ''">Salvar</a></li>
+                </ul>
+              </div>
             </div>
+          </nav>
+        </div>
         <div class="panel-body">
           <div class="row">           
             <div *ngIf="selected == 'g'">

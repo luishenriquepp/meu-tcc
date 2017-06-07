@@ -10,6 +10,14 @@ import {Comparador} from '../../models/aluguel/comparador';
 export class AluguelResultadoComponent implements OnChanges {
 
   @Input() extratoAluguel: Array<ExtratoAluguel>;
+
+  private collapsed: boolean = false;
+
+  private collapse(): string {
+    let panel: string = 'panel-collapse';
+    return this.collapsed ? panel+ ' collapse in' : panel+' collapse';
+  }
+  
   public investimentoInicial: number;
   public investimentoRendimentos: number;
   public investimentoAportes: number;
