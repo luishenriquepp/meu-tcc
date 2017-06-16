@@ -1,0 +1,17 @@
+{
+  "name": "sim-imoveis",
+  "authors": [
+    "Luis Henrique Paim"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jchartfx": "^7.4.5649"
+  }
+}

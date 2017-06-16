@@ -1,22 +1,24 @@
-button {
-    font-weight: bold;
-    font-size: 12px;
-    border-color: firebrick !important; 
-    color: #800000;
+.navi {
+    background-color: #485563;
 }
 
-#configuracoes {
-    background-color: #ffad99 !important;
+a {
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: 3px;
+    font-weight: 650;
 }
 
-#fdc {
-    background-color: #b3ff99 !important;
+a:hover { 
+    color: silver !important;
+    text-shadow: 1px 1px 2px black;
+    cursor: pointer;
 }
 
-#fgts {
-    background-color: #e6ff99 !important;
+.active {
+    color:goldenrod !important;
+    text-shadow: 1px 1px 3px black;
 }
 
-#resultado {
-    background-color: #ccccb3 !important;
+.navbar {
+    margin-bottom: 0px;
 }

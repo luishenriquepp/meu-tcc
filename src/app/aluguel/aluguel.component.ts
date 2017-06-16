@@ -12,6 +12,7 @@ import {FinanciamentoFgtsConfig} from '../models/financiamento-fgts-config';
 import {AluguelConfig} from '../models/aluguel/aluguel-config';
 import {FinancialMath} from '../utils/financial-math';
 import {ConfigurationSelectedService} from '../services/configuration-selected.service';
+import {ExtratoFinanciamento} from '../models/financiamento/extrato-financiamento';
 
 @Component({
   selector: 'app-aluguel',
@@ -22,10 +23,9 @@ import {ConfigurationSelectedService} from '../services/configuration-selected.s
 export class AluguelComponent {
 
   private extratoAluguel: Array<ExtratoAluguel>;
+  private extratoFinanciamento: Array<ExtratoFinanciamento>;
   private calculado: boolean = false;
-  private fluxoDeCaixa: boolean = false;
-  private grafico: boolean = false;
-  private resultado: boolean = false;
+  private selected: string = 'r';
   private comparador: Comparador;
   private fgtsConfig: FinanciamentoFgtsConfig;
   private user: Usuario;
@@ -33,10 +33,8 @@ export class AluguelComponent {
   constructor(private financiamentoProcessorService: FinanciamentoProcessorService,
               private selectedConfiguration: ConfigurationSelectedService) { }
 
-  private onComparar(aluguelConfig: AluguelConfig): void {
-    this.fluxoDeCaixa = false;
-    this.grafico = false;
-    
+  private onComparar(aluguelConfig: AluguelConfig): void {    
+    this.selected = 'r';
     this.propertyToUserToFgtsConfig(aluguelConfig.property);
     let investimento = new Investimento(aluguelConfig.property.Disponivel, FinancialMath.YearToMonth(this.selectedConfiguration.Configuration.Rentabilidade));
     let aluguel = new Aluguel(aluguelConfig.aluguelInicial, this.selectedConfiguration.Configuration.Aluguel);
@@ -45,31 +43,19 @@ export class AluguelComponent {
     let fgts: Investimento;
     if(this.user.usaFGTS) { fgts =  new Investimento(aluguelConfig.property.Fgts, FinancialMath.YearToMonth(this.selectedConfiguration.Configuration.Fundo)) };
     
-    let extratoFinanciamento = this.financiamentoProcessorService.Process(aluguelConfig.property);
+    this.extratoFinanciamento = this.financiamentoProcessorService.Process(aluguelConfig.property);
 
-    this.comparador = new Comparador(investimento, aluguel, extratoFinanciamento, investimentoFinanciamento, salario, fgts);
+    this.comparador = new Comparador(investimento, aluguel, this.extratoFinanciamento, investimentoFinanciamento, salario, fgts);
     this.comparador.compensar = aluguelConfig.compensar;
     this.comparador.Processar();
 
     this.extratoAluguel = this.comparador.Gerenciador.ExtratoAluguel;
     console.log(this.comparador.Gerenciador.ExtratoAluguel);
     this.calculado = true;
-    this.resultado = true;
   }
-  private exibeFluxoDeCaixa(): void {
-    this.grafico = false;
-    this.resultado = false;
-    this.fluxoDeCaixa = true;
-  }
-  private exibeGrafico(): void {
-    this.fluxoDeCaixa = false;
-    this.resultado = false;
-    this.grafico = true;
-  }
-  private exibeResultado(): void {
-    this.fluxoDeCaixa = false;
-    this.grafico = false;
-    this.resultado = true;
+
+  private changeScreen(value: string) {
+    this.selected = value;
   }
 
   private propertyToUserToFgtsConfig(property: AdvancedProperties): void {

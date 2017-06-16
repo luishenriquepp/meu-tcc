@@ -2,18 +2,10 @@
     background-color: #004d00;
 }
 
-.patri-main-2:hover {
+.patri-main-2, .patri-main-2:hover, .patri-main-2:focus {
     background-color: #005e00;
 }
-
-.patri-main-2:focus {
-    background-color: #005e00;
-}
-
-.patri-main-2 {
-    background-color: #005e00;
-}
-
+    
 .patri-main-3 {
     background-color: #007400;
 }
@@ -22,18 +14,15 @@
     background-color: #640000;
 }
 
-.cust-main-2:hover {
-    background-color: #780000;
-}
-
-.cust-main-2:focus {
-    background-color: #780000;
-}
-
-.cust-main-2 {
+.cust-main-2, .cust-main-2:hover, .cust-main-2:focus {
     background-color: #780000;
 }
 
 .cust-main-3 {
     background-color: #9d0000;
+}
+
+.clickable:hover {
+    cursor: pointer;
+    text-decoration: underline;
 }
