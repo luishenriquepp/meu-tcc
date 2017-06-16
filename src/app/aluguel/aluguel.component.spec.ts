@@ -9,7 +9,7 @@ describe('Component: Aluguel', () => {
   let fixture: ComponentFixture<AluguelComponent>;
   
   it('should create an instance', () => {
-    let component = new AluguelComponent(null);
+    let component = new AluguelComponent(null, null);
     expect(component).toBeTruthy();
   });
 });
