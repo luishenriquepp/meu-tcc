@@ -14,10 +14,8 @@ export class ConfigurationService {
 
     public BuscaTodos(): Promise<Array<GlobalConfiguration>> {
         let promise: Promise<Array<GlobalConfiguration>> = new Promise((properties) => {
-            setTimeout(() => {
                 let prop = this.repository.BuscaTodos();
                 properties(prop);
-            }, 800);
         });
         return promise;
     }

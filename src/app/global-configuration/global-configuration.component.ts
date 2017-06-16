@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { PercentPipe } from '@angular/common';
 import {GlobalConfiguration} from '../models/global-configuration';
-import {ConfigurationService} from '../services/configuration-service';
 import {MaskService} from '../services/mask-service';
+import {ConfigurationRemoteService} from '../services/configuration-remote-service';
+import {AuthService} from '../services/auth-service';
 
 @Component({
   selector: 'app-global-configuration',
   templateUrl: './global-configuration.component.html',
   styleUrls: ['./global-configuration.component.css'],
-  providers: [ConfigurationService, MaskService, PercentPipe]
+  providers: [ConfigurationRemoteService, MaskService, PercentPipe]
 })
 export class GlobalConfigurationComponent implements OnInit {
 
@@ -19,17 +20,15 @@ export class GlobalConfigurationComponent implements OnInit {
   private Descricao: string;
   
   constructor(
-    private conService: ConfigurationService,
     private maskService: MaskService,
-    private pipe: PercentPipe) { }
+    private pipe: PercentPipe,
+    private remoteService: ConfigurationRemoteService,
+    private authService: AuthService,) { }
 
   ngOnInit(): void {
-    this.conService.BuscaTodos()
-    .then((properties) => {
-      this.configurations = properties;
-      this.configuration = properties[0];
-      this.modelToViewModel(this.configuration);
-    });
+    let props = this.remoteService.BuscaTodos().subscribe((taxas) => {
+      this.configurations = taxas as Array<GlobalConfiguration>;
+    })
   }
 
   private adicionar(): void {
@@ -44,7 +43,7 @@ export class GlobalConfigurationComponent implements OnInit {
     this.configuration.Rentabilidade = this.maskService.ConvertToFloat(this.taxaRentabilidade);
     this.configuration.ImpostoRenda = this.maskService.ConvertToFloat(this.taxaImpostoRenda);
     this.configuration.Juros = this.maskService.ConvertToFloat(this.taxaJuros);
-    this.conService.Salva(this.configuration);
+    this.remoteService.Salva(this.configuration);
   }
 
   private onPropertyChange(value: GlobalConfiguration) {

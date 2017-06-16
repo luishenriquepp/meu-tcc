@@ -2,31 +2,32 @@ import { Component, Input, OnInit } from '@angular/core';
 
 import { FinanciamentoConfig } from '../../models/financiamento-config';
 import { FinanciamentoSeguro } from'../../models/financiamento-seguro';
-import {ConfigurationService} from '../../services/configuration-service';
+import {ConfigurationRemoteService} from '../../services/configuration-remote-service';
+import {ConfigurationSelectedService} from '../../services/configuration-selected.service';
 import {GlobalConfiguration} from '../../models/global-configuration';
 
 
 @Component({
   selector: 'financiamento-propriedades',
   templateUrl: './financiamento-propriedades.component.html',
-  providers: [ConfigurationService]
+  providers: [ConfigurationRemoteService]
 })
 export class FinanciamentoPropriedadesComponent implements OnInit{
 
   private configurations: Array<GlobalConfiguration>;
+  private configuration: GlobalConfiguration = new GlobalConfiguration();
   
-  constructor(private configurationService: ConfigurationService) { }
+  constructor(private configurationRemoteService: ConfigurationRemoteService,
+              private selectedConfiguration: ConfigurationSelectedService) { }
   
   @Input() config: FinanciamentoConfig;
-  @Input() configuration: GlobalConfiguration;
 
   ngOnInit() {
-    // this.config.Seguro = new FinanciamentoSeguro(new SeguradoraSa());
-    this.configurationService.BuscaTodos()
-      .then((configurations) => {
-        this.configurations = configurations;
-        Object.assign(this.configuration, configurations[0]);
-      });
+    this.configurationRemoteService.BuscaTodos().subscribe((taxas) => {
+        this.configurations = taxas as Array<GlobalConfiguration>;
+        this.configuration =  taxas[0];
+        this.selectedConfiguration.Configuration = this.configuration;
+    })
   }
 
   selecionaSeguro(event): void {
@@ -39,6 +40,6 @@ export class FinanciamentoPropriedadesComponent implements OnInit{
 
   onPropertyChange(configuration): void {
     let con = this.configurations.find(c => c.Id == this.configuration.Id);
-    Object.assign(this.configuration,con);  
+    this.selectedConfiguration = configuration;
   }
 }

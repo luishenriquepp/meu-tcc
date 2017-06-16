@@ -5,5 +5,4 @@ export class AluguelConfig {
     public aluguelInicial: number;
     public compensar: boolean;
     public property: AdvancedProperties;
-    public configuration: GlobalConfiguration;
 }

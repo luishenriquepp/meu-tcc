@@ -23,7 +23,6 @@ describe('processador financiamento', () => {
         let imovel = new Investimento(200000);
         let salario = new Aluguel(2);
         let fundo = new Investimento(fgts);
-        let properties = new AdvancedProperties(user, null, null, null);
 
     it('deve inicializar o extrato com fgts', () => {
         

@@ -3,14 +3,17 @@
 import { TestBed, async } from '@angular/core/testing';
 import { FinanciamentoComponent } from './financiamento.component';
 import {FinanciamentoProcessorService} from '../services/financiamento-processor-service';
+import {ConfigurationSelectedService} from '../services/configuration-selected.service';
 
 describe('Component: Financiamento', () => {
   
+  let selectedConfiguration: ConfigurationSelectedService;
   let processorService: FinanciamentoProcessorService;
 
   beforeEach(() => {
 
-    processorService = new FinanciamentoProcessorService();
+    selectedConfiguration = new ConfigurationSelectedService();
+    processorService = new FinanciamentoProcessorService(selectedConfiguration);
     
     TestBed.configureTestingModule({
       providers: [
@@ -20,7 +23,7 @@ describe('Component: Financiamento', () => {
   })
   
   it('should create an instance', () => {
-    let component = new FinanciamentoComponent(processorService);
+    let component = new FinanciamentoComponent(processorService, selectedConfiguration);
     expect(component).toBeTruthy();
   });
 });

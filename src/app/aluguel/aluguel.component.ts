@@ -11,6 +11,7 @@ import {Usuario} from '../models/usuario';
 import {FinanciamentoFgtsConfig} from '../models/financiamento-fgts-config';
 import {AluguelConfig} from '../models/aluguel/aluguel-config';
 import {FinancialMath} from '../utils/financial-math';
+import {ConfigurationSelectedService} from '../services/configuration-selected.service';
 import {ExtratoFinanciamento} from '../models/financiamento/extrato-financiamento';
 
 @Component({
@@ -29,17 +30,18 @@ export class AluguelComponent {
   private fgtsConfig: FinanciamentoFgtsConfig;
   private user: Usuario;
 
-  constructor(private financiamentoProcessorService: FinanciamentoProcessorService) { }
+  constructor(private financiamentoProcessorService: FinanciamentoProcessorService,
+              private selectedConfiguration: ConfigurationSelectedService) { }
 
   private onComparar(aluguelConfig: AluguelConfig): void {    
     this.selected = 'r';
     this.propertyToUserToFgtsConfig(aluguelConfig.property);
-    let investimento = new Investimento(aluguelConfig.property.Disponivel(), aluguelConfig.configuration.RentabilidadeLiquidaMensal());
-    let aluguel = new Aluguel(aluguelConfig.aluguelInicial, aluguelConfig.configuration.Aluguel);
-    let investimentoFinanciamento = new Investimento(0, aluguelConfig.configuration.RentabilidadeLiquidaMensal());
-    let salario = new Aluguel(aluguelConfig.property.Renda(), aluguelConfig.property.CrescimentoSalarial());
+    let investimento = new Investimento(aluguelConfig.property.Disponivel, FinancialMath.YearToMonth(this.selectedConfiguration.Configuration.Rentabilidade));
+    let aluguel = new Aluguel(aluguelConfig.aluguelInicial, this.selectedConfiguration.Configuration.Aluguel);
+    let investimentoFinanciamento = new Investimento(0, FinancialMath.YearToMonth(this.selectedConfiguration.Configuration.Rentabilidade));
+    let salario = new Aluguel(aluguelConfig.property.Renda, aluguelConfig.property.CrescimentoSalarial);
     let fgts: Investimento;
-    if(this.user.usaFGTS) { fgts =  new Investimento(aluguelConfig.property.Fgts(), FinancialMath.YearToMonth(aluguelConfig.configuration.Fundo)) };
+    if(this.user.usaFGTS) { fgts =  new Investimento(aluguelConfig.property.Fgts, FinancialMath.YearToMonth(this.selectedConfiguration.Configuration.Fundo)) };
     
     this.extratoFinanciamento = this.financiamentoProcessorService.Process(aluguelConfig.property);
 
@@ -48,6 +50,7 @@ export class AluguelComponent {
     this.comparador.Processar();
 
     this.extratoAluguel = this.comparador.Gerenciador.ExtratoAluguel;
+    console.log(this.comparador.Gerenciador.ExtratoAluguel);
     this.calculado = true;
   }
 
@@ -57,11 +60,11 @@ export class AluguelComponent {
 
   private propertyToUserToFgtsConfig(property: AdvancedProperties): void {
     this.user = new Usuario();
-    this.user.disponivel = property.Disponivel();
-    this.user.usaFGTS = property.UsaFgts();
+    this.user.disponivel = property.Disponivel;
+    this.user.usaFGTS = property.UsaFgts;
     this.fgtsConfig = new FinanciamentoFgtsConfig();
-    this.fgtsConfig.Posterior = property.Posterior();
-    this.fgtsConfig.Entrada = property.UsaComoEntrada();
-    this.fgtsConfig.Fgts = property.Fgts();
+    this.fgtsConfig.Posterior = property.Posterior;
+    this.fgtsConfig.Entrada = property.UsaComoEntrada;
+    this.fgtsConfig.Fgts = property.Fgts;
   }
 }

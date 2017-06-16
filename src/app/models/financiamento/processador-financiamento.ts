@@ -44,13 +44,13 @@ export class ProcessadorFinanciamento {
             
         while(this.saldoDevedor > 0) {
             let ex = new ExtratoFinanciamento();
-            this.Extrato.push(ex);            
+            this.Extrato.push(ex);  
             this.imovel.Depositar();           
             ex.Saldo = this.financiamento.SaldoDevedor;
             this.financiamento.Corrigir();
 
-            let parcela = new Parcela(this.jurosMensais, this.properties.TaxaAdministrativa());
-            let amortizacao = parcela.Amortizar(this.financiamento.SaldoDevedor, this.properties.Prestacoes()-(month-1));
+            let parcela = new Parcela(this.jurosMensais, this.properties.TaxaAdministrativa);
+            let amortizacao = parcela.Amortizar(this.financiamento.SaldoDevedor, this.properties.Prestacoes-(month-1));
             this.financiamento.Pagar(amortizacao);
             this.salario.Pagar();
             
@@ -60,7 +60,7 @@ export class ProcessadorFinanciamento {
             ex.ValorImovel = this.imovel.ValorAcumulado;
             ex.Mes = month;
 
-            if(this.properties.UsaFgts()) {
+            if(this.properties.UsaFgts) {
                 let extFgts = this.fundoGarantia.Depositar(this.salario.PrestacaoAluguel * 0.08);
                 ex.RendimentoFgts = extFgts.Rendimento;
                 ex.DepositoFgts = extFgts.Deposito;
@@ -76,16 +76,16 @@ export class ProcessadorFinanciamento {
     private initialize(): void {
         let ex = new ExtratoFinanciamento();
         ex.Parcela = new Parcela(0, 0);
-        ex.ValorImovel = this.properties.ValorImovel();
-        ex.SaldoAtual = this.properties.ValorImovel() - this.properties.Disponivel();
+        ex.ValorImovel = this.properties.ValorImovel;
+        ex.SaldoAtual = this.properties.ValorImovel - this.properties.Disponivel;
         ex.Saldo = ex.SaldoAtual;
         
-        this.financiamento.Abater(this.properties.Disponivel());
+        this.financiamento.Abater(this.properties.Disponivel);
 
-        if(this.properties.UsaFgts()) {            
+        if(this.properties.UsaFgts) {        
             const valorAbatido = this.fundoGarantia.ValorAcumulado;
             ex.MontanteFgts = valorAbatido;
-            if(this.properties.UsaComoEntrada()) {
+            if(this.properties.UsaComoEntrada) {
                 this.financiamento.Abater(valorAbatido);
                 this.fundoGarantia.Sacar(valorAbatido);
                 ex.Resgate = valorAbatido;
