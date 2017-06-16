@@ -24,16 +24,18 @@ import { FormularioAluguelComponent } from './aluguel/formulario-aluguel/formula
 import { ExtratoAluguelComponent } from './aluguel/extrato-aluguel/extrato-aluguel.component';
 import { GraficoAluguelComponent } from './aluguel/grafico-aluguel/grafico-aluguel.component';
 import { ResultadoParcialComponent } from './financiamento/resultado-parcial/resultado-parcial.component';
-
 import { MyDatePickerModule } from 'mydatepicker';
 import { GlobalConfigurationComponent } from './global-configuration/global-configuration.component';
 import { AluguelResultadoComponent } from './aluguel/aluguel-resultado/aluguel-resultado.component';
-
 import { GenericTableModule } from '@angular-generic-table/core';
 import { TextMaskModule } from 'angular2-text-mask';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AuthService } from './services/auth-service';
+import { ConfigurationSelectedService } from './services/configuration-selected.service';
+import { ConfigurationService } from './services/configuration-service';
+import { FinanciamentoService } from './services/financiamento-services';
 
 export const firebaseConfig = {
     apiKey: "AIzaSyAw3u-PIldtyxFVOFrReZyIT2vpfSjpNXk",
@@ -81,6 +83,10 @@ export const firebaseConfig = {
     AngularFireAuthModule
   ],
   providers: [
+    AuthService,
+    ConfigurationSelectedService,
+    ConfigurationService,
+    FinanciamentoService,
     {
       provide: LOCALE_ID,
       useValue: 'pt-BR'

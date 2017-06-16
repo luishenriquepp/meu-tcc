@@ -36,12 +36,12 @@ export class AluguelComponent {
     this.grafico = false;
     
     this.propertyToUserToFgtsConfig(aluguelConfig.property);
-    let investimento = new Investimento(aluguelConfig.property.Disponivel(), aluguelConfig.configuration.RentabilidadeLiquidaMensal());
+    let investimento = new Investimento(aluguelConfig.property.Disponivel, aluguelConfig.configuration.RentabilidadeLiquidaMensal());
     let aluguel = new Aluguel(aluguelConfig.aluguelInicial, aluguelConfig.configuration.Aluguel);
     let investimentoFinanciamento = new Investimento(0, aluguelConfig.configuration.RentabilidadeLiquidaMensal());
-    let salario = new Aluguel(aluguelConfig.property.Renda(), aluguelConfig.property.CrescimentoSalarial());
+    let salario = new Aluguel(aluguelConfig.property.Renda, aluguelConfig.property.CrescimentoSalarial);
     let fgts: Investimento;
-    if(this.user.usaFGTS) { fgts =  new Investimento(aluguelConfig.property.Fgts(), FinancialMath.YearToMonth(aluguelConfig.configuration.Fundo)) };
+    if(this.user.usaFGTS) { fgts =  new Investimento(aluguelConfig.property.Fgts, FinancialMath.YearToMonth(aluguelConfig.configuration.Fundo)) };
     
     let extratoFinanciamento = this.financiamentoProcessorService.Process(aluguelConfig.property);
 
@@ -71,11 +71,11 @@ export class AluguelComponent {
 
   private propertyToUserToFgtsConfig(property: AdvancedProperties): void {
     this.user = new Usuario();
-    this.user.disponivel = property.Disponivel();
-    this.user.usaFGTS = property.UsaFgts();
+    this.user.disponivel = property.Disponivel;
+    this.user.usaFGTS = property.UsaFgts;
     this.fgtsConfig = new FinanciamentoFgtsConfig();
-    this.fgtsConfig.Posterior = property.Posterior();
-    this.fgtsConfig.Entrada = property.UsaComoEntrada();
-    this.fgtsConfig.Fgts = property.Fgts();
+    this.fgtsConfig.Posterior = property.Posterior;
+    this.fgtsConfig.Entrada = property.UsaComoEntrada;
+    this.fgtsConfig.Fgts = property.Fgts;
   }
 }

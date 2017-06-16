@@ -26,12 +26,12 @@ export class FinanciamentoToString {
 
     public Process(): void {
 
-        this._identificacao = `fin${this.financiamento.ValorImovel()/1000}v${this.financiamento.Disponivel()/1000}d${this.financiamento.Prestacoes()}p`;
+        this._identificacao = `fin${this.financiamento.ValorImovel/1000}v${this.financiamento.Disponivel/1000}d${this.financiamento.Prestacoes}p`;
                         
         this._descricao = 
-`Financiamento de imóvel com valor R$ ${this.toLocale(this.financiamento.ValorImovel())} e entrada R$ ${this.toLocale(this.financiamento.Disponivel())} com previsão de ${this.financiamento.Prestacoes()} prestações.
-Usuário com renda mensal R$ ${this.toLocale(this.financiamento.Renda())} e crescimento salarial de ${this.toPercent(this.financiamento.CrescimentoSalarial())} ao ano. 
-Taxa administrativa de R$ ${this.financiamento.TaxaAdministrativa()} por mês.
+`Financiamento de imóvel com valor R$ ${this.toLocale(this.financiamento.ValorImovel)} e entrada R$ ${this.toLocale(this.financiamento.Disponivel)} com previsão de ${this.financiamento.Prestacoes} prestações.
+Usuário com renda mensal R$ ${this.toLocale(this.financiamento.Renda)} e crescimento salarial de ${this.toPercent(this.financiamento.CrescimentoSalarial)} ao ano. 
+Taxa administrativa de R$ ${this.financiamento.TaxaAdministrativa} por mês.
 ${this.fgts()}`;
     }
 
@@ -41,16 +41,16 @@ ${this.fgts()}`;
     }
 
     private fgts(): string {
-        if(!this.financiamento.UsaFgts()) {
+        if(!this.financiamento.UsaFgts) {
             return 'Sem fundo de garantia.';
         }
-        let msg = `Valor de FGTS inicial R$ ${this.toLocale(this.financiamento.Fgts())}`;
-        if(this.financiamento.UsaComoEntrada()) {
+        let msg = `Valor de FGTS inicial R$ ${this.toLocale(this.financiamento.Fgts)}`;
+        if(this.financiamento.UsaComoEntrada) {
             msg += ' abatido do salvo devedor na entrada e posteriormente ';
         } else {
             msg += ' não utilizado na entrada e posteriormente ';
         }
-        switch(this.financiamento.Posterior()) {
+        switch(this.financiamento.Posterior) {
             case Posterior.NaoUsar: 
                 msg += 'não utilizado.';
                 break;

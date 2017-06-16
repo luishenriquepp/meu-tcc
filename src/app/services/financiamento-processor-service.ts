@@ -17,31 +17,34 @@ import {Seguradora} from '../models/financiamento-config';
 import {SeguradoraHdi} from '../models/seguradora-hdi';
 import {SeguradoraSa} from '../models/seguradora-sa';
 import {FinancialMath} from '../utils/financial-math';
+import {ConfigurationSelectedService} from '../services/configuration-selected.service';
 
 @Injectable()
 export class FinanciamentoProcessorService {
+
+    constructor(private selectedConfiguration: ConfigurationSelectedService) { }
     
     public Process(properties: AdvancedProperties): Array<ExtratoFinanciamento> {
-        let global = properties.GlobalConfiguration;
+        let global = this.selectedConfiguration.Configuration;
 
-        let imovel = new Investimento(properties.ValorImovel(), FinancialMath.YearToMonth(global.Imovel));
-        let salario = new Aluguel(properties.Renda(), properties.CrescimentoSalarial());
-        let financiamento = new Financiamento(properties.ValorImovel(), FinancialMath.YearToMonth(global.Referencial));
-        let fundo: Investimento = properties.UsaFgts() ? new Investimento(properties.Fgts(), FinancialMath.YearToMonth(global.Fundo)) : null;
+        let imovel = new Investimento(properties.ValorImovel, FinancialMath.YearToMonth(global.Imovel));
+        let salario = new Aluguel(properties.Renda, properties.CrescimentoSalarial);
+        let financiamento = new Financiamento(properties.ValorImovel, FinancialMath.YearToMonth(global.Referencial));
+        let fundo: Investimento = properties.UsaFgts ? new Investimento(properties.Fgts, FinancialMath.YearToMonth(global.Fundo)) : null;
         
         let processador = new ProcessadorFinanciamento(financiamento,imovel,salario,properties,fundo);
         processador.jurosMensais = FinancialMath.YearToMonth(global.Juros);
 
-        if(properties.Seguradora() == Seguradora.HDI) {
-            properties.Seguro = new FinanciamentoSeguro(new SeguradoraHdi());
-        } else if (properties.Seguradora() == Seguradora.SULAMERICA) {
-            properties.Seguro = new FinanciamentoSeguro(new SeguradoraSa());
+        if(properties.Seguradora == Seguradora.HDI) {
+            // properties.Seguro = new FinanciamentoSeguro(new SeguradoraHdi());
+        } else if (properties.Seguradora == Seguradora.SULAMERICA) {
+            // properties.Seguro = new FinanciamentoSeguro(new SeguradoraSa());
         }
         
-        if(properties.Posterior() == Posterior.Parcelas) {
+        if(properties.Posterior == Posterior.Parcelas) {
             processador.Processor = new FgtsNasParcelas();
-        } else if (properties.Posterior() == Posterior.SaldoDevedor) {
-            processador.Processor = new FgtsNoSaldoDevedor(properties.UsaComoEntrada());
+        } else if (properties.Posterior == Posterior.SaldoDevedor) {
+            processador.Processor = new FgtsNoSaldoDevedor(properties.UsaComoEntrada);
         } else {
             processador.Processor = new FgtsNaoUsarMais();
         }

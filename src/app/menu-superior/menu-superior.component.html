@@ -6,6 +6,12 @@
   <li routerLinkActive="active"><a [routerLink]="['/aluguel']">{{aluguel}}</a></li>
   <li routerLinkActive="active"><a [routerLink]="['/consorcio']">{{consorcio}}</a></li>
   <li routerLinkActive="active"><a [routerLink]="['/taxas']">{{global}}</a></li>
+<ul class="nav navbar-nav navbar-right">
+  <li>
+    <a *ngIf="authService.isLogged" (click)="logout()">Sair</a>    
+    <a *ngIf="!isLoading && !authService.isLogged" (click)="login()">Logar</a>
+  </li>
+</ul>
 </ul>
 
 
