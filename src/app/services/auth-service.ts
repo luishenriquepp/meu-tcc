@@ -11,12 +11,23 @@ export class AuthService {
     
     constructor(private provider: AngularFireAuth) { }
         
-    public Loggin(): void {
-        this.provider.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
-            .then((s) => {
-                this.isLogged = true;
-                this.uId = this.provider.auth.currentUser.uid;                
-            })
+    public Loggin(provider: string): firebase.Promise<any> {
+        let promise: firebase.Promise<any>;
+        
+        if(provider == 'google') {
+            promise = this.provider.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
+                .then((s) => {
+                    this.isLogged = true;
+                    this.uId = this.provider.auth.currentUser.uid;                
+                })
+        } else {
+            promise = this.provider.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider())
+                .then((s) => {
+                    this.isLogged = true;
+                    this.uId = this.provider.auth.currentUser.uid;                
+                })
+        }
+        return promise;
     }
 
     public Loggout(): void {

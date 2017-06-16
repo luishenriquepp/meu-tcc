@@ -65,7 +65,7 @@ export class FormularioComponent implements OnInit {
     user.renda = this.maskService.ConvertToNumber(this.renda);
     user.prestacoes = this.prestacoes;
     user.usaFGTS = this.possuiFGTS;
-    user.nascimento = new Date(this.birthDay.date.year, this.birthDay.date.month, this.birthDay.date.day);;
+    user.nascimento = new Date(this.birthDay.date.year, this.birthDay.date.month, this.birthDay.date.day);
     this.onCalcular.emit(user);
   }
 

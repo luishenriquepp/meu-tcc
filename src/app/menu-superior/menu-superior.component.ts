@@ -29,10 +29,6 @@ export class MenuSuperiorComponent implements OnInit {
     });  
   }
 
-  private login(): void {
-    this.authService.Loggin();
-  }
-
   private logout(): void {
     this.authService.Loggout();
   }

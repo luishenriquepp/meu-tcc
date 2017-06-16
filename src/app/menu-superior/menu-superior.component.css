@@ -4,13 +4,13 @@ a {
     font-weight: 700;    
 }
 
-a:hover { 
+a:hover, button { 
     background-color: firebrick !important;
     color: silver !important;
     text-shadow: 1px 1px 2px black;
 }
 
-.active a {
+.active a, button {
     background-color: firebrick !important;
     color:goldenrod !important;
     text-shadow: 1px 1px 3px black;

@@ -5,6 +5,7 @@ import { AluguelComponent } from '../aluguel/aluguel.component';
 import { FinanciamentoComponent } from '../financiamento/financiamento.component';
 import { ConsorcioComponent } from '../consorcio/consorcio.component';
 import { GlobalConfigurationComponent } from '../global-configuration/global-configuration.component';
+import { LoginComponent } from '../login/login.component';
 
 export const Routes  = [
     { path: '', component: HomeComponent },
@@ -13,4 +14,5 @@ export const Routes  = [
     { path: 'aluguel', component: AluguelComponent },
     { path: 'consorcio', component: ConsorcioComponent },
     { path: 'taxas', component: GlobalConfigurationComponent },
+    { path: 'login', component: LoginComponent }
 ];

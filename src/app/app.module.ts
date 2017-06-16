@@ -36,6 +36,7 @@ import { AuthService } from './services/auth-service';
 import { ConfigurationSelectedService } from './services/configuration-selected.service';
 import { ConfigurationService } from './services/configuration-service';
 import { FinanciamentoService } from './services/financiamento-services';
+import { LoginComponent } from './login/login.component';
 
 export const firebaseConfig = {
     apiKey: "AIzaSyAw3u-PIldtyxFVOFrReZyIT2vpfSjpNXk",
@@ -68,7 +69,8 @@ export const firebaseConfig = {
     GraficoAluguelComponent,
     GlobalConfigurationComponent,
     AluguelResultadoComponent,
-    ResultadoParcialComponent
+    ResultadoParcialComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
