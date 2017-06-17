@@ -15,7 +15,11 @@ export class FinanciamentoRemoteService {
                 private financiamentoService: FinanciamentoService) { }
 
     public Save(financiamento: AdvancedProperties) {
-        this.db.database.ref(this.entity).child(this.authService.uId).push(financiamento);
+        if(this.authService.isLogged) {
+            this.db.database.ref(this.entity).child(this.authService.uId).push(financiamento);
+        } else {
+            this.financiamentoService.Adiciona(financiamento);
+        }
     }
 
     public GetAll(): Observable<Array<AdvancedProperties>> {

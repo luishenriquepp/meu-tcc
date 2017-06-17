@@ -32,6 +32,10 @@ export class ConfigurationRemoteService {
     }
 
     public Salva(global: GlobalConfiguration): void {
-        this.db.database.ref(this.entity).child(this.authService.uId).push(global);
+        if(this.authService.isLogged) {
+            this.db.database.ref(this.entity).child(this.authService.uId).push(global);
+        } else {
+            this.configurationService.Salva(global);
+        }
     }
 }

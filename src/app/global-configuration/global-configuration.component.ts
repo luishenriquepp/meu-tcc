@@ -18,6 +18,7 @@ export class GlobalConfigurationComponent implements OnInit {
   private mask = this.maskService.percentMask;
   private Identificacao: string;
   private Descricao: string;
+  private isAdicionado: boolean = false;
   
   constructor(
     private maskService: MaskService,
@@ -44,6 +45,7 @@ export class GlobalConfigurationComponent implements OnInit {
     this.configuration.ImpostoRenda = this.maskService.ConvertToFloat(this.taxaImpostoRenda);
     this.configuration.Juros = this.maskService.ConvertToFloat(this.taxaJuros);
     this.remoteService.Salva(this.configuration);
+    this.isAdicionado = true;
   }
 
   private onPropertyChange(value: GlobalConfiguration) {
